@@ -15,7 +15,7 @@ import { cell, resource, resourceFactory } from 'ember-resources';
  * {{/let}}
  * ```
  */
-export const WaitUntil = resourceFactory((maybeDelayMs?: number | (() => (number | undefined))) => {
+export const WaitUntil = resourceFactory((maybeDelayMs?: number | (() => number | undefined)) => {
   return resource(({ on }) => {
     const delayMs = typeof maybeDelayMs === 'function' ? maybeDelayMs() : maybeDelayMs;
 
