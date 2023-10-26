@@ -1,7 +1,7 @@
 {
   "name": "reactive-primitives",
   "version": "0.0.2",
-  "description": "The default blueprint for Embroider v2 addons.",
+  "description": "Platform primitives for building reactive applications",
   "keywords": [
     "ember-addon"
   ],

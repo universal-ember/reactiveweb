@@ -17,8 +17,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: wyvox/action-setup-pnpm@v2
+      - uses: actions/checkout@v4
+      - uses: wyvox/action-setup-pnpm@v3
         with:
           node-version: 16
       - name: Lint
@@ -31,8 +31,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: wyvox/action-setup-pnpm@v2
+      - uses: actions/checkout@v4
+      - uses: wyvox/action-setup-pnpm@v3
         with:
           node-version: 16
       - name: Run Tests
@@ -49,11 +49,10 @@ jobs:
         try-scenario:
           - ember-lts-4.8
           - ember-lts-4.12
+          - ember-5.0
           - ember-release
           - ember-beta
           - ember-canary
-          - embroider-safe
-          - embroider-optimized
 
     steps:
       - uses: actions/checkout@v3

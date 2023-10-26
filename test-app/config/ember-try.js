@@ -1,7 +1,6 @@
 'use strict';
 
 const getChannelURL = require('ember-source-channel-url');
-const { embroiderSafe, embroiderOptimized } = require('@embroider/test-setup');
 
 module.exports = async function () {
   return {
@@ -20,6 +19,14 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             'ember-source': '~4.12.0',
+          },
+        },
+      },
+      {
+        name: 'ember-5.0',
+        npm: {
+          devDependencies: {
+            'ember-source': '~5.0.0',
           },
         },
       },
@@ -47,8 +54,6 @@ module.exports = async function () {
           },
         },
       },
-      embroiderSafe(),
-      embroiderOptimized(),
     ],
   };
 };
