@@ -1,4 +1,4 @@
-import { resourceFactory, resource, cell } from 'ember-resources';
+import { cell, resource, resourceFactory } from 'ember-resources';
 
 /**
  * Reactively wait for a time.
@@ -15,8 +15,10 @@ import { resourceFactory, resource, cell } from 'ember-resources';
  * {{/let}}
  * ```
  */
-export const WaitUntil = resourceFactory((delayMs: number) => {
+export const WaitUntil = resourceFactory((maybeDelayMs?: number | (() => number | undefined)) => {
   return resource(({ on }) => {
+    const delayMs = typeof maybeDelayMs === 'function' ? maybeDelayMs() : maybeDelayMs;
+
     // If we don't have a delay, we can start with
     // immediately saying "we're done waiting"
     const initialValue = delayMs ? false : true;

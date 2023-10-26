@@ -1,4 +1,4 @@
-import { resourceFactory, resource } from 'ember-resources';
+import { resource, resourceFactory } from 'ember-resources';
 import { trackedFunction } from 'ember-resources/util/function';
 
 /**
@@ -38,7 +38,7 @@ import { trackedFunction } from 'ember-resources/util/function';
  * }
  * ```
  */
-export const ReactiveImage = resourceFactory((url: string) => {
+export const ReactiveImage = resourceFactory((maybeUrl: string | (() => string)) => {
   return resource(({ use }) => {
     const readonlyReactive = use(
       trackedFunction(async () => {
@@ -51,6 +51,7 @@ export const ReactiveImage = resourceFactory((url: string) => {
          * by wrapping in an extra promise.
          */
         const image = new window.Image();
+        const url = typeof maybeUrl === 'function' ? maybeUrl() : maybeUrl;
 
         function loadImage() {
           /**
@@ -84,7 +85,7 @@ export const ReactiveImage = resourceFactory((url: string) => {
         }
 
         return await loadImage();
-      }),
+      })
     );
 
     /**
