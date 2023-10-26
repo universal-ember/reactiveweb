@@ -1,4 +1,4 @@
-import { resourceFactory, resource } from 'ember-resources';
+import { resource, resourceFactory } from 'ember-resources';
 import { trackedFunction } from 'ember-resources/util/function';
 
 /**
@@ -84,7 +84,7 @@ export const ReactiveImage = resourceFactory((url: string) => {
         }
 
         return await loadImage();
-      }),
+      })
     );
 
     /**

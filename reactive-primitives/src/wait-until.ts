@@ -1,4 +1,4 @@
-import { resourceFactory, resource, cell } from 'ember-resources';
+import { cell, resource, resourceFactory } from 'ember-resources';
 
 /**
  * Reactively wait for a time.
