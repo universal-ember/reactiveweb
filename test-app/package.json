@@ -23,9 +23,9 @@
     "lint:prettier": "prettier -c .",
     "lint:prettier:fix": "prettier -w .",
     "lint:types": "tsc --noEmit",
-    "start": "ember serve",
-    "test": "concurrently \"npm:lint\" \"npm:test:*\" --names \"lint,test:\"",
-    "test:ember": "ember test"
+    "_syncPnpm": "pnpm sync-dependencies-meta-injected",
+    "start": "concurrently 'ember serve' 'pnpm _syncPnpm --watch' --names 'tests serve,tests sync deps'",
+    "test:ember": "pnpm _syncPnpm && ember test"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",
@@ -72,6 +72,7 @@
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-qunit": "^8.0.1",
     "loader.js": "^4.7.0",
+    "pnpm-sync-dependencies-meta-injected": "^0.0.10",
     "prettier": "^3.0.3",
     "qunit": "^2.20.0",
     "qunit-dom": "^3.0.0",
