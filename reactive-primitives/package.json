@@ -1,6 +1,6 @@
 {
   "name": "reactive-primitives",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Platform primitives for building reactive applications",
   "keywords": [
     "ember-addon"
