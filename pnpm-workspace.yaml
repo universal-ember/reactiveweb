@@ -1,0 +1,3 @@
+packages:
+  - 'reactive-primitives'
+  - 'test-app'
