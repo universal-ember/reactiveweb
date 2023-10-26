@@ -27,6 +27,11 @@
     "start": "concurrently 'ember serve' 'pnpm _syncPnpm --watch' --names 'tests serve,tests sync deps'",
     "test:ember": "pnpm _syncPnpm && ember test"
   },
+  "dependenciesMeta": {
+    "reactive-primitives": {
+      "injected": true
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.23.2",
     "@babel/eslint-parser": "^7.22.15",
