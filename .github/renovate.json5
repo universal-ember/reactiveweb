@@ -5,6 +5,7 @@
   ],
   "automerge": true,
   "masterIssue": true,
+  "postUpdateOptions": "pnpmDedupe",
   "packageRules": [
     ////////////////////////////////////////
     // Grouping namespaced packages together
