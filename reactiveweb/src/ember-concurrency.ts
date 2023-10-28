@@ -11,14 +11,6 @@ import { Resource } from 'ember-resources';
 import { DEFAULT_THUNK, normalizeThunk } from './utils.ts';
 
 /**
- * <div class="callout note">
- *
- * This is not a core part of ember-resources, but is an example utility to demonstrate a concept when authoring your own resources. However, this utility is still under the broader library's SemVer policy.
- *
- * A consuming app will not pay for the bytes of this utility unless imported.
- *
- * </div>
- *
  * uses Resource to make ember-concurrency tasks reactive.
  *
  * -------------------------

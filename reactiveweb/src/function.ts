@@ -6,16 +6,6 @@ import { TrackedAsyncData } from 'ember-async-data';
 import { resource } from 'ember-resources';
 
 /**
- * <div class="callout note">
- *
- * This is not a core part of ember-resources, but is an example utility to demonstrate a concept when authoring your own resources. However, this utility is still under the broader library's SemVer policy.
- *
- * A consuming app will not pay for the bytes of this utility unless imported.
- *
- * </div>
- *
- * _An example utility that uses resource_
- *
  * Any tracked data accessed in a tracked function _before_ an `await`
  * will "entangle" with the function -- we can call these accessed tracked
  * properties, the "tracked prelude". If any properties within the tracked
@@ -61,16 +51,6 @@ import { resource } from 'ember-resources';
 export function trackedFunction<Return>(fn: () => Return): State<Return>;
 
 /**
- * <div class="callout note">
- *
- * This is not a core part of ember-resources, but is an example utility to demonstrate a concept when authoring your own resources. However, this utility is still under the broader library's SemVer policy.
- *
- * A consuming app will not pay for the bytes of this utility unless imported.
- *
- * </div>
- *
- * _An example utility that uses resource_
- *
  * Any tracked data accessed in a tracked function _before_ an `await`
  * will "entangle" with the function -- we can call these accessed tracked
  * properties, the "tracked prelude". If any properties within the tracked
