@@ -17,7 +17,7 @@ pnpm add reactiveweb
 
 ## Usage
 
-See [the docs](reactive.nullvoxpopuli.com)
+See [the docs](https://reactive.nullvoxpopuli.com)
 
 ## Contributing
 
