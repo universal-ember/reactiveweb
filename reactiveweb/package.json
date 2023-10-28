@@ -1,11 +1,11 @@
 {
-  "name": "reactive-primitives",
+  "name": "reactiveweb",
   "version": "0.0.3",
-  "description": "Platform primitives for building reactive applications",
+  "description": "Web platform primitives for building reactive applications",
   "keywords": [
     "ember-addon"
   ],
-  "repository": "https://github.com/universal-ember/reactive-primitives",
+  "repository": "https://github.com/universal-ember/reactiveweb",
   "license": "MIT",
   "author": "NullVoxPopuli",
   "exports": {

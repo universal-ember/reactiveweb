@@ -6,7 +6,7 @@ import { trackedFunction } from 'ember-resources/util/function';
  *
  * Usage in a component
  * ```gjs
- * import { ReactiveImage } from 'reactive-primitives/image';
+ * import { ReactiveImage } from 'reactiveweb/image';
  * <template>
  *   {{#let (ReactiveImage 'https://path.to.image') as |state|}}
  *      {{#if imgState.isResolved}}
@@ -19,7 +19,7 @@ import { trackedFunction } from 'ember-resources/util/function';
  * Usage in a class
  * ```js
  * import { use } from 'ember-resources';
- * import { ReactiveImage } from 'reactive-primitives/image';
+ * import { ReactiveImage } from 'reactiveweb/image';
  *
  * class Demo {
  *   @use imageState = ReactiveImage('https://path.to.image');
@@ -30,7 +30,7 @@ import { trackedFunction } from 'ember-resources/util/function';
  * ```js
  * import { tracked } from '@glimmer/tracking';
  * import { use } from 'ember-resources';
- * import { ReactiveImage } from 'reactive-primitives/image';
+ * import { ReactiveImage } from 'reactiveweb/image';
  *
  * class Demo {
  *   @tracked url = '...';

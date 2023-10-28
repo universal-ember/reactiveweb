@@ -1,4 +1,4 @@
-# reactive-primitives
+# reactiveweb
 
 ## 0.0.3
 

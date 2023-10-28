@@ -3,7 +3,7 @@
 ## Installation
 
 - `git clone <repository-url>`
-- `cd reactive-primitives`
+- `cd reactiveweb`
 - `pnpm install`
 
 ## Linting
@@ -13,7 +13,7 @@
 
 ## Building the addon
 
-- `cd reactive-primitives`
+- `cd reactiveweb`
 - `pnpm build`
 
 ## Running tests

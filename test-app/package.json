@@ -2,7 +2,7 @@
   "name": "test-app",
   "version": "0.0.0",
   "private": true,
-  "description": "Test app for reactive-primitives addon",
+  "description": "Test app for reactiveweb addon",
   "repository": "",
   "license": "MIT",
   "author": "",
@@ -28,7 +28,7 @@
     "test:ember": "pnpm _syncPnpm && ember test"
   },
   "dependenciesMeta": {
-    "reactive-primitives": {
+    "reactiveweb": {
       "injected": true
     }
   },
@@ -82,7 +82,7 @@
     "prettier": "^3.0.3",
     "qunit": "^2.20.0",
     "qunit-dom": "^3.0.0",
-    "reactive-primitives": "workspace:*",
+    "reactiveweb": "workspace:*",
     "stylelint": "^15.11.0",
     "stylelint-config-standard": "^34.0.0",
     "stylelint-prettier": "^4.0.2",
