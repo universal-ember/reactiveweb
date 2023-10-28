@@ -1,0 +1,25 @@
+{
+  "tsconfig": "../reactiveweb/tsconfig.json",
+  "cleanOutputDir": false,
+  "compilerOptions": {
+    "noEmitOnError": false
+  },
+  "entryPoints": ["../reactiveweb/src/**"],
+  "navigationLinks": {
+    "Tutorial": "https://tutorial.glimdown.com",
+    "GitHub": "https://github.com/universal-ember/reactiveweb"
+  },
+  "readme": "../README.md",
+  "exclude": [],
+  "out": "dist",
+  "emit": "docs",
+  "pretty": true,
+  "skipErrorChecking": true,
+  "excludePrivate": true,
+  "excludeProtected": false,
+  "excludeExternals": true,
+  "searchInComments": true,
+  "disableSources": false,
+  "categorizeByGroup": false,
+  "plugin": []
+}

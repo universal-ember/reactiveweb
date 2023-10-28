@@ -1,0 +1,26 @@
+{
+  "name": "docs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "pnpm docs:watch",
+    "debug": "npx html-pages ./dist --no-cache",
+    "docs:collect": "typedoc --options ./typedoc.config.json",
+    "docs:watch": "typedoc --options ./typedoc.config.json --watch"
+  },
+  "devDependencies": {
+    "typedoc": "^0.25.0",
+    "typedoc-github-wiki-theme": "^1.0.1",
+    "typedoc-gitlab-wiki-theme": "^1.0.0",
+    "typedoc-plugin-markdown": "^3.14.0",
+    "typedoc-plugin-markdown-pages": "^0.3.0",
+    "typedoc-plugin-mdn-links": "^3.0.3",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">= 18"
+  },
+  "volta": {
+    "extends": "../package.json"
+  }
+}
