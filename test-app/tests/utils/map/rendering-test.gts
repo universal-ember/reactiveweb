@@ -9,7 +9,7 @@ import { render, settled } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
-import { map } from 'ember-resources/util/map';
+import { map } from 'reactiveweb/map';
 
 module('Utils | map | rendering', function (hooks) {
   setupRenderingTest(hooks);

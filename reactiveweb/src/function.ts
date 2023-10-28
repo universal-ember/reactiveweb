@@ -25,7 +25,7 @@ import { resource } from 'ember-resources';
  * import Component from '@glimmer/component';
  * import { tracked } from '@glimmer/tracking';
  * import { resourceFactory, resource, use } from 'ember-resources';
- * import { trackedFunction }  from 'ember-resources/util/function';
+ * import { trackedFunction }  from 'reactiveweb/function';
  * import { on } from '@ember/modifier';
  *
  * const Request = resourceFactory((idFn) => {
@@ -79,7 +79,7 @@ export function trackedFunction<Return>(fn: () => Return): State<Return>;
  * ```js
  * import Component from '@glimmer/component';
  * import { tracked } from '@glimmer/tracking';
- * import { trackedFunction }  from 'ember-resources/util/function';
+ * import { trackedFunction }  from 'reactiveweb/function';
  *
  * class Demo extends Component {
  *   @tracked id = 1;

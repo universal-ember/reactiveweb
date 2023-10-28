@@ -5,7 +5,7 @@ import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
 import { resource, use } from 'ember-resources';
-import { RemoteData, remoteData } from 'ember-resources/util/remote-data';
+import { RemoteData, remoteData } from 'reactiveweb/remote-data';
 import { setupMSW } from 'test-app/tests/msw';
 
 let data = [

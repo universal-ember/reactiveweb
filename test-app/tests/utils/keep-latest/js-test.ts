@@ -3,8 +3,8 @@ import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
 import { use } from 'ember-resources';
-import { trackedFunction } from 'ember-resources/util/function';
-import { keepLatest } from 'ember-resources/util/keep-latest';
+import { trackedFunction } from 'reactiveweb/function';
+import { keepLatest } from 'reactiveweb/keep-latest';
 
 const timeout = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 

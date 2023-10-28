@@ -6,7 +6,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
 import { restartableTask, timeout } from 'ember-concurrency';
-import { trackedTask } from 'ember-resources/util/ember-concurrency';
+import { trackedTask } from 'reactiveweb/ember-concurrency';
 
 let version = '^3.0.0';
 

@@ -5,7 +5,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
 import { cell, resource, resourceFactory } from 'ember-resources';
-import { trackedFunction } from 'ember-resources/util/function';
+import { trackedFunction } from 'reactiveweb/function';
 
 module('Utils | trackedFunction | timing', function (hooks) {
   setupRenderingTest(hooks);

@@ -32,7 +32,7 @@ import { DEFAULT_THUNK, normalizeThunk } from './utils.ts';
  * ```js
  * import { tracked } from '@glimmer/tracking';
  * import { restartableTask, timeout } from 'ember-concurrency';
- * import { task as trackedTask } from 'ember-resources/util/ember-concurrency';
+ * import { task as trackedTask } from 'reactiveweb/ember-concurrency';
  *
  * class Demo {
  *   @tracked id = 1;

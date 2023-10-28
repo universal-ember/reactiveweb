@@ -3,7 +3,7 @@ import { setOwner } from '@ember/application';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-import { map } from 'ember-resources/util/map';
+import { map } from 'reactiveweb/map';
 
 module('Utils | map | js', function (hooks) {
   setupTest(hooks);

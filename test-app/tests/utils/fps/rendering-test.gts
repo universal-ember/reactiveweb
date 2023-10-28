@@ -1,13 +1,12 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-// @ts-ignore
 import { on } from '@ember/modifier';
 import { click, find, render } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
 import { use } from 'ember-resources';
-import { FrameRate, UpdateFrequency } from 'ember-resources/util/fps';
+import { FrameRate, UpdateFrequency } from 'reactiveweb/fps';
 
 module('Utils | FPS | rendering', function (hooks) {
   setupRenderingTest(hooks);

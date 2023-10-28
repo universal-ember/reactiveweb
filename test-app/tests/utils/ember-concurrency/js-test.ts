@@ -6,7 +6,7 @@ import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
 import { dropTask, restartableTask, timeout } from 'ember-concurrency';
-import { trackedTask } from 'ember-resources/util/ember-concurrency';
+import { trackedTask } from 'reactiveweb/ember-concurrency';
 
 module('useTask', function () {
   module('ember-concurrency@v3', function () {

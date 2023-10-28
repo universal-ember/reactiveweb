@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-import { State } from 'ember-resources/util/function';
+import { State } from 'reactiveweb/function';
 
 module('Utils | trackedFunction | State | js', function (hooks) {
   setupTest(hooks);

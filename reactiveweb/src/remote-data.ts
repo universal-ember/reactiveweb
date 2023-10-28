@@ -94,7 +94,7 @@ export class State<T = unknown> {
  * ```js
  * import { tracked } from '@glimmer/tracking';
  * import { use, resource } from 'ember-resources';
- * import { remoteData } from 'ember-resources/util/remote-data';
+ * import { remoteData } from 'reactiveweb/remote-data';
  *
  * class Demo {
  *   @tracked id = 1;
@@ -110,7 +110,7 @@ export class State<T = unknown> {
  * ```js
  * import { tracked } from '@glimmer/tracking';
  * import { resource } from 'ember-resources';
- * import { remoteData } from 'ember-resources/util/remote-data';
+ * import { remoteData } from 'reactiveweb/remote-data';
  *
  * class Demo {
  *   @tracked id = 1;
@@ -171,7 +171,7 @@ export function remoteData<T = unknown>(
  * ```js
  * import { tracked } from '@glimmer/tracking';
  * import { use } from 'ember-resources';
- * import { RemoteData } from 'ember-resources/util/remote-data';
+ * import { RemoteData } from 'reactiveweb/remote-data';
  *
  * class Demo {
  *   @use myData = RemoteData(`https://some.domain.io`);
@@ -186,7 +186,7 @@ export function remoteData<T = unknown>(
  *
  * In strict mode with &lt;template&gt;
  * ```jsx gjs
- * import { RemoteData } from 'ember-resources/util/remote-data';
+ * import { RemoteData } from 'reactiveweb/remote-data';
  *
  * const options = (token) => ({
  *   headers: {
@@ -216,7 +216,7 @@ export function RemoteData<T = unknown>(url: string, options?: FetchOptions): St
  * ```js
  * import { tracked } from '@glimmer/tracking';
  * import { use } from 'ember-resources';
- * import { RemoteData } from 'ember-resources/util/remote-data';
+ * import { RemoteData } from 'reactiveweb/remote-data';
  *
  * class Demo {
  *   @tracked url = 'https:// .... '
@@ -237,7 +237,7 @@ export function RemoteData<T = unknown>(url: () => string): State<T>;
  * ```js
  * import { tracked } from '@glimmer/tracking';
  * import { use } from 'ember-resources';
- * import { RemoteData } from 'ember-resources/util/remote-data';
+ * import { RemoteData } from 'reactiveweb/remote-data';
  *
  * class Demo {
  *   @tracked id = 2;

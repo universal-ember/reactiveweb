@@ -157,7 +157,7 @@ export interface MappedArray<Elements extends readonly unknown[], MappedTo> {
  * @example
  *
  * ```js
- *  import { map } from 'ember-resources/util/map';
+ *  import { map } from 'reactiveweb/map';
  *
  *  class MyClass {
  *    wrappedRecords = map(this, {

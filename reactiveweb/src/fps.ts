@@ -16,7 +16,7 @@ import { cell, resource, resourceFactory } from 'ember-resources';
  * The result is rounded to two decimal places.
  *
  * ```js
- * import { FrameRate } from 'ember-resources/util/fps';
+ * import { FrameRate } from 'reactiveweb/fps';
  *
  * <template>
  *   {{FrameRate}}
@@ -66,7 +66,7 @@ export const FrameRate = resource(({ on }) => {
  * Utility that will report the frequency of updates to tracked data.
  *
  * ```js
- * import { UpdateFrequency } from 'ember-resources/util/fps';
+ * import { UpdateFrequency } from 'reactiveweb/fps';
  *
  * export default class Demo extends Component {
  *   @tracked someProp;

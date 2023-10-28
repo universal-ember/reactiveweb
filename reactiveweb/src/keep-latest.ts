@@ -50,8 +50,8 @@ interface Options<T = unknown> {
  * To smooth that out, we can use [[keepLatest]]
  *
  * ```js
- *  import { RemoteData } from 'ember-resources/util/remote-data';
- *  import { keepLatest } from 'ember-resources/util/keep-latest';
+ *  import { RemoteData } from 'reactiveweb/remote-data';
+ *  import { keepLatest } from 'reactiveweb/keep-latest';
  *
  *  class A {
  *    @use request = RemoteData(() => 'some url');
