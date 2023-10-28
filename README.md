@@ -1,4 +1,4 @@
-# reactive-primitives
+# reactiveweb
 
 A collection of utilities for helping applications be more reactive.
 
@@ -12,7 +12,7 @@ This library intends to provide convinence utilities for allow derived data patt
 ## Installation
 
 ```
-pnpm add reactive-primitives
+pnpm add reactiveweb
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ pnpm add reactive-primitives
 
 Usage in a component
 ```gjs
-import { ReactiveImage } from 'reactive-primitives/image';
+import { ReactiveImage } from 'reactiveweb/image';
 
 <template>
   {{#let (ReactiveImage 'https://path.to.image') as |state|}}
@@ -36,7 +36,7 @@ import { ReactiveImage } from 'reactive-primitives/image';
 Usage in a class
 ```js
 import { use } from 'ember-resources';
-import { ReactiveImage } from 'reactive-primitives/image';
+import { ReactiveImage } from 'reactiveweb/image';
 
 class Demo {
   @use imageState = ReactiveImage('https://path.to.image');
@@ -47,7 +47,7 @@ Reactive usage in a class
 ```js
 import { tracked } from '@glimmer/tracking';
 import { use } from 'ember-resources';
-import { ReactiveImage } from 'reactive-primitives/image';
+import { ReactiveImage } from 'reactiveweb/image';
 
 class Demo {
   @tracked url = '...';
@@ -59,7 +59,7 @@ class Demo {
 
 Usage in a component
 ```gjs
-import { WaitUntil } from 'reactive-primitives/wait-until';
+import { WaitUntil } from 'reactiveweb/wait-until';
 
 <template>
   {{#let (WaitUntil 500) as |delayFinished|}}
@@ -75,7 +75,7 @@ import { WaitUntil } from 'reactive-primitives/wait-until';
 Usage in a class
 ```js
 import { use } from 'ember-resources';
-import { WaitUntil } from 'reactive-primitives/wait-until';
+import { WaitUntil } from 'reactiveweb/wait-until';
 
 class Demo {
   @use delayFinished = WaitUntil(500);
@@ -90,7 +90,7 @@ Reactive usage in a class
 ```js
 import { tracked } from '@glimmer/tracking';
 import { use } from 'ember-resources';
-import { ReactiveImage } from 'reactive-primitives/image';
+import { ReactiveImage } from 'reactiveweb/image';
 
 class Demo {
   @tracked delay = 500;

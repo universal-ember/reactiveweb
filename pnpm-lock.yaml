@@ -20,7 +20,7 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0(prettier@3.0.3)
 
-  reactive-primitives:
+  reactiveweb:
     dependencies:
       '@embroider/addon-shim':
         specifier: ^1.8.6
@@ -276,9 +276,9 @@ importers:
       qunit-dom:
         specifier: ^3.0.0
         version: 3.0.0
-      reactive-primitives:
+      reactiveweb:
         specifier: workspace:*
-        version: file:reactive-primitives(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(@glint/template@1.2.1)(ember-source@5.3.0)
+        version: file:reactiveweb(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(@glint/template@1.2.1)(ember-source@5.3.0)
       stylelint:
         specifier: ^15.11.0
         version: 15.11.0(typescript@5.2.2)
@@ -298,7 +298,7 @@ importers:
         specifier: ^5.89.0
         version: 5.89.0
     dependenciesMeta:
-      reactive-primitives:
+      reactiveweb:
         injected: true
 
 packages:
@@ -14112,10 +14112,10 @@ packages:
     engines: {node: '>=12.20'}
     dev: true
 
-  file:reactive-primitives(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(@glint/template@1.2.1)(ember-source@5.3.0):
-    resolution: {directory: reactive-primitives, type: directory}
-    id: file:reactive-primitives
-    name: reactive-primitives
+  file:reactiveweb(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(@glint/template@1.2.1)(ember-source@5.3.0):
+    resolution: {directory: reactiveweb, type: directory}
+    id: file:reactiveweb
+    name: reactiveweb
     version: 0.0.2
     peerDependencies:
       ember-source: '*'
