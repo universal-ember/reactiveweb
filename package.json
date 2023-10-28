@@ -6,6 +6,7 @@
   "scripts": {
     "release": "changeset publish",
     "build": "pnpm --filter reactiveweb build",
+    "build:docs": "pnpm --filter docs docs:collect",
     "lint": "pnpm --filter '*' lint",
     "lint:fix": "pnpm --filter '*' lint:fix",
     "prepare": "pnpm build && pnpm sync",
