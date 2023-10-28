@@ -2,7 +2,7 @@
 
 A collection of utilities for helping applications be more reactive.
 
-This library intends to provide convinence utilities for allow derived data patterns and easy reactivity to be added to applications.
+This library intends to provide convinence utilities for allow derived data patterns and easy and performant reactivity to be added to applications.
 
 ## Compatibility
 
@@ -17,7 +17,7 @@ pnpm add reactiveweb
 
 ## Usage
 
-See [the docs]()
+See [the docs](reactive.nullvoxpopuli.com)
 
 ## Contributing
 
