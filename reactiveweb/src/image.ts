@@ -1,5 +1,6 @@
 import { resource, resourceFactory } from 'ember-resources';
-import { trackedFunction } from 'reactiveweb/function';
+
+import { trackedFunction } from './function.ts';
 
 /**
  * Reactively load an Image with access to loading / error state.
