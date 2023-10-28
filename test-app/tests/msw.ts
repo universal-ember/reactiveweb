@@ -18,7 +18,7 @@ QUnit.begin(async () => {
    * At this point we have no request handlers, but that's what
    * setupMSW is for
    */
-  await worker.start({ quiet: ENV.isTestCli });
+  await worker.start({ quiet: true });
 });
 
 QUnit.done(async () => {

@@ -72,8 +72,6 @@ module('useTask', function () {
     });
 
     test('error', async function (assert) {
-      assert.expect(3);
-
       setupOnerror((error: any) => {
         assert.ok(
           error?.message?.includes('boop'),

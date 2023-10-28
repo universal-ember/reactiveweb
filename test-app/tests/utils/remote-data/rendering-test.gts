@@ -1,5 +1,4 @@
 import { tracked } from '@glimmer/tracking';
-// @ts-ignore
 import { on } from '@ember/modifier';
 import { click, render, settled } from '@ember/test-helpers';
 import { module, test } from 'qunit';
@@ -14,6 +13,7 @@ let data = [
   { id: '3', type: 'blogs', attributes: { name: `name:3` } },
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let safeName = (blog: any): string => blog?.value?.attributes?.name;
 
 module('Utils | remote-data | rendering', function (hooks) {
