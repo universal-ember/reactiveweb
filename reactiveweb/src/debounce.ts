@@ -1,14 +1,8 @@
-import { tracked } from '@glimmer/tracking';
-
-import { resource } from 'ember-resources';
-
-class TrackedValue<T> {
-  @tracked value: T | undefined;
-}
+import { cell, resource } from 'ember-resources';
 
 /**
  * A utility for debouncing high-frequency updates.
- * The returned value will only be updated every `ms` and is
+ * The returned value will only be updated every `delay` ms and is
  * initially undefined.
  *
  * This can be useful when a user's typing is updating a tracked
@@ -25,7 +19,7 @@ class TrackedValue<T> {
  *  import { tracked } from '@glimmer/tracking';
  *  import { debounce } from 'reactiveweb/debounce';
  *
- *  const delay = 100; // ms
+ *  const delay = 100; // delay in ms
  *
  *  class Demo extends Component {
  *    @tracked userInput = '';
@@ -42,7 +36,7 @@ class TrackedValue<T> {
  *  import { debounce } from 'reactiveweb/debounce';
  *  import { RemoteData } from 'reactiveweb/remote-data';
  *
- *  const delay = 100; // ms
+ *  const delay = 100; // delay in ms
  *
  *  class Demo extends Component {
  *    @tracked userInput = '';
@@ -53,20 +47,20 @@ class TrackedValue<T> {
  *  }
  * ```
  *
- * @param {number} ms delay in milliseconds to wait before updating the returned value
- * @param {() => Value} thunk function that returns the value to debounce
+ * @param delay A zero-or-greater delay in milliseconds. For event callbacks, values around 100 or 250 (or even higher) are most useful.
+ * @param callback A function to be executed after delay milliseconds.
  */
-export function debounce<Value = unknown>(ms: number, thunk: () => Value) {
+export function debounce<Value = unknown>(delay: number, callback: () => Value) {
   let lastValue: Value;
   let timer: number;
-  let state = new TrackedValue<Value>();
+  let state = cell<Value>();
 
   return resource(({ on }) => {
-    lastValue = thunk();
+    lastValue = callback();
 
-    on.cleanup(() => timer && clearTimeout(timer));
-    timer = setTimeout(() => (state.value = lastValue), ms);
+    on.cleanup(() => clearTimeout(timer));
+    timer = setTimeout(() => (state.current = lastValue), delay);
 
-    return state.value;
+    return state.current;
   });
 }
