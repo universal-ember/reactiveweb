@@ -11,7 +11,7 @@ module('Utils | throttle | js', function (hooks) {
 
   let someTime = (ms = 25) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  module('debounce', function () {
+  module('throttle', function () {
     test('works with @use', async function (assert) {
       class Test {
         @tracked data = '';
