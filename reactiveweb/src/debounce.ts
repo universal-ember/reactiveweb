@@ -23,6 +23,7 @@ class TrackedValue<T> {
  * ```js
  *  import Component from '@glimmer/component';
  *  import { tracked } from '@glimmer/tracking';
+ *  import { use } from 'ember-resources';
  *  import { debounce } from 'reactiveweb/debounce';
  *
  *  const delay = 100; // ms
@@ -39,6 +40,7 @@ class TrackedValue<T> {
  * ```js
  *  import Component from '@glimmer/component';
  *  import { tracked } from '@glimmer/tracking';
+ *  import { use } from 'ember-resources';
  *  import { debounce } from 'reactiveweb/debounce';
  *  import { RemoteData } from 'reactiveweb/remote-data';
  *
