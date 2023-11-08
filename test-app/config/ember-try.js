@@ -18,6 +18,9 @@ module.exports = async function () {
             // We depend on latest ember-async-data
             // so that our types can pass.
             'ember-async-data': '0.7.1',
+            // This is needed until ember-source @ 4.5,
+            // when the functions are supported as helpers
+            'ember-functions-as-helper-polyfill': '2.1.2',
             // for compatibility with ember-qunit
             'ember-cli': '~4.12.1',
           },
