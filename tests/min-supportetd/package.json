@@ -22,7 +22,6 @@
     "lint:js:fix": "eslint . --fix",
     "lint:prettier": "prettier -c .",
     "lint:prettier:fix": "prettier -w .",
-    "lint:types": "tsc --noEmit",
     "_syncPnpm": "pnpm sync-dependencies-meta-injected",
     "start": "concurrently 'ember serve' 'pnpm _syncPnpm --watch' --names 'tests serve,tests sync deps'",
     "test:ember": "pnpm _syncPnpm && ember test"
