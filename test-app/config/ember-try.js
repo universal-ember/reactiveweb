@@ -5,6 +5,7 @@ const getChannelURL = require('ember-source-channel-url');
 module.exports = async function () {
   return {
     usePnpm: true,
+    command: 'pnpm dedupe; pnpm ember test',
     buildManagerOptions() {
       return ['--ignore-scripts', '--no-frozen-lockfile'];
     },
@@ -13,6 +14,7 @@ module.exports = async function () {
         name: 'ember-lts-3.28',
         npm: {
           devDependencies: {
+            'ember-try': '~4.12.2',
             'ember-source': '~3.28.0',
           },
         },
