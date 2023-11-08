@@ -26,18 +26,6 @@ jobs:
       # Default + min-supported
       - run: pnpm test
 
-  floating:
-    name: "Floating Dependencies"
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: wyvox/action-setup-pnpm@v3
-        with:
-          node-version: 16
-      - run: pnpm test
-
   try-scenarios:
     name: ${{ matrix.try-scenario }}
     runs-on: ubuntu-latest
@@ -62,12 +50,12 @@ jobs:
           node-version: 16
 
       - run: ./node_modules/.bin/ember try:one ${{ matrix.try-scenario }} --skip-cleanup --- echo "setup"
-        working-directory: test-app
+        working-directory: tests/test-app
       - run: pnpm install --ignore-scripts --no-frozen-lockfile
       - run: pnpm dedupe
       - run: pnpm install
       - run: pnpm ember test
-        working-directory: test-app
+        working-directory: tests/test-app
 
 
 
