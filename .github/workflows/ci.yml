@@ -60,5 +60,14 @@ jobs:
       - uses: wyvox/action-setup-pnpm@v3
         with:
           node-version: 16
-      - run: ./node_modules/.bin/ember try:one ${{ matrix.try-scenario }} --skip-cleanup
+
+      - run: ./node_modules/.bin/ember try:one ${{ matrix.try-scenario }} --skip-cleanup --- echo "setup"
         working-directory: test-app
+      - run: pnpm dedupe
+      - run: pnpm install --ignore-scripts --no-frozen-lockfile
+      - run: pnpm dedupe
+      - run: pnpm ember test
+        working-directory: test-app
+
+
+

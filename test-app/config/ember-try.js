@@ -5,7 +5,6 @@ const getChannelURL = require('ember-source-channel-url');
 module.exports = async function () {
   return {
     usePnpm: true,
-    command: 'pnpm dedupe; pnpm ember test',
     buildManagerOptions() {
       return ['--ignore-scripts', '--no-frozen-lockfile'];
     },
