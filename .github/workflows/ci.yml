@@ -63,9 +63,9 @@ jobs:
 
       - run: ./node_modules/.bin/ember try:one ${{ matrix.try-scenario }} --skip-cleanup --- echo "setup"
         working-directory: test-app
-      - run: pnpm dedupe
       - run: pnpm install --ignore-scripts --no-frozen-lockfile
       - run: pnpm dedupe
+      - run: pnpm install
       - run: pnpm ember test
         working-directory: test-app
 
