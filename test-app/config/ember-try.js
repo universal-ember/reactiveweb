@@ -13,8 +13,13 @@ module.exports = async function () {
         name: 'ember-lts-3.28',
         npm: {
           devDependencies: {
-            'ember-cli': '~4.12.1',
             'ember-source': '~3.28.0',
+            // Newer versions require ember-source@4.8+
+            // We depend on latest ember-async-data
+            // so that our types can pass.
+            'ember-async-data': '0.7.1',
+            // for compatibility with ember-qunit
+            'ember-cli': '~4.12.1',
           },
         },
       },
