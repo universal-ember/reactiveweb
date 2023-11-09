@@ -1,5 +1,11 @@
 # reactiveweb
 
+## 0.1.1
+
+### Patch Changes
+
+- 72d6797: Add support for ember-source 3.28 and 5.4
+
 ## 0.1.0
 
 ### Minor Changes
