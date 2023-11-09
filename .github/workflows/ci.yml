@@ -53,7 +53,7 @@ jobs:
         working-directory: tests/test-app
       - run: pnpm install --ignore-scripts --no-frozen-lockfile
       - run: pnpm dedupe
-      - run: pnpm install
+      - run: pnpm install --force # ensure pnpm injections are re-created
       - run: pnpm ember test
         working-directory: tests/test-app
 
