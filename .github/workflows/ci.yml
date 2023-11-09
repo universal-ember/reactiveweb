@@ -49,13 +49,14 @@ jobs:
         with:
           node-version: 16
 
-      - run: ./node_modules/.bin/ember try:one ${{ matrix.try-scenario }} --skip-cleanup --- echo "setup"
+      - run: ./node_modules/.bin/ember try:one ${{ matrix.try-scenario }} --skip-cleanup
+      # - run: ./node_modules/.bin/ember try:one ${{ matrix.try-scenario }} --skip-cleanup --- echo "setup"
         working-directory: tests/test-app
-      - run: pnpm install --ignore-scripts --no-frozen-lockfile
-      - run: pnpm dedupe
-      - run: pnpm install --force # ensure pnpm injections are re-created
-      - run: pnpm ember test
-        working-directory: tests/test-app
+      # - run: pnpm install --ignore-scripts --no-frozen-lockfile
+      # - run: pnpm dedupe
+      # - run: pnpm install --force # ensure pnpm injections are re-created
+      # - run: pnpm ember test
+      #   working-directory: tests/test-app
 
 
 
