@@ -1,4 +1,4 @@
 packages:
   - 'docs'
   - 'reactiveweb'
-  - 'test-app'
+  - 'tests/*'

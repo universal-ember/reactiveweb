@@ -30,7 +30,8 @@
     "peerDependencyRules": {
       "allowAny": [
         "typescript",
-        "ember-source"
+        "ember-source",
+        "ember-async-data"
       ],
       "ignoreMissing": [
         "webpack",

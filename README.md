@@ -6,8 +6,10 @@ This library intends to provide convinence utilities for allow derived data patt
 
 ## Compatibility
 
-- Ember.js v4.8 or above
-- Embroider or ember-auto-import v2
+- `ember-source` v3.28 or above
+- `@embroider/*` or `ember-auto-import` v2
+- TypeScript support can only be guaranteed for ember-source @ 4.8 or higher
+
 
 ## Installation
 

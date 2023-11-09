@@ -1,0 +1,108 @@
+{
+  "name": "test-app",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Test app for reactiveweb addon",
+  "repository": "",
+  "license": "MIT",
+  "author": "",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "scripts": {
+    "build": "ember build --environment=production",
+    "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\"",
+    "lint:css": "stylelint \"**/*.css\"",
+    "lint:css:fix": "concurrently \"npm:lint:css -- --fix\"",
+    "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\"",
+    "lint:hbs": "ember-template-lint .",
+    "lint:hbs:fix": "ember-template-lint . --fix",
+    "lint:js": "eslint . --cache",
+    "lint:js:fix": "eslint . --fix",
+    "lint:prettier": "prettier -c .",
+    "lint:prettier:fix": "prettier -w .",
+    "_syncPnpm": "pnpm sync-dependencies-meta-injected",
+    "start": "concurrently 'ember serve' 'pnpm _syncPnpm --watch' --names 'tests serve,tests sync deps'",
+    "test:ember": "pnpm _syncPnpm && ember test"
+  },
+  "dependenciesMeta": {
+    "reactiveweb": {
+      "injected": true
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/eslint-parser": "^7.22.15",
+    "@ember/optional-features": "^2.0.0",
+    "@ember/string": "^3.1.1",
+    "@ember/test-helpers": "^3.2.0",
+    "@embroider/compat": "^3.2.3",
+    "@embroider/core": "^3.3.0",
+    "@embroider/webpack": "^3.2.0",
+    "@glimmer/component": "^1.1.2",
+    "@glimmer/tracking": "^1.1.2",
+    "@glint/environment-ember-loose": "^1.2.1",
+    "@glint/template": "^1.2.1",
+    "@tsconfig/ember": "^3.0.1",
+    "@types/qunit": "^2.19.7",
+    "@types/rsvp": "^4.0.6",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "broccoli-asset-rev": "^3.0.0",
+    "concurrently": "^8.2.2",
+    "ember-async-data": "0.7.1",
+    "ember-auto-import": "^2.6.3",
+    "ember-cli": "~4.12.1",
+    "ember-cli-app-version": "^6.0.1",
+    "ember-cli-babel": "^8.2.0",
+    "ember-cli-dependency-checker": "^3.3.2",
+    "ember-cli-htmlbars": "^6.3.0",
+    "ember-cli-inject-live-reload": "^2.1.0",
+    "ember-functions-as-helper-polyfill": "2.1.2",
+    "ember-load-initializers": "^2.1.2",
+    "ember-modifier": "^4.1.0",
+    "ember-page-title": "^8.1.0",
+    "ember-qunit": "^8.0.2",
+    "ember-resolver": "^11.0.1",
+    "ember-source": "~3.28.0",
+    "ember-source-channel-url": "^3.0.0",
+    "ember-template-imports": "^3.0.0",
+    "ember-template-lint": "^5.11.2",
+    "ember-try": "^3.0.0",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-ember": "^11.11.1",
+    "eslint-plugin-n": "^16.2.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-qunit": "^8.0.1",
+    "loader.js": "^4.7.0",
+    "pnpm-sync-dependencies-meta-injected": "^0.0.10",
+    "prettier": "^3.0.3",
+    "qunit": "^2.20.0",
+    "qunit-dom": "^3.0.0",
+    "reactiveweb": "workspace:*",
+    "stylelint": "^15.11.0",
+    "stylelint-config-standard": "^34.0.0",
+    "stylelint-prettier": "^4.0.2",
+    "tracked-built-ins": "^3.3.0",
+    "typescript": "^5.2.2",
+    "webpack": "^5.89.0"
+  },
+  "engines": {
+    "node": "16.* || >= 18"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "dependencies": {
+    "@ember/test-waiters": "^3.1.0",
+    "@nullvoxpopuli/eslint-configs": "^3.2.2",
+    "ember-concurrency": "^3.1.1",
+    "ember-resources": "^6.4.2",
+    "msw": "^1.3.2"
+  },
+  "msw": {
+    "workerDirectory": "public"
+  }
+}
