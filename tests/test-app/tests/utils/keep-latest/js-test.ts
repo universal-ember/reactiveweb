@@ -8,10 +8,10 @@ import { keepLatest } from 'reactiveweb/keep-latest';
 
 const timeout = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-module('Utils | keepLatest | js', function (hooks) {
+module('Utils | keepLatest | js', function(hooks) {
   setupTest(hooks);
 
-  test('it works with a trackedFunction', async function (assert) {
+  test('it works with a trackedFunction', async function(assert) {
     class Test {
       @tracked x = 1;
 
@@ -32,7 +32,7 @@ module('Utils | keepLatest | js', function (hooks) {
 
     let instance = new Test();
 
-    assert.strictEqual(instance.data, undefined);
+    assert.strictEqual(instance.data, null);
 
     await timeout(100);
 
@@ -47,7 +47,7 @@ module('Utils | keepLatest | js', function (hooks) {
     assert.strictEqual(instance.data, 2);
   });
 
-  test('it works if the value gets reset to undefined while loading', async function (assert) {
+  test('it works if the value gets reset to undefined while loading', async function(assert) {
     class Test {
       @tracked isLoading = false;
       @tracked value?: number = 3;
@@ -68,7 +68,7 @@ module('Utils | keepLatest | js', function (hooks) {
     assert.strictEqual(instance.data, 3);
   });
 
-  test('it works with array values correctly', async function (assert) {
+  test('it works with array values correctly', async function(assert) {
     class Test {
       @tracked isLoading = false;
       @tracked value = ['a'];
@@ -98,7 +98,7 @@ module('Utils | keepLatest | js', function (hooks) {
     );
   });
 
-  test('it works with object values correctly', async function (assert) {
+  test('it works with object values correctly', async function(assert) {
     class Test {
       @tracked isLoading = false;
       @tracked value: Record<string, unknown> = { x: 3 };
@@ -128,7 +128,7 @@ module('Utils | keepLatest | js', function (hooks) {
     );
   });
 
-  test('it works with string values correctly', async function (assert) {
+  test('it works with string values correctly', async function(assert) {
     class Test {
       @tracked isLoading = false;
       @tracked value = 'one';
@@ -158,7 +158,7 @@ module('Utils | keepLatest | js', function (hooks) {
     );
   });
 
-  test('it works with number values correctly', async function (assert) {
+  test('it works with number values correctly', async function(assert) {
     class Test {
       @tracked isLoading = false;
       @tracked value: number | null = 1;
