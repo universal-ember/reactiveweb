@@ -42,9 +42,8 @@ interface Options<T = unknown> {
  * To smooth that out, we can use [[keepLatest]]
  *
  * ```js
- *  import { use } from 'ember-resources';
- *  import { RemoteData } from 'reactiveweb/remote-data';
- *  import { keepLatest } from 'reactiveweb/keep-latest';
+ *  import { RemoteData } from 'ember-resources/util/remote-data';
+ *  import { keepLatest } from 'ember-resources/util/keep-latest';
  *
  *  class A {
  *    @use request = RemoteData(() => 'some url');
@@ -59,15 +58,56 @@ interface Options<T = unknown> {
  *    }
  *  }
  * ```
+ *
+ * To specify a default value, use an additional getter
+ * ```js
+ *  import { RemoteData } from 'ember-resources/util/remote-data';
+ *  import { keepLatest } from 'ember-resources/util/keep-latest';
+ *
+ *  class A {
+ *    @use request = RemoteData(() => 'some url');
+ *    @use data = keepLatest({
+ *      value: () => this.request.value,
+ *      when: () => this.request.isLoading,
+ *    });
+ *
+ *    get latest() {
+ *      // after the initial request, this is always resolved
+ *      return this.data;
+ *    }
+ *
+ *    get result() {
+ *      return this.latest ?? { default: 'value' };
+ *    }
+ *  }
+ * ```
  */
 export function keepLatest<Return = unknown>({ when, value: valueFn }: Options<Return>) {
   return resource(() => {
     let previous: Return;
+    let initial = true;
 
     return () => {
       let value = valueFn();
 
       if (when()) {
+        /**
+         * Initially, if we may as well return the value instead
+         * of the "previous" value is there is no previous yet.
+         *
+         * We check against undefined, because that's what
+         * `previous` is "initialized" to.
+         *
+         * And then we never enter this block again, because
+         * we will have previous values in future invocations of this
+         * Formula.
+         */
+        if (previous === undefined && initial) {
+          initial = false;
+
+          return value;
+        }
+
         return (previous = isEmpty(value) ? previous : value);
       }
 
