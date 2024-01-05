@@ -22,8 +22,6 @@ module('Utils | FPS | rendering', function (hooks) {
 
       assert.notStrictEqual(text, '', 'Content is rendered');
     });
-
-
   });
 
   module('UpdateFrequency', function() {
