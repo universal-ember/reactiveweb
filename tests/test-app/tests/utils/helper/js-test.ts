@@ -8,10 +8,10 @@ import { setupTest } from 'ember-qunit';
 import { helper } from 'ember-resources/util/helper';
 
 // not testing in template, because that's the easy part
-module('Utils | helper | js', function(hooks) {
+module('Utils | helper | js', function (hooks) {
   setupTest(hooks);
 
-  test('it works', async function(assert) {
+  test('it works', async function (assert) {
     class Test {
       @tracked count = 1;
 

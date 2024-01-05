@@ -1,18 +1,16 @@
 import { getValue } from '@glimmer/tracking/primitives/cache';
 import { invokeHelper } from '@ember/helper';
 
-import { DEFAULT_THUNK, normalizeThunk } from './utils';
+import { DEFAULT_THUNK, normalizeThunk } from './utils.ts';
 
 import type ClassBasedHelper from '@ember/component/helper';
 import type { FunctionBasedHelper } from '@ember/component/helper';
 import type { HelperLike } from '@glint/template';
 import type { Thunk } from 'ember-resources';
 
-
 // Should be from
 // @glimmer/tracking/primitives/cache
 type Cache = ReturnType<typeof invokeHelper>;
-
 
 type Get<T, K, Otherwise = unknown> = K extends keyof T ? T[K] : Otherwise;
 
@@ -68,7 +66,7 @@ type Get<T, K, Otherwise = unknown> = K extends keyof T ? T[K] : Otherwise;
 export function helper<T = unknown, S = InferSignature<T>, Return = Get<S, 'Return'>>(
   context: object,
   helper: T,
-  thunk: Thunk = DEFAULT_THUNK,
+  thunk: Thunk = DEFAULT_THUNK
 ): { value: Return } {
   let resource: Cache;
 
