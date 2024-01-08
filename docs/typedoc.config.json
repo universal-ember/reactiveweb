@@ -4,7 +4,11 @@
   "compilerOptions": {
     "noEmitOnError": false
   },
-  "entryPoints": ["../reactiveweb/src/**"],
+  "entryPoints": [
+    "../reactiveweb/src/*",
+    "../reactiveweb/src/resource/service.ts",
+    "../reactiveweb/src/resource/modifier/index.ts"
+  ],
   "navigationLinks": {
     "GitHub": "https://github.com/universal-ember/reactiveweb"
   },
