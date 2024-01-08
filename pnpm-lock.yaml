@@ -160,7 +160,7 @@ importers:
         specifier: ^5.0.4
         version: 5.2.2
 
-  tests/min-supportetd:
+  tests/min-supported:
     dependencies:
       '@ember/test-waiters':
         specifier: ^3.1.0
@@ -2143,7 +2143,6 @@ packages:
       semver: 7.5.4
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   /@embroider/shared-internals@2.5.0:
     resolution: {integrity: sha512-7qzrb7GVIyNqeY0umxoeIvjDC+ay1b+wb2yCVuYTUYrFfLAkLEy9FNI3iWCi3RdQ9OFjgcAxAnwsAiPIMZZ3pQ==}
@@ -7893,7 +7892,7 @@ packages:
     dependencies:
       '@ember/test-helpers': 3.2.0(@glint/template@1.2.1)(ember-source@3.28.12)(webpack@5.89.0)
       '@embroider/addon-shim': 1.8.7
-      '@embroider/macros': 1.13.2(@glint/template@1.2.1)
+      '@embroider/macros': 1.13.4(@glint/template@1.2.1)
       ember-cli-test-loader: 3.1.0
       ember-source: 3.28.12(@babel/core@7.23.7)
       qunit: 2.20.0
@@ -15717,6 +15716,7 @@ packages:
     dependencies:
       '@ember/test-waiters': 3.1.0
       '@embroider/addon-shim': 1.8.7
+      '@embroider/macros': 1.13.4(@glint/template@1.2.1)
       ember-async-data: 1.0.3(ember-source@3.28.12)
       ember-resources: 6.4.2(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(@glint/template@1.2.1)(ember-concurrency@3.1.1)(ember-source@3.28.12)
       ember-source: 3.28.12(@babel/core@7.23.7)
@@ -15738,6 +15738,7 @@ packages:
     dependencies:
       '@ember/test-waiters': 3.1.0
       '@embroider/addon-shim': 1.8.7
+      '@embroider/macros': 1.13.4(@glint/template@1.2.1)
       ember-async-data: 1.0.3(ember-source@5.4.0)
       ember-resources: 6.4.2(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(@glint/template@1.2.1)(ember-concurrency@3.1.1)(ember-source@5.4.0)
       ember-source: 5.4.0(@babel/core@7.23.7)(@glimmer/component@1.1.2)(@glint/template@1.2.1)(webpack@5.89.0)
