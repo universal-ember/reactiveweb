@@ -4,7 +4,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
 import { cell, Resource, resource } from 'ember-resources';
-import { service, serviceOverride } from 'ember-resources/service';
+import { service, serviceOverride } from 'reactiveweb/resource/service';
 // This export is marked as @internal, so it is not present in
 // the built d.ts files.
 // @ts-expect-error - types are deliberately not exported

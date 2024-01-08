@@ -12,6 +12,6 @@
     "allowImportingTsExtensions": true,
     "declarationDir": "declarations",
     // https://www.typescriptlang.org/tsconfig#stripInternal
-    "stripInternal": true,
+    "stripInternal": true
   }
 }
