@@ -46,6 +46,19 @@ jobs:
       - uses: actions/checkout@v4
       - uses: wyvox/action-setup-pnpm@v3
       - run: pnpm test:ember
+        working-directory: tests/test-app
+
+  test_min:
+    name: "Tests (min-supported, 3.28)"
+    needs: ['setup']
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: wyvox/action-setup-pnpm@v3
+      - run: pnpm test:ember
+        working-directory: tests/min-supported
 
   try-scenarios:
     name: ${{ matrix.try-scenario }}
