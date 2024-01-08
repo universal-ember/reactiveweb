@@ -19,6 +19,9 @@
     },
     "./addon-main.js": "./addon-main.cjs"
   },
+  "imports": {
+    "#types": "./src/-private/types.ts"
+  },
   "typesVersions": {
     "*": {
       "*": [
