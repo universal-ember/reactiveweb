@@ -23,7 +23,6 @@
     "lint:js:fix": "eslint . --fix",
     "lint:prettier": "prettier -c .",
     "lint:prettier:fix": "prettier -w .",
-    "lint:types": "glint",
     "_syncPnpm": "pnpm sync-dependencies-meta-injected",
     "start": "concurrently 'ember serve' 'pnpm _syncPnpm --watch' --names 'tests serve,tests sync deps'",
     "test:ember": "pnpm _syncPnpm && ember test --test-port 0"
@@ -64,7 +63,7 @@
     "ember-cli-inject-live-reload": "^2.1.0",
     "ember-load-initializers": "^2.1.2",
     "ember-modifier": "^4.1.0",
-    "ember-page-title": "^8.1.0",
+    "ember-page-title": "^8.2.0",
     "ember-qunit": "^8.0.2",
     "ember-resolver": "^11.0.1",
     "ember-source": "~5.4.0",
