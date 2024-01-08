@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   setup:
-    name: "Lints"
+    name: "Fill Dependency Cache"
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
