@@ -23,7 +23,7 @@ jobs:
         with:
           # Future installations will run "prepare"
           # and this job doesn't need to
-          pnpm-args: '--ignore-scripts'
+          args: '--ignore-scripts'
 
   lint:
     name: "Lints"
