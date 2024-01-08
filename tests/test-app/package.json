@@ -18,14 +18,15 @@
     "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\"",
     "lint:hbs": "ember-template-lint .",
     "lint:hbs:fix": "ember-template-lint . --fix",
+    "lint:types": "glint",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
     "lint:prettier": "prettier -c .",
     "lint:prettier:fix": "prettier -w .",
-    "lint:types": "tsc --noEmit",
+    "lint:types": "glint",
     "_syncPnpm": "pnpm sync-dependencies-meta-injected",
     "start": "concurrently 'ember serve' 'pnpm _syncPnpm --watch' --names 'tests serve,tests sync deps'",
-    "test:ember": "pnpm _syncPnpm && ember test"
+    "test:ember": "pnpm _syncPnpm && ember test --test-port 0"
   },
   "dependenciesMeta": {
     "reactiveweb": {
@@ -43,7 +44,9 @@
     "@embroider/webpack": "^3.2.0",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
+    "@glint/core": "^1.2.1",
     "@glint/environment-ember-loose": "^1.2.1",
+    "@glint/environment-ember-template-imports": "^1.2.1",
     "@glint/template": "^1.2.1",
     "@tsconfig/ember": "^3.0.1",
     "@types/qunit": "^2.19.7",
