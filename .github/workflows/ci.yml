@@ -20,6 +20,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: wyvox/action-setup-pnpm@v3
+        with:
+          # Future installations will run "prepare"
+          # and this job doesn't need to
+          pnpm-args: '--ignore-scripts'
 
   lint:
     name: "Lints"
