@@ -26,7 +26,7 @@
     "lint:types": "glint",
     "_syncPnpm": "pnpm sync-dependencies-meta-injected",
     "start": "concurrently 'ember serve' 'pnpm _syncPnpm --watch' --names 'tests serve,tests sync deps'",
-    "test:ember": "pnpm _syncPnpm && ember test"
+    "test:ember": "pnpm _syncPnpm && ember test --test-port 0"
   },
   "dependenciesMeta": {
     "reactiveweb": {
