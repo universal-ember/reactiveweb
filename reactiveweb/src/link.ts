@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getOwner, setOwner } from '@ember/application';
 import { assert } from '@ember/debug';
 import { associateDestroyableChild } from '@ember/destroyable';
