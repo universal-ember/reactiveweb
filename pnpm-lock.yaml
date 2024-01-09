@@ -355,6 +355,9 @@ importers:
       '@ember/test-waiters':
         specifier: ^3.1.0
         version: 3.1.0
+      '@embroider/macros':
+        specifier: ^1.13.4
+        version: 1.13.4(@glint/template@1.2.1)
       '@nullvoxpopuli/eslint-configs':
         specifier: ^3.2.2
         version: 3.2.2(@babel/core@7.23.7)(@babel/eslint-parser@7.22.15)(@typescript-eslint/eslint-plugin@6.9.0)(@typescript-eslint/parser@6.9.0)(eslint-config-prettier@9.0.0)(eslint-plugin-ember@11.11.1)(eslint-plugin-qunit@8.0.1)(eslint@8.52.0)(prettier@3.0.3)(typescript@5.2.2)
@@ -446,9 +449,6 @@ importers:
       ember-cli-dependency-checker:
         specifier: ^3.3.2
         version: 3.3.2(ember-cli@5.4.0)
-      ember-cli-deprecation-workflow:
-        specifier: ^2.2.0
-        version: 2.2.0
       ember-cli-htmlbars:
         specifier: ^6.3.0
         version: 6.3.0
@@ -1905,7 +1905,7 @@ packages:
       ember-source: '*'
     dependencies:
       '@ember/test-waiters': 3.1.0
-      '@embroider/macros': 1.13.2(@glint/template@1.2.1)
+      '@embroider/macros': 1.13.4(@glint/template@1.2.1)
       '@simple-dom/interface': 1.4.0
       broccoli-debug: 0.6.5
       broccoli-funnel: 3.0.8
@@ -1926,7 +1926,7 @@ packages:
       ember-source: '*'
     dependencies:
       '@ember/test-waiters': 3.1.0
-      '@embroider/macros': 1.13.2(@glint/template@1.2.1)
+      '@embroider/macros': 1.13.4(@glint/template@1.2.1)
       '@simple-dom/interface': 1.4.0
       broccoli-debug: 0.6.5
       broccoli-funnel: 3.0.8
@@ -2125,6 +2125,7 @@ packages:
       semver: 7.5.4
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   /@embroider/macros@1.13.4(@glint/template@1.2.1):
     resolution: {integrity: sha512-A6tXvfwnscx66QO0R3c2dIJwEltfsTL4ihsYjMtgP9ODCCmQlCaRlZDQYw5Drta0ER9Fj3nXntu4naV5Wt5XLA==}
@@ -2162,6 +2163,7 @@ packages:
       typescript-memoize: 1.1.1
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   /@embroider/shared-internals@2.5.0(supports-color@8.1.1):
     resolution: {integrity: sha512-7qzrb7GVIyNqeY0umxoeIvjDC+ay1b+wb2yCVuYTUYrFfLAkLEy9FNI3iWCi3RdQ9OFjgcAxAnwsAiPIMZZ3pQ==}
@@ -2517,7 +2519,7 @@ packages:
       '@glimmer/component': 1.1.2(@babel/core@7.23.7)
       '@glint/template': 1.2.1
       ember-cli-htmlbars: 6.3.0
-      ember-modifier: 4.1.0(ember-source@5.4.0)
+      ember-modifier: 4.1.0(ember-source@3.28.12)
     dev: true
 
   /@glint/environment-ember-template-imports@1.2.1(@glint/environment-ember-loose@1.2.1)(@glint/template@1.2.1)(ember-template-imports@3.4.2):
@@ -7041,7 +7043,7 @@ packages:
       '@babel/plugin-proposal-class-properties': 7.18.6(@babel/core@7.23.7)
       '@babel/plugin-proposal-decorators': 7.23.2(@babel/core@7.23.7)
       '@babel/preset-env': 7.23.2(@babel/core@7.23.7)
-      '@embroider/macros': 1.13.2(@glint/template@1.2.1)
+      '@embroider/macros': 1.13.4(@glint/template@1.2.1)
       '@embroider/shared-internals': 2.5.1
       babel-loader: 8.3.0(@babel/core@7.23.7)
       babel-plugin-ember-modules-api-polyfill: 3.5.0
@@ -7081,7 +7083,7 @@ packages:
       '@babel/plugin-proposal-class-properties': 7.18.6(@babel/core@7.23.7)
       '@babel/plugin-proposal-decorators': 7.23.2(@babel/core@7.23.7)
       '@babel/preset-env': 7.23.2(@babel/core@7.23.7)
-      '@embroider/macros': 1.13.2(@glint/template@1.2.1)
+      '@embroider/macros': 1.13.4(@glint/template@1.2.1)
       '@embroider/shared-internals': 2.5.1
       babel-loader: 8.3.0(@babel/core@7.23.7)(webpack@5.89.0)
       babel-plugin-ember-modules-api-polyfill: 3.5.0
@@ -7246,18 +7248,6 @@ packages:
       is-git-url: 1.0.0
       resolve: 1.22.8
       semver: 5.7.2
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
-  /ember-cli-deprecation-workflow@2.2.0:
-    resolution: {integrity: sha512-23bXZqZJBJSKBTfT0LK7qzSJX861TgafL6RVdMfn/iubpLnoZIWergYwEdgs24CNTUbuehVbHy2Q71o8jYfwfw==}
-    engines: {node: 12.* || 14.* || >= 16}
-    dependencies:
-      '@ember/string': 3.1.1
-      broccoli-funnel: 3.0.8
-      broccoli-merge-trees: 4.2.0
-      broccoli-plugin: 4.0.7
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -7925,7 +7915,7 @@ packages:
     dependencies:
       '@ember/test-helpers': 3.2.0(@glint/template@1.2.1)(ember-source@5.4.0)(webpack@5.89.0)
       '@embroider/addon-shim': 1.8.7
-      '@embroider/macros': 1.13.2(@glint/template@1.2.1)
+      '@embroider/macros': 1.13.4(@glint/template@1.2.1)
       ember-cli-test-loader: 3.1.0
       ember-source: 5.4.0(@babel/core@7.23.7)(@glimmer/component@1.1.2)(@glint/template@1.2.1)(webpack@5.89.0)
       qunit: 2.20.0
@@ -7984,7 +7974,7 @@ packages:
       '@babel/runtime': 7.23.2
       '@ember/test-waiters': 3.1.0
       '@embroider/addon-shim': 1.8.7
-      '@embroider/macros': 1.13.2(@glint/template@1.2.1)
+      '@embroider/macros': 1.13.4(@glint/template@1.2.1)
       '@glimmer/component': 1.1.2(@babel/core@7.23.7)
       '@glimmer/tracking': 1.1.2
       '@glint/template': 1.2.1
@@ -8014,7 +8004,7 @@ packages:
       '@babel/runtime': 7.23.2
       '@ember/test-waiters': 3.1.0
       '@embroider/addon-shim': 1.8.7
-      '@embroider/macros': 1.13.2(@glint/template@1.2.1)
+      '@embroider/macros': 1.13.4(@glint/template@1.2.1)
       '@glimmer/component': 1.1.2(@babel/core@7.23.7)
       '@glimmer/tracking': 1.1.2
       '@glint/template': 1.2.1
@@ -8044,7 +8034,7 @@ packages:
       '@babel/runtime': 7.23.2
       '@ember/test-waiters': 3.1.0
       '@embroider/addon-shim': 1.8.7
-      '@embroider/macros': 1.13.2(@glint/template@1.2.1)
+      '@embroider/macros': 1.13.4(@glint/template@1.2.1)
       '@glimmer/component': 1.1.2(@babel/core@7.23.7)
       '@glimmer/tracking': 1.1.2
       '@glint/template': 1.2.1
