@@ -66,7 +66,7 @@ const REPLACEMENTS = new WeakMap<Owner, Map<object, object>>();
  * ```js
  * import Component from '@glimmer/component';
  * import { resource } from 'ember-resources';
- * import { service } from 'ember-resources/service';
+ * import { service } from 'reactiveweb/resource/service';
  *
  * class PlanetsAPI { ... }
  *
