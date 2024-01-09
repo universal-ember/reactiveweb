@@ -236,6 +236,10 @@ export class State<Value> {
    * that error will be the value returned by this property
    */
   get error() {
+    if (this.data?.state !== 'REJECTED') {
+      return null;
+    }
+
     return this.data?.error ?? null;
   }
 
