@@ -41,7 +41,7 @@ type ArgsForFn<S> = S extends { Args?: object }
  *
  * ```js
  * import { resource } from 'ember-resources';
- * import { modifier } from 'ember-resources/modifier';
+ * import { modifier } from 'reactiveweb/resource/modifier';
  *
  * const wiggle = modifier((element, arg1, arg2, namedArgs) => {
  *     return resource(({ on }) => {
@@ -89,7 +89,7 @@ export function modifier<El extends Element, Args extends unknown[] = unknown[]>
  *
  * ```js
  * import { resource } from 'ember-resources';
- * import { modifier } from 'ember-resources/modifier';
+ * import { modifier } from 'reactiveweb/resource/modifier';
  *
  * const wiggle = modifier((element, arg1, arg2, namedArgs) => {
  *     return resource(({ on }) => {
@@ -130,7 +130,7 @@ export function modifier<S extends { Element?: Element }>(
  *
  * ```js
  * import { resource } from 'ember-resources';
- * import { modifier } from 'ember-resources/modifier';
+ * import { modifier } from 'reactiveweb/resource/modifier';
  *
  * const wiggle = modifier((element, arg1, arg2, namedArgs) => {
  *     return resource(({ on }) => {
@@ -171,7 +171,7 @@ export function modifier<S extends { Args?: object }>(
  *
  * ```js
  * import { resource } from 'ember-resources';
- * import { modifier } from 'ember-resources/modifier';
+ * import { modifier } from 'reactiveweb/resource/modifier';
  *
  * const wiggle = modifier((element, arg1, arg2, namedArgs) => {
  *     return resource(({ on }) => {
