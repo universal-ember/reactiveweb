@@ -24,7 +24,7 @@
     "lint:prettier": "prettier -c .",
     "lint:prettier:fix": "prettier -w .",
     "_syncPnpm": "pnpm sync-dependencies-meta-injected",
-    "start": "concurrently 'ember serve' 'pnpm _syncPnpm --watch' --names 'tests serve,tests sync deps'",
+    "start": "concurrently 'ember serve' 'pnpm sync-dependencies-meta-injected --watch' --names 'tests serve,tests sync deps'",
     "test:ember": "pnpm _syncPnpm && ember test --test-port 0"
   },
   "dependenciesMeta": {
@@ -82,7 +82,6 @@
     "prettier": "^3.0.3",
     "qunit": "^2.20.0",
     "qunit-dom": "^3.0.0",
-    "reactiveweb": "workspace:*",
     "stylelint": "^15.11.0",
     "stylelint-config-standard": "^34.0.0",
     "stylelint-prettier": "^4.0.2",
@@ -101,6 +100,7 @@
     "@nullvoxpopuli/eslint-configs": "^3.2.2",
     "ember-concurrency": "^3.1.1",
     "ember-resources": "^6.4.2",
+    "reactiveweb": "workspace:*",
     "msw": "^1.3.2"
   },
   "msw": {

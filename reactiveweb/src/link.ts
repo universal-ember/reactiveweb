@@ -111,6 +111,16 @@ function directLink(child: object, parent: object) {
 
   let owner = getOwner(parent);
 
+  // the parent *is* the owner
+  // These checks are based on the `@public` interface of what
+  // an owner is
+  if (!owner && 'lookup' in parent && 'register' in parent && 'ownerInjection' in parent) {
+    // SAFETY: there is no JS-mode way to narrow an object
+    //         to an owner.
+    // SEE: @ember/-internal/owner.d.ts
+    owner = parent as any;
+  }
+
   if (owner) {
     setOwner(child, owner);
   }
