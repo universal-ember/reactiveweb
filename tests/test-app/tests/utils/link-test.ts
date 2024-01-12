@@ -3,7 +3,7 @@ import Service, { inject as service } from '@ember/service';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-import { link } from 'ember-resources/link';
+import { link } from 'reactiveweb/link';
 
 module('@link', function (hooks) {
   setupTest(hooks);
