@@ -13,7 +13,7 @@ type NonKey<K> = K extends string ? never : K extends symbol ? never : K;
  *
  * ```js
  * import Component from '@glimmer/component';
- * import { link } from 'ember-resources/link';
+ * import { link } from 'reactiveweb/link';
  *
  * class MyClass {  ... }
  *
@@ -31,7 +31,7 @@ export function link<Instance>(child: Class<Instance>): Stage1Decorator;
  * ```js
  * import Component from '@glimmer/component';
  * import { cached } from '@glimmer/tracking';
- * import { link } from 'ember-resources/link';
+ * import { link } from 'reactiveweb/link';
  *
  * export default class Demo extends Component {
  *   @cached
@@ -54,7 +54,7 @@ export function link<Child, Other>(child: Child, parent: NonKey<Other>): Child;
  *
  * ```js
  * import Component from '@glimmer/component';
- * import { link } from 'ember-resources/link';
+ * import { link } from 'reactiveweb/link';
  *
  * class MyClass {  ... }
  *
@@ -69,7 +69,7 @@ export function link<Child, Other>(child: Child, parent: NonKey<Other>): Child;
  * ```js
  * import Component from '@glimmer/component';
  * import { tracked } from '@glimmer/tracking';
- * import { link } from 'ember-resources/link';
+ * import { link } from 'reactiveweb/link';
  *
  * class MyClass {  ... }
  *

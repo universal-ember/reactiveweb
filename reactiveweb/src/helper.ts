@@ -40,7 +40,7 @@ type Get<T, K, Otherwise = unknown> = K extends keyof T ? T[K] : Otherwise;
  * ```js
  * import intersect from 'ember-composable-helpers/addon/helpers/intersect';
  *
- * import { helper } from 'ember-resources/util/helper';
+ * import { helper } from 'reactiveweb/helper';
  *
  * class Demo {
  *   @tracked listA = [...];
