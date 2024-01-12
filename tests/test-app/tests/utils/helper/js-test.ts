@@ -5,7 +5,7 @@ import { settled } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-import { helper } from 'ember-resources/util/helper';
+import { helper } from 'reactiveweb/helper';
 
 // not testing in template, because that's the easy part
 module('Utils | helper | js', function (hooks) {
