@@ -9,6 +9,17 @@ module.exports = {
   overrides: [
     ...config.overrides,
     {
+      files: ['**/*.gts'],
+      plugins: ['ember'],
+      parser: 'ember-eslint-parser',
+      globals: { out: true },
+    },
+    {
+      files: ['**/*.gjs'],
+      plugins: ['ember'],
+      parser: 'ember-eslint-parser',
+    },
+    {
       files: ['**/*.ts'],
       rules: {
         /**
