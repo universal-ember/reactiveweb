@@ -11,8 +11,6 @@ import {
   macroCondition,
 } from '@embroider/macros';
 
-import { Resource } from 'ember-resources';
-
 import type Owner from '@ember/owner';
 import type { Stage1DecoratorDescriptor } from '#types';
 
@@ -167,17 +165,12 @@ export function service(resource: unknown) {
             cache = invokeHelper(owner, resource);
             caches.set(resource, cache);
             associateDestroyableChild(owner, cache);
-          } else if ((resource as any).prototype instanceof Resource) {
-            assert(
-              `The .from() method on a type of Resource has been removed or altered. This is not allowed.`,
-              'from' in resource && resource.from === Resource.from
-            );
-
+          } else if ('from' in resource) {
             /**
              * We do a lot of lying internally to make TypeScript nice for consumers.
              * But it does mean that we have to cast in our own code.
              */
-            let { definition } = (resource as typeof Resource).from(() => []) as unknown as any;
+            let { definition } = (resource as any).from(() => []) as unknown as any;
 
             cache = invokeHelper(owner, definition);
             caches.set(resource, cache);
