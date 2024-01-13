@@ -1,4 +1,29 @@
 # Changelog
+## Release (2024-01-13)
+
+reactiveweb 1.1.0 (minor)
+
+#### :rocket: Enhancement
+* `reactiveweb`, `test-app`
+  * [#45](https://github.com/universal-ember/reactiveweb/pull/45) Migrate `trackedTask`'s implementation to use function-based resources ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#55](https://github.com/universal-ember/reactiveweb/pull/55) Update the service implementation to not require knowledge of a specific class-based resource implementation ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#54](https://github.com/universal-ember/reactiveweb/pull/54) Refactor the map util to not be a resource, it never needed to be ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :bug: Bug Fix
+* `reactiveweb`
+  * [#50](https://github.com/universal-ember/reactiveweb/pull/50) Fix in-editor docs ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :house: Internal
+* `reactiveweb`, `test-app`
+  * [#56](https://github.com/universal-ember/reactiveweb/pull/56) Upgrade eslint-plugin-ember ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* `reactiveweb`
+  * [#53](https://github.com/universal-ember/reactiveweb/pull/53) Update compilation tools, now using decorator-transforms ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* `test-app`
+  * [#52](https://github.com/universal-ember/reactiveweb/pull/52) Upgrade test-apps to ember-resources@6.5.1 to test against deprecations ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#51](https://github.com/universal-ember/reactiveweb/pull/51) Use correct import paths ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
 ## Release (2024-01-09)
 
 reactiveweb 1.0.0 (major)
