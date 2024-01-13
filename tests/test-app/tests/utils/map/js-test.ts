@@ -30,81 +30,102 @@ module('Utils | map | js', function (hooks) {
     return new ExampleTrackedThing(id);
   }
 
-  test('it works', async function (assert) {
-    class Test {
-      @tracked records: TestRecord[] = [];
+  for (let variant of [
+    {
+      name: 'public api',
+      getItem: (collection: Wrapper[], index: number) => collection[index],
+    },
+    {
+      name: 'private api (sanity check)',
+      getItem: (collection: any, index: number) => {
+        // const AT = Symbol.for('__AT__');
+        const AT = '__AT__';
 
-      stuff = map(this, {
-        data: () => {
-          assert.step('evaluate data thunk');
+        return collection[AT](index);
+      },
+    },
+  ]) {
+    test(`it works (${variant.name})`, async function (assert) {
+      class Test {
+        @tracked records: TestRecord[] = [];
 
-          return this.records;
-        },
-        map: (record) => {
-          assert.step(`perform map on ${record.id}`);
+        stuff = map(this, {
+          data: () => {
+            assert.step('evaluate data thunk');
 
-          return new Wrapper(record);
-        },
-      });
-    }
+            return this.records;
+          },
+          map: (record) => {
+            assert.step(`perform map on ${record.id}`);
 
-    let currentStuff: Wrapper[] = [];
-    let instance = new Test();
+            return new Wrapper(record);
+          },
+        });
+      }
 
-    setOwner(instance, this.owner);
+      let currentStuff: Wrapper[] = [];
+      let instance = new Test();
 
-    assert.strictEqual(instance.stuff.length, 0);
-    assert.verifySteps(['evaluate data thunk']);
+      const get = (index: number) => variant.getItem(instance.stuff, index);
 
-    let first = testData(1);
-    let second = testData(2);
+      setOwner(instance, this.owner);
 
-    instance.records = [first, second];
-    assert.strictEqual(instance.stuff.length, 2, 'length adjusted');
-    assert.verifySteps(
-      ['evaluate data thunk'],
-      'we do not map yet because the data has not been accessed'
-    );
+      assert.strictEqual(instance.stuff.length, 0);
+      assert.verifySteps(['evaluate data thunk'], '❯❯ initially, the data fn is consumed');
 
-    assert.ok(instance.stuff[0] instanceof Wrapper, 'access id:1');
-    assert.ok(instance.stuff[1] instanceof Wrapper, 'access id:2');
-    assert.verifySteps(['perform map on 1', 'perform map on 2']);
+      let first = testData(1);
+      let second = testData(2);
 
-    assert.ok(instance.stuff[0] instanceof Wrapper, 'access id:1');
-    assert.ok(instance.stuff[1] instanceof Wrapper, 'access id:2');
-    assert.verifySteps([], 're-access does not re-map');
+      instance.records = [first, second];
+      assert.strictEqual(instance.stuff.length, 2, 'length adjusted');
+      assert.verifySteps(
+        ['evaluate data thunk'],
+        '❯❯ we do not map yet because the data has not been accessed'
+      );
 
-    // this tests the iterator
-    currentStuff = [...instance.stuff];
-    assert.ok(instance.stuff.values()[0] instanceof Wrapper, 'mappedRecords id:1');
-    assert.ok(instance.stuff.values()[1] instanceof Wrapper, 'mappedRecords id:2');
+      assert.ok(get(0) instanceof Wrapper, 'access id:1');
+      assert.ok(get(1) instanceof Wrapper, 'access id:2');
+      assert.verifySteps(
+        ['perform map on 1', 'perform map on 2'],
+        '❯❯ accessing indicies calls the mapper'
+      );
 
-    assert.strictEqual(currentStuff[0]?.record, first, 'object equality retained');
-    assert.strictEqual(currentStuff[1]?.record, second, 'object equality retained');
+      assert.ok(get(0) instanceof Wrapper, 'access id:1');
+      assert.ok(get(1) instanceof Wrapper, 'access id:2');
+      assert.verifySteps([], '❯❯ re-access is a no-op');
 
-    instance.records = [...instance.records, testData(3)];
-    assert.strictEqual(instance.stuff.length, 3, 'length adjusted');
-    assert.verifySteps(
-      ['evaluate data thunk'],
-      'we do not map on the new object yet because the data has not been accessed'
-    );
+      // this tests the iterator
+      currentStuff = [...instance.stuff];
+      assert.ok(instance.stuff.values()[0] instanceof Wrapper, 'mappedRecords id:1');
+      assert.ok(instance.stuff.values()[1] instanceof Wrapper, 'mappedRecords id:2');
 
-    assert.ok(instance.stuff[0] instanceof Wrapper, 'access id:1');
-    assert.ok(instance.stuff[1] instanceof Wrapper, 'access id:2');
-    assert.ok(instance.stuff[2] instanceof Wrapper, 'access id:3');
-    assert.strictEqual(instance.stuff[0], currentStuff[0], 'original objects retained');
-    assert.strictEqual(instance.stuff[1], currentStuff[1], 'original objects retained');
-    assert.verifySteps(
-      ['perform map on 3'],
-      'only calls map once, even though the whole source data was re-created'
-    );
+      assert.strictEqual(currentStuff[0]?.record, first, 'object equality retained');
+      assert.strictEqual(currentStuff[1]?.record, second, 'object equality retained');
 
-    first.someValue = 'throwaway value';
-    assert.verifySteps(
-      [],
-      'data thunk is not ran, because the tracked data consumed in the thunk was not changed'
-    );
-    assert.strictEqual(instance.stuff[0], currentStuff[0], 'original objects retained');
-    assert.strictEqual(instance.stuff[1], currentStuff[1], 'original objects retained');
-  });
+      instance.records = [...instance.records, testData(3)];
+      assert.strictEqual(instance.stuff.length, 3, 'length adjusted');
+      assert.verifySteps(
+        ['evaluate data thunk'],
+        '❯❯ we do not map on the new object yet because the data has not been accessed'
+      );
+
+      assert.ok(get(0) instanceof Wrapper, 'access id:1');
+      assert.ok(get(1) instanceof Wrapper, 'access id:2');
+      assert.ok(get(2) instanceof Wrapper, 'access id:3');
+      assert.strictEqual(get(0), currentStuff[0], 'original objects retained');
+      assert.strictEqual(get(1), currentStuff[1], 'original objects retained');
+      assert.verifySteps(
+        ['perform map on 3'],
+        '❯❯ only calls map once, even though the whole source data was re-created'
+      );
+
+      first.someValue = 'throwaway value';
+      assert.verifySteps(
+        [],
+        '❯❯ data thunk is not ran, because the tracked data consumed in the thunk was not changed'
+      );
+      assert.strictEqual(get(0), currentStuff[0], 'original objects retained');
+      assert.strictEqual(get(1), currentStuff[1], 'original objects retained');
+    });
+  }
 });

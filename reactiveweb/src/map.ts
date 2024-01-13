@@ -1,15 +1,9 @@
-import { tracked } from '@glimmer/tracking';
+import { cached } from '@glimmer/tracking';
+import { setOwner } from '@ember/application';
 import { assert } from '@ember/debug';
 
-import { Resource } from 'ember-resources';
-
-import type { ExpandArgs } from 'ember-resources';
-
-type Positional<T> = ExpandArgs<T>['Positional'];
-type Named<T> = ExpandArgs<T>['Named'];
-
 /**
- * Public API of the return value of the [[map]] resource.
+ * Public API of the return value of the [[map]] utility.
  */
 export interface MappedArray<Elements extends readonly unknown[], MappedTo> {
   /**
@@ -130,7 +124,7 @@ export interface MappedArray<Elements extends readonly unknown[], MappedTo> {
  * need to be transformed into a different shape (adding/removing/modifying data/properties)
  * and you want the transform to be efficient when iterating over that data.
  *
- * A common use case where this `map` resource provides benefits over is
+ * A common use case where this `map` utility provides benefits over is
  * ```js
  * class MyClass {\
  *   @cached
@@ -180,72 +174,76 @@ export function map<Elements extends readonly unknown[], MapTo = unknown>(
      */
     map: (element: Elements[number]) => MapTo;
   }
-) {
+): MappedArray<Elements, MapTo> {
   let { data, map } = options;
 
-  // parens required, else ESLint and TypeScript/Glint error here
-  // prettier-ignore
-  let resource = (TrackedArrayMap<Elements[number], MapTo>).from(destroyable, () => {
-    let reified = data();
-
-    return { positional: [reified], named: { map } };
-  });
-
-  /**
-   * This is what allows square-bracket index-access to work.
-   *
-   * Unfortunately this means the returned value is
-   * Proxy -> Proxy -> wrapper object -> *then* the class instance
-   *
-   * Maybe JS has a way to implement array-index access, but I don't know how
-   */
-  return new Proxy(resource, {
-    get(target, property, receiver) {
-      if (typeof property === 'string') {
-        let parsed = parseInt(property, 10);
-
-        if (!isNaN(parsed)) {
-          return target[AT](parsed);
-        }
-      }
-
-      return Reflect.get(target, property, receiver);
-    },
-    // Is there a way to do this without lying to TypeScript?
-  }) as unknown as MappedArray<Elements, MapTo> & { [K in keyof Elements]: MapTo };
+  return new TrackedArrayMap(destroyable, data, map) as MappedArray<Elements, MapTo>;
 }
 
-type Args<E = unknown, Result = unknown> = {
-  Positional: [E[] | readonly E[]];
-  Named: {
-    map: (element: E) => Result;
-  };
-};
-
-const AT = Symbol('__AT__');
+const AT = '__AT__';
 
 /**
  * @private
  */
 export class TrackedArrayMap<Element = unknown, MappedTo = unknown>
-  extends Resource<Args<Element, MappedTo>>
   implements MappedArray<Element[], MappedTo>
 {
   // Tells TS that we can array-index-access
   [index: number]: MappedTo;
 
-  #map = new WeakMap<Element & object, MappedTo>();
+  // these can't be real private fields
+  // until @cached is a real decorator
+  private _mapCache = new WeakMap<Element & object, MappedTo>();
+  private _dataFn: () => readonly Element[];
+  private _mapper: (element: Element) => MappedTo;
 
-  @tracked private declare _records: (Element & object)[];
-  @tracked private declare _map: (element: Element) => MappedTo;
+  constructor(owner: object, data: () => readonly Element[], map: (element: Element) => MappedTo) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setOwner(this, owner as any);
 
-  modify([data]: Positional<Args<Element, MappedTo>>, { map }: Named<Args<Element, MappedTo>>) {
+    this._dataFn = data;
+    this._mapper = map;
+
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const self = this;
+
+    /**
+     * This is what allows square-bracket index-access to work.
+     *
+     * Unfortunately this means the returned value is
+     * Proxy -> Proxy -> wrapper object -> *then* the class instance
+     *
+     * Maybe JS has a way to implement array-index access, but I don't know how
+     */
+    return new Proxy(
+      this,
+      {
+        get(_target, property) {
+          if (typeof property === 'string') {
+            let parsed = parseInt(property, 10);
+
+            if (!isNaN(parsed)) {
+              return self[AT](parsed);
+            }
+          }
+
+          return self[property as keyof MappedArray<Element[], MappedTo>];
+        },
+        // Is there a way to do this without lying to TypeScript?
+      }
+    ) as TrackedArrayMap<Element, MappedTo>;
+  }
+
+  @cached
+  get _records(): (Element & object)[] {
+    let data = this._dataFn();
+
     assert(
       `Every entry in the data passed to \`map\` must be an object.`,
       data.every((datum) => typeof datum === 'object')
     );
-    this._records = data as Array<Element & object>;
-    this._map = map;
+
+    return data as Array<Element & object>;
   }
 
   values = () => [...this];
@@ -281,7 +279,7 @@ export class TrackedArrayMap<Element = unknown, MappedTo = unknown>
    * don't conflict with
    *   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
    */
-  [AT](i: number) {
+  [AT] = (i: number) => {
     let record = this._records[i];
 
     assert(
@@ -292,13 +290,13 @@ export class TrackedArrayMap<Element = unknown, MappedTo = unknown>
       record
     );
 
-    let value = this.#map.get(record);
+    let value = this._mapCache.get(record);
 
     if (!value) {
-      value = this._map(record);
-      this.#map.set(record, value);
+      value = this._mapper(record);
+      this._mapCache.set(record, value);
     }
 
     return value;
-  }
+  };
 }
