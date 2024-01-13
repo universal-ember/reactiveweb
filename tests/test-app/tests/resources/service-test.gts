@@ -3,7 +3,8 @@ import { find,render } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
-import { cell, Resource, resource } from 'ember-resources';
+import { Resource } from 'ember-modify-based-class-resource';
+import { cell, resource } from 'ember-resources';
 import { service, serviceOverride } from 'reactiveweb/resource/service';
 // This export is marked as @internal, so it is not present in
 // the built d.ts files.
