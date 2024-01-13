@@ -215,23 +215,20 @@ export class TrackedArrayMap<Element = unknown, MappedTo = unknown>
      *
      * Maybe JS has a way to implement array-index access, but I don't know how
      */
-    return new Proxy(
-      this,
-      {
-        get(_target, property) {
-          if (typeof property === 'string') {
-            let parsed = parseInt(property, 10);
+    return new Proxy(this, {
+      get(_target, property) {
+        if (typeof property === 'string') {
+          let parsed = parseInt(property, 10);
 
-            if (!isNaN(parsed)) {
-              return self[AT](parsed);
-            }
+          if (!isNaN(parsed)) {
+            return self[AT](parsed);
           }
+        }
 
-          return self[property as keyof MappedArray<Element[], MappedTo>];
-        },
-        // Is there a way to do this without lying to TypeScript?
-      }
-    ) as TrackedArrayMap<Element, MappedTo>;
+        return self[property as keyof MappedArray<Element[], MappedTo>];
+      },
+      // Is there a way to do this without lying to TypeScript?
+    }) as TrackedArrayMap<Element, MappedTo>;
   }
 
   @cached
