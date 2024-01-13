@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable ember/no-get */
-import { getValue } from '@glimmer/tracking/primitives/cache';
 import { assert } from '@ember/debug';
-import { invokeHelper } from '@ember/helper';
+import { associateDestroyableChild, registerDestructor } from '@ember/destroyable';
 import { get } from '@ember/object';
 
-import { Resource } from 'ember-resources';
+import { resource } from 'ember-resources';
 
 import { DEFAULT_THUNK, normalizeThunk } from './utils.ts';
 
@@ -55,108 +54,26 @@ export function task<
 >(context: object, task: LocalTask, thunk?: () => Args) {
   assert(`Task does not have a perform method. Is it actually a task?`, 'perform' in task);
 
-  let target = buildUnproxiedTaskResource(context, task, (thunk || DEFAULT_THUNK) as () => Args);
+  const state = new State<Args, Return, LocalTask>(task);
 
-  // TS can't figure out what the proxy is doing
-  return proxyClass(target as any) as never as TaskInstance<Return>;
+  let destroyable = resource(context, () => {
+    let args = thunk || DEFAULT_THUNK;
+
+    let positional = normalizeThunk(args).positional as Args;
+
+    state[RUN](positional || []);
+
+    return state;
+  });
+
+  associateDestroyableChild(destroyable, state);
+
+  registerDestructor(state, () => state[TASK].cancelAll());
+
+  return destroyable as unknown as TaskInstance<Return>;
 }
 
 export const trackedTask = task;
-
-const TASK_CACHE = new WeakMap<object, any>();
-
-function buildUnproxiedTaskResource<
-  ArgsList extends any[],
-  Return,
-  LocalTask extends TaskIsh<ArgsList, Return> = TaskIsh<ArgsList, Return>,
->(context: object, task: LocalTask, thunk: () => ArgsList) {
-  type LocalResource = TaskResource<ArgsList, Return, LocalTask>;
-  type Klass = new (...args: unknown[]) => LocalResource;
-
-  let resource: ReturnType<typeof invokeHelper>;
-  let klass: Klass;
-  let existing = TASK_CACHE.get(task);
-
-  if (existing) {
-    klass = existing;
-  } else {
-    klass = class AnonymousTaskRunner extends TaskResource<ArgsList, Return, LocalTask> {
-      [TASK] = task;
-    } as Klass;
-
-    TASK_CACHE.set(task, klass);
-  }
-
-  return {
-    get value(): LocalResource {
-      if (!resource) {
-        resource = invokeHelper(context, klass, () => {
-          return normalizeThunk(thunk);
-        });
-      }
-
-      return getValue(resource) as unknown as LocalResource;
-    },
-  };
-}
-
-/**
- * @private
- */
-export function proxyClass<
-  ArgsList extends any[],
-  Return,
-  LocalTask extends TaskIsh<ArgsList, Return>,
-  Instance extends TaskResource<ArgsList, Return, LocalTask> = TaskResource<
-    ArgsList,
-    Return,
-    LocalTask
-  >,
->(target: { value: Instance }) {
-  /*
-   * This proxy defaults to returning the underlying data on
-   * the task runner when '.value' is accessed.
-   *
-   * When working with ember-concurrency tasks, users have the expectation
-   * that they'll be able to inspect the status of the tasks, such as
-   * `isRunning`, `isFinished`, etc.
-   *
-   * To support that, we need to proxy to the `currentTask`.
-   *
-   */
-  return new Proxy(target, {
-    get(target, key): unknown {
-      const taskRunner = target.value;
-      const instance = taskRunner.currentTask;
-
-      if (typeof key === 'string') {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        get(taskRunner.currentTask, key);
-      }
-
-      if (key === 'value') {
-        /**
-         * getter than falls back to the previous task's value
-         */
-        return taskRunner.value;
-      }
-
-      /**
-       * If the key is anything other than value, query on the currentTask
-       */
-      const value = Reflect.get(instance as object, key, instance);
-
-      return typeof value === 'function' ? value.bind(instance) : value;
-    },
-    ownKeys(target): (string | symbol)[] {
-      return Reflect.ownKeys(target.value);
-    },
-    getOwnPropertyDescriptor(target, key): PropertyDescriptor | undefined {
-      return Reflect.getOwnPropertyDescriptor(target.value, key);
-    },
-  }) as never as Instance;
-}
 
 export type TaskReturnType<T> = T extends TaskIsh<any, infer Return> ? Return : unknown;
 export type TaskArgsType<T> = T extends TaskIsh<infer Args, any> ? Args : unknown[];
@@ -193,23 +110,78 @@ export interface TaskInstance<Return = unknown> extends Promise<Return> {
  */
 export const TASK = Symbol('TASK');
 
+const RUN = Symbol('RUN');
+
 /**
  * @private
  */
-export class TaskResource<
-  Args extends any[],
-  Return,
-  LocalTask extends TaskIsh<Args, Return>,
-> extends Resource<{
-  positional: Args;
-}> {
+export class State<Args extends any[], Return, LocalTask extends TaskIsh<Args, Return>> {
   // Set via useTask
   declare [TASK]: LocalTask;
+
+  constructor(task: LocalTask) {
+    this[TASK] = task;
+
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const self = this;
+
+    /*
+     * This proxy defaults to returning the underlying data on
+     * the task runner when '.value' is accessed.
+     *
+     * When working with ember-concurrency tasks, users have the expectation
+     * that they'll be able to inspect the status of the tasks, such as
+     * `isRunning`, `isFinished`, etc.
+     *
+     * To support that, we need to proxy to the `currentTask`.
+     *
+     */
+    return new Proxy(self, {
+      get(target, key): unknown {
+        if (key === RUN) {
+          return self[RUN];
+        }
+
+        const taskRunner = self;
+        const instance = taskRunner.currentTask;
+
+        if (!instance) {
+          return;
+        }
+
+        if (typeof key === 'string') {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          get(taskRunner.currentTask, key);
+        }
+
+        if (key === 'value') {
+          /**
+           * getter than falls back to the previous task's value
+           */
+          return taskRunner.value;
+        }
+
+        /**
+         * If the key is anything other than value, query on the currentTask
+         */
+        const value = Reflect.get(instance as object, key, instance);
+
+        return typeof value === 'function' ? value.bind(instance) : value;
+      },
+      // ownKeys(target): (string | symbol)[] {
+      //   return Reflect.ownKeys(target.value);
+      // },
+      // getOwnPropertyDescriptor(target, key): PropertyDescriptor | undefined {
+      //   return Reflect.getOwnPropertyDescriptor(target.value, key);
+      // },
+    });
+  }
   // Set during setup/update
   declare currentTask: TaskInstance<Return>;
   declare lastTask: TaskInstance<Return> | undefined;
 
-  get value() {
+  get value(): Return | null | undefined {
     if (this.currentTask?.isFinished && !this.currentTask.isCanceled) {
       return this.currentTask.value;
     }
@@ -217,15 +189,11 @@ export class TaskResource<
     return this.lastTask?.value;
   }
 
-  modify(positional: Args) {
+  [RUN] = (positional: Args) => {
     if (this.currentTask) {
       this.lastTask = this.currentTask;
     }
 
     this.currentTask = this[TASK].perform(...positional);
-  }
-
-  teardown() {
-    this[TASK].cancelAll();
-  }
+  };
 }
