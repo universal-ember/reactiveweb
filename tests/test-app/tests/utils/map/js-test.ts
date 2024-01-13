@@ -33,7 +33,7 @@ module('Utils | map | js', function (hooks) {
   for (let variant of [
     {
       name: 'public api',
-      getItem: (collection: Wrapper[], index: number) => collection[index],
+      getItem: (collection: any, index: number) => collection[index],
     },
     {
       name: 'private api (sanity check)',

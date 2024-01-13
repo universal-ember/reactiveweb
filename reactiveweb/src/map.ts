@@ -172,7 +172,7 @@ export function map<Elements extends readonly unknown[], MapTo = unknown>(
      * - if iterating over part of the data, map will only be called for the elements observed
      * - if not iterating, map will only be called for the elements observed.
      */
-    map: (element: Elements[number]) => MapTo;
+    map: (element: Elements[0]) => MapTo;
   }
 ): MappedArray<Elements, MapTo> {
   let { data, map } = options;
