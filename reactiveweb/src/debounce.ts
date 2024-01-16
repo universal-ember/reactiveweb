@@ -1,9 +1,13 @@
 import { tracked } from '@glimmer/tracking';
 
-import { resource } from 'ember-resources';
+import { resource 
+       
+       } from 'ember-resources';
 
 class TrackedValue<T> {
-  @tracked value: T | undefined;
+  @tracked value: T | undefined
+  
+  ;
 }
 
 /**
@@ -60,15 +64,21 @@ class TrackedValue<T> {
  */
 export function debounce<Value = unknown>(ms: number, thunk: () => Value) {
   let lastValue: Value;
-  let timer: number;
-  let state = new TrackedValue<Value>();
+  let timer      : number;
+  let state = new TrackedValue<   Value  >(     );
 
   return resource(({ on }) => {
     lastValue = thunk();
 
     on.cleanup(() => timer && clearTimeout(timer));
-    timer = setTimeout(() => (state.value = lastValue), ms);
+    timer = setTimeout(() => (
+      state.value = lastValue
+    ), 
+                       
+                       
+                       ms);
 
-    return state.value;
+    return state
+      .value;
   });
 }
