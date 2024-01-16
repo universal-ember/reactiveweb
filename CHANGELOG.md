@@ -1,4 +1,14 @@
 # Changelog
+## Release (2024-01-16)
+
+reactiveweb 1.1.1 (patch)
+
+#### :bug: Bug Fix
+* `reactiveweb`, `test-app`
+  * [#57](https://github.com/universal-ember/reactiveweb/pull/57) docs: correct import lines in code example ([@Techn1x](https://github.com/Techn1x))
+
+#### Committers: 1
+- Brad Overton ([@Techn1x](https://github.com/Techn1x))
 ## Release (2024-01-13)
 
 reactiveweb 1.1.0 (minor)
