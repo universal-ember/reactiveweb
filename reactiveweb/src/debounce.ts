@@ -58,16 +58,26 @@ class TrackedValue<T> {
  * @param {number} ms delay in milliseconds to wait before updating the returned value
  * @param {() => Value} thunk function that returns the value to debounce
  */
-export function debounce<Value = unknown>(ms: number, thunk: () => Value) {
+export function debounce<Value = unknown>(ms: number, thunk: () => Value, debounceInitialValue = true) {
   let lastValue: Value;
   let timer: number;
   let state = new TrackedValue<Value>();
 
+  /**
+   * Whether the initial value has been returned inmediately or not
+   */
+  let initialValueReturned = debounceInitialValue;
+
   return resource(({ on }) => {
     lastValue = thunk();
 
-    on.cleanup(() => timer && clearTimeout(timer));
-    timer = setTimeout(() => (state.value = lastValue), ms);
+    if (!initialValueReturned) {
+      state.value = lastValue;
+      initialValueReturned = true;
+    } else {
+      on.cleanup(() => timer && clearTimeout(timer));
+      timer = setTimeout(() => (state.value = lastValue), ms);
+    }
 
     return state.value;
   });
