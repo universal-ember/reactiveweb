@@ -6,7 +6,7 @@ import { click, render, settled } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
-import { resource, resourceFactory,use } from 'ember-resources';
+import { resource, resourceFactory, use } from 'ember-resources';
 import { trackedFunction } from 'reactiveweb/function';
 
 const timeout = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
