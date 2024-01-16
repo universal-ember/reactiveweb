@@ -5,12 +5,7 @@ import { assert } from '@ember/debug';
 /**
  * Public API of the return value of the [[map]] utility.
  */
-export interface MappedArray<Elements
-
-
-
-
-  extends readonly unknown[], MappedTo> {
+export interface MappedArray<Elements extends readonly unknown[], MappedTo> {
   /**
    * Array-index access to specific mapped data.
    *
