@@ -30,6 +30,9 @@ jobs:
     needs: ['setup']
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    permissions:
+      # Required for lint-fix auto-pushing back to the Branch
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
