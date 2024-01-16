@@ -3,7 +3,7 @@ import { render, settled } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
-import { cell,resource } from 'ember-resources';
+import { cell, resource } from 'ember-resources';
 import { modifier } from 'reactiveweb/resource/modifier';
 
 module('modifier | rendering', function (hooks) {

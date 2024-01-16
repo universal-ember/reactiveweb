@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { find,render } from '@ember/test-helpers';
+import { find, render } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
