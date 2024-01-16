@@ -30,25 +30,12 @@ jobs:
     needs: ['setup']
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    permissions:
-      # Required for lint-fix auto-pushing back to the Branch
-      contents: write
 
     steps:
       - uses: actions/checkout@v4
       - uses: wyvox/action-setup-pnpm@v3
       - run: pnpm build
       - run: pnpm i -f # re sync injected deps
-
-      ###################################################
-      # Commit easily fixable things back to the branch
-      ###################################################
-      - run: pnpm lint:fix
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "Automatically run 'pnpm lint:fix'"
-          branch: ${{ github.head_ref }}
 
       - name: "Verify that no manually needed fixes / violations are present"
         run: pnpm lint
