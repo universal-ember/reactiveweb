@@ -28,4 +28,5 @@ jobs:
         with:
           commit_message: "Automatically run 'pnpm lint:fix'"
           branch: ${{ github.head_ref }}
+          token: ${{ secrets.GH_PR_FIXER }}
 
