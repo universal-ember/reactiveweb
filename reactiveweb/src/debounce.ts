@@ -58,7 +58,11 @@ class TrackedValue<T> {
  * @param {number} ms delay in milliseconds to wait before updating the returned value
  * @param {() => Value} thunk function that returns the value to debounce
  */
-export function debounce<Value = unknown>(ms: number, thunk: () => Value, debounceInitialValue = true) {
+export function debounce<Value = unknown>(
+  ms: number,
+  thunk: () => Value,
+  debounceInitialValue = true
+) {
   let lastValue: Value;
   let timer: number;
   let state = new TrackedValue<Value>();
