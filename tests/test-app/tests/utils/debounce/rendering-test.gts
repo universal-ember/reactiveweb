@@ -21,7 +21,6 @@ module('Utils | debounce | rendering', function (hooks) {
       let foo = new Test();
 
       await render(<template>
-        {{log foo.debouncedText}}
         {{foo.debouncedText}}
         </template>);
 
