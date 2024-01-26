@@ -25,17 +25,17 @@ module('Utils | throttle | js', function (hooks) {
 
       setOwner(test, this.owner);
 
-      assert.strictEqual(test.text, undefined);
+      assert.strictEqual(test.text, '');
 
       test.data = 'b';
       await someTime();
-      assert.strictEqual(test.text, undefined);
+      assert.strictEqual(test.text, '');
       test.data = 'bo';
       await someTime();
-      assert.strictEqual(test.text, undefined);
+      assert.strictEqual(test.text, '');
       test.data = 'boo';
       await someTime();
-      assert.strictEqual(test.text, undefined);
+      assert.strictEqual(test.text, '');
 
       await someTime(110);
       assert.strictEqual(test.text, 'boo');
