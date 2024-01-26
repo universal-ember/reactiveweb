@@ -8,7 +8,7 @@ import { cell, resource } from 'ember-resources';
  * @param callback A function to be executed after delay milliseconds.
  */
 export function throttle<Value = unknown>(delay: number, callback: () => Value) {
-  const state = cell();
+  const state = cell<Value | undefined>();
   let last: unknown;
 
   return resource(({ on }) => {
@@ -19,6 +19,6 @@ export function throttle<Value = unknown>(delay: number, callback: () => Value) 
     timer = setTimeout(() => (state.current = callback()), delay);
     last = last ?? callback();
 
-    return state.current ?? last;
+    return (state.current ?? last) as Value;
   });
 }

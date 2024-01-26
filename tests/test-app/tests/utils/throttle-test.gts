@@ -59,7 +59,7 @@ module('Utils | throttle | rendering', function (hooks) {
     test('without debouncing the initial value', async function (assert) {
       class Test {
         @tracked text = 'someValue';
-        @use debouncedText = throttle(100, () => this.text, false);
+        @use debouncedText = throttle(100, () => this.text);
       }
 
       let foo = new Test();
