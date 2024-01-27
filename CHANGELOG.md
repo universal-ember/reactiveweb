@@ -1,4 +1,21 @@
 # Changelog
+
+## Release (2024-01-27)
+
+reactiveweb 1.2.0 (minor)
+
+#### :rocket: Enhancement
+* `reactiveweb`, `test-app`
+  * [#69](https://github.com/universal-ember/reactiveweb/pull/69) Add new util: Throttle ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :house: Internal
+* [#71](https://github.com/universal-ember/reactiveweb/pull/71) Update renovate config ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#66](https://github.com/universal-ember/reactiveweb/pull/66) Remove PR Fixer ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#63](https://github.com/universal-ember/reactiveweb/pull/63) Reduce CI time ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#60](https://github.com/universal-ember/reactiveweb/pull/60) Auto lintfix ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
 ## Release (2024-01-16)
 
 reactiveweb 1.1.1 (patch)
