@@ -10,8 +10,6 @@ import { cell, resource } from 'ember-resources';
  *  import { use } from 'ember-resources';
  *  import { throttle } from 'reactiveweb/throttle';
  *
- *  const delay = 100; // ms
- *
  *  class Demo extends Component {
  *    @tracked _userInput = 'initial';
  *
