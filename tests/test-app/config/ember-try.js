@@ -28,7 +28,7 @@ module.exports = async function () {
       {
         name: 'ember-concurrency-4.0',
         npm: {
-          devDependencies: {
+          dependencies: {
             'ember-concurrency': '^4.0.0',
           },
         },
