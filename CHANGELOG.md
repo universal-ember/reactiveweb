@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2024-02-06)
+
+
+
+#### :rocket: Enhancement
+* `test-app`
+  * [#77](https://github.com/universal-ember/reactiveweb/pull/77) Support ember-concurrency-4 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2024-01-27)
 
 reactiveweb 1.2.0 (minor)

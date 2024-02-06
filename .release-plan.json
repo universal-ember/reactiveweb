@@ -1,17 +1,8 @@
 {
   "solution": {
     "reactiveweb": {
-      "impact": "minor",
-      "oldVersion": "1.1.1",
-      "newVersion": "1.2.0",
-      "constraints": [
-        {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
-        }
-      ],
-      "pkgJSONPath": "./reactiveweb/package.json"
+      "oldVersion": "1.2.0"
     }
   },
-  "description": "## Release (2024-01-27)\n\nreactiveweb 1.2.0 (minor)\n\n#### :rocket: Enhancement\n* `reactiveweb`, `test-app`\n  * [#69](https://github.com/universal-ember/reactiveweb/pull/69) Add new util: Throttle ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :house: Internal\n* [#71](https://github.com/universal-ember/reactiveweb/pull/71) Update renovate config ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n* [#66](https://github.com/universal-ember/reactiveweb/pull/66) Remove PR Fixer ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n* [#63](https://github.com/universal-ember/reactiveweb/pull/63) Reduce CI time ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n* [#60](https://github.com/universal-ember/reactiveweb/pull/60) Auto lintfix ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2024-02-06)\n\n\n\n#### :rocket: Enhancement\n* `test-app`\n  * [#77](https://github.com/universal-ember/reactiveweb/pull/77) Support ember-concurrency-4 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
