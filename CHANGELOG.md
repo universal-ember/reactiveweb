@@ -1,5 +1,24 @@
 # Changelog
 
+## Release (2024-02-12)
+
+reactiveweb 1.2.1 (patch)
+
+#### :rocket: Enhancement
+* `test-app`
+  * [#77](https://github.com/universal-ember/reactiveweb/pull/77) Support ember-concurrency-4 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :bug: Bug Fix
+* `reactiveweb`, `test-app`
+  * [#79](https://github.com/universal-ember/reactiveweb/pull/79) Fix debounce cleanup timing ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :house: Internal
+* [#72](https://github.com/universal-ember/reactiveweb/pull/72) Prepare Release ([@github-actions[bot]](https://github.com/apps/github-actions))
+
+#### Committers: 2
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+- [@github-actions[bot]](https://github.com/apps/github-actions)
+
 ## Release (2024-02-06)
 
 
