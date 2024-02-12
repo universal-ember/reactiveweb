@@ -60,15 +60,16 @@ class TrackedValue<T> {
  */
 export function debounce<Value = unknown>(ms: number, thunk: () => Value) {
   let lastValue: Value;
-  let timer: number;
   let state = new TrackedValue<Value>();
 
   return resource(({ on }) => {
+    let timer: number;
+
     lastValue = thunk();
 
     on.cleanup(() => timer && clearTimeout(timer));
     timer = setTimeout(() => (state.value = lastValue), ms);
 
-    return state.value;
+    return () => state.value;
   });
 }
