@@ -69,7 +69,7 @@ export function debounce<Value = unknown>(ms: number, thunk: () => Value) {
 
     on.cleanup(() => {
       if (timer) {
-        clearTimeout(timer)
+        clearTimeout(timer);
       }
     });
 

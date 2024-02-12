@@ -31,7 +31,11 @@ module('Utils | debounce | js', function (hooks) {
 
       await timeout(50);
 
-      assert.strictEqual(test.debouncedValue, test.value, `Value is "${test.debouncedValue}" after ~100ms`);
+      assert.strictEqual(
+        test.debouncedValue,
+        test.value,
+        `Value is "${test.debouncedValue}" after ~100ms`
+      );
     });
   });
 });
