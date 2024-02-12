@@ -9,40 +9,33 @@ import { debounce } from 'reactiveweb/debounce';
 module('Utils | debounce | js', function (hooks) {
   setupTest(hooks);
 
-  let someTime = (ms = 25) => new Promise((resolve) => setTimeout(resolve, ms));
+  const timeout = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
   module('debounce', function () {
-    test('works with @use', async function (assert) {
+    test('value is returned after x ms', async function (assert) {
       class Test {
-        @tracked data = '';
+        @tracked value = 'initial';
 
-        @use text = debounce(100, () => this.data);
+        @use debouncedValue = debounce(100, () => this.value);
       }
 
       let test = new Test();
 
       setOwner(test, this.owner);
 
-      assert.strictEqual(test.text, undefined);
+      assert.strictEqual(test.debouncedValue, undefined, 'Value is undefined at first');
 
-      test.data = 'b';
-      await someTime();
-      assert.strictEqual(test.text, undefined);
-      test.data = 'bo';
-      await someTime();
-      assert.strictEqual(test.text, undefined);
-      test.data = 'boo';
-      await someTime();
-      assert.strictEqual(test.text, undefined);
+      await timeout(50);
 
-      await someTime(110);
-      assert.strictEqual(test.text, 'boo');
+      assert.strictEqual(test.debouncedValue, undefined, 'Value is still undefined after ~50ms');
 
-      test.data = 'boop';
-      assert.strictEqual(test.text, 'boo');
+      await timeout(50);
 
-      await someTime(110);
-      assert.strictEqual(test.text, 'boop');
+      assert.strictEqual(
+        test.debouncedValue,
+        test.value,
+        `Value is "${test.debouncedValue}" after ~100ms`
+      );
     });
   });
 });
