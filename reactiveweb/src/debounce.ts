@@ -67,8 +67,15 @@ export function debounce<Value = unknown>(ms: number, thunk: () => Value) {
 
     lastValue = thunk();
 
-    on.cleanup(() => timer && clearTimeout(timer));
-    timer = setTimeout(() => (state.value = lastValue), ms);
+    on.cleanup(() => {
+      if (timer) {
+        clearTimeout(timer)
+      }
+    });
+
+    timer = setTimeout(() => {
+      state.value = lastValue;
+    }, ms);
 
     return () => state.value;
   });
