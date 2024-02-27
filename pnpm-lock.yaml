@@ -24,8 +24,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0(prettier@3.0.3)
       release-plan:
-        specifier: ^0.7.0
-        version: 0.7.0
+        specifier: ^0.8.0
+        version: 0.8.0
 
   docs:
     devDependencies:
@@ -1867,8 +1867,8 @@ packages:
       postcss-selector-parser: 6.0.13
     dev: true
 
-  /@ef4/lerna-changelog@2.1.0:
-    resolution: {integrity: sha512-c6301SsWdOBrTGEkQmDTK5dDJUX2+03kN6UYZhewkqih3vy3HZxp1G1eJPVPd5EQpaLRptxFsMtgDcsabPZmRg==}
+  /@ef4/lerna-changelog@2.2.1:
+    resolution: {integrity: sha512-x0SkFpfvNj6l4LV6UnvnWIohmt8bC+i/P3ybmPc8X92KVMP6X/rkPeOxa2hI8BfDEHJMNXLJrDgQrJawI57aGQ==}
     engines: {node: 12.* || 14.* || >= 16}
     hasBin: true
     dependencies:
@@ -13756,11 +13756,11 @@ packages:
     dependencies:
       jsesc: 0.5.0
 
-  /release-plan@0.7.0:
-    resolution: {integrity: sha512-DHQ8o1Vnv27fIKecM4EA8r10NqVCa441Qld9STCZ90DOgxCTMUDpOxB3TASxeNd6gtHTvOwen6CPZWYM3uE+AA==}
+  /release-plan@0.8.0:
+    resolution: {integrity: sha512-kOR8rjuSD4ljH/BOoWeX5ECjQ0Wf0jl0xLFeKQpOCx2Qoo2Y+A+is4t2GRMtFUGjoA5Wp+j7aJaIFFbZNEC+oA==}
     hasBin: true
     dependencies:
-      '@ef4/lerna-changelog': 2.1.0
+      '@ef4/lerna-changelog': 2.2.1
       '@manypkg/get-packages': 2.2.0
       '@npmcli/package-json': 5.0.0
       '@octokit/rest': 19.0.13
