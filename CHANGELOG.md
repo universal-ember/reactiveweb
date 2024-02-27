@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2024-02-27)
+
+reactiveweb 1.2.2 (patch)
+
+#### :bug: Bug Fix
+* `reactiveweb`, `test-app`
+  * [#87](https://github.com/universal-ember/reactiveweb/pull/87) [trackedFunction]: fix error handling so Glimmer does die when an error is thrown ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2024-02-12)
 
 reactiveweb 1.2.1 (patch)

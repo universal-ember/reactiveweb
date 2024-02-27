@@ -2,8 +2,8 @@
   "solution": {
     "reactiveweb": {
       "impact": "patch",
-      "oldVersion": "1.2.0",
-      "newVersion": "1.2.1",
+      "oldVersion": "1.2.1",
+      "newVersion": "1.2.2",
       "constraints": [
         {
           "impact": "patch",
@@ -13,5 +13,5 @@
       "pkgJSONPath": "./reactiveweb/package.json"
     }
   },
-  "description": "## Release (2024-02-12)\n\nreactiveweb 1.2.1 (patch)\n\n#### :rocket: Enhancement\n* `test-app`\n  * [#77](https://github.com/universal-ember/reactiveweb/pull/77) Support ember-concurrency-4 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :bug: Bug Fix\n* `reactiveweb`, `test-app`\n  * [#79](https://github.com/universal-ember/reactiveweb/pull/79) Fix debounce cleanup timing ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :house: Internal\n* [#72](https://github.com/universal-ember/reactiveweb/pull/72) Prepare Release ([@github-actions[bot]](https://github.com/apps/github-actions))\n\n#### Committers: 2\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n- [@github-actions[bot]](https://github.com/apps/github-actions)\n"
+  "description": "## Release (2024-02-27)\n\nreactiveweb 1.2.2 (patch)\n\n#### :bug: Bug Fix\n* `reactiveweb`, `test-app`\n  * [#87](https://github.com/universal-ember/reactiveweb/pull/87) [trackedFunction]: fix error handling so Glimmer does die when an error is thrown ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
