@@ -142,6 +142,15 @@ export class State<Value> {
   @tracked data: TrackedAsyncData<Value> | null = null;
   @tracked declare promise: Value;
 
+  /**
+   * ember-async-data doesn't catch errors,
+   * so we can't rely on it to protect us from "leaky errors"
+   * during rendering.
+   *
+   * See also: https://github.com/qunitjs/qunit/issues/1736
+   */
+  @tracked caughtError: unknown;
+
   #fn: () => Value;
 
   constructor(fn: () => Value) {
@@ -202,7 +211,7 @@ export class State<Value> {
    * When true, the function passed to `trackedFunction` has errored
    */
   get isRejected() {
-    return this.data?.isRejected ?? false;
+    return this.data?.isRejected ?? Boolean(this.caughtError) ?? false;
   }
 
   /**
@@ -236,8 +245,16 @@ export class State<Value> {
    * that error will be the value returned by this property
    */
   get error() {
+    if (this.state === 'UNSTARTED' && this.caughtError) {
+      return this.caughtError;
+    }
+
     if (this.data?.state !== 'REJECTED') {
       return null;
+    }
+
+    if (this.caughtError) {
+      return this.caughtError;
     }
 
     return this.data?.error ?? null;
@@ -253,6 +270,20 @@ export class State<Value> {
    * until this promise resolves, and then they'll be updated to the new values.
    */
   retry = async () => {
+    try {
+      /**
+       * This function has two places where it can error:
+       * - immediately when inovking `fn` (where auto-tracking occurs)
+       * - after an await, "eventually"
+       */
+      await this._dangerousRetry();
+    } catch (e) {
+      if (isDestroyed(this) || isDestroying(this)) return;
+      this.caughtError = e;
+    }
+  };
+
+  _dangerousRetry = async () => {
     if (isDestroyed(this) || isDestroying(this)) return;
 
     // We've previously had data, but we're about to run-again.
@@ -262,6 +293,8 @@ export class State<Value> {
     //       we can't *read* data here.
     this.data = null;
 
+    // this._internalError = null;
+
     // We need to invoke this before going async so that tracked properties are consumed (entangled with) synchronously
     this.promise = this.#fn();
 
@@ -269,6 +302,13 @@ export class State<Value> {
     // We don't want this internal state to entangle with `trackedFunction`
     // so that *only* the tracked data in `fn` can be entangled.
     await Promise.resolve();
+
+    /**
+     * Before we await to start a new request, let's clear our error.
+     * This is detached from the tracking frame (via the above await),
+     * se the UI can update accordingly, without causing us to refetch
+     */
+    this.caughtError = null;
 
     if (this.data) {
       let isUnsafe = isDestroyed(this.data) || isDestroying(this.data);
