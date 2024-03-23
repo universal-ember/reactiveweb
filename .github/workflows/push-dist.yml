@@ -10,7 +10,6 @@ on:
     branches:
       - main
       - master
-  pull_request: {}
 
 jobs:
   push-dist:
@@ -23,16 +22,6 @@ jobs:
       - uses: NullVoxPopuli/action-setup-pnpm@v2
       - uses: kategengler/put-built-npm-package-contents-on-branch@v2.0.0
         with:
-          branch: dist-${{ github.ref_name }}
+          branch: dist
           token: ${{ secrets.GITHUB_TOKEN }}
           working-directory: reactiveweb
-
-      - name: Create comment
-        uses: peter-evans/create-or-update-comment@v4
-        with:
-          issue-number: 1
-          body: |
-            This branch can be tried locally via updating package.json to:
-            ```
-            "reactiveweb": "github:NullVoxPopuli/reactiveweb#dist-${{ github.ref_name }}",
-            ```
