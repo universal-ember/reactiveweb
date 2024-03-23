@@ -2,8 +2,8 @@
   "solution": {
     "reactiveweb": {
       "impact": "patch",
-      "oldVersion": "1.2.1",
-      "newVersion": "1.2.2",
+      "oldVersion": "1.2.2",
+      "newVersion": "1.2.3",
       "constraints": [
         {
           "impact": "patch",
@@ -13,5 +13,5 @@
       "pkgJSONPath": "./reactiveweb/package.json"
     }
   },
-  "description": "## Release (2024-02-27)\n\nreactiveweb 1.2.2 (patch)\n\n#### :bug: Bug Fix\n* `reactiveweb`, `test-app`\n  * [#87](https://github.com/universal-ember/reactiveweb/pull/87) [trackedFunction]: fix error handling so Glimmer does die when an error is thrown ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2024-03-23)\n\nreactiveweb 1.2.3 (patch)\n\n#### :bug: Bug Fix\n* `reactiveweb`, `test-app`\n  * [#93](https://github.com/universal-ember/reactiveweb/pull/93) Make trackedTask reactively thennable, so that integrations with thennables are automatically reactive ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
