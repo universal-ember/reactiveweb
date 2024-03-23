@@ -157,9 +157,14 @@ export class State<Args extends any[], Return, LocalTask extends TaskIsh<Args, R
 
         if (key === 'value') {
           /**
-           * getter than falls back to the previous task's value
+           * getter that falls back to the previous task's value
            */
           return taskRunner.value;
+        }
+
+        // We can be thennable, but we'll want to entangle with tracked data
+        if (key === 'then') {
+          get(taskRunner.currentTask, 'isRunning');
         }
 
         /**
