@@ -26,3 +26,13 @@ jobs:
           branch: dist-${{ github.ref_name }}
           token: ${{ secrets.GITHUB_TOKEN }}
           working-directory: reactiveweb
+
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: 1
+          body: |
+            This branch can be tried locally via updating package.json to:
+            ```
+            "reactiveweb": "github:NullVoxPopuli/reactiveweb#dist-${{ github.ref_name }}",
+            ```
