@@ -7,6 +7,7 @@ import { setupRenderingTest } from 'ember-qunit';
 
 import { restartableTask, timeout } from 'ember-concurrency';
 import { trackedTask } from 'reactiveweb/ember-concurrency';
+import { trackedFunction } from 'reactiveweb/function';
 
 let version = '^3.0.0';
 
@@ -69,6 +70,47 @@ module('useTask', function () {
 
     hooks.afterEach(function () {
       window.onerror = onError;
+    });
+
+    test('is reactively thennable', async function (assert) {
+      class Test {
+        @tracked input = 'Hello there';
+
+        _search = restartableTask(async (input: string) => {
+          await timeout(100);
+          assert.step('resolved rt');
+
+          return input;
+        });
+        search = trackedTask(this, this._search, () => [this.input]);
+
+        wrappedSearch = trackedFunction(this, async () => {
+          let result = await this.search;
+
+          assert.step('resolved tf');
+
+          return String(result);
+        });
+      }
+
+      let ctx = new Test();
+
+      render(<template>{{ctx.wrappedSearch.value}}</template>);
+
+      // This could introduce flakiness / timing issues
+      await timeout(10);
+
+      assert.dom().hasNoText();
+
+      await settled();
+
+      assert.dom().hasText('Hello there');
+      assert.verifySteps(['resolved rt', 'resolved tf']);
+
+      ctx.input = 'General Kenobi';
+      await settled();
+      assert.dom().hasText('General Kenobi');
+      assert.verifySteps(['resolved rt', 'resolved tf']);
     });
 
     test('error', async function (assert) {
