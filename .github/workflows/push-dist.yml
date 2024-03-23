@@ -10,6 +10,7 @@ on:
     branches:
       - main
       - master
+  pull_request: {}
 
 jobs:
   push-dist:
@@ -22,6 +23,6 @@ jobs:
       - uses: NullVoxPopuli/action-setup-pnpm@v2
       - uses: kategengler/put-built-npm-package-contents-on-branch@v2.0.0
         with:
-          branch: dist
+          branch: dist-${{ github.ref_name }}
           token: ${{ secrets.GITHUB_TOKEN }}
           working-directory: reactiveweb
