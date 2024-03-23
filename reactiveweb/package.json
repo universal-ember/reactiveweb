@@ -1,6 +1,6 @@
 {
   "name": "reactiveweb",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Web platform primitives and utilities for building reactive applications",
   "keywords": [
     "ember-addon"

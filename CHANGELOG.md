@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2024-03-23)
+
+reactiveweb 1.2.3 (patch)
+
+#### :bug: Bug Fix
+* `reactiveweb`, `test-app`
+  * [#93](https://github.com/universal-ember/reactiveweb/pull/93) Make trackedTask reactively thennable, so that integrations with thennables are automatically reactive ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2024-02-27)
 
 reactiveweb 1.2.2 (patch)
