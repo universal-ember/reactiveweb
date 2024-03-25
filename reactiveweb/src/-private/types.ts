@@ -28,11 +28,11 @@ export type ArgsFor<S> =
         Positional: GetOrElse<S, 'Positional', []>;
       }
     : S extends { named?: object; positional?: unknown[] }
-    ? {
-        Named: GetOrElse<S, 'named', EmptyObject>;
-        Positional: GetOrElse<S, 'positional', []>;
-      }
-    : { Named: EmptyObject; Positional: [] };
+      ? {
+          Named: GetOrElse<S, 'named', EmptyObject>;
+          Positional: GetOrElse<S, 'positional', []>;
+        }
+      : { Named: EmptyObject; Positional: [] };
 
 export type ElementFor<S> = 'Element' extends keyof S
   ? S['Element'] extends Element
@@ -48,8 +48,8 @@ export type ElementFor<S> = 'Element' extends keyof S
 export type ExpandArgs<T> = T extends any[]
   ? ArgsFor<{ Positional: T }>
   : T extends any
-  ? ArgsFor<T>
-  : never;
+    ? ArgsFor<T>
+    : never;
 
 export type Positional<T> = ExpandArgs<T>['Positional'];
 export type Named<T> = ExpandArgs<T>['Named'];

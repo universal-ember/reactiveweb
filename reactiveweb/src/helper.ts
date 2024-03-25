@@ -79,10 +79,11 @@ export function helper<T = unknown, S = InferSignature<T>, Return = Get<S, 'Retu
   };
 }
 
-type InferSignature<T> = T extends HelperLike<infer S>
-  ? S
-  : T extends FunctionBasedHelper<infer S>
-  ? S
-  : T extends ClassBasedHelper<infer S>
-  ? S
-  : 'Signature not found';
+type InferSignature<T> =
+  T extends HelperLike<infer S>
+    ? S
+    : T extends FunctionBasedHelper<infer S>
+      ? S
+      : T extends ClassBasedHelper<infer S>
+        ? S
+        : 'Signature not found';

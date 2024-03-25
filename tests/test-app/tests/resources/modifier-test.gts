@@ -27,7 +27,11 @@ module('modifier | rendering', function (hooks) {
       });
     });
 
-    await render(<template><div {{capture}}>content</div></template>);
+    await render(
+      <template>
+        <div {{capture}}>content</div>
+      </template>
+    );
 
     assert.verifySteps(['1 args', 'received element DIV']);
   });
@@ -45,7 +49,11 @@ module('modifier | rendering', function (hooks) {
       });
     });
 
-    await render(<template><div {{capture}}>content</div></template>);
+    await render(
+      <template>
+        <div {{capture}}>content</div>
+      </template>
+    );
 
     assert.verifySteps(['1 args', 'received element DIV']);
   });
@@ -66,11 +74,13 @@ module('modifier | rendering', function (hooks) {
       });
     });
 
-    await render(<template>
-      {{#if visible.current}}
-        <div {{capture state.current}}>content</div>
-      {{/if}}
-    </template>);
+    await render(
+      <template>
+        {{#if visible.current}}
+          <div {{capture state.current}}>content</div>
+        {{/if}}
+      </template>
+    );
 
     assert.verifySteps(['2 args', 'received element DIV for value 0']);
 
@@ -104,11 +114,13 @@ module('modifier | rendering', function (hooks) {
       });
     });
 
-    await render(<template>
-      {{#if visible.current}}
-        <div {{capture state.current}}>content</div>
-      {{/if}}
-    </template>);
+    await render(
+      <template>
+        {{#if visible.current}}
+          <div {{capture state.current}}>content</div>
+        {{/if}}
+      </template>
+    );
 
     assert.verifySteps(['2 args', 'received element DIV for value 0']);
 
@@ -137,11 +149,13 @@ module('modifier | rendering', function (hooks) {
       });
     });
 
-    await render(<template>
-      {{#if visible.current}}
-        <div {{capture value=state.current}}>content</div>
-      {{/if}}
-    </template>);
+    await render(
+      <template>
+        {{#if visible.current}}
+          <div {{capture value=state.current}}>content</div>
+        {{/if}}
+      </template>
+    );
 
     assert.verifySteps(['2 args', 'received element DIV for value 0']);
 
@@ -172,11 +186,13 @@ module('modifier | rendering', function (hooks) {
       });
     });
 
-    await render(<template>
-      {{#if visible.current}}
-        <div {{capture positional.current value=named.current}}>content</div>
-      {{/if}}
-    </template>);
+    await render(
+      <template>
+        {{#if visible.current}}
+          <div {{capture positional.current value=named.current}}>content</div>
+        {{/if}}
+      </template>
+    );
 
     assert.verifySteps(['3 args', 'received element DIV for value 0,0']);
 

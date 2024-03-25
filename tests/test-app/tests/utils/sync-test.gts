@@ -12,11 +12,7 @@ module('sync', function (hooks) {
   test('it runs once', async function (assert) {
     const doThis = () => assert.step('did it');
 
-    await render(
-      <template>
-        {{sync doThis}}
-      </template>
-    );
+    await render(<template>{{sync doThis}}</template>);
 
     assert.verifySteps(['did it']);
   });
@@ -26,11 +22,7 @@ module('sync', function (hooks) {
 
     const doThis = (num: { current: number }) => assert.step(`did it:${num.current}`);
 
-    await render(
-      <template>
-        {{sync (fn doThis value)}}
-      </template>
-    );
+    await render(<template>{{sync (fn doThis value)}}</template>);
 
     assert.verifySteps(['did it:0']);
 

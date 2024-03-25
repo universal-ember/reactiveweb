@@ -23,40 +23,38 @@ module('Utils | trackedFunction | timing', function (hooks) {
       return `yay:${value}`;
     }
 
-    const WithArgument = resourceFactory(num => resource(({ use }) => {
-      let reactive = use(trackedFunction(() => fn(num)));
+    const WithArgument = resourceFactory((num) =>
+      resource(({ use }) => {
+        let reactive = use(trackedFunction(() => fn(num)));
 
-      // TODO: the types should allow us to directly return the use,
-      // but they don't currently
-      return () => reactive.current;
-    }));
+        // TODO: the types should allow us to directly return the use,
+        // but they don't currently
+        return () => reactive.current;
+      })
+    );
 
     await render(
       <template>
         {{#let (WithArgument state.current) as |request|}}
           {{#if request.isLoading}}
-            {{step 'loading'}}
+            {{step "loading"}}
           {{/if}}
           {{#if request.isError}}
-            {{step 'error'}}
+            {{step "error"}}
           {{/if}}
           {{#if request.value}}
-            {{step (concat 'loaded:' request.value)}}
+            {{step (concat "loaded:" request.value)}}
           {{/if}}
         {{/let}}
       </template>
     );
 
-    assert.verifySteps([
-      'fn:begin:0', 'loading', 'fn:end:0', 'loaded:yay:0'
-    ]);
+    assert.verifySteps(['fn:begin:0', 'loading', 'fn:end:0', 'loaded:yay:0']);
 
     state.current = 1;
     await settled();
 
-    assert.verifySteps([
-      'fn:begin:1', 'loading', 'fn:end:1', 'loaded:yay:1'
-    ]);
+    assert.verifySteps(['fn:begin:1', 'loading', 'fn:end:1', 'loaded:yay:1']);
   });
 
   test('From a component class', async function (assert) {
@@ -77,38 +75,44 @@ module('Utils | trackedFunction | timing', function (hooks) {
 
       <template>
         {{#if this.request.isPending}}
-          {{step 'pending'}}
+          {{step "pending"}}
         {{/if}}
         {{#if this.request.isLoading}}
-          {{step 'loading'}}
+          {{step "loading"}}
         {{/if}}
         {{#if this.request.isError}}
-          {{step 'error'}}
+          {{step "error"}}
         {{/if}}
         {{#if this.request.value}}
-          {{step (concat 'loaded:' this.request.value)}}
+          {{step (concat "loaded:" this.request.value)}}
         {{/if}}
         {{#if this.request.isFinished}}
-          {{step 'finished'}}
+          {{step "finished"}}
         {{/if}}
       </template>
     }
 
-    await render(
-      <template>
-        <Example @value={{state.current}} />
-      </template>
-    );
+    await render(<template><Example @value={{state.current}} /></template>);
 
     assert.verifySteps([
-      'fn:begin:0', 'pending', 'loading', 'fn:end:0', 'loaded:yay:0', 'finished'
+      'fn:begin:0',
+      'pending',
+      'loading',
+      'fn:end:0',
+      'loaded:yay:0',
+      'finished',
     ]);
 
     state.current = 1;
     await settled();
 
     assert.verifySteps([
-      'fn:begin:1', 'pending', 'loading', 'fn:end:1', 'loaded:yay:1', 'finished'
+      'fn:begin:1',
+      'pending',
+      'loading',
+      'fn:end:1',
+      'loaded:yay:1',
+      'finished',
     ]);
   });
 });

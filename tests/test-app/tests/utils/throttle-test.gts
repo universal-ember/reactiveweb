@@ -49,7 +49,6 @@ module('Utils | throttle | js', function (hooks) {
   });
 });
 
-
 module('Utils | throttle | rendering', function (hooks) {
   setupRenderingTest(hooks);
 
@@ -64,9 +63,7 @@ module('Utils | throttle | rendering', function (hooks) {
 
       let foo = new Test();
 
-      await render(<template>
-        {{foo.debouncedText}}
-        </template>);
+      await render(<template>{{foo.debouncedText}}</template>);
 
       assert.dom().hasText('someValue');
 

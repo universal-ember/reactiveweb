@@ -8,7 +8,7 @@ import { use } from 'ember-resources';
 import { trackedFunction } from 'reactiveweb/function';
 import { keepLatest } from 'reactiveweb/keep-latest';
 
-const timeout = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const timeout = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 module('Utils | keepLatest | rendering', function (hooks) {
   setupRenderingTest(hooks);
@@ -29,16 +29,17 @@ module('Utils | keepLatest | rendering', function (hooks) {
 
     let instance = new Test();
 
-    let passthrough = <T>(x: T) => x;
+    let passthrough = <T,>(x: T) => x;
 
-    render(<template>
-      {{#let instance.request as |request|}}
-        {{keepLatest (hash
-          when=(fn passthrough request.isPending)
-          value=(fn passthrough request.value)
-        )}}
-      {{/let}}
-    </template>);
+    render(
+      <template>
+        {{#let instance.request as |request|}}
+          {{keepLatest
+            (hash when=(fn passthrough request.isPending) value=(fn passthrough request.value))
+          }}
+        {{/let}}
+      </template>
+    );
 
     await timeout(10);
 
@@ -73,7 +74,7 @@ module('Utils | keepLatest | rendering', function (hooks) {
       @use data = keepLatest({
         when: () => this.request.isPending,
         value: () => this.request.value,
-      })
+      });
     }
 
     let instance = new Test();
@@ -131,7 +132,7 @@ module('Utils | keepLatest | rendering', function (hooks) {
       @use latest = keepLatest({
         when: () => this.request.isPending,
         value: () => this.request.value,
-      })
+      });
 
       get data() {
         return this.latest ?? 'default';
@@ -144,10 +145,10 @@ module('Utils | keepLatest | rendering', function (hooks) {
 
     await timeout(8);
     /**
-      * Initially, a `trackedFunction` returns null.
-      * we could craft a resource that returns something other than null,
-      * initially, but null ?? 'default' is 'default'.
-      */
+     * Initially, a `trackedFunction` returns null.
+     * we could craft a resource that returns something other than null,
+     * initially, but null ?? 'default' is 'default'.
+     */
     assert.dom().hasText('"default"', 'pre-settled, value exists ');
     await settled();
     assert.dom().hasText('[]', 'value exists, and set explicitly');

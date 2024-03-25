@@ -15,7 +15,7 @@ module('ReactiveImage', function (hooks) {
   test('it handles errors', async function (assert) {
     render(
       <template>
-        {{#let (ReactiveImage 'broken-url') as |state|}}
+        {{#let (ReactiveImage "broken-url") as |state|}}
           {{stepProperties assert state properties}}
         {{/let}}
       </template>
@@ -23,34 +23,18 @@ module('ReactiveImage', function (hooks) {
 
     await renderSettled();
 
-    assert.verifySteps([
-      'value: null',
-      'isResolved: false',
-      'isLoading: true',
-      'isError: false',
-    ]);
+    assert.verifySteps(['value: null', 'isResolved: false', 'isLoading: true', 'isError: false']);
 
     await renderSettled();
 
     // TODO: is there a way to optimize this away?
     //       so that we only re-render once?
-    assert.verifySteps([
-      'value: null',
-      'isResolved: false',
-      'isLoading: true',
-      'isError: false',
-    ]);
+    assert.verifySteps(['value: null', 'isResolved: false', 'isLoading: true', 'isError: false']);
 
     await settled();
 
-    assert.verifySteps([
-      'value: null',
-      'isResolved: false',
-      'isLoading: false',
-      'isError: true',
-    ]);
+    assert.verifySteps(['value: null', 'isResolved: false', 'isLoading: false', 'isError: true']);
   });
-
 
   test('it handles success', async function (assert) {
     render(
@@ -63,23 +47,13 @@ module('ReactiveImage', function (hooks) {
 
     await renderSettled();
 
-    assert.verifySteps([
-      'value: null',
-      'isResolved: false',
-      'isLoading: true',
-      'isError: false',
-    ]);
+    assert.verifySteps(['value: null', 'isResolved: false', 'isLoading: true', 'isError: false']);
 
     await renderSettled();
 
     // TODO: is there a way to optimize this away?
     //       so that we only re-render once?
-    assert.verifySteps([
-      'value: null',
-      'isResolved: false',
-      'isLoading: true',
-      'isError: false',
-    ]);
+    assert.verifySteps(['value: null', 'isResolved: false', 'isLoading: true', 'isError: false']);
 
     await settled();
 

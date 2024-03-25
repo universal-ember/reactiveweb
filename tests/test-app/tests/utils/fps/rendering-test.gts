@@ -11,20 +11,21 @@ import { FrameRate, UpdateFrequency } from 'reactiveweb/fps';
 module('Utils | FPS | rendering', function (hooks) {
   setupRenderingTest(hooks);
 
-  module('FrameRate', function() {
+  module('FrameRate', function () {
     test('it works', async function (assert) {
-      await render(<template>
-        <out>{{FrameRate}}</out>
-      </template>);
+      await render(
+        <template>
+          <out>{{FrameRate}}</out>
+        </template>
+      );
 
-
-      let text = find('out')?.innerHTML?.trim() || ''
+      let text = find('out')?.innerHTML?.trim() || '';
 
       assert.notStrictEqual(text, '', 'Content is rendered');
     });
   });
 
-  module('UpdateFrequency', function() {
+  module('UpdateFrequency', function () {
     test('it works', async function (assert) {
       class Demo extends Component {
         @tracked someProp = 0;
@@ -39,11 +40,7 @@ module('Utils | FPS | rendering', function (hooks) {
         </template>
       }
 
-      await render(
-        <template>
-          <Demo />
-        </template>
-      );
+      await render(<template><Demo /></template>);
 
       assert.dom('out').hasText('0', 'Initial value is 0');
 
@@ -51,10 +48,9 @@ module('Utils | FPS | rendering', function (hooks) {
         await click('button');
       }
 
-      let text = find('out')?.innerHTML?.trim() || ''
+      let text = find('out')?.innerHTML?.trim() || '';
 
       assert.notStrictEqual(text, '', 'Content is rendered');
     });
   });
-
 });

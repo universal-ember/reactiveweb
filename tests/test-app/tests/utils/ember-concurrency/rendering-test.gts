@@ -32,20 +32,20 @@ module('useTask', function () {
             return `${this.search.value}`;
           }
 
-          <template>
-            {{yield this}}
-          </template>
+          <template>{{yield this}}</template>
         }
 
-        render(<template>
-          <TestComponent as |ctx|>
-            {{#if ctx.search.isRunning}}
-              Loading
-            {{else}}
-              {{ctx.result}}
-            {{/if}}
-          </TestComponent>
-        </template>);
+        render(
+          <template>
+            <TestComponent as |ctx|>
+              {{#if ctx.search.isRunning}}
+                Loading
+              {{else}}
+                {{ctx.result}}
+              {{/if}}
+            </TestComponent>
+          </template>
+        );
 
         // This could introduce flakiness / timing issues
         await timeout(10);
@@ -129,7 +129,6 @@ module('useTask', function () {
         });
 
         search = trackedTask(this, this._search);
-
 
         get error() {
           return `${this.search.error}`;

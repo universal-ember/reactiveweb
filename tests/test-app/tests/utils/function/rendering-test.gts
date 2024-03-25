@@ -160,7 +160,11 @@ module('Utils | trackedFunction | rendering', function (hooks) {
 
     setOwner(state, this.owner);
 
-    await render(<template><out>{{Doubled state.num}}</out></template>);
+    await render(
+      <template>
+        <out>{{Doubled state.num}}</out>
+      </template>
+    );
 
     assert.dom('out').hasText('4');
   });
@@ -213,7 +217,11 @@ module('Utils | trackedFunction | rendering', function (hooks) {
 
     setOwner(state, this.owner);
 
-    await render(<template><out>{{state.c}}</out></template>);
+    await render(
+      <template>
+        <out>{{state.c}}</out>
+      </template>
+    );
 
     assert.dom('out').hasText('5');
 
