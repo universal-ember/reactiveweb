@@ -18,7 +18,7 @@ import { resource } from 'ember-resources';
  * import { trackedFunction }  from 'reactiveweb/function';
  * import { on } from '@ember/modifier';
  *
- * const Request = resourceFactory((idFn) => {
+ * function Request(idFn) {
  *   return resource(({use}) => {
  *     let trackedRequest = use(trackedFunction(async () => {
  *       let id = idFn();
@@ -30,7 +30,7 @@ import { resource } from 'ember-resources';
  *
  *     return trackedRequest;
  *   });
- * });
+ * }
  *
  * class Demo extends Component {
  *   @tracked id = 1;
