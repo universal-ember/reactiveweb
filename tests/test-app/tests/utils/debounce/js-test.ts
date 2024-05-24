@@ -51,9 +51,9 @@ module('Utils | debounce | js', function (hooks) {
 
       assert.strictEqual(test.debouncedValue, 'initial', 'Value is as given at first');
 
-      test.value = 'new'
+      test.value = 'new';
 
-      assert.notEqual(test.debouncedValue, test.value, 'Value and debounced value have diverged')
+      assert.notEqual(test.debouncedValue, test.value, 'Value and debounced value have diverged');
 
       await timeout(50);
 
