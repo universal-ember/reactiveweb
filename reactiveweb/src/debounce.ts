@@ -1,15 +1,9 @@
-import { tracked } from '@glimmer/tracking';
-
-import { resource } from 'ember-resources';
-
-class TrackedValue<T> {
-  @tracked value: T | undefined;
-}
+import { cell, resource } from 'ember-resources';
 
 /**
  * A utility for debouncing high-frequency updates.
  * The returned value will only be updated every `ms` and is
- * initially undefined.
+ * initially undefined, unless an initialize value is provided.
  *
  * This can be useful when a user's typing is updating a tracked
  * property and you want to derive data less frequently than on
@@ -55,12 +49,30 @@ class TrackedValue<T> {
  *  }
  * ```
  *
+ * @example
+ * An initialize value can be provided as the starting value instead of it initially returning undefined.
+ * ```js
+ *  import Component from '@glimmer/component';
+ *  import { tracked } from '@glimmer/tracking';
+ *  import { use } from 'ember-resources';
+ *  import { debounce } from 'reactiveweb/debounce';
+ *
+ *  const delay = 100; // ms
+ *
+ *  class Demo extends Component {
+ *    @tracked userInput = 'products';
+ *
+ *    @use debouncedInput = debounce(delay, () => this.userInput, this.userInput);
+ *  }
+ * ```
+ *
  * @param {number} ms delay in milliseconds to wait before updating the returned value
  * @param {() => Value} thunk function that returns the value to debounce
+ * @param {Value} initialize value to return initially before any debounced updates
  */
-export function debounce<Value = unknown>(ms: number, thunk: () => Value) {
-  let lastValue: Value;
-  let state = new TrackedValue<Value>();
+export function debounce<Value = unknown>(ms: number, thunk: () => Value, initialize?: Value) {
+  let lastValue: Value | undefined = initialize;
+  let state = cell<Value | undefined>(lastValue);
 
   return resource(({ on }) => {
     let timer: number;
@@ -74,9 +86,9 @@ export function debounce<Value = unknown>(ms: number, thunk: () => Value) {
     });
 
     timer = setTimeout(() => {
-      state.value = lastValue;
+      state.current = lastValue;
     }, ms);
 
-    return () => state.value;
+    return () => state.current;
   });
 }
