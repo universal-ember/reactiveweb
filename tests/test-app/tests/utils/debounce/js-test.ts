@@ -40,35 +40,28 @@ module('Utils | debounce | js', function (hooks) {
 
     test('initialize value', async function (assert) {
       class Test {
-        @tracked data = 'start';
+        @tracked value = 'initial';
 
-        @use text = debounce(100, () => this.data, this.data);
+        @use debouncedValue = debounce(100, () => this.value, this.value);
       }
 
       let test = new Test();
 
       setOwner(test, this.owner);
 
-      assert.strictEqual(test.text, 'start');
+      assert.strictEqual(test.debouncedValue, 'initial', 'Value is as given at first');
 
-      test.data = 'b';
-      await someTime();
-      assert.strictEqual(test.text, 'start');
-      test.data = 'bo';
-      await someTime();
-      assert.strictEqual(test.text, 'start');
-      test.data = 'boo';
-      await someTime();
-      assert.strictEqual(test.text, 'start');
+      test.value = 'new'
 
-      await someTime(110);
-      assert.strictEqual(test.text, 'boo');
+      assert.notEqual(test.debouncedValue, test.value, 'Value and debounced value have diverged')
 
-      test.data = 'boop';
-      assert.strictEqual(test.text, 'boo');
+      await timeout(50);
 
-      await someTime(110);
-      assert.strictEqual(test.text, 'boop');
+      assert.strictEqual(test.debouncedValue, 'initial', 'Value is still initial after ~50ms');
+
+      await timeout(50);
+
+      assert.strictEqual(test.debouncedValue, 'new', `Value is updated after ~100ms`);
     });
   });
 });
