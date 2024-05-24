@@ -9,7 +9,7 @@ class TrackedValue<T> {
 /**
  * A utility for debouncing high-frequency updates.
  * The returned value will only be updated every `ms` and is
- * initially undefined.
+ * initially undefined, unless an initialize value is provided.
  *
  * This can be useful when a user's typing is updating a tracked
  * property and you want to derive data less frequently than on
@@ -57,10 +57,13 @@ class TrackedValue<T> {
  *
  * @param {number} ms delay in milliseconds to wait before updating the returned value
  * @param {() => Value} thunk function that returns the value to debounce
+ * @param {Value} initialize value to return initially before any debounced updates
  */
-export function debounce<Value = unknown>(ms: number, thunk: () => Value) {
-  let lastValue: Value;
+export function debounce<Value = unknown>(ms: number, thunk: () => Value, initialize?: Value) {
+  let lastValue: Value | undefined = initialize;
   let state = new TrackedValue<Value>();
+
+  state.value = lastValue;
 
   return resource(({ on }) => {
     let timer: number;

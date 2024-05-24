@@ -37,5 +37,38 @@ module('Utils | debounce | js', function (hooks) {
         `Value is "${test.debouncedValue}" after ~100ms`
       );
     });
+
+    test('initialize value', async function (assert) {
+      class Test {
+        @tracked data = 'start';
+
+        @use text = debounce(100, () => this.data, this.data);
+      }
+
+      let test = new Test();
+
+      setOwner(test, this.owner);
+
+      assert.strictEqual(test.text, 'start');
+
+      test.data = 'b';
+      await someTime();
+      assert.strictEqual(test.text, 'start');
+      test.data = 'bo';
+      await someTime();
+      assert.strictEqual(test.text, 'start');
+      test.data = 'boo';
+      await someTime();
+      assert.strictEqual(test.text, 'start');
+
+      await someTime(110);
+      assert.strictEqual(test.text, 'boo');
+
+      test.data = 'boop';
+      assert.strictEqual(test.text, 'boo');
+
+      await someTime(110);
+      assert.strictEqual(test.text, 'boop');
+    });
   });
 });
