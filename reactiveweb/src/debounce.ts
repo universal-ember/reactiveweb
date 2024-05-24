@@ -54,6 +54,23 @@ class TrackedValue<T> {
  *    @use search = RemoteData(() => `https://my.domain/search?q=${this.debouncedInput}`);
  *  }
  * ```
+ * 
+ * @example
+ * An initialize value can be provided as the starting value instead of it initially returning undefined.
+ * ```js
+ *  import Component from '@glimmer/component';
+ *  import { tracked } from '@glimmer/tracking';
+ *  import { use } from 'ember-resources';
+ *  import { debounce } from 'reactiveweb/debounce';
+ *
+ *  const delay = 100; // ms
+ *
+ *  class Demo extends Component {
+ *    @tracked userInput = 'products';
+ *
+ *    @use debouncedInput = debounce(delay, () => this.userInput, this.userInput);
+ *  }
+ * ```
  *
  * @param {number} ms delay in milliseconds to wait before updating the returned value
  * @param {() => Value} thunk function that returns the value to debounce
