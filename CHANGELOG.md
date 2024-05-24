@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2024-05-24)
+
+reactiveweb 1.3.0 (minor)
+
+#### :rocket: Enhancement
+* `reactiveweb`, `test-app`
+  * [#101](https://github.com/universal-ember/reactiveweb/pull/101) Add debounce initialize ([@Techn1x](https://github.com/Techn1x))
+
+#### Committers: 1
+- Brad Overton ([@Techn1x](https://github.com/Techn1x))
+
 ## Release (2024-03-23)
 
 reactiveweb 1.2.3 (patch)
