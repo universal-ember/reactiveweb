@@ -1,10 +1,4 @@
-import { tracked } from '@glimmer/tracking';
-
-import { resource } from 'ember-resources';
-
-class TrackedValue<T> {
-  @tracked value: T | undefined;
-}
+import { cell, resource } from 'ember-resources';
 
 /**
  * A utility for debouncing high-frequency updates.
@@ -78,9 +72,7 @@ class TrackedValue<T> {
  */
 export function debounce<Value = unknown>(ms: number, thunk: () => Value, initialize?: Value) {
   let lastValue: Value | undefined = initialize;
-  let state = new TrackedValue<Value>();
-
-  state.value = lastValue;
+  let state = cell<Value | undefined>(lastValue);
 
   return resource(({ on }) => {
     let timer: number;
@@ -94,9 +86,9 @@ export function debounce<Value = unknown>(ms: number, thunk: () => Value, initia
     });
 
     timer = setTimeout(() => {
-      state.value = lastValue;
+      state.current = lastValue;
     }, ms);
 
-    return () => state.value;
+    return () => state.current;
   });
 }
