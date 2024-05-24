@@ -58,8 +58,8 @@
     "test": "echo 'A v2 addon does not have tests, run tests in test-app'"
   },
   "dependencies": {
-    "@embroider/addon-shim": "^1.8.6",
-    "@embroider/macros": "^1.13.4",
+    "@embroider/addon-shim": "^1.8.9",
+    "@embroider/macros": "^1.16.1",
     "decorator-transforms": "^1.0.3",
     "ember-async-data": "^1.0.3",
     "ember-cached-decorator-polyfill": "^1.0.2",
