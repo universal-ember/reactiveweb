@@ -54,7 +54,7 @@ class TrackedValue<T> {
  *    @use search = RemoteData(() => `https://my.domain/search?q=${this.debouncedInput}`);
  *  }
  * ```
- * 
+ *
  * @example
  * An initialize value can be provided as the starting value instead of it initially returning undefined.
  * ```js
