@@ -1,17 +1,8 @@
 {
   "solution": {
     "reactiveweb": {
-      "impact": "minor",
-      "oldVersion": "1.2.3",
-      "newVersion": "1.3.0",
-      "constraints": [
-        {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
-        }
-      ],
-      "pkgJSONPath": "./reactiveweb/package.json"
+      "oldVersion": "1.3.0"
     }
   },
-  "description": "## Release (2024-05-24)\n\nreactiveweb 1.3.0 (minor)\n\n#### :rocket: Enhancement\n* `reactiveweb`, `test-app`\n  * [#101](https://github.com/universal-ember/reactiveweb/pull/101) Add debounce initialize ([@Techn1x](https://github.com/Techn1x))\n\n#### Committers: 1\n- Brad Overton ([@Techn1x](https://github.com/Techn1x))\n"
+  "description": "\n\n\n\n"
 }
