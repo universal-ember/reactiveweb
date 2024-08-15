@@ -44,6 +44,7 @@ interface Options<T = unknown> {
  * ```js
  *  import { RemoteData } from 'reactiveweb/remote-data';
  *  import { keepLatest } from 'reactiveweb/keep-latest';
+ *  import { use } from 'ember-resources';
  *
  *  class A {
  *    @use request = RemoteData(() => 'some url');
@@ -63,6 +64,7 @@ interface Options<T = unknown> {
  * ```js
  *  import { RemoteData } from 'reactiveweb/remote-data';
  *  import { keepLatest } from 'reactiveweb/keep-latest';
+ *  import { use } from 'ember-resources';
  *
  *  class A {
  *    @use request = RemoteData(() => 'some url');
