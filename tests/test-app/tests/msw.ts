@@ -1,7 +1,7 @@
 import * as QUnit from 'qunit';
 
-import { rest, setupWorker } from 'msw';
-import ENV from 'test-app/config/environment';
+import { http } from 'msw';
+import { setupWorker } from 'msw/browser';
 
 let worker: ReturnType<typeof setupWorker>;
 
@@ -22,13 +22,14 @@ QUnit.begin(async () => {
 });
 
 QUnit.done(async () => {
-  worker.printHandlers();
+  // eslint-disable-next-line no-console
+  console.log(worker.listHandlers());
   worker?.stop();
 });
 
 export async function setupMSW(
   hooks: NestedHooks,
-  handlers: (args: { rest: typeof rest }) => Parameters<(typeof worker)['use']>
+  handlers: (args: { http: typeof http }) => Parameters<(typeof worker)['use']>
 ) {
   hooks.beforeEach(async function () {
     /**
@@ -39,7 +40,7 @@ export async function setupMSW(
     /**
      * Install the handlers passed in from the test
      */
-    worker.use(...handlers({ rest }));
+    worker.use(...handlers({ http }));
   });
 
   hooks.afterEach(function () {

@@ -4,6 +4,7 @@ import { click, render, settled } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
+import { HttpResponse } from 'msw';
 import { RemoteData } from 'reactiveweb/remote-data';
 import { setupMSW } from 'test-app/tests/msw';
 
@@ -18,11 +19,11 @@ let safeName = (blog: any): string => blog?.value?.attributes?.name;
 
 module('Utils | remote-data | rendering', function (hooks) {
   setupRenderingTest(hooks);
-  setupMSW(hooks, ({ rest }) => [
-    rest.get('/blogs/:id', (req, res, ctx) => {
-      let record = data.find((datum) => datum.id === req.params['id']);
+  setupMSW(hooks, ({ http }) => [
+    http.get('/blogs/:id', ({ params }) => {
+      let record = data.find((datum) => datum.id === params['id']);
 
-      return res(ctx.json({ ...record }));
+      return HttpResponse.json({ ...record });
     }),
   ]);
 
