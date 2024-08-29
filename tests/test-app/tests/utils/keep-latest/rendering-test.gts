@@ -8,6 +8,7 @@ import { use } from 'ember-resources';
 import { trackedFunction } from 'reactiveweb/function';
 import { keepLatest } from 'reactiveweb/keep-latest';
 
+const { JSON } = globalThis;
 const timeout = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 module('Utils | keepLatest | rendering', function (hooks) {
