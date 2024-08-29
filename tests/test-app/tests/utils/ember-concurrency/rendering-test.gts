@@ -32,20 +32,20 @@ module('useTask', function () {
             return `${this.search.value}`;
           }
 
-          <template>
-            {{yield this}}
-          </template>
+          <template>{{yield this}}</template>
         }
 
-        render(<template>
-          <TestComponent as |ctx|>
-            {{#if ctx.search.isRunning}}
-              Loading
-            {{else}}
-              {{ctx.result}}
-            {{/if}}
-          </TestComponent>
-        </template>);
+        render(
+          <template>
+            <TestComponent as |ctx|>
+              {{#if ctx.search.isRunning}}
+                Loading
+              {{else}}
+                {{ctx.result}}
+              {{/if}}
+            </TestComponent>
+          </template>
+        );
 
         // This could introduce flakiness / timing issues
         await timeout(10);
@@ -105,12 +105,18 @@ module('useTask', function () {
       await settled();
 
       assert.dom().hasText('Hello there');
-      assert.verifySteps(['resolved rt', 'tf:Hello there', 'tf:Hello there'], 'tracked function over-dirties due to consuming a task');
+      assert.verifySteps(
+        ['resolved rt', 'tf:Hello there', 'tf:Hello there'],
+        'tracked function over-dirties due to consuming a task'
+      );
 
       ctx.input = 'General Kenobi';
       await settled();
       assert.dom().hasText('General Kenobi');
-      assert.verifySteps(['resolved rt', 'tf:General Kenobi', 'tf:General Kenobi'], 'tracked function over-dirties due to consuming a task');
+      assert.verifySteps(
+        ['resolved rt', 'tf:General Kenobi', 'tf:General Kenobi'],
+        'tracked function over-dirties due to consuming a task'
+      );
     });
 
     test('error', async function (assert) {
@@ -129,7 +135,6 @@ module('useTask', function () {
         });
 
         search = trackedTask(this, this._search);
-
 
         get error() {
           return `${this.search.error}`;

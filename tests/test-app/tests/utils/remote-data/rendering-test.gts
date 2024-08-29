@@ -28,11 +28,13 @@ module('Utils | remote-data | rendering', function (hooks) {
 
   module('RemoteData', function () {
     test('works with static url', async function (assert) {
-      await render(<template>
-        {{#let (RemoteData "/blogs/1") as |blog|}}
-          {{safeName blog}}
-        {{/let}}
-      </template>);
+      await render(
+        <template>
+          {{#let (RemoteData "/blogs/1") as |blog|}}
+            {{safeName blog}}
+          {{/let}}
+        </template>
+      );
 
       assert.dom().hasText('name:1');
     });
@@ -48,11 +50,13 @@ module('Utils | remote-data | rendering', function (hooks) {
 
       let foo = new Test();
 
-      await render(<template>
-        {{#let (RemoteData foo.url) as |blog|}}
-          {{safeName blog}}
-        {{/let}}
-      </template>);
+      await render(
+        <template>
+          {{#let (RemoteData foo.url) as |blog|}}
+            {{safeName blog}}
+          {{/let}}
+        </template>
+      );
 
       assert.dom().hasText('name:1');
 
@@ -75,13 +79,15 @@ module('Utils | remote-data | rendering', function (hooks) {
 
       let foo = new Test();
 
-      await render(<template>
-        {{#let (RemoteData foo.url) as |blog|}}
-          <out>{{safeName blog}}</out>
-        {{/let}}
+      await render(
+        <template>
+          {{#let (RemoteData foo.url) as |blog|}}
+            <out>{{safeName blog}}</out>
+          {{/let}}
 
-        <button {{on 'click' foo.update}} type='button'>++</button>
-      </template>);
+          <button {{on "click" foo.update}} type="button">++</button>
+        </template>
+      );
 
       assert.dom('out').hasText('name:1');
 

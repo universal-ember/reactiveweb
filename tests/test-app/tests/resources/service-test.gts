@@ -25,7 +25,6 @@ module('@service | rendering', function (hooks) {
       time.current = new Date();
     }, 1000);
 
-
     on.cleanup(() => {
       clearInterval(interval);
     });
@@ -37,9 +36,9 @@ module('@service | rendering', function (hooks) {
 
   class APIWrapper extends Resource {
     /**
-      * Adding a counter here allows us to roughly measure
-    * that the service is only created once for a given test.
-      */
+     * Adding a counter here allows us to roughly measure
+     * that the service is only created once for a given test.
+     */
     hello = 'world' + counter;
   }
 
@@ -88,7 +87,7 @@ module('@service | rendering', function (hooks) {
 
     serviceOverride(this.owner, {
       replacement: AuthenticatedAPI,
-      original: APIWrapper
+      original: APIWrapper,
     });
 
     await render(
