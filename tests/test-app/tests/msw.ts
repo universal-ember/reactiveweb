@@ -18,7 +18,7 @@ QUnit.begin(async () => {
    * At this point we have no request handlers, but that's what
    * setupMSW is for
    */
-  await worker.start({ quiet: true });
+  // await worker.start();
 });
 
 QUnit.done(async () => {
@@ -30,14 +30,7 @@ export async function setupMSW(
   handlers: (args: { http: typeof http }) => Parameters<(typeof worker)['use']>
 ) {
   hooks.beforeEach(async function () {
-    /**
-     * Remove handlers that were maybe added during a previous a test.
-     */
-    worker.resetHandlers();
-
-    /**
-     * Install the handlers passed in from the test
-     */
+    await worker.start();
     worker.use(...handlers({ http }));
   });
 
@@ -45,6 +38,6 @@ export async function setupMSW(
     /**
      * Ensure that we clean up after ourselves
      */
-    worker?.resetHandlers();
+    worker?.stop();
   });
 }
