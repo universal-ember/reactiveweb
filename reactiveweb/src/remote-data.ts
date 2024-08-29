@@ -127,6 +127,7 @@ export function remoteData<T = unknown>(
   waitForPromise(
     fetch(url, { signal: controller.signal, ...options })
       .then((response) => {
+        console.log({ url, response });
         state.status = response.status;
 
         if (response.headers.get('Content-Type')?.includes('json')) {

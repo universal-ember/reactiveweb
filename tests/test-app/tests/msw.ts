@@ -22,8 +22,6 @@ QUnit.begin(async () => {
 });
 
 QUnit.done(async () => {
-  // eslint-disable-next-line no-console
-  console.log(worker.listHandlers());
   worker?.stop();
 });
 
