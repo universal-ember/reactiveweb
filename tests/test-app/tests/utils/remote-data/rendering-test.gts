@@ -4,6 +4,7 @@ import { click, render, settled } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
+import { HttpResponse } from 'msw';
 import { RemoteData } from 'reactiveweb/remote-data';
 import { setupMSW } from 'test-app/tests/msw';
 
@@ -18,21 +19,23 @@ let safeName = (blog: any): string => blog?.value?.attributes?.name;
 
 module('Utils | remote-data | rendering', function (hooks) {
   setupRenderingTest(hooks);
-  setupMSW(hooks, ({ rest }) => [
-    rest.get('/blogs/:id', (req, res, ctx) => {
-      let record = data.find((datum) => datum.id === req.params['id']);
+  setupMSW(hooks, ({ http }) => [
+    http.get('/blogs/:id', ({ params }) => {
+      let record = data.find((datum) => datum.id === params['id']);
 
-      return res(ctx.json({ ...record }));
+      return HttpResponse.json({ ...record });
     }),
   ]);
 
   module('RemoteData', function () {
     test('works with static url', async function (assert) {
-      await render(<template>
-        {{#let (RemoteData "/blogs/1") as |blog|}}
-          {{safeName blog}}
-        {{/let}}
-      </template>);
+      await render(
+        <template>
+          {{#let (RemoteData "/blogs/1") as |blog|}}
+            {{safeName blog}}
+          {{/let}}
+        </template>
+      );
 
       assert.dom().hasText('name:1');
     });
@@ -48,11 +51,13 @@ module('Utils | remote-data | rendering', function (hooks) {
 
       let foo = new Test();
 
-      await render(<template>
-        {{#let (RemoteData foo.url) as |blog|}}
-          {{safeName blog}}
-        {{/let}}
-      </template>);
+      await render(
+        <template>
+          {{#let (RemoteData foo.url) as |blog|}}
+            {{safeName blog}}
+          {{/let}}
+        </template>
+      );
 
       assert.dom().hasText('name:1');
 
@@ -75,13 +80,15 @@ module('Utils | remote-data | rendering', function (hooks) {
 
       let foo = new Test();
 
-      await render(<template>
-        {{#let (RemoteData foo.url) as |blog|}}
-          <out>{{safeName blog}}</out>
-        {{/let}}
+      await render(
+        <template>
+          {{#let (RemoteData foo.url) as |blog|}}
+            <out>{{safeName blog}}</out>
+          {{/let}}
 
-        <button {{on 'click' foo.update}} type='button'>++</button>
-      </template>);
+          <button {{on "click" foo.update}} type="button">++</button>
+        </template>
+      );
 
       assert.dom('out').hasText('name:1');
 

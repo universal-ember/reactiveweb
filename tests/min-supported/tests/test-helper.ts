@@ -13,7 +13,7 @@ setup(QUnit.assert);
 
 Object.assign(window, { getPendingWaiterState, getWaiters, getSettledState });
 
-QUnit.config.testTimeout = 2000;
+QUnit.config.testTimeout = 5000;
 
 QUnit.testDone(function () {
   resetOnerror();

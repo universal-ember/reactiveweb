@@ -5,6 +5,7 @@ import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
 import { resource, use } from 'ember-resources';
+import { HttpResponse } from 'msw';
 import { RemoteData, remoteData } from 'reactiveweb/remote-data';
 import { setupMSW } from 'test-app/tests/msw';
 
@@ -16,9 +17,9 @@ let data = [
 
 module('Utils | remote-data | js', function (hooks) {
   setupTest(hooks);
-  setupMSW(hooks, ({ rest }) => [
-    rest.get('/blogs/:id', (req, res, ctx) => {
-      let record = data.find((datum) => datum.id === req.params['id']);
+  setupMSW(hooks, ({ http }) => [
+    http.get('/blogs/:id', ({ params, request }) => {
+      let record = data.find((datum) => datum.id === params['id']);
 
       if (record) {
         let extra: Record<string, unknown> = {};
@@ -29,23 +30,23 @@ module('Utils | remote-data | js', function (hooks) {
          *
          * all of the lifecycle is abstracted away in the `RemoteData` api
          */
-        if (req.headers.get('Authorization')) {
-          extra['Authorization'] = req.headers.get('Authorization');
+        if (request.headers.get('Authorization')) {
+          extra['Authorization'] = request.headers.get('Authorization');
         }
 
-        return res(ctx.json({ ...record, ...extra }));
+        return HttpResponse.json({ ...record, ...extra });
       }
 
-      return res(
-        ctx.status(404),
-        ctx.json({ errors: [{ status: '404', detail: 'Blog not found' }] })
+      return HttpResponse.json(
+        { errors: [{ status: '404', detail: 'Blog not found' }] },
+        { status: 404 }
       );
     }),
-    rest.get('/text-error/:id', (req, res, ctx) => {
-      return res(ctx.status(500), ctx.text('hello world'));
+    http.get('/text-error/:id', () => {
+      return HttpResponse.text('hello world', { status: 500 });
     }),
-    rest.get('/text-success/:id', (req, res, ctx) => {
-      return res(ctx.text('hello world'));
+    http.get('/text-success/:id', () => {
+      return HttpResponse.text('hello world');
     }),
   ]);
 

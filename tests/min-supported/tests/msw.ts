@@ -1,7 +1,7 @@
 import * as QUnit from 'qunit';
 
-import { rest, setupWorker } from 'msw';
-import ENV from 'test-app/config/environment';
+import { http } from 'msw';
+import { setupWorker } from 'msw/browser';
 
 let worker: ReturnType<typeof setupWorker>;
 
@@ -18,34 +18,26 @@ QUnit.begin(async () => {
    * At this point we have no request handlers, but that's what
    * setupMSW is for
    */
-  await worker.start({ quiet: true });
+  // await worker.start();
 });
 
 QUnit.done(async () => {
-  worker.printHandlers();
   worker?.stop();
 });
 
 export async function setupMSW(
   hooks: NestedHooks,
-  handlers: (args: { rest: typeof rest }) => Parameters<(typeof worker)['use']>
+  handlers: (args: { http: typeof http }) => Parameters<(typeof worker)['use']>
 ) {
   hooks.beforeEach(async function () {
-    /**
-     * Remove handlers that were maybe added during a previous a test.
-     */
-    worker.resetHandlers();
-
-    /**
-     * Install the handlers passed in from the test
-     */
-    worker.use(...handlers({ rest }));
+    await worker.start();
+    worker.use(...handlers({ http }));
   });
 
   hooks.afterEach(function () {
     /**
      * Ensure that we clean up after ourselves
      */
-    worker?.resetHandlers();
+    worker?.stop();
   });
 }
