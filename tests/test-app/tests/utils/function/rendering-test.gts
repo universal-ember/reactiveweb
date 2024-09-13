@@ -234,4 +234,49 @@ module('Utils | trackedFunction | rendering', function (hooks) {
     await settled();
     assert.dom('out').containsText('12.206');
   });
+
+  test('failing case', async function (assert) {
+    class TestCase {
+      items = trackedFunction(this, async () => {
+        const items = await Promise.resolve([3, 4, 5]);
+
+        return items;
+      })
+
+      get firstItem() {
+        return this.items.value?.[0];
+      }
+
+      stringArray = trackedFunction(this, async () => {
+        if (!this.firstItem) return [];
+
+        const stringArray = await Promise.resolve(Array.from({ length: this.firstItem }, () => 'item'));
+
+        return stringArray;
+      })
+
+      get endResult() {
+        return this.stringArray.value?.join(',') ?? [].join('')
+      }
+    }
+
+    class TestComponent extends Component {
+      @tracked testCase?: TestCase;
+
+      setTestCase = () => this.testCase = new TestCase();
+
+      <template>
+        <out>{{this.testCase.endResult}}</out>
+        <button type="button" {{on "click" this.setTestCase}}></button>
+      </template>
+    }
+
+    await render(<template><TestComponent /></template>);
+
+    assert.dom('out').doesNotIncludeText('item')
+
+    await click('button')
+
+    assert.dom('out').hasText('item,item,item')
+  })
 });
