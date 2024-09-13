@@ -241,7 +241,7 @@ module('Utils | trackedFunction | rendering', function (hooks) {
         const items = await Promise.resolve([3, 4, 5]);
 
         return items;
-      })
+      });
 
       get firstItem() {
         return this.items.value?.[0];
@@ -250,20 +250,22 @@ module('Utils | trackedFunction | rendering', function (hooks) {
       stringArray = trackedFunction(this, async () => {
         if (!this.firstItem) return [];
 
-        const stringArray = await Promise.resolve(Array.from({ length: this.firstItem }, () => 'item'));
+        const stringArray = await Promise.resolve(
+          Array.from({ length: this.firstItem }, () => 'item')
+        );
 
         return stringArray;
-      })
+      });
 
       get endResult() {
-        return this.stringArray.value?.join(',') ?? [].join('')
+        return this.stringArray.value?.join(',') ?? [].join('');
       }
     }
 
     class TestComponent extends Component {
       @tracked testCase?: TestCase;
 
-      setTestCase = () => this.testCase = new TestCase();
+      setTestCase = () => (this.testCase = new TestCase());
 
       <template>
         <out>{{this.testCase.endResult}}</out>
@@ -273,10 +275,10 @@ module('Utils | trackedFunction | rendering', function (hooks) {
 
     await render(<template><TestComponent /></template>);
 
-    assert.dom('out').doesNotIncludeText('item')
+    assert.dom('out').doesNotIncludeText('item');
 
-    await click('button')
+    await click('button');
 
-    assert.dom('out').hasText('item,item,item')
-  })
+    assert.dom('out').hasText('item,item,item');
+  });
 });
