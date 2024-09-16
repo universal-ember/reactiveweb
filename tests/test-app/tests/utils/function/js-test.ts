@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { tracked } from '@glimmer/tracking';
 import { destroy, isDestroyed, isDestroying } from '@ember/destroyable';
 import { settled } from '@ember/test-helpers';

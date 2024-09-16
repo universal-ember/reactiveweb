@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { tracked } from '@glimmer/tracking';
 import { settled } from '@ember/test-helpers';

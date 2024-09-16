@@ -200,6 +200,7 @@ export function modifier<S extends { Element?: Element; Args?: object }>(
 export function modifier(fn: (element: Element, ...args: unknown[]) => void): ModifierLike<{
   Element: Element;
   Args: {
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     Named: {};
     Positional: [];
   };
@@ -211,6 +212,7 @@ export function modifier(fn: (element: Element, ...args: unknown[]) => void): Mo
   return fn as unknown as ModifierLike<{
     Element: Element;
     Args: {
+      // eslint-disable-next-line @typescript-eslint/no-empty-object-type
       Named: {};
       Positional: [];
     };
