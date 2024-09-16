@@ -6,10 +6,18 @@ import { click, render, settled } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
+import { modifier } from 'ember-modifier';
 import { resource, resourceFactory, use } from 'ember-resources';
 import { trackedFunction } from 'reactiveweb/function';
 
 const timeout = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const logText = modifier(function (_element, [value]) {
+  // eslint-disable-next-line no-console
+  console.log(value);
+
+  return () => {};
+});
 
 module('Utils | trackedFunction | rendering', function (hooks) {
   setupRenderingTest(hooks);
@@ -237,28 +245,26 @@ module('Utils | trackedFunction | rendering', function (hooks) {
 
   test('failing case', async function (assert) {
     class TestCase {
-      items = trackedFunction(this, async () => {
-        const items = await Promise.resolve([3, 4, 5]);
-
-        return items;
+      lengthPromise = trackedFunction(this, async () => {
+        return await Promise.resolve(3);
       });
 
-      get firstItem() {
-        return this.items.value?.[0];
+      get length() {
+        return this.lengthPromise.value;
       }
 
       stringArray = trackedFunction(this, async () => {
-        if (!this.firstItem) return [];
+        if (!this.length) return [];
 
         const stringArray = await Promise.resolve(
-          Array.from({ length: this.firstItem }, () => 'item')
-        );
+          Array.from({ length: this.length }, () => 'item')
+        ); // ['item', 'item', 'item']
 
         return stringArray;
       });
 
       get endResult() {
-        return this.stringArray.value?.join(',') ?? [].join('');
+        return this.stringArray.value;
       }
     }
 
@@ -268,7 +274,8 @@ module('Utils | trackedFunction | rendering', function (hooks) {
       setTestCase = () => (this.testCase = new TestCase());
 
       <template>
-        <out>{{this.testCase.endResult}}</out>
+        <div {{logText this.testCase.endResult}} />
+        <out>{{JSON.stringify this.testCase.endResult}}</out>
         <button type="button" {{on "click" this.setTestCase}}></button>
       </template>
     }
@@ -279,6 +286,6 @@ module('Utils | trackedFunction | rendering', function (hooks) {
 
     await click('button');
 
-    assert.dom('out').hasText('item,item,item');
+    assert.dom('out').hasText(JSON.stringify(['item', 'item', 'item']))
   });
 });
