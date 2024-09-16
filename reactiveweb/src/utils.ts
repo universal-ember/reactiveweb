@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import type { ArgsWrapper, Thunk } from 'ember-resources';
 
 export const DEFAULT_THUNK = () => [];

@@ -126,7 +126,7 @@ function linkDecoratorFactory(child: Class<unknown>) {
 
 function linkDecorator(
   _prototype: object,
-  key: string | Symbol,
+  key: string | symbol,
   descriptor: Stage1DecoratorDescriptor | undefined,
   explicitChild?: Class<unknown>
 ): void {
