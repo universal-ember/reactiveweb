@@ -264,7 +264,7 @@ module('Utils | trackedFunction | rendering', function (hooks) {
       });
 
       get endResult() {
-        return this.stringArray.value;
+        return this.stringArray.value?.join(',') ?? '';
       }
     }
 
@@ -275,7 +275,7 @@ module('Utils | trackedFunction | rendering', function (hooks) {
 
       <template>
         <div {{logText this.testCase.endResult}} />
-        <out>{{JSON.stringify this.testCase.endResult}}</out>
+        <out>{{this.testCase.endResult}}</out>
         <button type="button" {{on "click" this.setTestCase}}></button>
       </template>
     }
@@ -286,6 +286,6 @@ module('Utils | trackedFunction | rendering', function (hooks) {
 
     await click('button');
 
-    assert.dom('out').hasText(JSON.stringify(['item', 'item', 'item']))
+    assert.dom('out').hasText('item,item,item');
   });
 });
