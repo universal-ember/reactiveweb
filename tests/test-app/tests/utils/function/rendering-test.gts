@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
+import { cached, tracked } from '@glimmer/tracking';
 import { setOwner } from '@ember/application';
 import { on } from '@ember/modifier';
 import { click, render, settled } from '@ember/test-helpers';
@@ -11,13 +11,6 @@ import { resource, resourceFactory, use } from 'ember-resources';
 import { trackedFunction } from 'reactiveweb/function';
 
 const timeout = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-const logText = modifier(function (_element, [value]) {
-  // eslint-disable-next-line no-console
-  console.log(value);
-
-  return () => {};
-});
 
 module('Utils | trackedFunction | rendering', function (hooks) {
   setupRenderingTest(hooks);
@@ -245,28 +238,40 @@ module('Utils | trackedFunction | rendering', function (hooks) {
 
   test('failing case', async function (assert) {
     class TestCase {
-      lengthPromise = trackedFunction(this, async () => {
-        return await Promise.resolve(3);
-      });
-
-      get length() {
-        return this.lengthPromise.value;
-      }
+      @tracked length = 0;
 
       stringArray = trackedFunction(this, async () => {
-        if (!this.length) return [];
+        let length = this.length;
 
-        const stringArray = await Promise.resolve(
-          Array.from({ length: this.length }, () => 'item')
-        ); // ['item', 'item', 'item']
+        if (!length) return [];
+
+        const stringArray = Array.from({ length }, () => 'item'); // ['item', 'item', 'item']
 
         return stringArray;
       });
 
+      @cached
       get endResult() {
+        setTimeout(() => {
+          // could be any reactive property set later, like as would
+          // be from a reactive promise resolving
+          if (this.length > 0) return;
+          this.length = 3;
+        }, 5);
+
+        // eslint-disable-next-line no-console
+        console.log('this.endResult', this.length, this.stringArray.value);
+
         return this.stringArray.value?.join(',') ?? '';
       }
     }
+
+    const logText = modifier(function (_element, positional) {
+      // eslint-disable-next-line no-console
+      console.log('{{logText}}', positional[0]);
+
+      return () => {};
+    });
 
     class TestComponent extends Component {
       @tracked testCase?: TestCase;
@@ -274,6 +279,13 @@ module('Utils | trackedFunction | rendering', function (hooks) {
       setTestCase = () => (this.testCase = new TestCase());
 
       <template>
+        Does not make work
+        <!-- {{log this.testCase.lengthPromise.value}} -->
+        Makes work
+        <!-- {{log this.testCase.stringArray.isPending}} -->
+        <!-- {{log this.testCase.stringArray.value}} -->
+        <!-- {{log this.testCase.endResult}} -->
+        Breaks
         <div {{logText this.testCase.endResult}} />
         <out>{{this.testCase.endResult}}</out>
         <button type="button" {{on "click" this.setTestCase}}></button>
