@@ -1,0 +1,365 @@
+diff --git a/dist/dependencies/@glimmer/validator.js b/dist/dependencies/@glimmer/validator.js
+index de7babf840cf558e50179a102c95a33c320c86fa..87b713d8951e5f780b1d3f4e6e2fd9677b66b467 100644
+--- a/dist/dependencies/@glimmer/validator.js
++++ b/dist/dependencies/@glimmer/validator.js
+@@ -14,7 +14,8 @@ function getGlobal() {
+   throw new Error('unable to locate global object');
+ }
+ function unwrap(val) {
+-  if (val === null || val === undefined) throw new Error(`Expected value to be present`);
++  if (val === null || val === undefined)
++    throw new Error(`Expected value to be present`);
+   return val;
+ }
+ 
+@@ -31,30 +32,36 @@ if (DEBUG) {
+       if (typeof obj === 'function') {
+         objName = obj.name;
+       } else if (typeof obj === 'object' && obj !== null) {
+-        let className = obj.constructor && obj.constructor.name || '(unknown class)';
++        let className =
++          (obj.constructor && obj.constructor.name) || '(unknown class)';
+         objName = `(an instance of ${className})`;
+       } else if (obj === undefined) {
+         objName = '(an unknown tag)';
+       } else {
+         objName = String(obj);
+       }
+-      let dirtyString = keyName ? `\`${keyName}\` on \`${objName}\`` : `\`${objName}\``;
++      let dirtyString = keyName
++        ? `\`${keyName}\` on \`${objName}\``
++        : `\`${objName}\``;
+       return `You attempted to update ${dirtyString}, but it had already been used previously in the same computation.  Attempting to update a value after using it in a computation can cause logical errors, infinite revalidation bugs, and performance issues, and is not supported.`;
+-    }
++    },
+   };
+-  debug.setTrackingTransactionEnv = env => Object.assign(TRANSACTION_ENV, env);
+-  debug.beginTrackingTransaction = _debugLabel => {
++  debug.setTrackingTransactionEnv = (env) =>
++    Object.assign(TRANSACTION_ENV, env);
++  debug.beginTrackingTransaction = (_debugLabel) => {
+     CONSUMED_TAGS = CONSUMED_TAGS || new WeakMap();
+     let debugLabel = _debugLabel || undefined;
+     let parent = TRANSACTION_STACK[TRANSACTION_STACK.length - 1] ?? null;
+     TRANSACTION_STACK.push({
+       parent,
+-      debugLabel
++      debugLabel,
+     });
+   };
+   debug.endTrackingTransaction = () => {
+     if (TRANSACTION_STACK.length === 0) {
+-      throw new Error('attempted to close a tracking transaction, but one was not open');
++      throw new Error(
++        'attempted to close a tracking transaction, but one was not open',
++      );
+     }
+     TRANSACTION_STACK.pop();
+     if (TRANSACTION_STACK.length === 0) {
+@@ -64,7 +71,9 @@ if (DEBUG) {
+   debug.resetTrackingTransaction = () => {
+     let stack = '';
+     if (TRANSACTION_STACK.length > 0) {
+-      stack = debug.logTrackingStack(TRANSACTION_STACK[TRANSACTION_STACK.length - 1]);
++      stack = debug.logTrackingStack(
++        TRANSACTION_STACK[TRANSACTION_STACK.length - 1],
++      );
+     }
+     TRANSACTION_STACK.splice(0, TRANSACTION_STACK.length);
+     CONSUMED_TAGS = null;
+@@ -102,7 +111,8 @@ if (DEBUG) {
+   };
+ 
+   let nthIndex = function (str, pattern, n) {
+-    let startingPos = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : -1;
++    let startingPos =
++      arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : -1;
+     let i = startingPos;
+     while (n-- > 0 && i++ < str.length) {
+       i = str.indexOf(pattern, i);
+@@ -111,15 +121,18 @@ if (DEBUG) {
+     return i;
+   };
+   let makeTrackingErrorMessage = (transaction, obj, keyName) => {
+-    let message = [TRANSACTION_ENV.debugMessage(obj, keyName && String(keyName))];
++    let message = [
++      TRANSACTION_ENV.debugMessage(obj, keyName && String(keyName)),
++    ];
+     message.push(`\`${String(keyName)}\` was first used:`);
+     message.push(debug.logTrackingStack(transaction));
+     message.push(`Stack trace for the update:`);
+     return message.join('\n\n');
+   };
+-  debug.logTrackingStack = transaction => {
++  debug.logTrackingStack = (transaction) => {
+     let trackingStack = [];
+-    let current = transaction || TRANSACTION_STACK[TRANSACTION_STACK.length - 1];
++    let current =
++      transaction || TRANSACTION_STACK[TRANSACTION_STACK.length - 1];
+     if (current === undefined) return '';
+     while (current) {
+       if (current.debugLabel) {
+@@ -129,9 +142,11 @@ if (DEBUG) {
+     }
+ 
+     // TODO: Use String.prototype.repeat here once we can drop support for IE11
+-    return trackingStack.map((label, index) => Array(2 * index + 1).join(' ') + label).join('\n');
++    return trackingStack
++      .map((label, index) => Array(2 * index + 1).join(' ') + label)
++      .join('\n');
+   };
+-  debug.markTagAsConsumed = _tag => {
++  debug.markTagAsConsumed = (_tag) => {
+     if (!CONSUMED_TAGS || CONSUMED_TAGS.has(_tag)) return;
+     CONSUMED_TAGS.set(_tag, getLast(asPresentArray(TRANSACTION_STACK)));
+ 
+@@ -170,7 +185,12 @@ if (DEBUG) {
+   };
+ }
+ function hasStack(error) {
+-  return typeof error === 'object' && error !== null && 'stack' in error && typeof error.stack === 'string';
++  return (
++    typeof error === 'object' &&
++    error !== null &&
++    'stack' in error &&
++    typeof error.stack === 'string'
++  );
+ }
+ 
+ //////////
+@@ -245,12 +265,11 @@ class MonomorphicTagImpl {
+         return CONSTANT_TAG;
+       case 1:
+         return tags[0];
+-      default:
+-        {
+-          let tag = new MonomorphicTagImpl(COMBINATOR_TAG_ID);
+-          tag.subtag = tags;
+-          return tag;
+-        }
++      default: {
++        let tag = new MonomorphicTagImpl(COMBINATOR_TAG_ID);
++        tag.subtag = tags;
++        return tag;
++      }
+     }
+   }
+   revision = INITIAL;
+@@ -264,9 +283,7 @@ class MonomorphicTagImpl {
+     this[TYPE] = type;
+   }
+   [COMPUTE]() {
+-    let {
+-      lastChecked
+-    } = this;
++    let { lastChecked } = this;
+     if (this.isUpdating === true) {
+       if (DEBUG && !allowsCycles(this)) {
+         throw new Error('Cycles in tags are not allowed');
+@@ -276,10 +293,7 @@ class MonomorphicTagImpl {
+       this.isUpdating = true;
+       this.lastChecked = $REVISION;
+       try {
+-        let {
+-          subtag,
+-          revision
+-        } = this;
++        let { subtag, revision } = this;
+         if (subtag !== null) {
+           if (Array.isArray(subtag)) {
+             for (const tag of subtag) {
+@@ -338,7 +352,10 @@ class MonomorphicTagImpl {
+     }
+   }
+   static dirtyTag(tag, disableConsumptionAssertion) {
+-    if (DEBUG && !(tag[TYPE] === UPDATABLE_TAG_ID || tag[TYPE] === DIRYTABLE_TAG_ID)) {
++    if (
++      DEBUG &&
++      !(tag[TYPE] === UPDATABLE_TAG_ID || tag[TYPE] === DIRYTABLE_TAG_ID)
++    ) {
+       throw new Error('Attempted to dirty a tag that was not dirtyable');
+     }
+     if (DEBUG && disableConsumptionAssertion !== true) {
+@@ -395,27 +412,8 @@ const CURRENT_TAG = new CurrentTag();
+ 
+ const combine = MonomorphicTagImpl.combine;
+ 
+-// Warm
+-
+-let tag1 = createUpdatableTag();
+-let tag2 = createUpdatableTag();
+-let tag3 = createUpdatableTag();
+-valueForTag(tag1);
+-DIRTY_TAG(tag1);
+-valueForTag(tag1);
+-UPDATE_TAG(tag1, combine([tag2, tag3]));
+-valueForTag(tag1);
+-DIRTY_TAG(tag2);
+-valueForTag(tag1);
+-DIRTY_TAG(tag3);
+-valueForTag(tag1);
+-UPDATE_TAG(tag1, tag3);
+-valueForTag(tag1);
+-DIRTY_TAG(tag3);
+-valueForTag(tag1);
+-
+ function isObjectLike(u) {
+-  return typeof u === 'object' && u !== null || typeof u === 'function';
++  return (typeof u === 'object' && u !== null) || typeof u === 'function';
+ }
+ 
+ ///////////
+@@ -472,16 +470,14 @@ class Tracker {
+     this.last = tag;
+   }
+   combine() {
+-    let {
+-      tags
+-    } = this;
++    let { tags } = this;
+     if (tags.size === 0) {
+       return CONSTANT_TAG;
+     } else if (tags.size === 1) {
+       return this.last;
+     } else {
+       let tagsArr = [];
+-      tags.forEach(tag => tagsArr.push(tag));
++      tags.forEach((tag) => tagsArr.push(tag));
+       return combine(tagsArr);
+     }
+   }
+@@ -503,6 +499,7 @@ class Tracker {
+ let CURRENT_TRACKER = null;
+ const OPEN_TRACK_FRAMES = [];
+ function beginTrackFrame(debuggingContext) {
++  console.group('[[[ Begin Tracking Frame ]]]');
+   OPEN_TRACK_FRAMES.push(CURRENT_TRACKER);
+   CURRENT_TRACKER = new Tracker();
+   if (DEBUG) {
+@@ -513,12 +510,16 @@ function endTrackFrame() {
+   let current = CURRENT_TRACKER;
+   if (DEBUG) {
+     if (OPEN_TRACK_FRAMES.length === 0) {
+-      throw new Error('attempted to close a tracking frame, but one was not open');
++      throw new Error(
++        'attempted to close a tracking frame, but one was not open',
++      );
+     }
+     unwrap(debug.endTrackingTransaction)();
+   }
+   CURRENT_TRACKER = OPEN_TRACK_FRAMES.pop() || null;
+-  return unwrap(current).combine();
++  let result = unwrap(current).combine();
++  console.groupEnd();
++  return result;
+ }
+ function beginUntrackFrame() {
+   OPEN_TRACK_FRAMES.push(CURRENT_TRACKER);
+@@ -526,7 +527,9 @@ function beginUntrackFrame() {
+ }
+ function endUntrackFrame() {
+   if (DEBUG && OPEN_TRACK_FRAMES.length === 0) {
+-    throw new Error('attempted to close a tracking frame, but one was not open');
++    throw new Error(
++      'attempted to close a tracking frame, but one was not open',
++    );
+   }
+   CURRENT_TRACKER = OPEN_TRACK_FRAMES.pop() || null;
+ }
+@@ -559,13 +562,15 @@ const SNAPSHOT = Symbol('SNAPSHOT');
+ const DEBUG_LABEL = Symbol('DEBUG_LABEL');
+ function createCache(fn, debuggingLabel) {
+   if (DEBUG && !(typeof fn === 'function')) {
+-    throw new Error(`createCache() must be passed a function as its first parameter. Called with: ${String(fn)}`);
++    throw new Error(
++      `createCache() must be passed a function as its first parameter. Called with: ${String(fn)}`,
++    );
+   }
+   let cache = {
+     [FN]: fn,
+     [LAST_VALUE]: undefined,
+     [TAG]: undefined,
+-    [SNAPSHOT]: -1
++    [SNAPSHOT]: -1,
+   };
+   if (DEBUG) {
+     cache[DEBUG_LABEL] = debuggingLabel;
+@@ -600,14 +605,18 @@ function isConst(cache) {
+ }
+ function assertCache(value, fnName) {
+   if (DEBUG && !(typeof value === 'object' && value !== null && FN in value)) {
+-    throw new Error(`${fnName}() can only be used on an instance of a cache created with createCache(). Called with: ${String(value)}`);
++    throw new Error(
++      `${fnName}() can only be used on an instance of a cache created with createCache(). Called with: ${String(value)}`,
++    );
+   }
+ }
+ 
+ // replace this with `expect` when we can
+ function assertTag(tag, cache) {
+   if (DEBUG && tag === undefined) {
+-    throw new Error(`isConst() can only be used on a cache once getValue() has been called at least once. Called with cache function:\n\n${String(cache[FN])}`);
++    throw new Error(
++      `isConst() can only be used on a cache once getValue() has been called at least once. Called with cache function:\n\n${String(cache[FN])}`,
++    );
+   }
+ }
+ 
+@@ -665,15 +674,54 @@ function trackedData(key, initializer) {
+   }
+   return {
+     getter,
+-    setter
++    setter,
+   };
+ }
+ 
+ const GLIMMER_VALIDATOR_REGISTRATION = Symbol('GLIMMER_VALIDATOR_REGISTRATION');
+ const globalObj = getGlobal();
+ if (globalObj[GLIMMER_VALIDATOR_REGISTRATION] === true) {
+-  throw new Error('The `@glimmer/validator` library has been included twice in this application. It could be different versions of the package, or the same version included twice by mistake. `@glimmer/validator` depends on having a single copy of the package in use at any time in an application, even if they are the same version. You must dedupe your build to remove the duplicate packages in order to prevent this error.');
++  throw new Error(
++    'The `@glimmer/validator` library has been included twice in this application. It could be different versions of the package, or the same version included twice by mistake. `@glimmer/validator` depends on having a single copy of the package in use at any time in an application, even if they are the same version. You must dedupe your build to remove the duplicate packages in order to prevent this error.',
++  );
+ }
+ globalObj[GLIMMER_VALIDATOR_REGISTRATION] = true;
+ 
+-export { ALLOW_CYCLES, COMPUTE, CONSTANT, CONSTANT_TAG, CURRENT_TAG, CurrentTag, INITIAL, VOLATILE, VOLATILE_TAG, VolatileTag, beginTrackFrame, beginUntrackFrame, bump, combine, consumeTag, createCache, createTag, createUpdatableTag, debug, DIRTY_TAG as dirtyTag, dirtyTagFor, endTrackFrame, endUntrackFrame, getValue, isConst, isConstTag, isTracking, resetTracking, tagFor, tagMetaFor, track, trackedData, untrack, UPDATE_TAG as updateTag, validateTag, valueForTag };
++export {
++  ALLOW_CYCLES,
++  COMPUTE,
++  CONSTANT,
++  CONSTANT_TAG,
++  CURRENT_TAG,
++  CurrentTag,
++  INITIAL,
++  VOLATILE,
++  VOLATILE_TAG,
++  VolatileTag,
++  beginTrackFrame,
++  beginUntrackFrame,
++  bump,
++  combine,
++  consumeTag,
++  createCache,
++  createTag,
++  createUpdatableTag,
++  debug,
++  DIRTY_TAG as dirtyTag,
++  dirtyTagFor,
++  endTrackFrame,
++  endUntrackFrame,
++  getValue,
++  isConst,
++  isConstTag,
++  isTracking,
++  resetTracking,
++  tagFor,
++  tagMetaFor,
++  track,
++  trackedData,
++  untrack,
++  UPDATE_TAG as updateTag,
++  validateTag,
++  valueForTag,
++};
