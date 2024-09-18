@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
 import { cached, tracked } from '@glimmer/tracking';
+import { debug } from '@glimmer/validator';
 import { setOwner } from '@ember/application';
 import { on } from '@ember/modifier';
 import { click, render, settled } from '@ember/test-helpers';
@@ -243,15 +244,18 @@ module('Utils | trackedFunction | rendering', function (hooks) {
       stringArray = trackedFunction(this, async () => {
         let length = this.length;
 
-        if (!length) return [];
+        if (!length) return ['empty'];
 
         const stringArray = Array.from({ length }, () => 'item'); // ['item', 'item', 'item']
+
+        console.log(debug.logTrackingStack());
 
         return stringArray;
       });
 
       @cached
       get endResult() {
+        console.group('endResult');
         setTimeout(() => {
           // could be any reactive property set later, like as would
           // be from a reactive promise resolving
@@ -262,22 +266,40 @@ module('Utils | trackedFunction | rendering', function (hooks) {
         // eslint-disable-next-line no-console
         console.log('this.endResult', this.length, this.stringArray.value);
 
-        return this.stringArray.value?.join(',') ?? '';
+        let value = this.stringArray.value;
+
+        if (!value || this.stringArray.isPending) {
+          console.log('this.endResult: isPending');
+
+          console.groupEnd();
+
+          return '';
+        }
+
+        console.log('this.endResult: should have value', value);
+
+        console.groupEnd();
+
+        return value.join(',');
       }
     }
 
-    const logText = modifier(function (_element, positional) {
+    const logText = modifier(function (_element, positional, named) {
       // eslint-disable-next-line no-console
-      console.log('{{logText}}', positional[0]);
+      console.log('{{logText}}', positional[0], positional.length, named.bar, named.foo);
 
       return () => {};
     });
 
-    class TestComponent extends Component {
+    class State {
       @tracked testCase?: TestCase;
 
       setTestCase = () => (this.testCase = new TestCase());
+    }
 
+    let state = new State();
+
+    await render(
       <template>
         Does not make work
         <!-- {{log this.testCase.lengthPromise.value}} -->
@@ -286,17 +308,16 @@ module('Utils | trackedFunction | rendering', function (hooks) {
         <!-- {{log this.testCase.stringArray.value}} -->
         <!-- {{log this.testCase.endResult}} -->
         Breaks
-        <div {{logText this.testCase.endResult}} />
-        <out>{{this.testCase.endResult}}</out>
-        <button type="button" {{on "click" this.setTestCase}}></button>
+        <div {{logText state.testCase.length bar=state.testCase.endResult foo="foo"}} />
+        <out>{{state.testCase.endResult}}</out>
+        <button type="button" {{on "click" state.setTestCase}}></button>
       </template>
-    }
-
-    await render(<template><TestComponent /></template>);
+    );
 
     assert.dom('out').doesNotIncludeText('item');
 
     await click('button');
+    await this.pauseTest();
 
     assert.dom('out').hasText('item,item,item');
   });
