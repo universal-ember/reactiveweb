@@ -240,36 +240,72 @@ module('Utils | trackedFunction | rendering', function (hooks) {
   test('failing case', async function (assert) {
     class TestCase {
       @tracked length = 0;
+      @tracked value;
 
-      stringArray = trackedFunction(this, async () => {
-        let length = this.length;
+      setLength = () => (this.length = 3);
 
-        if (!length) return ['empty'];
+      callCount = 0;
+      isPending = true;
+      getValue = async () => {
+        this.callCount++;
+
+        if (this.callCount > 20) {
+          console.log('getValue() too much calling', this.callCount);
+
+          return;
+        }
+
+        let { length, isPending } = this;
+
+        if (!this.isPending && this.value?.[0] === 'not yet') {
+          console.log('getValue() early return', { length, isPending });
+
+          return;
+        }
+
+        // detach from auto-tracking
+        await Promise.resolve();
+        console.group('getValue');
+
+        if (!length) {
+          if (this.value?.[0] === 'not yet') {
+            console.log('getValue() value is already set to net yet');
+
+            console.groupEnd();
+
+            return;
+          }
+
+          console.log('getValue() setting value to net yet', { length, isPending });
+          this.value = ['not yet'];
+
+          console.groupEnd();
+
+          return;
+        }
 
         const stringArray = Array.from({ length }, () => 'item'); // ['item', 'item', 'item']
 
-        console.log(debug.logTrackingStack());
+        // console.log(debug.logTrackingStack());
+        console.log('getValue() setting value');
+        this.value = stringArray;
+        this.isPending = false;
+        console.groupEnd();
+      };
 
-        return stringArray;
-      });
-
-      @cached
       get endResult() {
         console.group('endResult');
-        setTimeout(() => {
-          // could be any reactive property set later, like as would
-          // be from a reactive promise resolving
-          if (this.length > 0) return;
-          this.length = 3;
-        }, 5);
+        console.log(this.length);
 
         // eslint-disable-next-line no-console
-        console.log('this.endResult', this.length, this.stringArray.value);
+        console.log('this.endResult', { length: this.length, value: this.value });
 
-        let value = this.stringArray.value;
+        this.getValue();
 
-        if (!value || this.stringArray.isPending) {
-          console.log('this.endResult: isPending');
+        let value = this.value;
+
+        if (!value) {
+          console.log('this.endResult: no value');
 
           console.groupEnd();
 
@@ -286,7 +322,7 @@ module('Utils | trackedFunction | rendering', function (hooks) {
 
     const logText = modifier(function (_element, positional, named) {
       // eslint-disable-next-line no-console
-      console.log('{{logText}}', positional[0], positional.length, named.bar, named.foo);
+      console.log('{{logText}}', positional[0], named.bar, named.foo);
 
       return () => {};
     });
@@ -299,24 +335,33 @@ module('Utils | trackedFunction | rendering', function (hooks) {
 
     let state = new State();
 
+    const setLength = () => state.testCase?.setLength();
+
     await render(
       <template>
+        <!-- {{#if state.testCase}} -->
+        <!--   {{(state.testCase.getValue)}} -->
+        <!-- {{/if}} -->
         Does not make work
-        <!-- {{log this.testCase.lengthPromise.value}} -->
+        <!-- {{log state.testCase.lengthPromise.value}} -->
         Makes work
-        <!-- {{log this.testCase.stringArray.isPending}} -->
-        <!-- {{log this.testCase.stringArray.value}} -->
-        <!-- {{log this.testCase.endResult}} -->
+        <!-- {{log state.testCase.stringArray.value}} -->
+        <!-- {{log state.testCase.endResult}} -->
         Breaks
-        <div {{logText state.testCase.length bar=state.testCase.endResult foo="foo"}} />
+        <div {{logText bar=state.testCase.endResult foo="foo"}} />
         <out>{{state.testCase.endResult}}</out>
-        <button type="button" {{on "click" state.setTestCase}}></button>
+        <button id="setTestCase" type="button" {{on "click" state.setTestCase}}>set testcase</button>
+        <button id="setLength" type="button" {{on "click" setLength}}>set length ({{state.testCase.length}})</button>
       </template>
     );
 
     assert.dom('out').doesNotIncludeText('item');
 
-    await click('button');
+    await this.pauseTest();
+    await click('#setTestCase');
+    await new Promise((r) => setTimeout(r, 100));
+    await click('#setLength');
+    await new Promise((r) => setTimeout(r, 100));
     await this.pauseTest();
 
     assert.dom('out').hasText('item,item,item');
