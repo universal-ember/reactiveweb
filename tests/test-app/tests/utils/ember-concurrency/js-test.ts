@@ -195,6 +195,72 @@ module('useTask', function () {
         assert.true(foo.search.isFinished);
         assert.false(foo.search.isRunning);
       });
+
+      test('it runs again when calling retry()', async function (assert) {
+        class Test {
+          @tracked input = '';
+
+          counter = 0;
+
+          _search = restartableTask(async (input: string) => {
+            // or some bigger timeout for an actual search task to debounce
+            await timeout(0);
+
+            this.counter++;
+
+            // or some api data if actual search task
+            return { results: [input, this.counter] };
+          });
+
+          search = trackedTask(this, this._search, () => [this.input]);
+        }
+
+        let foo = new Test();
+
+        // task is initiated upon first access
+        foo.search;
+        await settled();
+
+
+        assert.strictEqual(foo.search.value, undefined);
+        assert.false(foo.search.isFinished);
+        assert.true(foo.search.isRunning);
+
+        await settled();
+
+        assert.true(foo.search.isFinished);
+        assert.false(foo.search.isRunning);
+        assert.deepEqual(foo.search.value, { results: ['', 1] });
+        assert.strictEqual(foo._search.performCount, 1, 'Task was performed once');
+
+        foo.input = 'Hello there!';
+        await settled();
+
+        assert.deepEqual(foo.search.value, { results: ['', 1] }, 'previous value is retained');
+        assert.false(foo.search.isFinished);
+        assert.true(foo.search.isRunning);
+
+        await settled();
+
+        assert.true(foo.search.isFinished);
+        assert.false(foo.search.isRunning);
+        assert.deepEqual(foo.search.value, { results: ['Hello there!', 2] });
+        assert.strictEqual(foo._search.performCount, 2, 'Task was performed twice');
+
+
+        foo.search.retry();
+
+        assert.deepEqual(foo.search.value, { results: ['Hello there!', 2] }, 'previous value is retained');
+        assert.false(foo.search.isFinished);
+        assert.true(foo.search.isRunning);
+
+        await settled();
+        assert.true(foo.search.isFinished);
+        assert.false(foo.search.isRunning);
+        assert.deepEqual(foo.search.value, { results: ['Hello there!', 3] });
+
+        assert.strictEqual(foo._search.performCount, 3, 'Task was performed three times');
+      });
     });
   });
 });
