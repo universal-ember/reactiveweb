@@ -1,6 +1,6 @@
+/** eslint-disable no-console */
 import Component from '@glimmer/component';
-import { cached, tracked } from '@glimmer/tracking';
-import { debug } from '@glimmer/validator';
+import { tracked } from '@glimmer/tracking';
 import { setOwner } from '@ember/application';
 import { on } from '@ember/modifier';
 import { click, render, settled } from '@ember/test-helpers';
@@ -295,7 +295,6 @@ module('Utils | trackedFunction | rendering', function (hooks) {
 
       get endResult() {
         console.group('endResult');
-        console.log(this.length);
 
         // eslint-disable-next-line no-console
         console.log('this.endResult', { length: this.length, value: this.value });
@@ -357,12 +356,12 @@ module('Utils | trackedFunction | rendering', function (hooks) {
 
     assert.dom('out').doesNotIncludeText('item');
 
-    await this.pauseTest();
+    // await this.pauseTest();
     await click('#setTestCase');
     await new Promise((r) => setTimeout(r, 100));
     await click('#setLength');
     await new Promise((r) => setTimeout(r, 100));
-    await this.pauseTest();
+    // await this.pauseTest();
 
     assert.dom('out').hasText('item,item,item');
   });
