@@ -8,7 +8,7 @@
  *
  * As a result, tracked data should not be set within `sync`.
  * Example usage of when you may want to use `sync`
- * ```gjs
+ * ```js
  * import { sync } from 'reactiveweb/sync';
  * import { fn } from '@ember/helper';
  *
@@ -24,7 +24,7 @@
  * `sync` does autotrack, so accessing tracked data within the function passed to sync
  * will cause updates to be re-synced.
  *
- * ```gjs
+ * ```js
  * import { sync } from 'reactiveweb/sync';
  * import { fn } from '@ember/helper';
  *
@@ -53,7 +53,7 @@
  * since auto-tracking is synchronous, but the probability is non-0.
  *
  * Example of detaching from auto-tracking:
- * ```gjs
+ * ```js
  * import { sync } from 'reactiveweb/sync';
  *
  * class Demo extends Component {

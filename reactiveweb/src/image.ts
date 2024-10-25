@@ -6,7 +6,7 @@ import { trackedFunction } from './function.ts';
  * Reactively load an Image with access to loading / error state.
  *
  * Usage in a component
- * ```gjs
+ * ```js
  * import { ReactiveImage } from 'reactiveweb/image';
  * <template>
  *   {{#let (ReactiveImage 'https://path.to.image') as |state|}}
