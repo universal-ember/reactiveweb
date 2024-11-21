@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2024-08-15)
+
+reactiveweb 1.3.1 (patch)
+
+#### :memo: Documentation
+* `reactiveweb`
+  * [#107](https://github.com/universal-ember/reactiveweb/pull/107) [docs] Update keepLatest code example to specify import for use decorator ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 1
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
 ## Release (2024-05-24)
 
 reactiveweb 1.3.0 (minor)
