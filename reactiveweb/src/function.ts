@@ -107,11 +107,13 @@ export function trackedFunction<Return>(
   assert('Unknown arity: trackedFunction must be called with 1 or 2 arguments');
 }
 
+const START = Symbol.for('__reactiveweb_trackedFunction__START__');
+
 function classUsable<Return>(fn: () => Return) {
   const state = new State(fn);
 
   let destroyable = resource<State<Return>>(() => {
-    state.retry();
+    state[START]();
 
     return state;
   });
@@ -151,7 +153,7 @@ export class State<Value> {
    */
   @tracked caughtError: unknown;
 
-  #fn: () => Value;
+  #fn: (meta: { isRetrying: boolean }) => Value;
 
   constructor(fn: () => Value) {
     this.#fn = fn;
@@ -260,6 +262,15 @@ export class State<Value> {
     return this.data?.error ?? null;
   }
 
+  async [START]() {
+    try {
+      await this._dangerousRetry({ isRetrying: false });
+    } catch (e) {
+      if (isDestroyed(this) || isDestroying(this)) return;
+      this.caughtError = e;
+    }
+  }
+
   /**
    * Will re-invoke the function passed to `trackedFunction`
    * this will also re-set some properties on the `State` instance.
@@ -276,14 +287,14 @@ export class State<Value> {
        * - immediately when inovking `fn` (where auto-tracking occurs)
        * - after an await, "eventually"
        */
-      await this._dangerousRetry();
+      await this._dangerousRetry({ isRetrying: true });
     } catch (e) {
       if (isDestroyed(this) || isDestroying(this)) return;
       this.caughtError = e;
     }
   };
 
-  _dangerousRetry = async () => {
+  _dangerousRetry = async ({ isRetrying }: { isRetrying: boolean }) => {
     if (isDestroyed(this) || isDestroying(this)) return;
 
     // We've previously had data, but we're about to run-again.
@@ -296,7 +307,7 @@ export class State<Value> {
     // this._internalError = null;
 
     // We need to invoke this before going async so that tracked properties are consumed (entangled with) synchronously
-    this.promise = this.#fn();
+    this.promise = this.#fn({ isRetrying });
 
     // TrackedAsyncData interacts with tracked data during instantiation.
     // We don't want this internal state to entangle with `trackedFunction`

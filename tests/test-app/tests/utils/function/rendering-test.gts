@@ -42,14 +42,14 @@ module('Utils | trackedFunction | rendering', function (hooks) {
     let count = 0;
 
     class TestComponent extends Component {
-      data = trackedFunction(this, () => {
+      data = trackedFunction(this, ({ isRetrying }) => {
         // Copy the count so asynchrony of trackedFunction evaluation
         // doesn't return a newer value than existed at the time
         // of the function invocation.
         let localCount = count;
 
         count++;
-        assert.step(`ran trackedFunction ${localCount}`);
+        assert.step(`ran trackedFunction ${localCount} & ${isRetrying}`);
 
         return localCount;
       });
