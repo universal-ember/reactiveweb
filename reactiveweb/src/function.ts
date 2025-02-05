@@ -5,6 +5,10 @@ import { associateDestroyableChild, destroy, isDestroyed, isDestroying } from '@
 import { TrackedAsyncData } from 'ember-async-data';
 import { resource } from 'ember-resources';
 
+interface CallbackMeta {
+  isRetrying: boolean;
+}
+
 /**
  * Any tracked data accessed in a tracked function _before_ an `await`
  * will "entangle" with the function -- we can call these accessed tracked
@@ -48,7 +52,14 @@ import { resource } from 'ember-resources';
  * }
  * ```
  */
-export function trackedFunction<Return>(fn: () => Return): State<Return>;
+export function trackedFunction<Return>(
+  fn: (meta: {
+    /**
+     * true when state.retry() is called, false initially
+     */
+    isRetrying: boolean;
+  }) => Return
+): State<Return>;
 
 /**
  * Any tracked data accessed in a tracked function _before_ an `await`
@@ -91,7 +102,15 @@ export function trackedFunction<Return>(fn: () => Return): State<Return>;
  * @param {Object} context destroyable parent, e.g.: component instance aka "this"
  * @param {Function} fn the function to run with the return value available on .value
  */
-export function trackedFunction<Return>(context: object, fn: () => Return): State<Return>;
+export function trackedFunction<Return>(
+  context: object,
+  fn: (meta: {
+    /**
+     * true when state.retry() is called, false initially
+     */
+    isRetrying: boolean;
+  }) => Return
+): State<Return>;
 
 export function trackedFunction<Return>(
   ...args: Parameters<typeof directTrackedFunction<Return>> | Parameters<typeof classUsable<Return>>
@@ -109,7 +128,7 @@ export function trackedFunction<Return>(
 
 const START = Symbol.for('__reactiveweb_trackedFunction__START__');
 
-function classUsable<Return>(fn: () => Return) {
+function classUsable<Return>(fn: (meta: CallbackMeta) => Return) {
   const state = new State(fn);
 
   let destroyable = resource<State<Return>>(() => {
@@ -123,7 +142,7 @@ function classUsable<Return>(fn: () => Return) {
   return destroyable;
 }
 
-function directTrackedFunction<Return>(context: object, fn: () => Return) {
+function directTrackedFunction<Return>(context: object, fn: (meta: CallbackMeta) => Return) {
   const state = new State(fn);
 
   let destroyable = resource<State<Return>>(context, () => {
@@ -153,9 +172,9 @@ export class State<Value> {
    */
   @tracked caughtError: unknown;
 
-  #fn: (meta: { isRetrying: boolean }) => Value;
+  #fn: (meta: CallbackMeta) => Value;
 
-  constructor(fn: () => Value) {
+  constructor(fn: (meta: CallbackMeta) => Value) {
     this.#fn = fn;
   }
 
@@ -294,7 +313,7 @@ export class State<Value> {
     }
   };
 
-  _dangerousRetry = async ({ isRetrying }: { isRetrying: boolean }) => {
+  _dangerousRetry = async ({ isRetrying }: CallbackMeta) => {
     if (isDestroyed(this) || isDestroying(this)) return;
 
     // We've previously had data, but we're about to run-again.
