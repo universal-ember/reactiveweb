@@ -56,6 +56,7 @@ export function trackedFunction<Return>(
   fn: (meta: {
     /**
      * true when state.retry() is called, false initially
+     * and also false when tracked data changes (new initial)
      */
     isRetrying: boolean;
   }) => Return
@@ -107,6 +108,7 @@ export function trackedFunction<Return>(
   fn: (meta: {
     /**
      * true when state.retry() is called, false initially
+     * and also false when tracked data changes (new initial)
      */
     isRetrying: boolean;
   }) => Return
@@ -146,7 +148,7 @@ function directTrackedFunction<Return>(context: object, fn: (meta: CallbackMeta)
   const state = new State(fn);
 
   let destroyable = resource<State<Return>>(context, () => {
-    state.retry();
+    state[START]();
 
     return state;
   });
