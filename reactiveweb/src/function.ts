@@ -5,6 +5,10 @@ import { associateDestroyableChild, destroy, isDestroyed, isDestroying } from '@
 import { TrackedAsyncData } from 'ember-async-data';
 import { resource } from 'ember-resources';
 
+interface CallbackMeta {
+  isRetrying: boolean;
+}
+
 /**
  * Any tracked data accessed in a tracked function _before_ an `await`
  * will "entangle" with the function -- we can call these accessed tracked
@@ -48,7 +52,15 @@ import { resource } from 'ember-resources';
  * }
  * ```
  */
-export function trackedFunction<Return>(fn: () => Return): State<Return>;
+export function trackedFunction<Return>(
+  fn: (meta: {
+    /**
+     * true when state.retry() is called, false initially
+     * and also false when tracked data changes (new initial)
+     */
+    isRetrying: boolean;
+  }) => Return
+): State<Return>;
 
 /**
  * Any tracked data accessed in a tracked function _before_ an `await`
@@ -91,7 +103,16 @@ export function trackedFunction<Return>(fn: () => Return): State<Return>;
  * @param {Object} context destroyable parent, e.g.: component instance aka "this"
  * @param {Function} fn the function to run with the return value available on .value
  */
-export function trackedFunction<Return>(context: object, fn: () => Return): State<Return>;
+export function trackedFunction<Return>(
+  context: object,
+  fn: (meta: {
+    /**
+     * true when state.retry() is called, false initially
+     * and also false when tracked data changes (new initial)
+     */
+    isRetrying: boolean;
+  }) => Return
+): State<Return>;
 
 export function trackedFunction<Return>(
   ...args: Parameters<typeof directTrackedFunction<Return>> | Parameters<typeof classUsable<Return>>
@@ -107,11 +128,13 @@ export function trackedFunction<Return>(
   assert('Unknown arity: trackedFunction must be called with 1 or 2 arguments');
 }
 
-function classUsable<Return>(fn: () => Return) {
+const START = Symbol.for('__reactiveweb_trackedFunction__START__');
+
+function classUsable<Return>(fn: (meta: CallbackMeta) => Return) {
   const state = new State(fn);
 
   let destroyable = resource<State<Return>>(() => {
-    state.retry();
+    state[START]();
 
     return state;
   });
@@ -121,11 +144,11 @@ function classUsable<Return>(fn: () => Return) {
   return destroyable;
 }
 
-function directTrackedFunction<Return>(context: object, fn: () => Return) {
+function directTrackedFunction<Return>(context: object, fn: (meta: CallbackMeta) => Return) {
   const state = new State(fn);
 
   let destroyable = resource<State<Return>>(context, () => {
-    state.retry();
+    state[START]();
 
     return state;
   });
@@ -151,9 +174,9 @@ export class State<Value> {
    */
   @tracked caughtError: unknown;
 
-  #fn: () => Value;
+  #fn: (meta: CallbackMeta) => Value;
 
-  constructor(fn: () => Value) {
+  constructor(fn: (meta: CallbackMeta) => Value) {
     this.#fn = fn;
   }
 
@@ -260,6 +283,15 @@ export class State<Value> {
     return this.data?.error ?? null;
   }
 
+  async [START]() {
+    try {
+      await this._dangerousRetry({ isRetrying: false });
+    } catch (e) {
+      if (isDestroyed(this) || isDestroying(this)) return;
+      this.caughtError = e;
+    }
+  }
+
   /**
    * Will re-invoke the function passed to `trackedFunction`
    * this will also re-set some properties on the `State` instance.
@@ -276,14 +308,14 @@ export class State<Value> {
        * - immediately when inovking `fn` (where auto-tracking occurs)
        * - after an await, "eventually"
        */
-      await this._dangerousRetry();
+      await this._dangerousRetry({ isRetrying: true });
     } catch (e) {
       if (isDestroyed(this) || isDestroying(this)) return;
       this.caughtError = e;
     }
   };
 
-  _dangerousRetry = async () => {
+  _dangerousRetry = async ({ isRetrying }: CallbackMeta) => {
     if (isDestroyed(this) || isDestroying(this)) return;
 
     // We've previously had data, but we're about to run-again.
@@ -296,7 +328,7 @@ export class State<Value> {
     // this._internalError = null;
 
     // We need to invoke this before going async so that tracked properties are consumed (entangled with) synchronously
-    this.promise = this.#fn();
+    this.promise = this.#fn({ isRetrying });
 
     // TrackedAsyncData interacts with tracked data during instantiation.
     // We don't want this internal state to entangle with `trackedFunction`

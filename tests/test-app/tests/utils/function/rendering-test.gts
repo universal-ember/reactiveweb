@@ -18,7 +18,9 @@ module('Utils | trackedFunction | rendering', function (hooks) {
     class TestComponent extends Component {
       @tracked count = 1;
 
-      data = trackedFunction(this, () => {
+      data = trackedFunction(this, ({ isRetrying }) => {
+        assert.step(`${isRetrying}`);
+
         return this.count;
       });
       increment = () => this.count++;
@@ -32,24 +34,26 @@ module('Utils | trackedFunction | rendering', function (hooks) {
     await render(<template><TestComponent /></template>);
 
     assert.dom('out').hasText('1');
+    assert.verifySteps(['false']);
 
     await click('button');
 
     assert.dom('out').hasText('2');
+    assert.verifySteps(['false']);
   });
 
   test('it is retryable', async function (assert) {
     let count = 0;
 
     class TestComponent extends Component {
-      data = trackedFunction(this, () => {
+      data = trackedFunction(this, ({ isRetrying }) => {
         // Copy the count so asynchrony of trackedFunction evaluation
         // doesn't return a newer value than existed at the time
         // of the function invocation.
         let localCount = count;
 
         count++;
-        assert.step(`ran trackedFunction ${localCount}`);
+        assert.step(`ran trackedFunction ${localCount} & ${isRetrying}`);
 
         return localCount;
       });
@@ -61,12 +65,12 @@ module('Utils | trackedFunction | rendering', function (hooks) {
     }
 
     await render(<template><TestComponent /></template>);
-    assert.verifySteps(['ran trackedFunction 0']);
+    assert.verifySteps(['ran trackedFunction 0 & false']);
 
     assert.dom('out').hasText('0');
 
     await click('button');
-    assert.verifySteps(['ran trackedFunction 1']);
+    assert.verifySteps(['ran trackedFunction 1 & true']);
 
     assert.dom('out').hasText('1');
 
