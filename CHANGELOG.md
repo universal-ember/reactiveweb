@@ -1,5 +1,37 @@
 # Changelog
 
+## Release (2025-02-05)
+
+reactiveweb 1.4.0 (minor)
+
+#### :rocket: Enhancement
+* `reactiveweb`, `test-app`
+  * [#130](https://github.com/universal-ember/reactiveweb/pull/130) Add meta to the trackedFunction callback ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :memo: Documentation
+* `reactiveweb`
+  * [#107](https://github.com/universal-ember/reactiveweb/pull/107) [docs] Update keepLatest code example to specify import for use decorator ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :house: Internal
+* Other
+  * [#132](https://github.com/universal-ember/reactiveweb/pull/132) Upgrade release-plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* `docs`, `test-app`
+  * [#131](https://github.com/universal-ember/reactiveweb/pull/131) Fix node/pnpm ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* `test-app`
+  * [#121](https://github.com/universal-ember/reactiveweb/pull/121) Remove imaginary config ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#113](https://github.com/universal-ember/reactiveweb/pull/113) test-helpers v4 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#111](https://github.com/universal-ember/reactiveweb/pull/111) Widen test matrix to include ember-source 5.8 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* `reactiveweb`
+  * [#120](https://github.com/universal-ember/reactiveweb/pull/120) Update decorator-transforms ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* `docs`, `reactiveweb`, `test-app`
+  * [#117](https://github.com/universal-ember/reactiveweb/pull/117) Update lint and some build deps ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* `reactiveweb`, `test-app`
+  * [#112](https://github.com/universal-ember/reactiveweb/pull/112) Use pnpm 9 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 2
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2024-05-24)
 
 reactiveweb 1.3.0 (minor)
