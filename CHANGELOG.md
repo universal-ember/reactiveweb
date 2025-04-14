@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-04-14)
+
+reactiveweb 1.4.1 (patch)
+
+#### :bug: Bug Fix
+* `reactiveweb`
+  * [#134](https://github.com/universal-ember/reactiveweb/pull/134) Widen allowed range on ember-async-data ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-02-05)
 
 reactiveweb 1.4.0 (minor)

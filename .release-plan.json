@@ -1,25 +1,17 @@
 {
   "solution": {
     "reactiveweb": {
-      "impact": "minor",
-      "oldVersion": "1.3.0",
-      "newVersion": "1.4.0",
+      "impact": "patch",
+      "oldVersion": "1.4.0",
+      "newVersion": "1.4.1",
       "constraints": [
         {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
-        },
-        {
           "impact": "patch",
-          "reason": "Appears in changelog section :memo: Documentation"
-        },
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :house: Internal"
+          "reason": "Appears in changelog section :bug: Bug Fix"
         }
       ],
       "pkgJSONPath": "./reactiveweb/package.json"
     }
   },
-  "description": "## Release (2025-02-05)\n\nreactiveweb 1.4.0 (minor)\n\n#### :rocket: Enhancement\n* `reactiveweb`, `test-app`\n  * [#130](https://github.com/universal-ember/reactiveweb/pull/130) Add meta to the trackedFunction callback ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :memo: Documentation\n* `reactiveweb`\n  * [#107](https://github.com/universal-ember/reactiveweb/pull/107) [docs] Update keepLatest code example to specify import for use decorator ([@SergeAstapov](https://github.com/SergeAstapov))\n\n#### :house: Internal\n* Other\n  * [#132](https://github.com/universal-ember/reactiveweb/pull/132) Upgrade release-plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n* `docs`, `test-app`\n  * [#131](https://github.com/universal-ember/reactiveweb/pull/131) Fix node/pnpm ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n* `test-app`\n  * [#121](https://github.com/universal-ember/reactiveweb/pull/121) Remove imaginary config ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#113](https://github.com/universal-ember/reactiveweb/pull/113) test-helpers v4 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#111](https://github.com/universal-ember/reactiveweb/pull/111) Widen test matrix to include ember-source 5.8 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n* `reactiveweb`\n  * [#120](https://github.com/universal-ember/reactiveweb/pull/120) Update decorator-transforms ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n* `docs`, `reactiveweb`, `test-app`\n  * [#117](https://github.com/universal-ember/reactiveweb/pull/117) Update lint and some build deps ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n* `reactiveweb`, `test-app`\n  * [#112](https://github.com/universal-ember/reactiveweb/pull/112) Use pnpm 9 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 2\n- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2025-04-14)\n\nreactiveweb 1.4.1 (patch)\n\n#### :bug: Bug Fix\n* `reactiveweb`\n  * [#134](https://github.com/universal-ember/reactiveweb/pull/134) Widen allowed range on ember-async-data ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
