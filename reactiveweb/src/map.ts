@@ -1,6 +1,9 @@
-import { cached } from '@glimmer/tracking';
-import { setOwner } from '@ember/application';
+import { createCache, getValue } from '@glimmer/tracking/primitives/cache';
 import { assert } from '@ember/debug';
+
+import { compatOwner } from './-private/ember-compat.ts';
+
+const setOwner = compatOwner.setOwner;
 
 /**
  * Public API of the return value of the [[map]] utility.
@@ -231,8 +234,11 @@ export class TrackedArrayMap<Element = unknown, MappedTo = unknown>
     }) as TrackedArrayMap<Element, MappedTo>;
   }
 
-  @cached
-  get _records(): (Element & object)[] {
+  /**
+   * We don't want to use @cached
+   * because we support 3.28, and @cached was introduced in 4.1-4.5
+   */
+  #records = createCache(() => {
     let data = this._dataFn();
 
     assert(
@@ -241,6 +247,10 @@ export class TrackedArrayMap<Element = unknown, MappedTo = unknown>
     );
 
     return data as Array<Element & object>;
+  });
+
+  get _records(): (Element & object)[] {
+    return getValue(this.#records) as (Element & object)[];
   }
 
   values = () => [...this];
