@@ -3,28 +3,14 @@ import { getValue } from '@glimmer/tracking/primitives/cache';
 import { assert } from '@ember/debug';
 import { associateDestroyableChild } from '@ember/destroyable';
 import { invokeHelper } from '@ember/helper';
-import {
-  dependencySatisfies,
-  importSync,
-  isDevelopingApp,
-  isTesting,
-  macroCondition,
-} from '@embroider/macros';
+import { isDevelopingApp, isTesting, macroCondition } from '@embroider/macros';
+
+import { compatOwner } from '../-private/ember-compat.ts';
 
 import type Owner from '@ember/owner';
 import type { Stage1DecoratorDescriptor } from '#types';
 
-let getOwner: (context: unknown) => Owner | undefined;
-
-if (macroCondition(dependencySatisfies('ember-source', '>=4.12.0'))) {
-  // Using 'any' here because importSync can't lookup types correctly
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  getOwner = (importSync('@ember/owner') as any).getOwner;
-} else {
-  // Using 'any' here because importSync can't lookup types correctly
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  getOwner = (importSync('@ember/application') as any).getOwner;
-}
+let getOwner = compatOwner.getOwner;
 
 /**
  * In order for the same cache to be used for all references

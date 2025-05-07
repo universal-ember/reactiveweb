@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { getOwner, setOwner } from '@ember/application';
 import { assert } from '@ember/debug';
 import { associateDestroyableChild } from '@ember/destroyable';
 
+import { compatOwner } from './-private/ember-compat.ts';
+
 import type { Class, Stage1Decorator, Stage1DecoratorDescriptor } from '#types';
+
+let getOwner = compatOwner.getOwner;
+let setOwner = compatOwner.setOwner;
 
 type NonKey<K> = K extends string ? never : K extends symbol ? never : K;
 
