@@ -1,5 +1,20 @@
 # Changelog
 
+## Release (2025-05-07)
+
+* reactiveweb 1.4.2 (patch)
+
+#### :bug: Bug Fix
+* `reactiveweb`
+  * [#139](https://github.com/universal-ember/reactiveweb/pull/139) Remove unneeded peers ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#136](https://github.com/universal-ember/reactiveweb/pull/136) Keeping 3.28+ support, but remove the cached-decorator polyfill ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :house: Internal
+* [#138](https://github.com/universal-ember/reactiveweb/pull/138) Update release-plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-04-14)
 
 reactiveweb 1.4.1 (patch)
