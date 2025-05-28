@@ -20,9 +20,9 @@ module('effect', function (hooks) {
   test('it can autotrack', async function (assert) {
     const value = cell(0);
 
-    const doThis = (num: { current: number }) => assert.step(`did it:${num.current}`);
+    const doThis = (num: number) => assert.step(`did it:${num}`);
 
-    await render(<template>{{effect (fn doThis value)}}</template>);
+    await render(<template>{{effect doThis value.current}}</template>);
 
     assert.verifySteps(['did it:0']);
 
@@ -46,9 +46,9 @@ module('renderEffect', function (hooks) {
   test('it can autotrack', async function (assert) {
     const value = cell(0);
 
-    const doThis = (num: { current: number }) => assert.step(`did it:${num.current}`);
+    const doThis = (num: number) => assert.step(`did it:${num}`);
 
-    await render(<template>{{renderEffect (fn doThis value)}}</template>);
+    await render(<template>{{renderEffect doThis value.current}}</template>);
 
     assert.verifySteps(['did it:0']);
 

@@ -58,6 +58,20 @@ import { waitForPromise } from '@ember/test-waiters';
  * ```
  *
  * Note that if args are accessed outside of the `effect`, the modifier will re-run as the args change.
+ *
+ * This may be done intentially for extra clarity in the non-modifier case, such as in this example
+ *
+ * ```js
+ * import { effect } from 'reactiveweb/effect';
+ *
+ * function log(...args) {
+ *   console.log(...args);
+ * }
+ *
+ * <template>
+ *   {{effect log @trackedValue}}
+ * </template>
+ * ```
  */
 export function effect(fn: (...args: unknown[]) => void | Promise<void>, ...args: unknown[]) {
   assert(
