@@ -1,4 +1,3 @@
-import { fn } from '@ember/helper';
 import { render, settled } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
