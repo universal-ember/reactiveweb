@@ -4,7 +4,7 @@ import { waitForPromise } from '@ember/test-waiters';
 /**
  * Run an effect, reactively, based on the passed args.
  *
- * Effects are an escape-hatch. We acknoledge that there are real use cases where you need to escape the reactive system and instead of everyone implementing the same boilerplate to do so, this utility helps codify the reactive-system escapment.
+ * Effects are an escape-hatch that _can_ hurt performance. We acknowledge that there are real use cases where you need to escape the reactive system and instead of everyone implementing the same boilerplate to do so, this utility helps codify the reactive-system escapment.
  *
  * Note that typically, applications that can get away with derived data will be easier to debug and have better performance.
  *
@@ -92,7 +92,7 @@ export function effect(fn: (...args: unknown[]) => void | Promise<void>, ...args
 /**
  * Run an _render_ effect, reactively, based on the passed args.
  *
- * Like `effect`, this is an escape-hatch..
+ * Like `effect`, this is an escape-hatch and _can_ hurt performance.
  *
  * The main difference with `renderEffect` is that it enables you to measure changes to the DOM,
  * if needed, like when implementing line-clamping, or any other feature that requires a full render pass
