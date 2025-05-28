@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-05-28)
+
+* reactiveweb 1.5.0 (minor)
+
+#### :rocket: Enhancement
+* `reactiveweb`
+  * [#140](https://github.com/universal-ember/reactiveweb/pull/140) Add `effect` and `renderEffect` ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-05-07)
 
 * reactiveweb 1.4.2 (patch)
