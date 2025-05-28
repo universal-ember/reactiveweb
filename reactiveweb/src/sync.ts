@@ -1,9 +1,8 @@
 /**
  * Synchronize external state.
  *
- * This should be used sparingly, if at all.
- * The purpose of this util is to provide a way to synchronize external state
- * in an auto-tracked system.
+ * This is a semmantic utility that does nothing more that provide documentation for invoking functions directly from templates and documenting
+ * a way to synchronize external state in an auto-tracked system.
  * However, this can lead to infinite revalidation / re-rendering problems if tracked data is set within the function passed to `sync`.
  *
  * As a result, tracked data should not be set within `sync`.
