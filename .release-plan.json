@@ -1,18 +1,18 @@
 {
   "solution": {
     "reactiveweb": {
-      "impact": "patch",
-      "oldVersion": "1.4.1",
-      "newVersion": "1.4.2",
+      "impact": "minor",
+      "oldVersion": "1.4.2",
+      "newVersion": "1.5.0",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
+          "impact": "minor",
+          "reason": "Appears in changelog section :rocket: Enhancement"
         }
       ],
       "pkgJSONPath": "./reactiveweb/package.json"
     }
   },
-  "description": "## Release (2025-05-07)\n\n* reactiveweb 1.4.2 (patch)\n\n#### :bug: Bug Fix\n* `reactiveweb`\n  * [#139](https://github.com/universal-ember/reactiveweb/pull/139) Remove unneeded peers ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#136](https://github.com/universal-ember/reactiveweb/pull/136) Keeping 3.28+ support, but remove the cached-decorator polyfill ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :house: Internal\n* [#138](https://github.com/universal-ember/reactiveweb/pull/138) Update release-plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2025-05-28)\n\n* reactiveweb 1.5.0 (minor)\n\n#### :rocket: Enhancement\n* `reactiveweb`\n  * [#140](https://github.com/universal-ember/reactiveweb/pull/140) Add `effect` and `renderEffect` ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
