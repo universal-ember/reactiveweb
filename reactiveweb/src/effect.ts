@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { assert } from '@ember/debug';
 import { waitForPromise } from '@ember/test-waiters';
 
 /**
  * Run an effect, reactively, based on the passed args.
  *
- * Effects are an escape-hatch that _can_ hurt performance. We acknowledge that there are real use cases where you need to escape the reactive system and instead of everyone implementing the same boilerplate to do so, this utility helps codify the reactive-system escapment.
+ * Effects are an escape-hatch that _can_ hurt performance. We acknowledge that there are real use cases where you need to escape the reactive system and instead of everyone implementing the same boilerplate to do so, this utility helps codify the reactive-system escapement.
  *
  * Note that typically, applications that can get away with derived data will be easier to debug and have better performance.
  *
@@ -73,7 +75,10 @@ import { waitForPromise } from '@ember/test-waiters';
  * </template>
  * ```
  */
-export function effect(fn: (...args: unknown[]) => void | Promise<void>, ...args: unknown[]) {
+export function effect<Args extends any[]>(
+  fn: (...args: Args) => void | Promise<void>,
+  ...args: Args
+) {
   assert(
     `You may not invoke a non-function. Received a typeof ${typeof fn}.`,
     typeof fn === 'function'
@@ -114,7 +119,10 @@ export function effect(fn: (...args: unknown[]) => void | Promise<void>, ...args
  *
  * When using this, it is important to ensure that visual jitter is minimized.
  */
-export function renderEffect(fn: (...args: unknown[]) => void | Promise<void>, ...args: unknown[]) {
+export function renderEffect<Args extends any[]>(
+  fn: (...args: Args) => void | Promise<void>,
+  ...args: Args
+) {
   assert(
     `You may not invoke a non-function. Received a typeof ${typeof fn}.`,
     typeof fn === 'function'

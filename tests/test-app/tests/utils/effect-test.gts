@@ -1,3 +1,4 @@
+import { fn } from '@ember/helper';
 import { render, settled } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
@@ -29,6 +30,21 @@ module('effect', function (hooks) {
     await settled();
     assert.verifySteps(['did it:1']);
   });
+
+  test('arg types are correct', async function (assert) {
+    function doThis(a: number, b: string) {
+      // eslint-disable-next-line
+      console.log(a, b);
+    }
+
+    await render(
+      <template>
+        {{effect doThis 1 "2"}}
+        {{effect (fn doThis 1 "2")}}
+      </template>
+    );
+    assert.ok(true, 'testing types, not behavior here');
+  });
 });
 
 module('renderEffect', function (hooks) {
@@ -54,5 +70,20 @@ module('renderEffect', function (hooks) {
     value.current++;
     await settled();
     assert.verifySteps(['did it:1']);
+  });
+
+  test('arg types are correct', async function (assert) {
+    function doThis(a: number, b: string) {
+      // eslint-disable-next-line
+      console.log(a, b);
+    }
+
+    await render(
+      <template>
+        {{renderEffect doThis 1 "2"}}
+        {{renderEffect (fn doThis 1 "2")}}
+      </template>
+    );
+    assert.ok(true, 'testing types, not behavior here');
   });
 });
