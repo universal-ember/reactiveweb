@@ -3,12 +3,10 @@ import { waitForPromise } from '@ember/test-waiters';
 /**
  * Run an effect, reactively, based on the passed args.
  *
- * Effects should be used sparingly, if at all.
+ * Effects are an escape-hatch and are not recommend for general use. There are real use cases where you need to escape the reactive system.
  * Typically, applications that can get away with derived data will be easier to debug and have better performance.
  *
- * However, humans naturally think in cause and effect, and when dealing with old code, you may not realize that
- * it is effectful, or causing the infinite revalidation / re-rendering protection error.
- * This utility provides a safe way for you to get around those errors at the cost of performance (in most cases, it won't be perceivable though -- unless you have a lot of effects in hot paths). It is strongly discouraged to use effects in loops, (such as #each), or any component that is rendered many times on a page.
+ * This utility provides a safe way for you to get around infinite revalidation / infinite rendering protection errors at the cost of performance (in most cases, it won't be perceivable though -- unless you have a lot of effects in hot paths). It is strongly discouraged to use effects in loops, (such as #each), or any component that is rendered many times on a page.
  *
  * This can be used in JS as well is a in templates.
  * Note however, that re-runs will not occur if the JS is not being called
