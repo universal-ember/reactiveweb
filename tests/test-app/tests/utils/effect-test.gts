@@ -41,6 +41,11 @@ module('effect', function (hooks) {
       <template>
         {{effect doThis 1 "2"}}
         {{effect (fn doThis 1 "2")}}
+
+        {{! @glint-expect-error }}
+        {{effect doThis "2" 1}}
+        {{! @glint-expect-error }}
+        {{effect (fn doThis "2" 1)}}
       </template>
     );
     assert.ok(true, 'testing types, not behavior here');
@@ -82,6 +87,11 @@ module('renderEffect', function (hooks) {
       <template>
         {{renderEffect doThis 1 "2"}}
         {{renderEffect (fn doThis 1 "2")}}
+
+        {{! @glint-expect-error }}
+        {{renderEffect doThis "2" 1}}
+        {{! @glint-expect-error }}
+        {{renderEffect (fn doThis "2" 1)}}
       </template>
     );
     assert.ok(true, 'testing types, not behavior here');
