@@ -104,7 +104,7 @@ export function effect(fn: (...args: unknown[]) => void | Promise<void>, ...args
 }
 
 /**
- * Run an _render_ effect, reactively, based on the passed args.
+ * Run a _render_ effect, reactively, based on the passed args.
  *
  * Like `effect`, this is an escape-hatch and _can_ hurt performance.
  *
