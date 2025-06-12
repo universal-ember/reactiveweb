@@ -6,6 +6,13 @@ interface Options<State, Value> {
   read: (state: State) => Value;
 }
 
+/**
+ * Utility for live-updating data based on some interval.
+ * Can be used for keeping track of durations, time-elapsed, etc.
+ *
+ * Defaults to updating every 1 second.
+ * Options requires specifying how to create, update, and read the state.
+ */
 export function Interval<State, Value>(ms = 1000, options: Options<State, Value>) {
   return resource(({ on }) => {
     const value = options.create();
@@ -27,6 +34,11 @@ const counterOptions: Options<ReturnType<typeof cell<number>>, number> = {
   read: (x) => x.current,
 };
 
+/**
+ * Returns a live-updating count of seconds passed since initial rendered.
+ * Always returns an integer.
+ * Updates every 1 second.
+ */
 export function Seconds() {
   return Interval(1000, counterOptions);
 }
@@ -37,8 +49,17 @@ const durationOptions: Options<{ start: number; last: number }, number> = {
   read: (x) => x.last - x.start,
 };
 
-export function Duration() {
-  return Interval(1000, durationOptions);
+/**
+ * Returns a live-updating duration since initial render.
+ * Measured in milliseconds.
+ *
+ * By default updates every 1 second.
+ *
+ * Useful combined with
+ * [Temporal.Duration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal/Duration)
+ */
+export function Duration(ms = 1000) {
+  return Interval(ms, durationOptions);
 }
 
 resourceFactory(Interval);
