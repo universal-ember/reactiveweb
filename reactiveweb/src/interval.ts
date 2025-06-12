@@ -1,6 +1,6 @@
 import { cell, resource, resourceFactory } from 'ember-resources';
 
-interface Options<State, Value> {
+export interface Options<State, Value> {
   create: () => State;
   update: (state: State) => void;
   read: (state: State) => Value;
