@@ -2,8 +2,8 @@
   "solution": {
     "reactiveweb": {
       "impact": "minor",
-      "oldVersion": "1.4.2",
-      "newVersion": "1.5.0",
+      "oldVersion": "1.5.0",
+      "newVersion": "1.6.0",
       "tagName": "latest",
       "constraints": [
         {
@@ -14,5 +14,5 @@
       "pkgJSONPath": "./reactiveweb/package.json"
     }
   },
-  "description": "## Release (2025-05-28)\n\n* reactiveweb 1.5.0 (minor)\n\n#### :rocket: Enhancement\n* `reactiveweb`\n  * [#140](https://github.com/universal-ember/reactiveweb/pull/140) Add `effect` and `renderEffect` ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2025-06-12)\n\n* reactiveweb 1.6.0 (minor)\n\n#### :rocket: Enhancement\n* `reactiveweb`\n  * [#143](https://github.com/universal-ember/reactiveweb/pull/143) New utilities: `Interval`, `Seconds`, `Duration`, imprtable from `reactiveweb/interval` ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }

@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-06-12)
+
+* reactiveweb 1.6.0 (minor)
+
+#### :rocket: Enhancement
+* `reactiveweb`
+  * [#143](https://github.com/universal-ember/reactiveweb/pull/143) New utilities: `Interval`, `Seconds`, `Duration`, imprtable from `reactiveweb/interval` ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-05-28)
 
 * reactiveweb 1.5.0 (minor)
