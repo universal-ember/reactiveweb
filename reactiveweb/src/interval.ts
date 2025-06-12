@@ -43,10 +43,10 @@ export function Seconds() {
   return Interval(1000, counterOptions);
 }
 
-const durationOptions: Options<{ start: number; last: number }, number> = {
-  create: () => ({ start: Date.now(), last: Date.now() }),
-  update: (x) => (x.last = Date.now()),
-  read: (x) => x.last - x.start,
+const durationOptions: Options<{ start: number; last: ReturnType<typeof cell<number>> }, number> = {
+  create: () => ({ start: Date.now(), last: cell(Date.now()) }),
+  update: (x) => void (x.last.current = Date.now()),
+  read: (x) => x.last.current - x.start,
 };
 
 /**
