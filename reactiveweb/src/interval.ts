@@ -6,18 +6,6 @@ interface Options<State, Value> {
   read: (state: State) => Value;
 }
 
-const counterOptions: Options<ReturnType<typeof cell<number>>, number> = {
-  create: () => cell(0),
-  update: (x) => void x.current++,
-  read: (x) => x.current,
-};
-
-const durationOptions: Options<{ start: number; last: number }, number> = {
-  create: () => ({ start: Date.now(), last: Date.now() }),
-  update: (x) => (x.last = Date.now()),
-  read: (x) => x.last - x.start,
-};
-
 export function Interval<State, Value>(ms = 1000, options: Options<State, Value>) {
   return resource(({ on }) => {
     const value = options.create();
@@ -33,9 +21,21 @@ export function Interval<State, Value>(ms = 1000, options: Options<State, Value>
   });
 }
 
+const counterOptions: Options<ReturnType<typeof cell<number>>, number> = {
+  create: () => cell(0),
+  update: (x) => void x.current++,
+  read: (x) => x.current,
+};
+
 export function Seconds() {
   return Interval(1000, counterOptions);
 }
+
+const durationOptions: Options<{ start: number; last: number }, number> = {
+  create: () => ({ start: Date.now(), last: Date.now() }),
+  update: (x) => (x.last = Date.now()),
+  read: (x) => x.last - x.start,
+};
 
 export function Duration() {
   return Interval(1000, durationOptions);
