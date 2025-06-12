@@ -7,7 +7,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { cell, use } from 'ember-resources';
 import { Duration, Interval, Seconds } from 'reactiveweb/interval';
 
-function timeout(ms) {
+function timeout(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
@@ -43,8 +43,8 @@ module('Interval | rendering', function (hooks) {
   test('it works', async function (assert) {
     const config = {
       create: () => cell('hello'),
-      update: (x) => (x.current += '!'),
-      read: (x) => x.current,
+      update: (x: ReturnType<typeof cell<string>>) => (x.current += '!'),
+      read: (x: ReturnType<typeof cell<string>>) => x.current,
     };
 
     await render(<template>{{Interval 50 config}}</template>);
@@ -93,7 +93,7 @@ module('Seconds | rendering', function (hooks) {
 module('Duration | js', function (hooks) {
   setupRenderingTest(hooks);
 
-  const text = () => find('out').textContent;
+  const text = () => find('out')?.textContent;
 
   test('it works', async function (assert) {
     class Test extends Component {
@@ -115,7 +115,7 @@ module('Duration | js', function (hooks) {
 module('Duration | rendering', function (hooks) {
   setupRenderingTest(hooks);
 
-  const text = () => find('out').textContent;
+  const text = () => find('out')?.textContent;
 
   test('it works', async function (assert) {
     await render(
