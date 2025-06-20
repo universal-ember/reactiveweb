@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-06-20)
+
+* reactiveweb 1.6.1 (patch)
+
+#### :bug: Bug Fix
+* `reactiveweb`
+  * [#146](https://github.com/universal-ember/reactiveweb/pull/146) Fix issue where the `modifier` resource does not have an owner ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-06-12)
 
 * reactiveweb 1.6.0 (minor)

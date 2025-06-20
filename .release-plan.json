@@ -1,18 +1,18 @@
 {
   "solution": {
     "reactiveweb": {
-      "impact": "minor",
-      "oldVersion": "1.5.0",
-      "newVersion": "1.6.0",
+      "impact": "patch",
+      "oldVersion": "1.6.0",
+      "newVersion": "1.6.1",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
+          "impact": "patch",
+          "reason": "Appears in changelog section :bug: Bug Fix"
         }
       ],
       "pkgJSONPath": "./reactiveweb/package.json"
     }
   },
-  "description": "## Release (2025-06-12)\n\n* reactiveweb 1.6.0 (minor)\n\n#### :rocket: Enhancement\n* `reactiveweb`\n  * [#143](https://github.com/universal-ember/reactiveweb/pull/143) New utilities: `Interval`, `Seconds`, `Duration`, imprtable from `reactiveweb/interval` ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2025-06-20)\n\n* reactiveweb 1.6.1 (patch)\n\n#### :bug: Bug Fix\n* `reactiveweb`\n  * [#146](https://github.com/universal-ember/reactiveweb/pull/146) Fix issue where the `modifier` resource does not have an owner ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
