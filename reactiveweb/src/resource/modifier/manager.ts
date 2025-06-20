@@ -9,7 +9,10 @@ interface ArgsWrapper {
   named?: Record<string, any>;
 }
 
+import { compatOwner } from '../../-private/ember-compat.ts';
+
 import type { FunctionBasedModifierDefinition } from './index.ts';
+import type Owner from '@ember/owner';
 import type { ElementFor } from '#types';
 
 interface State<S> {
@@ -56,12 +59,18 @@ function arrangeArgs(element: Element, args: any) {
 export default class FunctionBasedModifierManager<S> {
   capabilities = capabilities('3.22');
 
+  constructor(owner: Owner) {
+    compatOwner.setOwner(this, owner);
+  }
+
   createModifier(instance: FunctionBasedModifierDefinition<S>): CreatedState<S> {
     return { element: null, instance, helper: null };
   }
 
   installModifier(createdState: CreatedState<S>, element: ElementFor<S>, args: ArgsWrapper): void {
     const state = installElement(createdState, element);
+
+    compatOwner.linkOwner(state, this);
 
     this.updateModifier(state, args);
   }

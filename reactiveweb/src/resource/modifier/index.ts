@@ -9,9 +9,6 @@ import type { ModifierLike } from '@glint/template';
 import type { ArgsFor, ElementFor, EmptyObject } from '#types';
 import type { resource } from 'ember-resources';
 
-// Provide a singleton manager.
-const MANAGER = new FunctionBasedModifierManager();
-
 type PositionalArgs<S> = S extends { Args?: object } ? ArgsFor<S['Args']>['Positional'] : [];
 type NamedArgs<S> = S extends { Args?: object }
   ? ArgsFor<S['Args']>['Named'] extends object
@@ -206,7 +203,7 @@ export function modifier(fn: (element: Element, ...args: unknown[]) => void): Mo
   };
 }> {
   assert(`modifier() must be invoked with a function`, typeof fn === 'function');
-  setModifierManager(() => MANAGER, fn);
+  setModifierManager((owner) => new FunctionBasedModifierManager(owner), fn);
   resourceFactory(fn);
 
   return fn as unknown as ModifierLike<{

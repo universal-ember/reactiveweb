@@ -218,4 +218,22 @@ module('modifier | rendering', function (hooks) {
     await settled();
     assert.verifySteps(['cleanup 2,1']);
   });
+
+  test('owner still works', async function (assert) {
+    const capture = modifier((...args: [HTMLDivElement]) => {
+      assert.step(`${args.length} args`);
+
+      return resource(({ owner }) => {
+        assert.step(`has owner: ${Boolean(owner)}`);
+      });
+    });
+
+    await render(
+      <template>
+        <div {{capture}}>content</div>
+      </template>
+    );
+
+    assert.verifySteps(['1 args', 'has owner: true']);
+  });
 });

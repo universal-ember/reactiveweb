@@ -6,9 +6,18 @@ import type Owner from '@ember/owner';
 interface CompatOwner {
   getOwner: (context: unknown) => Owner | undefined;
   setOwner: (context: unknown, owner: Owner) => void;
+  linkOwner: (toHaveOwner: unknown, alreadyHasOwner: unknown) => void;
 }
 
-export const compatOwner = {} as CompatOwner;
+export const compatOwner = {
+  linkOwner(toHaveOwner, alreadyHasOwner) {
+    let owner = compatOwner.getOwner(alreadyHasOwner);
+
+    if (owner) {
+      compatOwner.setOwner(toHaveOwner, owner);
+    }
+  },
+} as CompatOwner;
 
 if (macroCondition(dependencySatisfies('ember-source', '>=4.12.0'))) {
   // In no version of ember where `@ember/owner` tried to be imported did it exist
