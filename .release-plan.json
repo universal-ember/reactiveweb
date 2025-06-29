@@ -2,8 +2,8 @@
   "solution": {
     "reactiveweb": {
       "impact": "patch",
-      "oldVersion": "1.6.0",
-      "newVersion": "1.6.1",
+      "oldVersion": "1.6.1",
+      "newVersion": "1.6.2",
       "tagName": "latest",
       "constraints": [
         {
@@ -14,5 +14,5 @@
       "pkgJSONPath": "./reactiveweb/package.json"
     }
   },
-  "description": "## Release (2025-06-20)\n\n* reactiveweb 1.6.1 (patch)\n\n#### :bug: Bug Fix\n* `reactiveweb`\n  * [#146](https://github.com/universal-ember/reactiveweb/pull/146) Fix issue where the `modifier` resource does not have an owner ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2025-06-29)\n\n* reactiveweb 1.6.2 (patch)\n\n#### :bug: Bug Fix\n* `reactiveweb`\n  * [#149](https://github.com/universal-ember/reactiveweb/pull/149) Switch seconds from counting integers to be time based ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
