@@ -28,10 +28,10 @@ export function Interval<State, Value>(ms = 1000, options: Options<State, Value>
   });
 }
 
-const counterOptions: Options<ReturnType<typeof cell<number>>, number> = {
-  create: () => cell(0),
-  update: (x) => void x.current++,
-  read: (x) => x.current,
+const secondsOptions: Options<{ start: number; last: ReturnType<typeof cell<number>> }, number> = {
+  create: () => ({ start: Date.now(), last: cell(Date.now()) }),
+  update: (x) => void (x.last.current = Date.now()),
+  read: (x) => Math.round((x.last.current - x.start) / 1000),
 };
 
 /**
@@ -40,7 +40,7 @@ const counterOptions: Options<ReturnType<typeof cell<number>>, number> = {
  * Updates every 1 second.
  */
 export function Seconds() {
-  return Interval(1000, counterOptions);
+  return Interval(1000, secondsOptions);
 }
 
 const durationOptions: Options<{ start: number; last: ReturnType<typeof cell<number>> }, number> = {
