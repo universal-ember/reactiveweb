@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-06-29)
+
+* reactiveweb 1.6.2 (patch)
+
+#### :bug: Bug Fix
+* `reactiveweb`
+  * [#149](https://github.com/universal-ember/reactiveweb/pull/149) Switch seconds from counting integers to be time based ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-06-20)
 
 * reactiveweb 1.6.1 (patch)
