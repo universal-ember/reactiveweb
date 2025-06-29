@@ -189,6 +189,9 @@ importers:
       msw:
         specifier: ^2.4.7
         version: 2.4.7(typescript@5.6.3)
+    dependenciesMeta:
+      reactiveweb:
+        injected: true
     devDependencies:
       '@babel/core':
         specifier: ^7.23.2
@@ -361,9 +364,6 @@ importers:
       webpack:
         specifier: ^5.89.0
         version: 5.94.0
-    dependenciesMeta:
-      reactiveweb:
-        injected: true
 
   tests/test-app:
     dependencies:
@@ -388,6 +388,9 @@ importers:
       msw:
         specifier: ^2.4.7
         version: 2.4.7(typescript@5.6.3)
+    dependenciesMeta:
+      reactiveweb:
+        injected: true
     devDependencies:
       '@babel/core':
         specifier: ^7.23.2
@@ -560,9 +563,6 @@ importers:
       webpack:
         specifier: ^5.89.0
         version: 5.94.0
-    dependenciesMeta:
-      reactiveweb:
-        injected: true
 
 packages:
 
