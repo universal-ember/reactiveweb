@@ -14,7 +14,7 @@ import { resource, resourceFactory } from 'ember-resources';
  */
 export function addScript(
   url: string | (() => string),
-  attributes: Record<keyof HTMLScriptElement, unknown>
+  attributes?: undefined | Record<keyof HTMLScriptElement, unknown>
 ) {
   let resolvedURL = typeof url === 'function' ? url() : url;
 

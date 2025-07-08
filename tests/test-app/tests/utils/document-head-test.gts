@@ -11,25 +11,33 @@ function numScripts() {
   return scripts.length;
 }
 
+function getKnownGlobal(): unknown {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  return window.__reactiveweb_test__;
+}
+
 module('addScript', function (hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function () {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     delete window.__reactiveweb_test__;
   });
 
   test('works', async function (assert) {
-    assert.strictEqual(window.__reactiveweb_test__, undefined);
+    assert.strictEqual(getKnownGlobal(), undefined);
 
     await render(<template>{{addScript "/script-that-succeeds.js"}}</template>);
 
-    assert.strictEqual(window.__reactiveweb_test__, 'success');
+    assert.strictEqual(getKnownGlobal(), 'success');
   });
 
   test('script is removed from <head> when template block is removed', async function (assert) {
     let originalNumScripts = numScripts();
 
-    assert.strictEqual(window.__reactiveweb_test__, undefined);
+    assert.strictEqual(getKnownGlobal(), undefined);
 
     let show = cell(true);
 
@@ -41,7 +49,7 @@ module('addScript', function (hooks) {
       </template>
     );
 
-    assert.strictEqual(window.__reactiveweb_test__, 'success');
+    assert.strictEqual(getKnownGlobal(), 'success');
     assert.strictEqual(numScripts(), originalNumScripts + 1);
 
     show.current = false;
@@ -53,7 +61,7 @@ module('addScript', function (hooks) {
   test('the same script cannot be added more than once', async function (assert) {
     let originalNumScripts = numScripts();
 
-    assert.strictEqual(window.__reactiveweb_test__, undefined);
+    assert.strictEqual(getKnownGlobal(), undefined);
 
     let show = cell(true);
 
@@ -70,7 +78,7 @@ module('addScript', function (hooks) {
       </template>
     );
 
-    assert.strictEqual(window.__reactiveweb_test__, 'success');
+    assert.strictEqual(getKnownGlobal(), 'success');
     assert.strictEqual(numScripts(), originalNumScripts + 1);
 
     show.current = false;
@@ -82,11 +90,11 @@ module('addScript', function (hooks) {
   test('script throws an error while loading', async function (assert) {
     let originalNumScripts = numScripts();
 
-    assert.strictEqual(window.__reactiveweb_test__, undefined);
+    assert.strictEqual(getKnownGlobal(), undefined);
 
-    function handleError(e) {
+    function handleError(e: unknown) {
       console.error(`Captured:`, e);
-      assert.step(e.message.split(':')[1].trim());
+      assert.step(String((e as Error).message.split(':')[1]?.trim()));
     }
 
     window.addEventListener('error', handleError);
@@ -105,11 +113,9 @@ module('addScript', function (hooks) {
   skip('script does not exist', async function (assert) {
     let originalNumScripts = numScripts();
 
-    assert.strictEqual(window.__reactiveweb_test__, undefined);
-
-    function handleError(e) {
+    function handleError(e: unknown) {
       console.error(`Captured:`, e);
-      assert.step(e.message);
+      assert.step((e as Error).message);
     }
 
     window.addEventListener('error', handleError);
