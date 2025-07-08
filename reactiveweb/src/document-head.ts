@@ -12,7 +12,7 @@ import { resource, resourceFactory } from 'ember-resources';
  *
  * No-ops if something else already added the script with the same URL.
  */
-export function addScriptToHead(
+export function addScript(
   url: string | (() => string),
   attributes: Record<keyof HTMLScriptElement, unknown>
 ) {
@@ -24,7 +24,10 @@ export function addScriptToHead(
     // Nothing to do, something else is managing this script
     if (existing) {
       warn(
-        `Something else added a <script> tag with the URL: ${url} to the page. Early exiiting. Will not cleanup.`
+        `Something else added a <script> tag with the URL: ${url} to the page. Early exiiting. Will not cleanup.`,
+        {
+          id: 'reactiveweb/document-head#addScript',
+        }
       );
 
       return;
@@ -46,14 +49,14 @@ export function addScriptToHead(
       onload: (...args: unknown[]) => {
         resolve();
 
-        if (typeof attributes.onload === 'function') {
+        if (typeof attributes?.onload === 'function') {
           attributes.onload(...args);
         }
       },
       onerror: (reason: unknown) => {
         reject(reason);
 
-        if (typeof attributes.onerror === 'function') {
+        if (typeof attributes?.onerror === 'function') {
           attributes.onerror(reason);
         }
       },
@@ -74,4 +77,4 @@ export function addScriptToHead(
   });
 }
 
-resourceFactory(addScriptToHead);
+resourceFactory(addScript);
