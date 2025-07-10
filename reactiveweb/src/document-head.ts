@@ -7,10 +7,19 @@ import { waitForPromise } from '@ember/test-waiters';
 import { resource, resourceFactory } from 'ember-resources';
 
 /**
- * Adds a <script> element to the document head.
+ * Adds a `<script>` element to the document head.
  * Removed when the rendering context is torn down.
  *
  * No-ops if something else already added the script with the same URL.
+ *
+ * @example
+ * ```gjs
+ * import { addScript } from 'reactiveweb/document-head';
+ *
+ * <template>
+ *  {{addScript "https://my.cdn.com/asset/v1.2.3/file/path.js"}}
+ * </template>
+ * ```
  */
 export function addScript(
   url: string | (() => string),
