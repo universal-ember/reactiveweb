@@ -124,7 +124,7 @@ export function addLink(
       return;
     }
 
-    let el = document.createElement('script');
+    let el = document.createElement('link');
     let resolve: (x?: unknown) => void;
     let reject: (reason: unknown) => void;
     let promise = new Promise((r, e) => {
@@ -151,6 +151,8 @@ export function addLink(
         if (typeof attributes?.onerror === 'function') {
           attributes.onerror(reason);
         }
+
+        return true;
       },
     });
 
