@@ -542,15 +542,6 @@ importers:
       reactiveweb:
         specifier: workspace:*
         version: file:reactiveweb(@babel/core@7.25.7)(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2(@babel/core@7.25.7))(@glimmer/tracking@1.1.2)(@glint/template@1.6.0-alpha.1)(ember-concurrency@3.1.1(@babel/core@7.25.7)(ember-source@5.4.1(@babel/core@7.25.7)(@glimmer/component@1.1.2(@babel/core@7.25.7))(@glint/template@1.6.0-alpha.1)(rsvp@4.8.5)(webpack@5.94.0)))(ember-source@5.4.1(@babel/core@7.25.7)(@glimmer/component@1.1.2(@babel/core@7.25.7))(@glint/template@1.6.0-alpha.1)(rsvp@4.8.5)(webpack@5.94.0))
-      stylelint:
-        specifier: ^16.9.0
-        version: 16.9.0(typescript@5.6.3)
-      stylelint-config-standard:
-        specifier: ^36.0.1
-        version: 36.0.1(stylelint@16.9.0(typescript@5.6.3))
-      stylelint-prettier:
-        specifier: ^5.0.2
-        version: 5.0.2(prettier@3.3.3)(stylelint@16.9.0(typescript@5.6.3))
       tracked-built-ins:
         specifier: ^3.3.0
         version: 3.3.0
@@ -18684,7 +18675,7 @@ snapshots:
     dependencies:
       vscode-html-languageservice: 5.5.1
       vscode-languageserver-textdocument: 1.0.12
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
     optionalDependencies:
       '@volar/language-service': 2.4.12
 
@@ -18695,7 +18686,7 @@ snapshots:
       typescript-auto-import-cache: 0.3.6
       vscode-languageserver-textdocument: 1.0.12
       vscode-nls: 5.2.0
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
     optionalDependencies:
       '@volar/language-service': 2.4.12
 

@@ -3,9 +3,11 @@
 
 # compiled output
 /dist/
+.eslintignore
 
 # misc
 /coverage/
+/public/
 !.*
 .*/
 
