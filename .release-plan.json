@@ -1,18 +1,8 @@
 {
   "solution": {
     "reactiveweb": {
-      "impact": "minor",
-      "oldVersion": "1.6.2",
-      "newVersion": "1.7.0",
-      "tagName": "latest",
-      "constraints": [
-        {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
-        }
-      ],
-      "pkgJSONPath": "./reactiveweb/package.json"
+      "oldVersion": "1.7.0"
     }
   },
-  "description": "## Release (2025-07-11)\n\n* reactiveweb 1.7.0 (minor)\n\n#### :rocket: Enhancement\n* `reactiveweb`\n  * [#151](https://github.com/universal-ember/reactiveweb/pull/151) Add script utility ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "\n\n\n\n"
 }
