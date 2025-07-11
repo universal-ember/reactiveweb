@@ -62,12 +62,11 @@ export function addScript(
           attributes.onload(event);
         }
       },
-      onerror: (reason: unknown) => {
+      onerror: (reason: string | Event) => {
         reject(reason);
 
         if (typeof attributes?.onerror === 'function') {
-          // eslint-disable-next-line
-          attributes.onerror(reason as any);
+          attributes.onerror(reason);
         }
       },
     });
@@ -146,12 +145,11 @@ export function addLink(
           attributes.onload(event);
         }
       },
-      onerror: (reason: unknown) => {
+      onerror: (reason: string | Event) => {
         reject(reason);
 
         if (typeof attributes?.onerror === 'function') {
-          // eslint-disable-next-line
-          attributes.onerror(reason as any);
+          attributes.onerror(reason);
         }
 
         return true;

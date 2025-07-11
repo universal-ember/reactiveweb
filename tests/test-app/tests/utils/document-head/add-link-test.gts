@@ -97,7 +97,12 @@ module('addLink', function (hooks) {
 
     window.addEventListener('unhandledrejection', handleError);
 
-    await render(<template>{{addLink "/dne.css" onerror=handleError}}</template>);
+    await render(
+      <template>
+        {{! @glint-expect-error type mismatch? }}
+        {{addLink "/dne.css" onerror=handleError}}
+      </template>
+    );
 
     window.removeEventListener('unhandledrejection', handleError);
 
