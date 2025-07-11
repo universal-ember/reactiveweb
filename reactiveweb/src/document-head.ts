@@ -13,7 +13,7 @@ import { resource, resourceFactory } from 'ember-resources';
  * No-ops if something else already added the script with the same URL.
  *
  * @example
- * ```gjs
+ * ```js
  * import { addScript } from 'reactiveweb/document-head';
  *
  * <template>
@@ -95,7 +95,7 @@ resourceFactory(addScript);
  * No-ops if something else already added the link with the same URL.
  *
  * @example
- * ```gjs
+ * ```js
  * import { addLink } from 'reactiveweb/document-head';
  *
  * <template>
