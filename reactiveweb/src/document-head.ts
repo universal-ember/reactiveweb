@@ -23,7 +23,7 @@ import { resource, resourceFactory } from 'ember-resources';
  */
 export function addScript(
   url: string | (() => string),
-  attributes?: undefined | Record<keyof HTMLScriptElement, unknown>
+  attributes?: undefined | (HTMLScriptElement & {})
 ) {
   let resolvedURL = typeof url === 'function' ? url() : url;
 
@@ -55,18 +55,19 @@ export function addScript(
     Object.assign(el, {
       ...attributes,
       src: resolvedURL,
-      onload: (...args: unknown[]) => {
+      onload: (event: Event) => {
         resolve();
 
         if (typeof attributes?.onload === 'function') {
-          attributes.onload(...args);
+          attributes.onload(event);
         }
       },
       onerror: (reason: unknown) => {
         reject(reason);
 
         if (typeof attributes?.onerror === 'function') {
-          attributes.onerror(reason);
+          // eslint-disable-next-line
+          attributes.onerror(reason as any);
         }
       },
     });
@@ -105,7 +106,7 @@ resourceFactory(addScript);
  */
 export function addLink(
   url: string | (() => string),
-  attributes?: undefined | Record<keyof HTMLLinkElement, unknown>
+  attributes?: undefined | (HTMLLinkElement & {})
 ) {
   let resolvedURL = typeof url === 'function' ? url() : url;
 
@@ -138,18 +139,19 @@ export function addLink(
       rel: 'stylesheet',
       href: resolvedURL,
       ...attributes,
-      onload: (...args: unknown[]) => {
+      onload: (event: Event) => {
         resolve();
 
         if (typeof attributes?.onload === 'function') {
-          attributes.onload(...args);
+          attributes.onload(event);
         }
       },
       onerror: (reason: unknown) => {
         reject(reason);
 
         if (typeof attributes?.onerror === 'function') {
-          attributes.onerror(reason);
+          // eslint-disable-next-line
+          attributes.onerror(reason as any);
         }
 
         return true;
