@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-07-11)
+
+* reactiveweb 1.7.0 (minor)
+
+#### :rocket: Enhancement
+* `reactiveweb`
+  * [#151](https://github.com/universal-ember/reactiveweb/pull/151) Add script utility ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-06-29)
 
 * reactiveweb 1.6.2 (patch)
