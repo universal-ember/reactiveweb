@@ -2,6 +2,7 @@ import { tracked } from '@glimmer/tracking';
 import { waitForPromise } from '@ember/test-waiters';
 
 type DePromise<Value> = Value extends Promise<infer Result> ? Result : Value;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type ResolvedValueOf<Value> = Value extends (...args: any[]) => any
   ? DePromise<ReturnType<Value>>
   : DePromise<Value>;
