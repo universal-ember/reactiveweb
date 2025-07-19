@@ -54,8 +54,8 @@ export interface State<Result> {
 
 const promiseCache = new WeakMap<object, State<unknown>>();
 
-const REASON_FUNCTION_EXCEPTION = `Passed function threw an exception`;
-const REASON_PROMISE_REJECTION = `Promise rejected while waiting to resolve`;
+export const REASON_FUNCTION_EXCEPTION = `Passed function threw an exception`;
+export const REASON_PROMISE_REJECTION = `Promise rejected while waiting to resolve`;
 
 class StateImpl<Value> implements State<Value> {
   /**

@@ -1,9 +1,14 @@
-import { render,settled } from '@ember/test-helpers';
+import { render, settled } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
 import { cell } from 'ember-resources';
-import { getPromiseState, type State } from 'reactiveweb/get-promise-state';
+import {
+  getPromiseState,
+  REASON_FUNCTION_EXCEPTION,
+  REASON_PROMISE_REJECTION,
+  type State,
+} from 'reactiveweb/get-promise-state';
 
 import type QUnit from 'qunit';
 
@@ -134,7 +139,11 @@ module('getPromiseState', function (hooks) {
         await stateStepper(state, assert);
 
         assert.verifySteps(['error']);
-        assert.deepEqual(state.toJSON(), { isLoading: false, error: 'hello', resolved: undefined });
+        assert.deepEqual(state.toJSON(), {
+          isLoading: false,
+          error: { original: 'hello', reason: REASON_PROMISE_REJECTION },
+          resolved: undefined,
+        });
       });
 
       test('() => Promise.reject', async function (assert) {
@@ -143,7 +152,11 @@ module('getPromiseState', function (hooks) {
         await stateStepper(state, assert);
 
         assert.verifySteps(['error']);
-        assert.deepEqual(state.toJSON(), { isLoading: false, error: 'hello', resolved: undefined });
+        assert.deepEqual(state.toJSON(), {
+          isLoading: false,
+          error: { original: 'hello', reason: REASON_PROMISE_REJECTION },
+          resolved: undefined,
+        });
       });
 
       test('() => throw (string)', async function (assert) {
@@ -154,7 +167,11 @@ module('getPromiseState', function (hooks) {
         await stateStepper(state, assert);
 
         assert.verifySteps(['error']);
-        assert.deepEqual(state.toJSON(), { isLoading: false, error: 'hello', resolved: undefined });
+        assert.deepEqual(state.toJSON(), {
+          isLoading: false,
+          error: { original: 'hello', reason: REASON_FUNCTION_EXCEPTION },
+          resolved: undefined,
+        });
       });
 
       test('() => throw (Error)', async function (assert) {
@@ -167,7 +184,7 @@ module('getPromiseState', function (hooks) {
         assert.verifySteps(['error']);
         assert.deepEqual(state.toJSON(), {
           isLoading: false,
-          error: new Error('hello'),
+          error: { original: new Error('hello'), reason: REASON_FUNCTION_EXCEPTION },
           resolved: undefined,
         });
       });
@@ -183,7 +200,7 @@ module('getPromiseState', function (hooks) {
         assert.verifySteps(['error']);
         assert.deepEqual(state.toJSON(), {
           isLoading: false,
-          error: new Error('hello'),
+          error: { original: new Error('hello'), reason: REASON_PROMISE_REJECTION },
           resolved: undefined,
         });
       });
@@ -198,7 +215,7 @@ module('getPromiseState', function (hooks) {
         assert.verifySteps(['error']);
         assert.deepEqual(state.toJSON(), {
           isLoading: false,
-          error: 'hello',
+          error: { original: 'hello', reason: REASON_PROMISE_REJECTION },
           resolved: undefined,
         });
       });
