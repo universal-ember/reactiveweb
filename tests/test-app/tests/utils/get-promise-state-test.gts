@@ -9,7 +9,7 @@ import type QUnit from 'qunit';
 module('getPromiseState', function (hooks) {
   setupRenderingTest(hooks);
 
-  module('state transitions', function () {
+  module('state', function () {
     async function stateStepper(state: State<unknown>, assert: QUnit['assert']) {
       let step = (msg: string) => assert.step(msg);
 
