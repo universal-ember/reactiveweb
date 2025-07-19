@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-07-19)
+
+* reactiveweb 1.8.0 (minor)
+
+#### :rocket: Enhancement
+* `reactiveweb`
+  * [#154](https://github.com/universal-ember/reactiveweb/pull/154) getPromiseState ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-07-11)
 
 * reactiveweb 1.7.0 (minor)
