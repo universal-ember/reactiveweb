@@ -1,4 +1,5 @@
-import { render } from '@ember/test-helpers';
+import { settled, render } from '@ember/test-helpers';
+import { cell } from 'ember-resources';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
@@ -87,6 +88,43 @@ module('getPromiseState', function (hooks) {
 
       assert.verifySteps(['loading', 'resolved']);
       assert.deepEqual(state.toJSON(), { isLoading: false, error: null, resolved: 'hello' });
+    });
+
+    module('dedupe', function () {
+      test('async () => string', async function (assert) {
+        let fun = async () => {
+          await Promise.resolve();
+
+          return 'hello';
+        };
+        let step = (msg: string) => assert.step(msg);
+        let second = cell(false);
+
+        await render(
+          <template>
+            {{#let (getPromiseState fun) as |state|}}
+              {{#if state.isLoading}}{{step "loading"}}{{/if}}
+              {{#if state.error}}{{step "error"}}{{/if}}
+              {{#if state.resolved}}{{step "resolved"}}{{/if}}
+            {{/let}}
+
+            {{#if second.current}}
+              {{#let (getPromiseState fun) as |state|}}
+                {{#if state.isLoading}}{{step "loading"}}{{/if}}
+                {{#if state.error}}{{step "error"}}{{/if}}
+                {{#if state.resolved}}{{step "resolved"}}{{/if}}
+              {{/let}}
+            {{/if}}
+          </template>
+        );
+
+        assert.verifySteps(['loading', 'resolved']);
+
+        second.current = true;
+        await settled();
+
+        assert.verifySteps(['resolved']);
+      });
     });
 
     module('errors', function () {
