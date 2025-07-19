@@ -149,7 +149,7 @@ export type GetPromiseStateInput<Value> =
  * ```
  *
  * @example
- * `getPromiseState can also be used in a class without `@cached`, because it maintains its own cache.
+ * `getPromiseState` can also be used in a class without `@cached`, because it maintains its own cache.
  * ```gjs
  * import Component from '@glimmer/component';
  *
@@ -157,11 +157,51 @@ export type GetPromiseStateInput<Value> =
  * }
  *
  * export default class Demo extends Component {
+ *   // doesn't matter how many times state is accessed, you get a stable state
  *   get state() {
- *
+ *     return getPromiseState(readFromSomewhere);
  *   }
+ *
+ *   <template>
+ *     {{#if this.state.resolved}}
+ *        ...
+ *     {{/if}}
+ *   </template>
  * }
  * ```
+ *
+ * @example
+ * A reactively constructed function will also be used and have its result cached between uses
+ *
+ * ```gjs
+ * import Component from '@glimmer/component';
+ *
+ * async function readFromSomewhere() { // implementation omitted for brevity
+ * }
+ *
+ * export default class Demo extends Component {
+ *   // Note: the @cached is important here because we don't want repeat accesses
+ *   //       to cause doAsync to be called again unless @id changes
+ *   @cached
+ *   get promise() {
+ *     return this.doAsync(this.args.id);
+ *   }
+ *
+ *   get state() {
+ *     return getPromiseState(this.promise);
+ *   }
+ *
+ *   <template>
+ *     {{#if this.state.resolved}}
+ *        ...
+ *     {{/if}}
+ *   </template>
+ * }
+ * ```
+ *
+ * NOTE: This `getPromiseState` is not a replacement for [WarpDrive](https://docs.warp-drive.io/)'s [getRequestState](https://www.npmjs.com/package/@warp-drive/ember#getrequeststate)
+ *       namely, the `getPromiseState` in this library (reactiveweb) does not support futures, cancellation, or anything else specific to warp-drive.
+ *
  */
 export function getPromiseState<Value, Result = ResolvedValueOf<Value>>(
   fn: GetPromiseStateInput<Value>
