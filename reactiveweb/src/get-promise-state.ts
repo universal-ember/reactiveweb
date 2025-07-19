@@ -7,11 +7,29 @@ type ResolvedValueOf<Value> = Value extends (...args: any[]) => any
   ? DePromise<ReturnType<Value>>
   : DePromise<Value>;
 
+/**
+ * The state of a Value or Promise that was passed to `getPromiseState`
+ */
 export interface State<Result> {
+  /**
+   * If the value passed to `getPromiseState` was a promise or function that returns a promise,
+   * this will initially be true, and become false when the promise resolves or errors.
+   */
   isLoading: boolean;
+  /**
+   * If the value passed to `getPromiseState` was a promise or function,
+   * this will be the value thrown / caught from the promise or function.
+   */
   error: undefined | null | string | Error;
+  /**
+   * The final value.
+   * This will be undefined initially if the value passed in to `getPromiseState` is a promise or function that returns a promise.
+   */
   resolved: Result | undefined;
 
+  /**
+   * JSON Serializer for inspecting the full State
+   */
   toJSON(): {
     isLoading: boolean;
     error: Error | string | null;
@@ -40,7 +58,12 @@ class StateImpl<Value> implements State<Value> {
   constructor(fn: GetPromiseStateInput<Value>, initial?: Partial<State<Value>>) {
     this.#initial = initial;
 
-    let maybePromise = isThennable(fn) ? fn : isFunction(fn) ? fn() : fn;
+    try {
+      var maybePromise = isThennable(fn) ? fn : isFunction(fn) ? fn() : fn;
+    } catch (e) {
+      this.#initial = { isLoading: false, error: e };
+      return;
+    }
 
     if (typeof maybePromise === 'object' && maybePromise !== null && 'then' in maybePromise) {
       waitForPromise(
@@ -78,7 +101,9 @@ export type GetPromiseStateInput<Value> =
   | (() => Promise<Value>);
 
 /**
- * Returns a reactive state for a give
+ * Returns a reactive state for a given value, function, promise, or function that returns a promise.
+ *
+ * Normally when trying to derive async state, you'll first need to
  */
 export function getPromiseState<Value, Result = ResolvedValueOf<Value>>(
   fn: GetPromiseStateInput<Value>

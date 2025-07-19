@@ -88,5 +88,82 @@ module('getPromiseState', function (hooks) {
       assert.verifySteps(['loading', 'resolved']);
       assert.deepEqual(state.toJSON(), { isLoading: false, error: null, resolved: 'hello' });
     });
+
+    module('errors', function () {
+      test('Promise.reject', async function (assert) {
+        let state = getPromiseState(Promise.reject('hello'));
+
+        await stateStepper(state, assert);
+
+        assert.verifySteps(['error']);
+        assert.deepEqual(state.toJSON(), { isLoading: false, error: 'hello', resolved: undefined });
+      });
+
+      test('() => Promise.reject', async function (assert) {
+        let state = getPromiseState(() => Promise.reject('hello'));
+
+        await stateStepper(state, assert);
+
+        assert.verifySteps(['error']);
+        assert.deepEqual(state.toJSON(), { isLoading: false, error: 'hello', resolved: undefined });
+      });
+
+      test('() => throw (string)', async function (assert) {
+        let state = getPromiseState(() => {
+          throw 'hello';
+        });
+
+        await stateStepper(state, assert);
+
+        assert.verifySteps(['error']);
+        assert.deepEqual(state.toJSON(), { isLoading: false, error: 'hello', resolved: undefined });
+      });
+
+      test('() => throw (Error)', async function (assert) {
+        let state = getPromiseState(() => {
+          throw new Error('hello');
+        });
+
+        await stateStepper(state, assert);
+
+        assert.verifySteps(['error']);
+        assert.deepEqual(state.toJSON(), {
+          isLoading: false,
+          error: new Error('hello'),
+          resolved: undefined,
+        });
+      });
+
+      test('async () => throw (Error)', async function (assert) {
+        let state = getPromiseState(async () => {
+          await Promise.resolve();
+          throw new Error('hello');
+        });
+
+        await stateStepper(state, assert);
+
+        assert.verifySteps(['error']);
+        assert.deepEqual(state.toJSON(), {
+          isLoading: false,
+          error: new Error('hello'),
+          resolved: undefined,
+        });
+      });
+
+      test('async () => Promise.reject', async function (assert) {
+        let state = getPromiseState(async () => {
+          return await Promise.reject('hello');
+        });
+
+        await stateStepper(state, assert);
+
+        assert.verifySteps(['error']);
+        assert.deepEqual(state.toJSON(), {
+          isLoading: false,
+          error: 'hello',
+          resolved: undefined,
+        });
+      });
+    });
   });
 });
