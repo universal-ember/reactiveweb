@@ -8,6 +8,21 @@ type ResolvedValueOf<Value> = Value extends (...args: any[]) => any
   : DePromise<Value>;
 
 /**
+ * Custom error type that explains what phase of getPromiseState an error could have occurred during.
+ * Provides the original error as well.
+ */
+export type Error = {
+  /**
+   * Why there is an error
+   */
+  reason: string;
+  /**
+   * The original thrown/rejected error value
+   */
+  original: unknown;
+};
+
+/**
  * The state of a Value or Promise that was passed to `getPromiseState`
  */
 export interface State<Result> {
@@ -20,7 +35,7 @@ export interface State<Result> {
    * If the value passed to `getPromiseState` was a promise or function,
    * this will be the value thrown / caught from the promise or function.
    */
-  error: undefined | null | string | Error;
+  error: undefined | null | Error;
   /**
    * The final value.
    * This will be undefined initially if the value passed in to `getPromiseState` is a promise or function that returns a promise.
@@ -39,6 +54,9 @@ export interface State<Result> {
 
 const promiseCache = new WeakMap<object, State<unknown>>();
 
+const REASON_FUNCTION_EXCEPTION = `Passed function threw an exception`;
+const REASON_PROMISE_REJECTION = `Promise rejected while waiting to resolve`;
+
 class StateImpl<Value> implements State<Value> {
   /**
    * @private
@@ -47,7 +65,7 @@ class StateImpl<Value> implements State<Value> {
   /**
    * @private
    */
-  @tracked _error: undefined | null | string;
+  @tracked _error: undefined | null | Error;
   /**
    * @private
    */
@@ -61,7 +79,11 @@ class StateImpl<Value> implements State<Value> {
     try {
       var maybePromise = isThennable(fn) ? fn : isFunction(fn) ? fn() : fn;
     } catch (e) {
-      this.#initial = { isLoading: false, error: e };
+      this.#initial = {
+        isLoading: false,
+        error: { reason: REASON_FUNCTION_EXCEPTION, original: e },
+      };
+
       return;
     }
 
@@ -69,7 +91,7 @@ class StateImpl<Value> implements State<Value> {
       waitForPromise(
         maybePromise
           .then((value) => (this._resolved = value))
-          .catch((error) => (this._error = error))
+          .catch((error) => (this._error = { reason: REASON_PROMISE_REJECTION, original: error }))
           .finally(() => (this._isLoading = false))
       );
 
@@ -103,7 +125,43 @@ export type GetPromiseStateInput<Value> =
 /**
  * Returns a reactive state for a given value, function, promise, or function that returns a promise.
  *
- * Normally when trying to derive async state, you'll first need to
+ * Also caches the result for the given value, so `getPromiseState` will become synchronous if the passed value
+ * has already been resolved.
+ *
+ * Normally when trying to derive async state, you'll first need to invoke a function to get the promise from that function's return value.
+ * With `getPromiseState`, a passed function will be invoked for you, so you can skip that step.
+ *
+ * @example
+ * We can use `getPromiseState` to dynamically load and render a component
+ *
+ * ```gjs
+ * let state = getPromiseState(() => import('./some-module/component'));
+ *
+ * <template>
+ *   {{#if state.isLoading}}
+ *     ... pending ...
+ *   {{else if state.error}}
+ *     oh no!
+ *   {{else if state.resolved}}
+ *     <state.resolved />
+ *   {{/if}}
+ * </template>
+ * ```
+ *
+ * @example
+ * `getPromiseState can also be used in a class without `@cached`, because it maintains its own cache.
+ * ```gjs
+ * import Component from '@glimmer/component';
+ *
+ * async function readFromSomewhere() { // implementation omitted for brevity
+ * }
+ *
+ * export default class Demo extends Component {
+ *   get state() {
+ *
+ *   }
+ * }
+ * ```
  */
 export function getPromiseState<Value, Result = ResolvedValueOf<Value>>(
   fn: GetPromiseStateInput<Value>

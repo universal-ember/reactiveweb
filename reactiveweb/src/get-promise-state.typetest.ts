@@ -12,4 +12,11 @@ expectTypeOf(getPromiseState(Promise.resolve(2)).resolved).toEqualTypeOf<undefin
 
 // Other Properties
 expectTypeOf(getPromiseState(2).isLoading).toEqualTypeOf<boolean>();
-expectTypeOf(getPromiseState(2).error).toEqualTypeOf<undefined | string | null | Error>();
+expectTypeOf(getPromiseState(2).error).toMatchTypeOf<
+  | undefined
+  | null
+  | {
+      reason: string;
+      original: unknown;
+    }
+>();

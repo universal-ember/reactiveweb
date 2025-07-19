@@ -1,8 +1,8 @@
-import { settled, render } from '@ember/test-helpers';
-import { cell } from 'ember-resources';
+import { render,settled } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
+import { cell } from 'ember-resources';
 import { getPromiseState, type State } from 'reactiveweb/get-promise-state';
 
 import type QUnit from 'qunit';
