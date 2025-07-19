@@ -5,6 +5,7 @@
 /dist/
 /declarations/
 .eslintignore
+.eslintcache
 
 # misc
 /coverage/
