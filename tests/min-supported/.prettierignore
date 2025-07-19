@@ -9,6 +9,8 @@
 /coverage/
 !.*
 .*/
+.eslintignore
+.eslintcache
 
 # ember-try
 /.node_modules.ember-try/

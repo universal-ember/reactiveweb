@@ -4,6 +4,7 @@
 # compiled output
 /dist/
 .eslintignore
+.eslintcache
 
 # misc
 /coverage/

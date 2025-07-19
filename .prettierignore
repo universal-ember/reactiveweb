@@ -4,6 +4,8 @@
 # misc
 !.*
 .lint-todo/
+.eslintignore
+.eslintcache
 
 # ember-try
 /.node_modules.ember-try/

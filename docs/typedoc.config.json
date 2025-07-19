@@ -13,16 +13,29 @@
     "GitHub": "https://github.com/universal-ember/reactiveweb"
   },
   "readme": "./README.md",
-  "exclude": [],
+  "exclude": [
+    "../reactiveweb/src/get-promise-state.typetest.ts"
+  ],
   "out": "dist",
   "emit": "docs",
   "pretty": true,
   "skipErrorChecking": true,
+  "highlightLanguages": [
+    "bash",
+    "css",
+    "html",
+    "javascript",
+    "typescript",
+    "glimmer-js",
+    "glimmer-ts",
+    "json",
+    "jsonc"
+  ],
   "excludePrivate": true,
   "excludeProtected": false,
   "excludeExternals": true,
   "searchInComments": true,
   "disableSources": false,
   "categorizeByGroup": false,
-  "plugin": []
+  "plugin": ["typedoc-github-theme"]
 }
