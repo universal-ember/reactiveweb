@@ -5,6 +5,8 @@ export interface State<Value> {
   isLoading: boolean;
   error: undefined | null | string;
   resolved: Value | undefined;
+
+  toJSON(): { isLoading: boolean; error: string | null; resolved: Value | undefined };
 }
 
 const promiseCache = new WeakMap<object, State<unknown>>();
@@ -28,7 +30,7 @@ class StateImpl<Value> implements State<Value> {
   constructor(fn: GetPromiseStateInput<Value>, initial?: Partial<State<Value>>) {
     this.#initial = initial;
 
-    let maybePromise = 'then' in fn ? fn : fn();
+    let maybePromise = isThennable(fn) ? fn : isFunction(fn) ? fn() : fn;
 
     if (typeof maybePromise === 'object' && maybePromise !== null && 'then' in maybePromise) {
       waitForPromise(
@@ -74,6 +76,9 @@ export function getPromiseState<Value>(fn: GetPromiseStateInput<Value>): State<V
       isLoading: false,
       error: null,
       resolved: fn,
+      toJSON() {
+        return { isLoading: false, error: null, resolved: fn };
+      },
     };
   }
 
@@ -88,9 +93,20 @@ export function getPromiseState<Value>(fn: GetPromiseStateInput<Value>): State<V
   return state;
 }
 
-function isThennable(x: unknown) {
+function isThennable(x: unknown): x is Promise<unknown> {
   if (typeof x !== 'object') return false;
-  if (!x) return;
+  if (!x) return false;
 
   return 'then' in x;
+}
+
+/**
+ * This exists because when you guard with typeof x === function normally in TS,
+ * you just get `& Function` added to your type, which isn't exactly the narrowing I want.
+ *
+ * This can result in "Value & Function" has no call signatures....
+ * which is kinda ridiculous.
+ */
+function isFunction(x: unknown): x is () => unknown {
+  return typeof x === 'function';
 }
