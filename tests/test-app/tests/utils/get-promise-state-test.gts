@@ -10,7 +10,7 @@ module('getPromiseState', function (hooks) {
   setupRenderingTest(hooks);
 
   module('state transitions', function () {
-    async function stateStepper(state: State, assert: QUnit['assert']) {
+    async function stateStepper(state: State<unknown>, assert: QUnit['assert']) {
       let step = (msg: string) => assert.step(msg);
 
       await render(
@@ -28,7 +28,7 @@ module('getPromiseState', function (hooks) {
       await stateStepper(state, assert);
 
       assert.verifySteps(['resolved']);
-      assert.deepEqual(state, { isLoading: false, error: null, resolved: 'hello' });
+      assert.deepEqual(state.toJSON(), { isLoading: false, error: null, resolved: 'hello' });
     });
 
     test('handles Promise (state created outside template)', async function (assert) {

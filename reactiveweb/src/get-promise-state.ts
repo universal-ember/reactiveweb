@@ -1,12 +1,21 @@
 import { tracked } from '@glimmer/tracking';
 import { waitForPromise } from '@ember/test-waiters';
 
-export interface State<Value> {
-  isLoading: boolean;
-  error: undefined | null | string;
-  resolved: Value | undefined;
+type DePromise<Value> = Value extends Promise<infer Result> ? Result : Value;
+type ResolvedValueOf<Value> = Value extends (...args: any[]) => any
+  ? DePromise<ReturnType<Value>>
+  : DePromise<Value>;
 
-  toJSON(): { isLoading: boolean; error: string | null; resolved: Value | undefined };
+export interface State<Result> {
+  isLoading: boolean;
+  error: undefined | null | string | Error;
+  resolved: Result | undefined;
+
+  toJSON(): {
+    isLoading: boolean;
+    error: Error | string | null;
+    resolved: Result | undefined;
+  };
 }
 
 const promiseCache = new WeakMap<object, State<unknown>>();
@@ -70,7 +79,9 @@ export type GetPromiseStateInput<Value> =
 /**
  * Returns a reactive state for a give
  */
-export function getPromiseState<Value>(fn: GetPromiseStateInput<Value>): State<Value> {
+export function getPromiseState<Value, Result = ResolvedValueOf<Value>>(
+  fn: GetPromiseStateInput<Value>
+): State<Result> {
   if (typeof fn !== 'function' && !isThennable(fn)) {
     return {
       isLoading: false,
@@ -79,18 +90,18 @@ export function getPromiseState<Value>(fn: GetPromiseStateInput<Value>): State<V
       toJSON() {
         return { isLoading: false, error: null, resolved: fn };
       },
-    };
+    } as State<Result>;
   }
 
   let existing = promiseCache.get(fn);
 
-  if (existing) return existing as State<Value>;
+  if (existing) return existing as State<Result>;
 
   let state = new StateImpl(fn, { isLoading: true });
 
   promiseCache.set(fn, state);
 
-  return state;
+  return state as State<Result>;
 }
 
 function isThennable(x: unknown): x is Promise<unknown> {

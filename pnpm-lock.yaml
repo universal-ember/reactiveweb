@@ -150,6 +150,9 @@ importers:
       eslint-plugin-prettier:
         specifier: ^5.0.1
         version: 5.2.1(@types/eslint@8.56.12)(eslint-config-prettier@9.1.0(eslint@8.57.1))(eslint@8.57.1)(prettier@3.3.3)
+      expect-type:
+        specifier: ^1.2.2
+        version: 1.2.2
       prettier:
         specifier: ^3.0.3
         version: 3.3.3
@@ -433,7 +436,7 @@ importers:
         version: 1.4.0
       '@glint/tsserver-plugin':
         specifier: alpha
-        version: 2.0.0-alpha.2
+        version: 2.0.0-alpha.3
       '@tsconfig/ember':
         specifier: ^3.0.1
         version: 3.0.8
@@ -1599,8 +1602,8 @@ packages:
     peerDependencies:
       typescript: '>=4.8.0'
 
-  '@glint/core@2.0.0-alpha.2':
-    resolution: {integrity: sha512-380+A50bS3JZUjRJmoEjLansQRPvNPTMzT3mtsBuDw3XegjDTM24TqWZcTWBQ5/QsuqGmMX+GRHgZoEipJo+tA==}
+  '@glint/core@2.0.0-alpha.3':
+    resolution: {integrity: sha512-PCiajENyPfNkFfSDhqIcQ0DXzJZrPc1g7v5o8FyLDtvSwmM+/wlmpI4yJDXgo2TGJKFowjSOY1MKFRMiEd36GA==}
     hasBin: true
     peerDependencies:
       typescript: '>=5.6.0'
@@ -1655,8 +1658,8 @@ packages:
   '@glint/template@1.4.0':
     resolution: {integrity: sha512-yD271NhLei/HSQ6utm6hKgoU+B5D5DY+B1irPvgI4KsDEcZI7v/INf5HAMJfzCg92bP1sIxSOuXu5DU6VsY7Mw==}
 
-  '@glint/tsserver-plugin@2.0.0-alpha.2':
-    resolution: {integrity: sha512-VY8RL+0/ZjJ1/TePztKuiCbRbSJRo3n0PlytLaaFJ5OnfjrXePmsLIWqLK1XmiSpLWM3b8gof8e5nxNgeKhk9w==}
+  '@glint/tsserver-plugin@2.0.0-alpha.3':
+    resolution: {integrity: sha512-VPg0rVOu7Ql+ji28/mYO10J7xDpd4bEOEAF+Bu8i8cNIlLaKQoNqlrhMjChxPyS87Neiys69Kdh6lGzJ904xeg==}
 
   '@gwhitney/detect-indent@7.0.1':
     resolution: {integrity: sha512-7bQW+gkKa2kKZPeJf6+c6gFK9ARxQfn+FKy9ScTBppyKRWH2KzsmweXUoklqeEiHiNVWaeP5csIdsNq6w7QhzA==}
@@ -4579,6 +4582,10 @@ packages:
     resolution: {integrity: sha512-A5EmesHW6rfnZ9ysHQjPdJRni0SRar0tjtG5MNtm9n5TUvsYU8oozprtRD4AqHxcZWWlVuAmQo2nWKfN9oyjTw==}
     engines: {node: '>=0.10.0'}
 
+  expect-type@1.2.2:
+    resolution: {integrity: sha512-JhFGDVJ7tmDJItKhYgJCGLOWjuK9vPxiXoUFLwLDc99NlmklilbiQJwoctZtt13+xMw91MCk/REan6MWHqDjyA==}
+    engines: {node: '>=12.0.0'}
+
   express@4.19.2:
     resolution: {integrity: sha512-5T6nhjsT+EOMzuck8JjBHARTHfMht0POzlA60WV2pMD3gyXw2LZnZ+ueGdNxG+0calOJcWKbpFcuzLZ91YWq9Q==}
     engines: {node: '>= 0.10.0'}
@@ -5841,6 +5848,7 @@ packages:
 
   lodash.omit@4.5.0:
     resolution: {integrity: sha512-XeqSp49hNGmlkj2EJlfrQFIzQ6lXdNro9sddtQzcJY8QaoC2GO0DT7xaIokHeyM+mIT0mPMlPvkYzg2xCuHdZg==}
+    deprecated: This package is deprecated. Use destructuring assignment syntax instead.
 
   lodash.restparam@3.6.1:
     resolution: {integrity: sha512-L4/arjjuq4noiUJpt3yS6KIKDtJwNe2fIYgMqyYYKoeIfV1iEqvPwhCx23o+R9dzouGihDAPN1dTIRWa7zk8tw==}
@@ -8109,8 +8117,8 @@ packages:
       '@volar/language-service':
         optional: true
 
-  volar-service-typescript@0.0.64:
-    resolution: {integrity: sha512-FN2H97iqjR1id8AM4fH7lTXuTx2on9zD6QlUFllaiHKqgNrEITlQwm/9Ujrd9ST7MUzhgIKyUsa2WlanX9kkMg==}
+  volar-service-typescript@0.0.65:
+    resolution: {integrity: sha512-zPJuLIMs7lkQCvL+Rza8+3/EIoXEIkX8+DL7bNNfPgnbalbvRDhqWLVMJ6Zk3pINjLJafDqyhSbw8srfkUv97w==}
     peerDependencies:
       '@volar/language-service': ~2.4.0
     peerDependenciesMeta:
@@ -10078,7 +10086,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@glint/core@2.0.0-alpha.2(typescript@5.6.3)':
+  '@glint/core@2.0.0-alpha.3(typescript@5.6.3)':
     dependencies:
       '@glimmer/syntax': 0.92.3
       '@volar/kit': 2.4.12(typescript@5.6.3)
@@ -10095,10 +10103,10 @@ snapshots:
       typescript: 5.6.3
       uuid: 8.3.2
       volar-service-html: 0.0.64(@volar/language-service@2.4.12)
-      volar-service-typescript: 0.0.64(@volar/language-service@2.4.12)
+      volar-service-typescript: 0.0.65(@volar/language-service@2.4.12)
       vscode-languageserver-protocol: 3.17.5
       vscode-languageserver-textdocument: 1.0.12
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
       yargs: 17.7.2
     transitivePeerDependencies:
       - supports-color
@@ -10141,9 +10149,9 @@ snapshots:
 
   '@glint/template@1.4.0': {}
 
-  '@glint/tsserver-plugin@2.0.0-alpha.2':
+  '@glint/tsserver-plugin@2.0.0-alpha.3':
     dependencies:
-      '@glint/core': 2.0.0-alpha.2(typescript@5.6.3)
+      '@glint/core': 2.0.0-alpha.3(typescript@5.6.3)
       '@volar/language-core': 2.4.12
       '@volar/typescript': 2.4.12
       jiti: 2.4.2
@@ -11081,7 +11089,7 @@ snapshots:
       typesafe-path: 0.2.2
       typescript: 5.6.3
       vscode-languageserver-textdocument: 1.0.12
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
 
   '@volar/language-core@2.4.12':
     dependencies:
@@ -11097,14 +11105,14 @@ snapshots:
       vscode-languageserver: 9.0.1
       vscode-languageserver-protocol: 3.17.5
       vscode-languageserver-textdocument: 1.0.12
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
 
   '@volar/language-service@2.4.12':
     dependencies:
       '@volar/language-core': 2.4.12
       vscode-languageserver-protocol: 3.17.5
       vscode-languageserver-textdocument: 1.0.12
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
 
   '@volar/source-map@2.4.12': {}
 
@@ -11113,7 +11121,7 @@ snapshots:
       '@volar/language-core': 2.4.12
       '@volar/language-server': 2.4.12
       vscode-languageserver-textdocument: 1.0.12
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
 
   '@volar/typescript@2.4.12':
     dependencies:
@@ -14418,6 +14426,8 @@ snapshots:
   expand-tilde@2.0.2:
     dependencies:
       homedir-polyfill: 1.0.3
+
+  expect-type@1.2.2: {}
 
   express@4.19.2:
     dependencies:
@@ -18461,7 +18471,7 @@ snapshots:
     optionalDependencies:
       '@volar/language-service': 2.4.12
 
-  volar-service-typescript@0.0.64(@volar/language-service@2.4.12):
+  volar-service-typescript@0.0.65(@volar/language-service@2.4.12):
     dependencies:
       path-browserify: 1.0.1
       semver: 7.6.3
