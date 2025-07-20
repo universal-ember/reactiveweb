@@ -47,7 +47,7 @@ export interface State<Result> {
    */
   toJSON(): {
     isLoading: boolean;
-    error: Error | string | null;
+    error: Error | null;
     resolved: Result | undefined;
   };
 }
