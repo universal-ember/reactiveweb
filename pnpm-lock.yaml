@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@glimmer/validator': ^0.92.0
+  '@glimmer/validator': ^0.95.0
 
 importers:
 
@@ -439,7 +439,7 @@ importers:
         version: 1.4.0
       '@glint/tsserver-plugin':
         specifier: alpha
-        version: 2.0.0-alpha.2
+        version: 2.0.0-alpha.4
       '@tsconfig/ember':
         specifier: ^3.0.1
         version: 3.0.8
@@ -1508,11 +1508,17 @@ packages:
   '@glimmer/global-context@0.92.3':
     resolution: {integrity: sha512-tvlK5pt6oSe3furJ1KsO9vG/KmF9S98HLrcR48XbfwXlkuxvUeS94cdQId4GCN5naeX4OC4xm6eEjZWdc2s+jw==}
 
+  '@glimmer/global-context@0.93.4':
+    resolution: {integrity: sha512-Yw9xkDReAcC5oS/hY3PjGrFKRygYFA4pdO7tvuxReoVOyUtjoBOAwHJUileiElERDdMWIMfoLema8Td1mqkjhA==}
+
   '@glimmer/interfaces@0.84.3':
     resolution: {integrity: sha512-dk32ykoNojt0mvEaIW6Vli5MGTbQo58uy3Epj7ahCgTHmWOKuw/0G83f2UmFprRwFx689YTXG38I/vbpltEjzg==}
 
   '@glimmer/interfaces@0.92.3':
     resolution: {integrity: sha512-QwQeA01N+0h+TAi/J7iUnZtRuJy+093hNyagxDQBA6b1wCBw+q+al9+O6gmbWlkWE7EifzmNE1nnrgcecJBlJQ==}
+
+  '@glimmer/interfaces@0.94.6':
+    resolution: {integrity: sha512-sp/1WePvB/8O+jrcUHwjboNPTKrdGicuHKA9T/lh0vkYK2qM5Xz4i25lQMQ38tEMiw7KixrjHiTUiaXRld+IwA==}
 
   '@glimmer/low-level@0.78.2':
     resolution: {integrity: sha512-0S6TWOOd0fzLLysw1pWZN0TgasaHmYs1Sjz9Til1mTByIXU1S+1rhdyr2veSQPO/aRjPuEQyKXZQHvx23Zax6w==}
@@ -1577,8 +1583,8 @@ packages:
   '@glimmer/util@0.92.3':
     resolution: {integrity: sha512-K1oH93gGU36slycxJ9CcFpUTsdOc4XQ6RuZFu5oRsxFYtEF5PSu7ik11h58fyeoaWOr1ebfkyAMawbeI2AJ5GA==}
 
-  '@glimmer/validator@0.92.3':
-    resolution: {integrity: sha512-HKrMYeW0YhiksSeKYqX2chUR/rz82j12DcY7p2dORQlTV3qlAfiE5zRTJH1KRA1X3ZMf7DI2/GOzkXwYp0o+3Q==}
+  '@glimmer/validator@0.95.0':
+    resolution: {integrity: sha512-xF3K5voKeRqhONztfMHDd2wHDYD6UUI9pFPd+RMGtW6DXYv31G0zUm2pGsOwQ9dyNeE6khaXy7e3FtNjDrSmvQ==}
 
   '@glimmer/vm-babel-plugins@0.80.3':
     resolution: {integrity: sha512-9ej6xlm5MzHBJ5am2l0dbbn8Z0wJoYoMpM8FcrGMlUP6SPMLWxvxpMsApgQo8u6dvZRCjR3/bw3fdf7GOy0AFw==}
@@ -1608,8 +1614,8 @@ packages:
     peerDependencies:
       typescript: '>=4.8.0'
 
-  '@glint/core@2.0.0-alpha.2':
-    resolution: {integrity: sha512-380+A50bS3JZUjRJmoEjLansQRPvNPTMzT3mtsBuDw3XegjDTM24TqWZcTWBQ5/QsuqGmMX+GRHgZoEipJo+tA==}
+  '@glint/core@2.0.0-alpha.4':
+    resolution: {integrity: sha512-tGQNKlwZ/1BhNnxP6No+yIxaff3ta7dh2gEaNFSYZMOA+hBldHeDzxUJH0w2QtbCy/6ZaM+Ujepvfp+mpiY+9A==}
     hasBin: true
     peerDependencies:
       typescript: '>=5.6.0'
@@ -1664,8 +1670,8 @@ packages:
   '@glint/template@1.4.0':
     resolution: {integrity: sha512-yD271NhLei/HSQ6utm6hKgoU+B5D5DY+B1irPvgI4KsDEcZI7v/INf5HAMJfzCg92bP1sIxSOuXu5DU6VsY7Mw==}
 
-  '@glint/tsserver-plugin@2.0.0-alpha.2':
-    resolution: {integrity: sha512-VY8RL+0/ZjJ1/TePztKuiCbRbSJRo3n0PlytLaaFJ5OnfjrXePmsLIWqLK1XmiSpLWM3b8gof8e5nxNgeKhk9w==}
+  '@glint/tsserver-plugin@2.0.0-alpha.4':
+    resolution: {integrity: sha512-m24oz/QVo7Qes2WjwsLbTExlerKm5a6IPrcW+CPDMArtvn9rFSxDxcoiK/x6f7xy0dfud3Ej1iHe0hO4KAu0qA==}
 
   '@gwhitney/detect-indent@7.0.1':
     resolution: {integrity: sha512-7bQW+gkKa2kKZPeJf6+c6gFK9ARxQfn+FKy9ScTBppyKRWH2KzsmweXUoklqeEiHiNVWaeP5csIdsNq6w7QhzA==}
@@ -5827,6 +5833,7 @@ packages:
 
   lodash.omit@4.5.0:
     resolution: {integrity: sha512-XeqSp49hNGmlkj2EJlfrQFIzQ6lXdNro9sddtQzcJY8QaoC2GO0DT7xaIokHeyM+mIT0mPMlPvkYzg2xCuHdZg==}
+    deprecated: This package is deprecated. Use destructuring assignment syntax instead.
 
   lodash.restparam@3.6.1:
     resolution: {integrity: sha512-L4/arjjuq4noiUJpt3yS6KIKDtJwNe2fIYgMqyYYKoeIfV1iEqvPwhCx23o+R9dzouGihDAPN1dTIRWa7zk8tw==}
@@ -7054,7 +7061,7 @@ packages:
   right-pad@1.0.1:
     resolution: {integrity: sha512-bYBjgxmkvTAfgIYy328fmkwhp39v8lwVgWhhrzxPV3yHtcSqyYKe9/XOhvW48UFjATg3VuJbpsp5822ACNvkmw==}
     engines: {node: '>= 0.10'}
-    deprecated: Please use String.prototype.padEnd() over this package.
+    deprecated: Use String.prototype.padEnd() instead
 
   rimraf@2.6.3:
     resolution: {integrity: sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==}
@@ -7796,6 +7803,10 @@ packages:
 
   type-fest@4.26.1:
     resolution: {integrity: sha512-yOGpmOAL7CkKe/91I5O3gPICmJNLJ1G4zFYVAsRHg7M64biSnPtRj0WNQt++bRkjYOqjWXrhnUw1utzmVErAdg==}
+    engines: {node: '>=16'}
+
+  type-fest@4.41.0:
+    resolution: {integrity: sha512-TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA==}
     engines: {node: '>=16'}
 
   type-is@1.6.18:
@@ -9777,6 +9788,8 @@ snapshots:
 
   '@glimmer/global-context@0.92.3': {}
 
+  '@glimmer/global-context@0.93.4': {}
+
   '@glimmer/interfaces@0.84.3':
     dependencies:
       '@simple-dom/interface': 1.4.0
@@ -9784,6 +9797,11 @@ snapshots:
   '@glimmer/interfaces@0.92.3':
     dependencies:
       '@simple-dom/interface': 1.4.0
+
+  '@glimmer/interfaces@0.94.6':
+    dependencies:
+      '@simple-dom/interface': 1.4.0
+      type-fest: 4.41.0
 
   '@glimmer/low-level@0.78.2': {}
 
@@ -9795,7 +9813,7 @@ snapshots:
       '@glimmer/interfaces': 0.84.3
       '@glimmer/reference': 0.84.3
       '@glimmer/util': 0.84.3
-      '@glimmer/validator': 0.92.3
+      '@glimmer/validator': 0.95.0
 
   '@glimmer/manager@0.92.4':
     dependencies:
@@ -9806,7 +9824,7 @@ snapshots:
       '@glimmer/interfaces': 0.92.3
       '@glimmer/reference': 0.92.3
       '@glimmer/util': 0.92.3
-      '@glimmer/validator': 0.92.3
+      '@glimmer/validator': 0.95.0
       '@glimmer/vm': 0.92.3
 
   '@glimmer/node@0.84.3':
@@ -9881,7 +9899,7 @@ snapshots:
       '@glimmer/global-context': 0.84.3
       '@glimmer/interfaces': 0.84.3
       '@glimmer/util': 0.84.3
-      '@glimmer/validator': 0.92.3
+      '@glimmer/validator': 0.95.0
 
   '@glimmer/reference@0.92.3':
     dependencies:
@@ -9889,7 +9907,7 @@ snapshots:
       '@glimmer/global-context': 0.92.3
       '@glimmer/interfaces': 0.92.3
       '@glimmer/util': 0.92.3
-      '@glimmer/validator': 0.92.3
+      '@glimmer/validator': 0.95.0
 
   '@glimmer/runtime@0.84.3':
     dependencies:
@@ -9902,7 +9920,7 @@ snapshots:
       '@glimmer/program': 0.84.3
       '@glimmer/reference': 0.84.3
       '@glimmer/util': 0.84.3
-      '@glimmer/validator': 0.92.3
+      '@glimmer/validator': 0.95.0
       '@glimmer/vm': 0.84.3
       '@glimmer/wire-format': 0.84.3
       '@simple-dom/interface': 1.4.0
@@ -9918,7 +9936,7 @@ snapshots:
       '@glimmer/program': 0.92.4
       '@glimmer/reference': 0.92.3
       '@glimmer/util': 0.92.3
-      '@glimmer/validator': 0.92.3
+      '@glimmer/validator': 0.95.0
       '@glimmer/vm': 0.92.3
       '@glimmer/wire-format': 0.92.3
 
@@ -9940,7 +9958,7 @@ snapshots:
   '@glimmer/tracking@1.1.2':
     dependencies:
       '@glimmer/env': 0.1.7
-      '@glimmer/validator': 0.92.3
+      '@glimmer/validator': 0.95.0
 
   '@glimmer/util@0.44.0': {}
 
@@ -9955,12 +9973,10 @@ snapshots:
       '@glimmer/env': 0.1.7
       '@glimmer/interfaces': 0.92.3
 
-  '@glimmer/validator@0.92.3':
+  '@glimmer/validator@0.95.0':
     dependencies:
-      '@glimmer/env': 0.1.7
-      '@glimmer/global-context': 0.92.3
-      '@glimmer/interfaces': 0.92.3
-      '@glimmer/util': 0.92.3
+      '@glimmer/global-context': 0.93.4
+      '@glimmer/interfaces': 0.94.6
 
   '@glimmer/vm-babel-plugins@0.80.3(@babel/core@7.25.7)':
     dependencies:
@@ -10015,7 +10031,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@glint/core@2.0.0-alpha.2(typescript@5.6.3)':
+  '@glint/core@2.0.0-alpha.4(typescript@5.6.3)':
     dependencies:
       '@glimmer/syntax': 0.92.3
       '@volar/kit': 2.4.12(typescript@5.6.3)
@@ -10035,7 +10051,7 @@ snapshots:
       volar-service-typescript: 0.0.65(@volar/language-service@2.4.12)
       vscode-languageserver-protocol: 3.17.5
       vscode-languageserver-textdocument: 1.0.12
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
       yargs: 17.7.2
     transitivePeerDependencies:
       - supports-color
@@ -10078,9 +10094,9 @@ snapshots:
 
   '@glint/template@1.4.0': {}
 
-  '@glint/tsserver-plugin@2.0.0-alpha.2':
+  '@glint/tsserver-plugin@2.0.0-alpha.4':
     dependencies:
-      '@glint/core': 2.0.0-alpha.2(typescript@5.6.3)
+      '@glint/core': 2.0.0-alpha.4(typescript@5.6.3)
       '@volar/language-core': 2.4.12
       '@volar/typescript': 2.4.12
       jiti: 2.4.2
@@ -11007,7 +11023,7 @@ snapshots:
       typesafe-path: 0.2.2
       typescript: 5.6.3
       vscode-languageserver-textdocument: 1.0.12
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
 
   '@volar/language-core@2.4.12':
     dependencies:
@@ -11023,14 +11039,14 @@ snapshots:
       vscode-languageserver: 9.0.1
       vscode-languageserver-protocol: 3.17.5
       vscode-languageserver-textdocument: 1.0.12
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
 
   '@volar/language-service@2.4.12':
     dependencies:
       '@volar/language-core': 2.4.12
       vscode-languageserver-protocol: 3.17.5
       vscode-languageserver-textdocument: 1.0.12
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
 
   '@volar/source-map@2.4.12': {}
 
@@ -11039,7 +11055,7 @@ snapshots:
       '@volar/language-core': 2.4.12
       '@volar/language-server': 2.4.12
       vscode-languageserver-textdocument: 1.0.12
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
 
   '@volar/typescript@2.4.12':
     dependencies:
@@ -13662,7 +13678,7 @@ snapshots:
       '@glimmer/runtime': 0.92.4
       '@glimmer/syntax': 0.92.3
       '@glimmer/util': 0.92.3
-      '@glimmer/validator': 0.92.3
+      '@glimmer/validator': 0.95.0
       '@glimmer/vm': 0.92.3
       '@glimmer/vm-babel-plugins': 0.92.3(@babel/core@7.25.7)
       '@simple-dom/interface': 1.4.0
@@ -13713,7 +13729,7 @@ snapshots:
       '@glimmer/runtime': 0.84.3
       '@glimmer/syntax': 0.84.3
       '@glimmer/util': 0.84.3
-      '@glimmer/validator': 0.92.3
+      '@glimmer/validator': 0.95.0
       '@glimmer/vm-babel-plugins': 0.84.3(@babel/core@7.25.7)
       '@simple-dom/interface': 1.4.0
       babel-plugin-debug-macros: 0.3.4(@babel/core@7.25.7)
@@ -13797,7 +13813,7 @@ snapshots:
     dependencies:
       '@glimmer/reference': 0.84.3
       '@glimmer/syntax': 0.84.3
-      '@glimmer/validator': 0.92.3
+      '@glimmer/validator': 0.95.0
       async-promise-queue: 1.0.5
       colors: 1.4.0
       commander: 8.3.0
@@ -18047,6 +18063,8 @@ snapshots:
   type-fest@0.6.0: {}
 
   type-fest@4.26.1: {}
+
+  type-fest@4.41.0: {}
 
   type-is@1.6.18:
     dependencies:
