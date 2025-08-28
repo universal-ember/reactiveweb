@@ -2,8 +2,10 @@ import { tracked } from '@glimmer/tracking';
 import { assert } from '@ember/debug';
 import { associateDestroyableChild, destroy, isDestroyed, isDestroying } from '@ember/destroyable';
 
-import { TrackedAsyncData } from 'ember-async-data';
 import { resource } from 'ember-resources';
+
+import { type State as PromiseState, getPromiseState } from './get-promise-state.ts';
+import { waitForPromise } from '@ember/test-waiters';
 
 interface CallbackMeta {
   isRetrying: boolean;
@@ -162,7 +164,6 @@ function directTrackedFunction<Return>(context: object, fn: (meta: CallbackMeta)
  * State container that represents the asynchrony of a `trackedFunction`
  */
 export class State<Value> {
-  @tracked data: TrackedAsyncData<Value> | null = null;
   @tracked declare promise: Value;
 
   /**
@@ -180,8 +181,24 @@ export class State<Value> {
     this.#fn = fn;
   }
 
-  get state(): TrackedAsyncData<Value>['state'] | 'UNSTARTED' {
-    return this.data?.state ?? 'UNSTARTED';
+  get #state(): PromiseState<Value> {
+    return getPromiseState(this.promise);
+  }
+
+  get state(): 'PENDING' | 'RESOLVED' | 'REJECTED' | 'UNSTARTED' {
+    if (this.#state.isLoading) {
+      return 'PENDING';
+    }
+
+    if (this.#state.resolved) {
+      return 'RESOLVED';
+    }
+
+    if (this.#state.error) {
+      return 'REJECTED';
+    }
+
+    return 'UNSTARTED';
   }
 
   /**
@@ -189,9 +206,7 @@ export class State<Value> {
    * until the underlying promise resolves or rejects.
    */
   get isPending() {
-    if (!this.data) return true;
-
-    return this.data.isPending ?? false;
+    return this.#state.isLoading ?? false;
   }
 
   /**
@@ -220,7 +235,7 @@ export class State<Value> {
    * When true, the function passed to `trackedFunction` has resolved
    */
   get isResolved() {
-    return this.data?.isResolved ?? false;
+    return Boolean(this.#state.resolved) ?? false;
   }
 
   /**
@@ -234,7 +249,7 @@ export class State<Value> {
    * When true, the function passed to `trackedFunction` has errored
    */
   get isRejected() {
-    return this.data?.isRejected ?? Boolean(this.caughtError) ?? false;
+    return Boolean(this.#state.error ?? this.caughtError ?? false);
   }
 
   /**
@@ -254,10 +269,10 @@ export class State<Value> {
    * For now, `trackedFunction` will retain that flexibility.
    */
   get value(): Awaited<Value> | null {
-    if (this.data?.isResolved) {
+    if (this.isResolved) {
       // This is sort of a lie, but it ends up working out due to
       // how promises chain automatically when awaited
-      return this.data.value as Awaited<Value>;
+      return this.#state.resolved as Awaited<Value>;
     }
 
     return null;
@@ -272,7 +287,7 @@ export class State<Value> {
       return this.caughtError;
     }
 
-    if (this.data?.state !== 'REJECTED') {
+    if (this.state !== 'REJECTED') {
       return null;
     }
 
@@ -280,12 +295,14 @@ export class State<Value> {
       return this.caughtError;
     }
 
-    return this.data?.error ?? null;
+    return this.#state.error ?? null;
   }
 
   async [START]() {
     try {
-      await this._dangerousRetry({ isRetrying: false });
+      let promise = this._dangerousRetry({ isRetrying: false });
+
+      await waitForPromise(promise);
     } catch (e) {
       if (isDestroyed(this) || isDestroying(this)) return;
       this.caughtError = e;
@@ -308,7 +325,9 @@ export class State<Value> {
        * - immediately when inovking `fn` (where auto-tracking occurs)
        * - after an await, "eventually"
        */
-      await this._dangerousRetry({ isRetrying: true });
+      let promise = this._dangerousRetry({ isRetrying: true });
+
+      await waitForPromise(promise);
     } catch (e) {
       if (isDestroyed(this) || isDestroying(this)) return;
       this.caughtError = e;
@@ -318,15 +337,6 @@ export class State<Value> {
   _dangerousRetry = async ({ isRetrying }: CallbackMeta) => {
     if (isDestroyed(this) || isDestroying(this)) return;
 
-    // We've previously had data, but we're about to run-again.
-    // we need to do this again so `isLoading` goes back to `true` when re-running.
-    // NOTE: we want to do this _even_ if this.data is already null.
-    //       it's all in the same tracking frame and the important thing is taht
-    //       we can't *read* data here.
-    this.data = null;
-
-    // this._internalError = null;
-
     // We need to invoke this before going async so that tracked properties are consumed (entangled with) synchronously
     this.promise = this.#fn({ isRetrying });
 
@@ -334,6 +344,7 @@ export class State<Value> {
     // We don't want this internal state to entangle with `trackedFunction`
     // so that *only* the tracked data in `fn` can be entangled.
     await Promise.resolve();
+    if (isDestroyed(this) || isDestroying(this)) return;
 
     /**
      * Before we await to start a new request, let's clear our error.
@@ -341,20 +352,6 @@ export class State<Value> {
      * se the UI can update accordingly, without causing us to refetch
      */
     this.caughtError = null;
-
-    if (this.data) {
-      let isUnsafe = isDestroyed(this.data) || isDestroying(this.data);
-
-      if (!isUnsafe) {
-        destroy(this.data);
-        this.data = null;
-      }
-    }
-
-    if (isDestroyed(this) || isDestroying(this)) return;
-
-    // TrackedAsyncData manages the destroyable child association for us
-    this.data = new TrackedAsyncData(this.promise);
 
     return this.promise;
   };
