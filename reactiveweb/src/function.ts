@@ -1,11 +1,11 @@
 import { tracked } from '@glimmer/tracking';
 import { assert } from '@ember/debug';
-import { associateDestroyableChild, destroy, isDestroyed, isDestroying } from '@ember/destroyable';
+import { associateDestroyableChild, isDestroyed, isDestroying } from '@ember/destroyable';
+import { waitForPromise } from '@ember/test-waiters';
 
 import { resource } from 'ember-resources';
 
-import { type State as PromiseState, getPromiseState } from './get-promise-state.ts';
-import { waitForPromise } from '@ember/test-waiters';
+import { getPromiseState, type State as PromiseState } from './get-promise-state.ts';
 
 interface CallbackMeta {
   isRetrying: boolean;
@@ -269,13 +269,7 @@ export class State<Value> {
    * For now, `trackedFunction` will retain that flexibility.
    */
   get value(): Awaited<Value> | null {
-    if (this.isResolved) {
-      // This is sort of a lie, but it ends up working out due to
-      // how promises chain automatically when awaited
-      return this.#state.resolved as Awaited<Value>;
-    }
-
-    return null;
+    return (this.#state.resolved as Awaited<Value>) ?? null;
   }
 
   /**
@@ -352,6 +346,10 @@ export class State<Value> {
      * se the UI can update accordingly, without causing us to refetch
      */
     this.caughtError = null;
+    /**
+     * This looks weird, but we need to cerate the state cache if it doesn't exist already as well as prevent JIT from removing this l ine.
+     */
+    await this.#state.resolved;
 
     return this.promise;
   };

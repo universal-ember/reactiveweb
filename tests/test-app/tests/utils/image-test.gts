@@ -25,12 +25,6 @@ module('ReactiveImage', function (hooks) {
 
     assert.verifySteps(['value: null', 'isResolved: false', 'isLoading: true', 'isError: false']);
 
-    await renderSettled();
-
-    // TODO: is there a way to optimize this away?
-    //       so that we only re-render once?
-    assert.verifySteps(['value: null', 'isResolved: false', 'isLoading: true', 'isError: false']);
-
     await settled();
 
     assert.verifySteps(['value: null', 'isResolved: false', 'isLoading: false', 'isError: true']);
@@ -47,12 +41,6 @@ module('ReactiveImage', function (hooks) {
 
     await renderSettled();
 
-    assert.verifySteps(['value: null', 'isResolved: false', 'isLoading: true', 'isError: false']);
-
-    await renderSettled();
-
-    // TODO: is there a way to optimize this away?
-    //       so that we only re-render once?
     assert.verifySteps(['value: null', 'isResolved: false', 'isLoading: true', 'isError: false']);
 
     await settled();

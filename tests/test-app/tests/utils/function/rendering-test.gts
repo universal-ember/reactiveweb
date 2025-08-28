@@ -45,6 +45,8 @@ module('Utils | trackedFunction | rendering', function (hooks) {
   test('it is retryable', async function (assert) {
     let count = 0;
 
+    globalThis.extract = (key, v) => (globalThis[key] = v);
+
     class TestComponent extends Component {
       data = trackedFunction(this, ({ isRetrying }) => {
         // Copy the count so asynchrony of trackedFunction evaluation
