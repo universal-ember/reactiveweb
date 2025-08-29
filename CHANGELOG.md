@@ -1,5 +1,20 @@
 # Changelog
 
+## Release (2025-08-29)
+
+* reactiveweb 1.9.0 (minor)
+
+#### :rocket: Enhancement
+* `reactiveweb`
+  * [#159](https://github.com/universal-ember/reactiveweb/pull/159) Remove ember-async-data, make trackedFunction use getPromiseState, add waiter. ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :bug: Bug Fix
+* `reactiveweb`
+  * [#155](https://github.com/universal-ember/reactiveweb/pull/155) Fix error type in getPromiseState's State's toJSON ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-07-19)
 
 * reactiveweb 1.8.0 (minor)
