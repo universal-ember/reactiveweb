@@ -60,9 +60,6 @@ module('Utils | trackedFunction | js', function (hooks) {
 
     let foo = new Test();
 
-    assert.strictEqual(foo.data.value, null);
-    await settled();
-
     assert.strictEqual(foo.data.value, 2);
 
     foo.count = 2;
