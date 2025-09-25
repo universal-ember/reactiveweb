@@ -135,6 +135,8 @@ export type GetPromiseStateInput<Value> =
  * We can use `getPromiseState` to dynamically load and render a component
  *
  * ```gjs
+ * import { getPromiseState } from 'reactiveweb/get-promise-state';
+ *
  * let state = getPromiseState(() => import('./some-module/component'));
  *
  * <template>
@@ -152,6 +154,7 @@ export type GetPromiseStateInput<Value> =
  * `getPromiseState` can also be used in a class without `@cached`, because it maintains its own cache.
  * ```gjs
  * import Component from '@glimmer/component';
+ * import { getPromiseState } from 'reactiveweb/get-promise-state';
  *
  * async function readFromSomewhere() { // implementation omitted for brevity
  * }
@@ -175,6 +178,7 @@ export type GetPromiseStateInput<Value> =
  *
  * ```gjs
  * import Component from '@glimmer/component';
+ * import { getPromiseState } from 'reactiveweb/get-promise-state';
  *
  * async function readFromSomewhere() { // implementation omitted for brevity
  * }
