@@ -227,10 +227,10 @@ reactiveweb's `getPromiseState` is made primarily for my needs in my own project
 
 [^module-state]: `getPromiseState(promise);`
 [^cached-getter]: requires a stable reference to a promise. getter itself does not need to be cached.
-[^private-apis]: `@warp-drive/ember` declares an optional peer dependency on `ember-provide-consume-context`, which uses private apis, and I want nothing to do with those.
-[^no-dependencies]: this is important for me, because I don't want `@warp-drive/core` in my projects, as it requires a goofy macros config that isn't compatible with my non-API using projects (it's mostly how they generate macros to not gracefully have some behavior if you don't set up their required babel config -- which I also can't do in a REPL environment (easily -- as in -- without pushing the responsibility to configure babel to the REPLer)).
-[^ember-resources]: reactiveweb does depend on on ember-resources, but ember-resources itself has no dependencies (for real), and is a suuuuuuuuuuper tiny use of a helper manager.
-[^wd-aliases]: warp-drive provides _many_ aliases for states, as well as support some extended promise behavior which is not built in to the platform (Futures, etc).
+[^private-apis]: `@warp-drive/ember` declares an optional peer dependency on `ember-provide-consume-context`, which uses private apis, and we don't want to support usage of private APIs.
+[^no-dependencies]: warp-drive requires a macros config that isn't compatible with "non-config" projects (it's mostly how they generate macros to not gracefully have some behavior if you don't set up their required babel config -- which affects REPL environments (this is solveable via pushing the responsibility to configure babel to the REPLer)). Also, the warp-drive team says this is on their radar, and the'll address it eventually / soon.
+[^ember-resources]: reactiveweb (as a whole) does depend on on ember-resources, but ember-resources itself has no dependencies (for real), and is a very tiny use of a helper manager. Additionally, `getPromiseState` does not depend on `ember-resources`.
+[^wd-aliases]: warp-drive provides _many_ aliases for states, as well as support some extended promise behavior which is not built in to the platform (Futures, etc). This is still good for convenience and compatibility.
 [^state-compare]: in reactiveweb: [State](https://reactive.nullvoxpopuli.com/interfaces/get-promise-state.State.html), and then in `@warp-drive/*`: the [`PromiseState`](https://warp-drive.io/api/@warp-drive/ember/type-aliases/PromiseState) is made of 3 sub types: [PendingPromise](https://warp-drive.io/api/@warp-drive/core/reactive/interfaces/PendingPromise), [ResolvedPromise](https://warp-drive.io/api/@warp-drive/core/reactive/interfaces/ResolvedPromise), and [RejectedPromise](https://warp-drive.io/api/@warp-drive/core/reactive/interfaces/RejectedPromise)
  *
  */
