@@ -29,6 +29,9 @@ importers:
 
   docs:
     devDependencies:
+      markdown-it-footnote:
+        specifier: ^4.0.0
+        version: 4.0.0
       typedoc:
         specifier: ^0.28.7
         version: 0.28.7(typescript@5.6.3)
@@ -436,7 +439,7 @@ importers:
         version: 1.4.0
       '@glint/tsserver-plugin':
         specifier: alpha
-        version: 2.0.0-alpha.2
+        version: 2.0.0-alpha.8
       '@tsconfig/ember':
         specifier: ^3.0.1
         version: 3.0.8
@@ -1605,8 +1608,8 @@ packages:
     peerDependencies:
       typescript: '>=4.8.0'
 
-  '@glint/core@2.0.0-alpha.2':
-    resolution: {integrity: sha512-380+A50bS3JZUjRJmoEjLansQRPvNPTMzT3mtsBuDw3XegjDTM24TqWZcTWBQ5/QsuqGmMX+GRHgZoEipJo+tA==}
+  '@glint/core@2.0.0-alpha.8':
+    resolution: {integrity: sha512-1KOhKAVaWdKoA4HYXgA8jwn4M4UVfBFvdJ2bVdr4JH9CdjrOjq+8020uB35FCVVSdKwQJQEhbseRv6I5t99J+w==}
     hasBin: true
     peerDependencies:
       typescript: '>=5.6.0'
@@ -1661,8 +1664,11 @@ packages:
   '@glint/template@1.4.0':
     resolution: {integrity: sha512-yD271NhLei/HSQ6utm6hKgoU+B5D5DY+B1irPvgI4KsDEcZI7v/INf5HAMJfzCg92bP1sIxSOuXu5DU6VsY7Mw==}
 
-  '@glint/tsserver-plugin@2.0.0-alpha.2':
-    resolution: {integrity: sha512-VY8RL+0/ZjJ1/TePztKuiCbRbSJRo3n0PlytLaaFJ5OnfjrXePmsLIWqLK1XmiSpLWM3b8gof8e5nxNgeKhk9w==}
+  '@glint/template@1.6.0-alpha.3':
+    resolution: {integrity: sha512-S7k7EWjNr6KMZ1+XJcVKLdy7/M9AaFh+zfmXwfJlRaVhjM6lBhn5KGUnf33sJ63EHzyorWKsCsiqxyXSx0GAYQ==}
+
+  '@glint/tsserver-plugin@2.0.0-alpha.8':
+    resolution: {integrity: sha512-ILTjSXJa6cnEGSqpw8/cKzABVJFSL7+++zBI0V+xaivrECiZm1xtRPpPse+JUgEmGriJbKCMMtxNiAcyQrfvcA==}
 
   '@gwhitney/detect-indent@7.0.1':
     resolution: {integrity: sha512-7bQW+gkKa2kKZPeJf6+c6gFK9ARxQfn+FKy9ScTBppyKRWH2KzsmweXUoklqeEiHiNVWaeP5csIdsNq6w7QhzA==}
@@ -2431,28 +2437,28 @@ packages:
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
-  '@volar/kit@2.4.12':
-    resolution: {integrity: sha512-f9JE8oy9C2rBcCWxUYKUF23hOXz4mwgVXFjk7nHhxzplaoVjEOsKpBm8NI2nBH7Cwu8DRxDwBsbIxMl/8wlLxw==}
+  '@volar/kit@2.4.23':
+    resolution: {integrity: sha512-YuUIzo9zwC2IkN7FStIcVl1YS9w5vkSFEZfPvnu0IbIMaR9WHhc9ZxvlT+91vrcSoRY469H2jwbrGqpG7m1KaQ==}
     peerDependencies:
       typescript: '*'
 
-  '@volar/language-core@2.4.12':
-    resolution: {integrity: sha512-RLrFdXEaQBWfSnYGVxvR2WrO6Bub0unkdHYIdC31HzIEqATIuuhRRzYu76iGPZ6OtA4Au1SnW0ZwIqPP217YhA==}
+  '@volar/language-core@2.4.23':
+    resolution: {integrity: sha512-hEEd5ET/oSmBC6pi1j6NaNYRWoAiDhINbT8rmwtINugR39loROSlufGdYMF9TaKGfz+ViGs1Idi3mAhnuPcoGQ==}
 
-  '@volar/language-server@2.4.12':
-    resolution: {integrity: sha512-KC0YqTXCZMaImMWyAKC+dLB2BXjfz80kqesJkV6oXxJsGEQPfmdqug299idwtrT6FVSmZ7q5UrPfvgKwA0S3JA==}
+  '@volar/language-server@2.4.23':
+    resolution: {integrity: sha512-k0iO+tybMGMMyrNdWOxgFkP0XJTdbH0w+WZlM54RzJU3WZSjHEupwL30klpM7ep4FO6qyQa03h+VcGHD4Q8gEg==}
 
-  '@volar/language-service@2.4.12':
-    resolution: {integrity: sha512-nifOPGYYPnCmxja6/ML/Gl2EgFkUdw4gLbYqbh8FjqX3gSpXSZl/0ebqORjKo1KW56YWHWRZd1jFutEtCiRYhA==}
+  '@volar/language-service@2.4.23':
+    resolution: {integrity: sha512-h5mU9DZ/6u3LCB9xomJtorNG6awBNnk9VuCioGsp6UtFiM8amvS5FcsaC3dabdL9zO0z+Gq9vIEMb/5u9K6jGQ==}
 
-  '@volar/source-map@2.4.12':
-    resolution: {integrity: sha512-bUFIKvn2U0AWojOaqf63ER0N/iHIBYZPpNGogfLPQ68F5Eet6FnLlyho7BS0y2HJ1jFhSif7AcuTx1TqsCzRzw==}
+  '@volar/source-map@2.4.23':
+    resolution: {integrity: sha512-Z1Uc8IB57Lm6k7q6KIDu/p+JWtf3xsXJqAX/5r18hYOTpJyBn0KXUR8oTJ4WFYOcDzWC9n3IflGgHowx6U6z9Q==}
 
-  '@volar/test-utils@2.4.12':
-    resolution: {integrity: sha512-8nIP0qGt1jANEuWY8Pm5658UsxbWl3p4N5XUNA/SZmuHvb9C3vygjLIWFHf0+Apbvy6yNwbKsRxawoYCoh+kkQ==}
+  '@volar/test-utils@2.4.23':
+    resolution: {integrity: sha512-ZF3Ejtv6mfwXHuR6aZGsh1ksvAdSZUfWKGacXa9S+Mnc3MpSPgxzHN3PwdXGt26HfRDWGuykJc8y6lVs20dDKw==}
 
-  '@volar/typescript@2.4.12':
-    resolution: {integrity: sha512-HJB73OTJDgPc80K30wxi3if4fSsZZAOScbj2fcicMuOPoOkcf9NNAINb33o+DzhBdF9xTKC1gnPmIRDous5S0g==}
+  '@volar/typescript@2.4.23':
+    resolution: {integrity: sha512-lAB5zJghWxVPqfcStmAP1ZqQacMpe90UrP5RJ3arDyrhy4aCUQqmxPPLB2PWDKugvylmO41ljK7vZ+t6INMTag==}
 
   '@vscode/l10n@0.0.18':
     resolution: {integrity: sha512-KYSIHVmslkaCDyw013pphY+d7x1qV8IZupYfeIfzNA+nsaWHbn5uPuQRvdRFsa9zFzGeudPuoGoZ1Op4jrJXIQ==}
@@ -3622,6 +3628,9 @@ packages:
 
   content-tag@2.0.2:
     resolution: {integrity: sha512-qHRyTp02dgzRK2tsCFxZ1H289bZOuSLNpupr6prvnSFq4SFPmNlBKbbE5PCMb+8+Z1a1z+yCVtXvQIGUCCa3lQ==}
+
+  content-tag@3.1.3:
+    resolution: {integrity: sha512-4Kiv9mEroxuMXfWUNUHcljVJgxThCNk7eEswdHMXdzJnkBBaYDqDwzHkoh3F74JJhfU3taJOsgpR6oEGIDg17g==}
 
   content-type@1.0.5:
     resolution: {integrity: sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==}
@@ -5824,6 +5833,7 @@ packages:
 
   lodash.omit@4.5.0:
     resolution: {integrity: sha512-XeqSp49hNGmlkj2EJlfrQFIzQ6lXdNro9sddtQzcJY8QaoC2GO0DT7xaIokHeyM+mIT0mPMlPvkYzg2xCuHdZg==}
+    deprecated: This package is deprecated. Use destructuring assignment syntax instead.
 
   lodash.restparam@3.6.1:
     resolution: {integrity: sha512-L4/arjjuq4noiUJpt3yS6KIKDtJwNe2fIYgMqyYYKoeIfV1iEqvPwhCx23o+R9dzouGihDAPN1dTIRWa7zk8tw==}
@@ -5902,6 +5912,9 @@ packages:
   map-visit@1.0.0:
     resolution: {integrity: sha512-4y7uGv8bd2WdM9vpQsiQNo41Ln1NvhvDRuVt0k2JZQ+ezN2uaQes7lZeZ+QQUHOLQAtDaBJ+7wCbi+ab/KFs+w==}
     engines: {node: '>=0.10.0'}
+
+  markdown-it-footnote@4.0.0:
+    resolution: {integrity: sha512-WYJ7urf+khJYl3DqofQpYfEYkZKbmXmwxQV8c8mO/hGIhgZ1wOe7R4HLFNwqx7TjILbnC98fuyeSsin19JdFcQ==}
 
   markdown-it-terminal@0.4.0:
     resolution: {integrity: sha512-NeXtgpIK6jBciHTm9UhiPnyHDdqyVIdRPJ+KdQtZaf/wR74gvhCNbw5li4TYsxRp5u3ZoHEF4DwpECeZqyCw+w==}
@@ -7051,7 +7064,7 @@ packages:
   right-pad@1.0.1:
     resolution: {integrity: sha512-bYBjgxmkvTAfgIYy328fmkwhp39v8lwVgWhhrzxPV3yHtcSqyYKe9/XOhvW48UFjATg3VuJbpsp5822ACNvkmw==}
     engines: {node: '>= 0.10'}
-    deprecated: Please use String.prototype.padEnd() over this package.
+    deprecated: Use String.prototype.padEnd() instead
 
   rimraf@2.6.3:
     resolution: {integrity: sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==}
@@ -10012,27 +10025,29 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@glint/core@2.0.0-alpha.2(typescript@5.6.3)':
+  '@glint/core@2.0.0-alpha.8(typescript@5.6.3)':
     dependencies:
       '@glimmer/syntax': 0.92.3
-      '@volar/kit': 2.4.12(typescript@5.6.3)
-      '@volar/language-core': 2.4.12
-      '@volar/language-server': 2.4.12
-      '@volar/language-service': 2.4.12
-      '@volar/source-map': 2.4.12
-      '@volar/test-utils': 2.4.12
-      '@volar/typescript': 2.4.12
+      '@glint/template': 1.6.0-alpha.3
+      '@volar/kit': 2.4.23(typescript@5.6.3)
+      '@volar/language-core': 2.4.23
+      '@volar/language-server': 2.4.23
+      '@volar/language-service': 2.4.23
+      '@volar/source-map': 2.4.23
+      '@volar/test-utils': 2.4.23
+      '@volar/typescript': 2.4.23
       computeds: 0.0.1
+      content-tag: 3.1.3
       escape-string-regexp: 4.0.0
       semver: 7.6.3
       silent-error: 1.1.1
       typescript: 5.6.3
       uuid: 8.3.2
-      volar-service-html: 0.0.64(@volar/language-service@2.4.12)
-      volar-service-typescript: 0.0.65(@volar/language-service@2.4.12)
+      volar-service-html: 0.0.64(@volar/language-service@2.4.23)
+      volar-service-typescript: 0.0.65(@volar/language-service@2.4.23)
       vscode-languageserver-protocol: 3.17.5
       vscode-languageserver-textdocument: 1.0.12
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
       yargs: 17.7.2
     transitivePeerDependencies:
       - supports-color
@@ -10075,11 +10090,13 @@ snapshots:
 
   '@glint/template@1.4.0': {}
 
-  '@glint/tsserver-plugin@2.0.0-alpha.2':
+  '@glint/template@1.6.0-alpha.3': {}
+
+  '@glint/tsserver-plugin@2.0.0-alpha.8':
     dependencies:
-      '@glint/core': 2.0.0-alpha.2(typescript@5.6.3)
-      '@volar/language-core': 2.4.12
-      '@volar/typescript': 2.4.12
+      '@glint/core': 2.0.0-alpha.8(typescript@5.6.3)
+      '@volar/language-core': 2.4.23
+      '@volar/typescript': 2.4.23
       jiti: 2.4.2
       typescript: 5.6.3
     transitivePeerDependencies:
@@ -10997,52 +11014,52 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@volar/kit@2.4.12(typescript@5.6.3)':
+  '@volar/kit@2.4.23(typescript@5.6.3)':
     dependencies:
-      '@volar/language-service': 2.4.12
-      '@volar/typescript': 2.4.12
+      '@volar/language-service': 2.4.23
+      '@volar/typescript': 2.4.23
       typesafe-path: 0.2.2
       typescript: 5.6.3
       vscode-languageserver-textdocument: 1.0.12
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
 
-  '@volar/language-core@2.4.12':
+  '@volar/language-core@2.4.23':
     dependencies:
-      '@volar/source-map': 2.4.12
+      '@volar/source-map': 2.4.23
 
-  '@volar/language-server@2.4.12':
+  '@volar/language-server@2.4.23':
     dependencies:
-      '@volar/language-core': 2.4.12
-      '@volar/language-service': 2.4.12
-      '@volar/typescript': 2.4.12
+      '@volar/language-core': 2.4.23
+      '@volar/language-service': 2.4.23
+      '@volar/typescript': 2.4.23
       path-browserify: 1.0.1
       request-light: 0.7.0
       vscode-languageserver: 9.0.1
       vscode-languageserver-protocol: 3.17.5
       vscode-languageserver-textdocument: 1.0.12
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
 
-  '@volar/language-service@2.4.12':
+  '@volar/language-service@2.4.23':
     dependencies:
-      '@volar/language-core': 2.4.12
+      '@volar/language-core': 2.4.23
       vscode-languageserver-protocol: 3.17.5
       vscode-languageserver-textdocument: 1.0.12
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
 
-  '@volar/source-map@2.4.12': {}
+  '@volar/source-map@2.4.23': {}
 
-  '@volar/test-utils@2.4.12':
+  '@volar/test-utils@2.4.23':
     dependencies:
-      '@volar/language-core': 2.4.12
-      '@volar/language-server': 2.4.12
+      '@volar/language-core': 2.4.23
+      '@volar/language-server': 2.4.23
       vscode-languageserver-textdocument: 1.0.12
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
 
-  '@volar/typescript@2.4.12':
+  '@volar/typescript@2.4.23':
     dependencies:
-      '@volar/language-core': 2.4.12
+      '@volar/language-core': 2.4.23
       path-browserify: 1.0.1
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
 
   '@vscode/l10n@0.0.18': {}
 
@@ -12396,6 +12413,8 @@ snapshots:
   content-tag@2.0.1: {}
 
   content-tag@2.0.2: {}
+
+  content-tag@3.1.3: {}
 
   content-type@1.0.5: {}
 
@@ -15906,6 +15925,8 @@ snapshots:
     dependencies:
       object-visit: 1.0.1
 
+  markdown-it-footnote@4.0.0: {}
+
   markdown-it-terminal@0.4.0(markdown-it@13.0.2):
     dependencies:
       ansi-styles: 3.2.1
@@ -18260,15 +18281,15 @@ snapshots:
 
   vary@1.1.2: {}
 
-  volar-service-html@0.0.64(@volar/language-service@2.4.12):
+  volar-service-html@0.0.64(@volar/language-service@2.4.23):
     dependencies:
       vscode-html-languageservice: 5.5.1
       vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.1.0
     optionalDependencies:
-      '@volar/language-service': 2.4.12
+      '@volar/language-service': 2.4.23
 
-  volar-service-typescript@0.0.65(@volar/language-service@2.4.12):
+  volar-service-typescript@0.0.65(@volar/language-service@2.4.23):
     dependencies:
       path-browserify: 1.0.1
       semver: 7.6.3
@@ -18277,7 +18298,7 @@ snapshots:
       vscode-nls: 5.2.0
       vscode-uri: 3.1.0
     optionalDependencies:
-      '@volar/language-service': 2.4.12
+      '@volar/language-service': 2.4.23
 
   vscode-html-languageservice@5.5.1:
     dependencies:
