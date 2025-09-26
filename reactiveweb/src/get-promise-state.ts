@@ -206,6 +206,10 @@ export type GetPromiseStateInput<Value> =
  * NOTE: This `getPromiseState` is not a replacement for [WarpDrive](https://docs.warp-drive.io/)'s [getRequestState](https://www.npmjs.com/package/@warp-drive/ember#getrequeststate)
  *       namely, the `getPromiseState` in this library (reactiveweb) does not support futures, cancellation, or anything else specific to warp-drive.
  *
+ *
+ * --------------
+
+_comparison of pure capability_
 
 | . | reactiveweb | @warpdrive/ember |
 | - | ----------- | ---------------- |
@@ -213,25 +217,49 @@ export type GetPromiseStateInput<Value> =
 | use in a getter[^cached-getter] | ✅ | ✅ |
 | usable in template | ✅ | ✅  |
 | immediate has resolved value for resolved promise | ✅  | ✅  |
-| invokes a passed function automatically | ✅ | ❌ |
-| avoids addons using private APIs | ✅ | ❌[^private-apis] |
 | test waiter integration | ✅ | ✅ |
-| no dependencies[^no-dependencies] | ✅[^ember-resources] | ❌ |
-| simple state return[^state-compare] | ✅ | ❌[^wd-aliases] |
+| can be used without build | ✅ | ❌[^warp-drive-no-build] |
+| allows prepopulation of result cache by 3rd party | ❌ | ✅ |
+| discriminated states (helpful for TS) | ❌[^needs-work] | ✅ |
+| align with [allSettled's return value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled#return_value) | ❌[^needs-work] | ✅ |
+
+[^warp-drive-no-build]: the warp-drive team is interested in this work, and wants to make REPLs and CDNs easier as well
 
 
-all in all, they are very similar. The primary use case I had for creating my own is that I wanted dynamic module loading (with import) to be one line (shown in the first example).
+All in all, they are very similar. The primary use case I had for creating my own is that I wanted dynamic module loading (with import) to be one line (shown in the first example).
 
 reactiveweb's `getPromiseState` is made primarily for my needs in my own projects, and I don't intend to say anything negative about `@warp-drive`s `getPromiseState` -- I actually took a lot of code from it! it's a good tool.
+
+These projects of slightly different goals, so some additional information:
+
+_from the perspective of reactiveweb's_ set of goals:
+
+| . | reactiveweb | @warpdrive/ember |
+| - | ----------- | ---------------- |
+| invokes a passed function automatically | ✅ | ❌ |
+| simple state return[^state-compare] | ⚠️[^needs-work] | ⚠️ [^warp-drive-pending-deprecations] |
+
+[^warp-drive-pending-deprecations]: has pending deprecations, otherwise ✅
+[^needs-work]: This is fixable, and probably with little effort, just needs doing
+
+_from the perspective of @warp-drive/core's set of goals_
+
+| . | reactiveweb | @warpdrive/core |
+| - | ----------- | ---------------- |
+| has a simple API surface | ❌ [^invokes-functions] | ✅ |
+| no dependencies | ❌ [^ember-resources] | ⚠️[^warp-drive-no-dependencies] |
+
+
+[^invokes-functions]: `@warp-drive/core` strives for API simplicity, which means few (if any) overloads on its utilities.
+[^warp-drive-no-dependencies]: Does not directly depend on any dependencies, but requires an integration into reactivity (which is technically true for `reactiveweb` as well)
 
 
 [^module-state]: `getPromiseState(promise);`
 [^cached-getter]: requires a stable reference to a promise. getter itself does not need to be cached.
-[^private-apis]: `@warp-drive/ember` declares an optional peer dependency on `ember-provide-consume-context`, which uses private apis, and we don't want to support usage of private APIs.
 [^no-dependencies]: warp-drive requires a macros config that isn't compatible with "non-config" projects (it's mostly how they generate macros to not gracefully have some behavior if you don't set up their required babel config -- which affects REPL environments (this is solveable via pushing the responsibility to configure babel to the REPLer)). Also, the warp-drive team says this is on their radar, and the'll address it eventually / soon.
 [^ember-resources]: reactiveweb (as a whole) does depend on on ember-resources, but ember-resources itself has no dependencies (for real), and is a very tiny use of a helper manager. Additionally, `getPromiseState` does not depend on `ember-resources`.
 [^wd-aliases]: warp-drive provides _many_ aliases for states, as well as support some extended promise behavior which is not built in to the platform (Futures, etc). This is still good for convenience and compatibility.
-[^state-compare]: in reactiveweb: [State](https://reactive.nullvoxpopuli.com/interfaces/get-promise-state.State.html), and then in `@warp-drive/*`: the [`PromiseState`](https://warp-drive.io/api/@warp-drive/ember/type-aliases/PromiseState) is made of 3 sub types: [PendingPromise](https://warp-drive.io/api/@warp-drive/core/reactive/interfaces/PendingPromise), [ResolvedPromise](https://warp-drive.io/api/@warp-drive/core/reactive/interfaces/ResolvedPromise), and [RejectedPromise](https://warp-drive.io/api/@warp-drive/core/reactive/interfaces/RejectedPromise)
+[^state-compare]: in reactiveweb: [State](https://reactive.nullvoxpopuli.com/interfaces/get-promise-state.State.html), and then in `@warp-drive/*`: the [`PromiseState`](https://warp-drive.io/api/@warp-drive/ember/type-aliases/PromiseState) is made of 3 sub types: [PendingPromise](https://warp-drive.io/api/@warp-drive/core/reactive/interfaces/PendingPromise), [ResolvedPromise](https://warp-drive.io/api/@warp-drive/core/reactive/interfaces/ResolvedPromise), and [RejectedPromise](https://warp-drive.io/api/@warp-drive/core/reactive/interfaces/RejectedPromise). Over time, these will align slightly with [allSettled's return value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled#return_value).
  *
  */
 export function getPromiseState<Value, Result = ResolvedValueOf<Value>>(
