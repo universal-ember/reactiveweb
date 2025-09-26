@@ -5,8 +5,8 @@
   "scripts": {
     "start": "pnpm docs:watch",
     "debug": "npx html-pages ./dist --no-cache",
-    "docs:collect": "typedoc --options ./typedoc.config.json",
-    "docs:watch": "typedoc --options ./typedoc.config.json --watch"
+    "docs:collect": "typedoc --options ./typedoc.config.mjs",
+    "docs:watch": "typedoc --options ./typedoc.config.mjs --watch"
   },
   "devDependencies": {
     "markdown-it-footnote": "^4.0.0",
