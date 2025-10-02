@@ -218,6 +218,7 @@ _comparison of pure capability_
 | usable in template | ✅ | ✅  |
 | immediate has resolved value for resolved promise | ✅  | ✅  |
 | test waiter integration | ✅ | ✅ |
+| allows non-promises (forgiving inputs) | ✅ | ❌ |
 | can be used without build | ✅ | ❌[^warp-drive-no-build] |
 | allows prepopulation of result cache by 3rd party | ❌ | ✅ |
 | discriminated states (helpful for TS) | ❌[^needs-work] | ✅ |
