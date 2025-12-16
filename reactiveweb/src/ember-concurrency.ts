@@ -53,14 +53,10 @@ export function task<
 >(context: object, task: LocalTask, thunk?: () => Args) {
   assert(`Task does not have a perform method. Is it actually a task?`, 'perform' in task);
 
-  const state = new State<Args, Return, LocalTask>(task);
+  const state = new State<Args, Return, LocalTask>(task, thunk);
 
   let destroyable = resource(context, () => {
-    let args = thunk || DEFAULT_THUNK;
-
-    let positional = normalizeThunk(args).positional as Args;
-
-    state[RUN](positional || []);
+    state[RUN]();
 
     return state;
   });
@@ -69,7 +65,7 @@ export function task<
 
   registerDestructor(state, () => state[TASK].cancelAll());
 
-  return destroyable as unknown as TaskInstance<Return>;
+  return destroyable as unknown as TaskInstance<Return> & { retry: () => void };
 }
 
 export const trackedTask = task;
@@ -110,6 +106,7 @@ export interface TaskInstance<Return = unknown> extends Promise<Return> {
 export const TASK = Symbol('TASK');
 
 const RUN = Symbol('RUN');
+const THUNK = Symbol('THUNK');
 
 /**
  * @private
@@ -117,9 +114,11 @@ const RUN = Symbol('RUN');
 export class State<Args extends any[], Return, LocalTask extends TaskIsh<Args, Return>> {
   // Set via useTask
   declare [TASK]: LocalTask;
+  declare [THUNK]?: () => Args;
 
-  constructor(task: LocalTask) {
+  constructor(task: LocalTask, thunk?: () => Args) {
     this[TASK] = task;
+    this[THUNK] = thunk;
 
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
@@ -161,6 +160,10 @@ export class State<Args extends any[], Return, LocalTask extends TaskIsh<Args, R
           return taskRunner.value;
         }
 
+        if (key === 'retry') {
+          return taskRunner.retry;
+        }
+
         // We can be thennable, but we'll want to entangle with tracked data
         if (key === 'then') {
           get(taskRunner.currentTask, 'isRunning');
@@ -193,11 +196,22 @@ export class State<Args extends any[], Return, LocalTask extends TaskIsh<Args, R
     return this.lastTask?.value;
   }
 
-  [RUN] = (positional: Args) => {
+  [RUN] = () => {
+    let args = this[THUNK] || DEFAULT_THUNK;
+
+    let positional = (normalizeThunk(args).positional ?? []) as Args;
+
     if (this.currentTask) {
       this.lastTask = this.currentTask;
     }
 
     this.currentTask = this[TASK].perform(...positional);
+  };
+
+  /**
+   * Will re-invoke the task passed to `trackedTask`
+   */
+  retry = () => {
+    this[RUN]();
   };
 }
