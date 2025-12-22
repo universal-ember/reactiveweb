@@ -116,6 +116,8 @@ function directLink(child: object, parent: object) {
 
   if (owner) {
     setOwner(child, owner);
+  } else if (typeof parent.lookup === 'function') {
+    setOwner(child, parent);
   }
 
   return child;
