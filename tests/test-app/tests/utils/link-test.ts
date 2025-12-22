@@ -69,4 +69,18 @@ module('link', function (hooks) {
 
     assert.strictEqual(demo.foo.foo, 2);
   });
+
+  test('it works with directly being passed the owner for the parent', function (assert) {
+    this.owner.register('service:foo', FooService);
+
+    class Demo {
+      @service declare foo: FooService;
+    }
+
+    let demo = new Demo();
+
+    link(demo, this.owner);
+
+    assert.strictEqual(demo.foo.foo, 2);
+  });
 });
