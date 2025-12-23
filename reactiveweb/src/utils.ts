@@ -1,4 +1,4 @@
-import type { ArgsWrapper, Thunk } from 'ember-resources';
+import type { ArgsWrapper, Thunk } from './resource/types.ts';
 
 export const DEFAULT_THUNK = () => [];
 
