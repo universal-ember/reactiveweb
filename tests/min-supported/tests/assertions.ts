@@ -1,4 +1,3 @@
- 
 export function stepProperties(assert: Assert, obj: unknown, properties: string[]) {
   if (typeof obj !== 'object') {
     assert.false(`object is of incorrect type, ${typeof obj}`);
