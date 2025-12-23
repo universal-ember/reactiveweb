@@ -1,0 +1,16 @@
+# unconventional js
+/blueprints/*/files/
+
+# compiled output
+/dist/
+.eslintignore
+.eslintcache
+
+# misc
+/coverage/
+/public/
+!.*
+.*/
+
+# ember-try
+/.node_modules.ember-try/
