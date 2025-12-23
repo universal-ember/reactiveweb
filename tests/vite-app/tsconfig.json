@@ -10,8 +10,8 @@
     // work with TypeScript.
     "baseUrl": ".",
     "paths": {
-      "test-app/tests/*": ["tests/*"],
-      "test-app/*": ["app/*"],
+      "vite-app/tests/*": ["tests/*"],
+      "vite-app/*": ["app/*"],
       "*": ["types/*"]
     },
     "types": ["ember-source/types", "@glint/ember-tsc/types"]

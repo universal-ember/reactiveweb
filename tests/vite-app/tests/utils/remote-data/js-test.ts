@@ -7,7 +7,7 @@ import { setupTest } from 'ember-qunit';
 import { resource, use } from 'ember-resources';
 import { HttpResponse } from 'msw';
 import { RemoteData, remoteData } from 'reactiveweb/remote-data';
-import { setupMSW } from 'test-app/tests/msw';
+import { setupMSW } from 'vite-app/tests/msw';
 
 const data = [
   { id: '1', type: 'blogs', attributes: { name: `name:1` } },

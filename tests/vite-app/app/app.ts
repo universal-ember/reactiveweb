@@ -8,7 +8,7 @@ import Resolver from 'ember-resolver';
 import config from './config/environment';
 
 if (macroCondition(isDevelopingApp())) {
-  importSync('test-app/deprecation-workflow');
+  importSync('vite-app/deprecation-workflow');
 }
 
 export default class App extends Application {

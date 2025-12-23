@@ -6,7 +6,7 @@ import { setupRenderingTest } from 'ember-qunit';
 
 import { HttpResponse } from 'msw';
 import { RemoteData } from 'reactiveweb/remote-data';
-import { setupMSW } from 'test-app/tests/msw';
+import { setupMSW } from 'vite-app/tests/msw';
 
 const data = [
   { id: '1', type: 'blogs', attributes: { name: `name:1` } },

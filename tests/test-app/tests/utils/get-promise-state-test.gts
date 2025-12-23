@@ -134,7 +134,7 @@ module('getPromiseState', function (hooks) {
 
     module('errors', function () {
       test('Promise.reject', async function (assert) {
-        // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
+         
         const state = getPromiseState(Promise.reject('hello'));
 
         await stateStepper(state, assert);
@@ -148,7 +148,7 @@ module('getPromiseState', function (hooks) {
       });
 
       test('() => Promise.reject', async function (assert) {
-        // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
+         
         const state = getPromiseState(() => Promise.reject('hello'));
 
         await stateStepper(state, assert);
@@ -210,7 +210,7 @@ module('getPromiseState', function (hooks) {
 
       test('async () => Promise.reject', async function (assert) {
         const state = getPromiseState(async () => {
-          // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
+           
           return await Promise.reject('hello');
         });
 

@@ -1,6 +1,6 @@
 import { registerDeprecationHandler } from '@ember/debug';
 
-import config from 'test-app/config/environment';
+import config from 'vite-app/config/environment';
 
 const SHOULD_THROW = config.environment !== 'production';
 const SILENCED_DEPRECATIONS: string[] = [

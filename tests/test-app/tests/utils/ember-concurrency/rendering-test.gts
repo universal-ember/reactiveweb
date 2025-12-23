@@ -294,7 +294,7 @@ module('useTask', function () {
         search = trackedTask(this, this._search, () => [this.input]);
 
         get result() {
-          // eslint-disable-next-line @typescript-eslint/no-base-to-string
+           
           return `${this.search.value || ''}`;
         }
       }

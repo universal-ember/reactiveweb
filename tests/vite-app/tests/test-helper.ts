@@ -4,8 +4,8 @@ import * as QUnit from 'qunit';
 import { setup } from 'qunit-dom';
 import { start as qunitStart } from 'ember-qunit';
 
-import Application from 'test-app/app';
-import config from 'test-app/config/environment';
+import Application from 'vite-app/app';
+import config from 'vite-app/config/environment';
 
 export function start() {
   setApplication(Application.create(config.APP));

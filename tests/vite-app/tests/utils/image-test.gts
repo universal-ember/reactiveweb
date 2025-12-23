@@ -4,7 +4,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
 import { ReactiveImage } from 'reactiveweb/image';
-import { stepProperties } from 'test-app/tests/assertions';
+import { stepProperties } from 'vite-app/tests/assertions';
 
 const properties = ['value', 'isResolved', 'isLoading', 'isError'];
 const tinyProfilePic = 'https://avatars.githubusercontent.com/u/199018?s=40&v=4';

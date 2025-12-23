@@ -1,5 +1,5 @@
 {
-  "name": "test-app",
+  "name": "vite-app",
   "version": "0.0.0",
   "private": true,
   "description": "Test app for reactiveweb addon",
