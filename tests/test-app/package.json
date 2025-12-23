@@ -87,7 +87,7 @@
     "@ember/test-waiters": "^4.1.1",
     "@embroider/macros": "^1.19.5",
     "@nullvoxpopuli/eslint-configs": "^5.5.0",
-    "ember-concurrency": "^3.1.1",
+    "ember-concurrency": "^5.0.0",
     "ember-modify-based-class-resource": "^1.1.0",
     "ember-resources": "^6.5.1",
     "msw": "^2.4.7"
