@@ -294,7 +294,7 @@ module('useTask', function () {
         search = trackedTask(this, this._search, () => [this.input]);
 
         get result() {
-          return `${this.search.value || ''}`;
+          return `${String(this.search.value) || ''}`;
         }
       }
 
