@@ -14,6 +14,9 @@ importers:
       '@glint/core':
         specifier: ^1.2.1
         version: 1.4.0(typescript@5.6.3)
+      '@glint/template':
+        specifier: ~1.5.1
+        version: 1.5.2
       concurrently:
         specifier: ^9.0.1
         version: 9.0.1
@@ -1702,6 +1705,9 @@ packages:
 
   '@glint/template@1.4.0':
     resolution: {integrity: sha512-yD271NhLei/HSQ6utm6hKgoU+B5D5DY+B1irPvgI4KsDEcZI7v/INf5HAMJfzCg92bP1sIxSOuXu5DU6VsY7Mw==}
+
+  '@glint/template@1.5.2':
+    resolution: {integrity: sha512-fA9FoHCmWsWkoOKWshsOQlS0WCAM7NwwoaeSTHuz5yHvBZmmtkgx3t2SPOTJs85/hWTNVzYC/Gthw7xDUR3BlQ==}
 
   '@glint/template@1.6.0-alpha.3':
     resolution: {integrity: sha512-S7k7EWjNr6KMZ1+XJcVKLdy7/M9AaFh+zfmXwfJlRaVhjM6lBhn5KGUnf33sJ63EHzyorWKsCsiqxyXSx0GAYQ==}
@@ -10871,6 +10877,8 @@ snapshots:
       content-tag: 2.0.1
 
   '@glint/template@1.4.0': {}
+
+  '@glint/template@1.5.2': {}
 
   '@glint/template@1.6.0-alpha.3': {}
 

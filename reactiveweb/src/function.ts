@@ -235,7 +235,7 @@ export class State<Value> {
    * When true, the function passed to `trackedFunction` has resolved
    */
   get isResolved() {
-    return this.#state.resolved ?? false;
+    return Boolean(this.#state.resolved);
   }
 
   /**
