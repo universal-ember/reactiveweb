@@ -18,7 +18,6 @@
   },
   "devDependencies": {
     "@glint/core": "^1.2.1",
-    "@glint/template": "~1.5.1",
     "concurrently": "^9.0.1",
     "prettier": "^3.0.3",
     "prettier-plugin-ember-template-tag": "^2.0.0",
@@ -41,7 +40,8 @@
       ]
     },
     "overrides": {
-      "@glimmer/validator": "^0.92.0"
+      "@glimmer/validator": "^0.92.0",
+      "@glint/template": "~1.5.1"
     }
   }
 }
