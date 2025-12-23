@@ -23,7 +23,7 @@ module('@link', function (hooks) {
       @link(Demo) declare demo: Demo;
     }
 
-    let testDemo = new TestDemo();
+    const testDemo = new TestDemo();
 
     setOwner(testDemo, this.owner);
 
@@ -41,7 +41,7 @@ module('@link', function (hooks) {
       @link demo = new Demo();
     }
 
-    let testDemo = new TestDemo();
+    const testDemo = new TestDemo();
 
     setOwner(testDemo, this.owner);
 
@@ -63,7 +63,7 @@ module('link', function (hooks) {
       @service declare foo: FooService;
     }
 
-    let demo = new Demo();
+    const demo = new Demo();
 
     link(demo, this);
 

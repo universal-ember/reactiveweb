@@ -7,7 +7,7 @@ export function normalizeThunk(thunk?: Thunk): ArgsWrapper {
     return { named: {}, positional: [] };
   }
 
-  let args = thunk();
+  const args = thunk();
 
   if (Array.isArray(args)) {
     return { named: {}, positional: args };

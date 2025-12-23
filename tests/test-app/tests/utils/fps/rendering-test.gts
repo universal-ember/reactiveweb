@@ -19,7 +19,7 @@ module('Utils | FPS | rendering', function (hooks) {
         </template>
       );
 
-      let text = find('out')?.innerHTML?.trim() || '';
+      const text = find('out')?.innerHTML?.trim() || '';
 
       assert.notStrictEqual(text, '', 'Content is rendered');
     });
@@ -48,7 +48,7 @@ module('Utils | FPS | rendering', function (hooks) {
         await click('button');
       }
 
-      let text = find('out')?.innerHTML?.trim() || '';
+      const text = find('out')?.innerHTML?.trim() || '';
 
       assert.notStrictEqual(text, '', 'Content is rendered');
     });

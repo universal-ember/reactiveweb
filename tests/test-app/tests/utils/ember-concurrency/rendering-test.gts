@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { render, settled, setupOnerror } from '@ember/test-helpers';
@@ -9,7 +8,7 @@ import { restartableTask, timeout } from 'ember-concurrency';
 import { trackedTask } from 'reactiveweb/ember-concurrency';
 import { trackedFunction } from 'reactiveweb/function';
 
-let version = '^3.0.0';
+const version = '^3.0.0';
 
 module('useTask', function () {
   module('ember-concurrency@v3', function () {
@@ -85,7 +84,7 @@ module('useTask', function () {
         search = trackedTask(this, this._search, () => [this.input]);
 
         wrappedSearch = trackedFunction(this, async () => {
-          let result = await this.search;
+          const result = await this.search;
 
           assert.step(`tf:${result}`);
 
@@ -93,7 +92,7 @@ module('useTask', function () {
         });
       }
 
-      let ctx = new Test();
+      const ctx = new Test();
 
       render(<template>{{ctx.wrappedSearch.value}}</template>);
 
@@ -141,7 +140,7 @@ module('useTask', function () {
         }
       }
 
-      let ctx = new Test();
+      const ctx = new Test();
 
       render(<template>{{ctx.error}}</template>);
 
@@ -167,7 +166,7 @@ module('useTask', function () {
         search = trackedTask(this, this._search, () => [this.input]);
       }
 
-      let ctx = new Test();
+      const ctx = new Test();
 
       render(<template>{{ctx.search.hasStarted}}</template>);
 
@@ -191,7 +190,7 @@ module('useTask', function () {
         search = trackedTask(this, this._search);
       }
 
-      let ctx = new Test();
+      const ctx = new Test();
 
       render(<template>{{ctx.search.isCanceled}}</template>);
 
@@ -217,7 +216,7 @@ module('useTask', function () {
         search = trackedTask(this, this._search);
       }
 
-      let ctx = new Test();
+      const ctx = new Test();
 
       render(<template>{{ctx.search.isError}}</template>);
 
@@ -243,7 +242,7 @@ module('useTask', function () {
         search = trackedTask(this, this._search, () => [this.input]);
       }
 
-      let ctx = new Test();
+      const ctx = new Test();
 
       render(<template>{{ctx.search.isFinished}}</template>);
 
@@ -269,7 +268,7 @@ module('useTask', function () {
         search = trackedTask(this, this._search, () => [this.input]);
       }
 
-      let ctx = new Test();
+      const ctx = new Test();
 
       render(<template>{{ctx.search.isSuccessful}}</template>);
 
@@ -295,11 +294,12 @@ module('useTask', function () {
         search = trackedTask(this, this._search, () => [this.input]);
 
         get result() {
+          // eslint-disable-next-line @typescript-eslint/no-base-to-string
           return `${this.search.value || ''}`;
         }
       }
 
-      let ctx = new Test();
+      const ctx = new Test();
 
       render(<template>{{ctx.result}}</template>);
 

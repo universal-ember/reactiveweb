@@ -20,7 +20,7 @@ module('Utils | helper | js', function (hooks) {
       doubler = helper(this, this._doubler, () => [this.count]);
     }
 
-    let foo = new Test();
+    const foo = new Test();
 
     setOwner(foo, this.owner);
 

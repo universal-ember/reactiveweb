@@ -17,7 +17,7 @@ module('getPromiseState', function (hooks) {
 
   module('state', function () {
     async function stateStepper(state: State<unknown>, assert: QUnit['assert']) {
-      let step = (msg: string) => assert.step(msg);
+      const step = (msg: string) => assert.step(msg);
 
       await render(
         <template>
@@ -29,7 +29,7 @@ module('getPromiseState', function (hooks) {
     }
 
     test('handles value', async function (assert) {
-      let state = getPromiseState('hello');
+      const state = getPromiseState('hello');
 
       await stateStepper(state, assert);
 
@@ -38,7 +38,7 @@ module('getPromiseState', function (hooks) {
     });
 
     test('handles Promise (state created outside template)', async function (assert) {
-      let state = getPromiseState(Promise.resolve('hello'));
+      const state = getPromiseState(Promise.resolve('hello'));
 
       await stateStepper(state, assert);
 
@@ -47,9 +47,9 @@ module('getPromiseState', function (hooks) {
     });
 
     test('handles Promise (state created inside template)', async function (assert) {
-      let promiseValue = Promise.resolve('hello');
+      const promiseValue = Promise.resolve('hello');
 
-      let step = (msg: string) => assert.step(msg);
+      const step = (msg: string) => assert.step(msg);
 
       await render(
         <template>
@@ -65,7 +65,7 @@ module('getPromiseState', function (hooks) {
     });
 
     test('handles sync function', async function (assert) {
-      let state = getPromiseState(() => 'hello');
+      const state = getPromiseState(() => 'hello');
 
       await stateStepper(state, assert);
 
@@ -74,7 +74,7 @@ module('getPromiseState', function (hooks) {
     });
 
     test('handles async function', async function (assert) {
-      let state = getPromiseState(async () => Promise.resolve('hello'));
+      const state = getPromiseState(async () => Promise.resolve('hello'));
 
       await stateStepper(state, assert);
 
@@ -83,7 +83,7 @@ module('getPromiseState', function (hooks) {
     });
 
     test('handles async function (with delay)', async function (assert) {
-      let state = getPromiseState(async () => {
+      const state = getPromiseState(async () => {
         await new Promise((resolve) => setTimeout(resolve, 100));
 
         return 'hello';
@@ -97,13 +97,13 @@ module('getPromiseState', function (hooks) {
 
     module('dedupe', function () {
       test('async () => string', async function (assert) {
-        let fun = async () => {
+        const fun = async () => {
           await Promise.resolve();
 
           return 'hello';
         };
-        let step = (msg: string) => assert.step(msg);
-        let second = cell(false);
+        const step = (msg: string) => assert.step(msg);
+        const second = cell(false);
 
         await render(
           <template>
@@ -134,7 +134,8 @@ module('getPromiseState', function (hooks) {
 
     module('errors', function () {
       test('Promise.reject', async function (assert) {
-        let state = getPromiseState(Promise.reject('hello'));
+        // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
+        const state = getPromiseState(Promise.reject('hello'));
 
         await stateStepper(state, assert);
 
@@ -147,7 +148,8 @@ module('getPromiseState', function (hooks) {
       });
 
       test('() => Promise.reject', async function (assert) {
-        let state = getPromiseState(() => Promise.reject('hello'));
+        // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
+        const state = getPromiseState(() => Promise.reject('hello'));
 
         await stateStepper(state, assert);
 
@@ -160,7 +162,8 @@ module('getPromiseState', function (hooks) {
       });
 
       test('() => throw (string)', async function (assert) {
-        let state = getPromiseState(() => {
+        const state = getPromiseState(() => {
+          // eslint-disable-next-line @typescript-eslint/only-throw-error
           throw 'hello';
         });
 
@@ -175,7 +178,7 @@ module('getPromiseState', function (hooks) {
       });
 
       test('() => throw (Error)', async function (assert) {
-        let state = getPromiseState(() => {
+        const state = getPromiseState(() => {
           throw new Error('hello');
         });
 
@@ -190,7 +193,7 @@ module('getPromiseState', function (hooks) {
       });
 
       test('async () => throw (Error)', async function (assert) {
-        let state = getPromiseState(async () => {
+        const state = getPromiseState(async () => {
           await Promise.resolve();
           throw new Error('hello');
         });
@@ -206,7 +209,8 @@ module('getPromiseState', function (hooks) {
       });
 
       test('async () => Promise.reject', async function (assert) {
-        let state = getPromiseState(async () => {
+        const state = getPromiseState(async () => {
+          // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
           return await Promise.reject('hello');
         });
 

@@ -70,8 +70,8 @@ export class State<T = unknown> {
    * or if the request.status is >= 400
    */
   get isError() {
-    let httpError = this.status && this.status >= 400;
-    let promiseThrew = this.isRejected;
+    const httpError = this.status && this.status >= 400;
+    const promiseThrew = this.isRejected;
 
     return httpError || promiseThrew;
   }
@@ -119,8 +119,8 @@ export function remoteData<T = unknown>(
   url: string,
   options: FetchOptions = {}
 ): State<T> {
-  let state = new State<T>();
-  let controller = new AbortController();
+  const state = new State<T>();
+  const controller = new AbortController();
 
   on.cleanup(() => controller.abort());
 
@@ -248,14 +248,14 @@ export function RemoteData<T = unknown>(
   opts?: FetchOptions
 ) {
   return resource((hooks) => {
-    let result = typeof url === 'string' ? url : url();
+    const result = typeof url === 'string' ? url : url();
     let targetUrl: string;
     let options: FetchOptions = {};
 
     if (typeof result === 'string') {
       targetUrl = result;
     } else {
-      let { url, ...opts } = result;
+      const { url, ...opts } = result;
 
       targetUrl = url;
       options = opts;

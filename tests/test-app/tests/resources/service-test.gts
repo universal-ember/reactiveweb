@@ -5,23 +5,21 @@ import { setupRenderingTest } from 'ember-qunit';
 
 import { Resource } from 'ember-modify-based-class-resource';
 import { cell, resource } from 'ember-resources';
-import { service, serviceOverride } from 'reactiveweb/resource/service';
 // This export is marked as @internal, so it is not present in
 // the built d.ts files.
 // @ts-expect-error - types are deliberately not exported
-import { __secret_service_cache__ } from 'reactiveweb/resource/service';
+import { __secret_service_cache__, service, serviceOverride } from 'reactiveweb/resource/service';
 
 import type Owner from '@ember/owner';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CACHE = __secret_service_cache__ as WeakMap<Owner, Map<object, any>>;
 
 module('@service | rendering', function (hooks) {
   setupRenderingTest(hooks);
 
   const Clock = resource(({ on }) => {
-    let time = cell(new Date());
-    let interval = setInterval(() => {
+    const time = cell(new Date());
+    const interval = setInterval(() => {
       time.current = new Date();
     }, 1000);
 
@@ -32,7 +30,7 @@ module('@service | rendering', function (hooks) {
     return () => time.current;
   });
 
-  let counter = 0;
+  const counter = 0;
 
   class APIWrapper extends Resource {
     /**
@@ -42,7 +40,7 @@ module('@service | rendering', function (hooks) {
     hello = 'world' + counter;
   }
 
-  let asString = (x: unknown) => `${x}`;
+  const asString = (x: unknown) => `${x}`;
 
   test('it works', async function (assert) {
     class Demo extends Component {
@@ -63,8 +61,8 @@ module('@service | rendering', function (hooks) {
     );
 
     // Ensure that #one and #two have the same text
-    let helloText = find('#one out')?.textContent?.trim() || `<no text found!!>`;
-    let clockText = find('#one time')?.textContent?.trim() || `<no text found!!>`;
+    const helloText = find('#one out')?.textContent?.trim() || `<no text found!!>`;
+    const clockText = find('#one time')?.textContent?.trim() || `<no text found!!>`;
 
     assert.dom('#two time').hasText(clockText);
     assert.dom('#two out').hasText(helloText);
@@ -98,7 +96,7 @@ module('@service | rendering', function (hooks) {
     );
 
     // Ensure that #one and #two have the same text
-    let helloText = find('#one out')?.textContent?.trim() || `<no text found!!>`;
+    const helloText = find('#one out')?.textContent?.trim() || `<no text found!!>`;
 
     assert.dom('#one out').hasText('there');
     assert.dom('#two out').hasText(helloText);

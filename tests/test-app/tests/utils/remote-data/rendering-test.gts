@@ -8,20 +8,19 @@ import { HttpResponse } from 'msw';
 import { RemoteData } from 'reactiveweb/remote-data';
 import { setupMSW } from 'test-app/tests/msw';
 
-let data = [
+const data = [
   { id: '1', type: 'blogs', attributes: { name: `name:1` } },
   { id: '2', type: 'blogs', attributes: { name: `name:2` } },
   { id: '3', type: 'blogs', attributes: { name: `name:3` } },
 ];
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let safeName = (blog: any): string => blog?.value?.attributes?.name;
+const safeName = (blog: any): string => blog?.value?.attributes?.name;
 
 module('Utils | remote-data | rendering', function (hooks) {
   setupRenderingTest(hooks);
   setupMSW(hooks, ({ http }) => [
     http.get('/blogs/:id', ({ params }) => {
-      let record = data.find((datum) => datum.id === params['id']);
+      const record = data.find((datum) => datum.id === params['id']);
 
       return HttpResponse.json({ ...record });
     }),
@@ -49,7 +48,7 @@ module('Utils | remote-data | rendering', function (hooks) {
         }
       }
 
-      let foo = new Test();
+      const foo = new Test();
 
       await render(
         <template>
@@ -78,7 +77,7 @@ module('Utils | remote-data | rendering', function (hooks) {
         update = () => this.id++;
       }
 
-      let foo = new Test();
+      const foo = new Test();
 
       await render(
         <template>

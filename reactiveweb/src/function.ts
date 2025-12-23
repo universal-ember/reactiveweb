@@ -135,7 +135,7 @@ const START = Symbol.for('__reactiveweb_trackedFunction__START__');
 function classUsable<Return>(fn: (meta: CallbackMeta) => Return) {
   const state = new State(fn);
 
-  let destroyable = resource<State<Return>>(() => {
+  const destroyable = resource<State<Return>>(() => {
     state[START]();
 
     return state;
@@ -149,7 +149,7 @@ function classUsable<Return>(fn: (meta: CallbackMeta) => Return) {
 function directTrackedFunction<Return>(context: object, fn: (meta: CallbackMeta) => Return) {
   const state = new State(fn);
 
-  let destroyable = resource<State<Return>>(context, () => {
+  const destroyable = resource<State<Return>>(context, () => {
     state[START]();
 
     return state;
@@ -235,7 +235,7 @@ export class State<Value> {
    * When true, the function passed to `trackedFunction` has resolved
    */
   get isResolved() {
-    return Boolean(this.#state.resolved) ?? false;
+    return this.#state.resolved ?? false;
   }
 
   /**
@@ -294,7 +294,7 @@ export class State<Value> {
 
   async [START]() {
     try {
-      let promise = this._dangerousRetry({ isRetrying: false });
+      const promise = this._dangerousRetry({ isRetrying: false });
 
       await waitForPromise(promise);
     } catch (e) {
@@ -319,7 +319,7 @@ export class State<Value> {
        * - immediately when inovking `fn` (where auto-tracking occurs)
        * - after an await, "eventually"
        */
-      let promise = this._dangerousRetry({ isRetrying: true });
+      const promise = this._dangerousRetry({ isRetrying: true });
 
       await waitForPromise(promise);
     } catch (e) {

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { getValue } from '@glimmer/tracking/primitives/cache';
 import { assert } from '@ember/debug';
 import { associateDestroyableChild } from '@ember/destroyable';
@@ -10,7 +10,7 @@ import { compatOwner } from '../-private/ember-compat.ts';
 import type Owner from '@ember/owner';
 import type { Stage1DecoratorDescriptor } from '#types';
 
-let getOwner = compatOwner.getOwner;
+const getOwner = compatOwner.getOwner;
 
 /**
  * In order for the same cache to be used for all references
@@ -114,7 +114,7 @@ export function service(resource: unknown) {
 
     return {
       get(this: object) {
-        let owner = getOwner(this);
+        const owner = getOwner(this);
 
         assert(
           `owner was not found on instance of ${this.constructor.name}. ` +
@@ -126,9 +126,9 @@ export function service(resource: unknown) {
         assert(`Resource definition is invalid`, isResourceType(resource));
 
         if (macroCondition(isTesting() || isDevelopingApp())) {
-          let cachedReplacements = ensureCaches(owner, REPLACEMENTS);
+          const cachedReplacements = ensureCaches(owner, REPLACEMENTS);
 
-          let replacement = cachedReplacements.get(resource);
+          const replacement = cachedReplacements.get(resource);
 
           if (replacement) {
             resource = replacement;
@@ -137,7 +137,7 @@ export function service(resource: unknown) {
           }
         }
 
-        let caches = ensureCaches(owner);
+        const caches = ensureCaches(owner);
         let cache = caches.get(resource);
 
         if (!cache) {
@@ -156,7 +156,7 @@ export function service(resource: unknown) {
              * We do a lot of lying internally to make TypeScript nice for consumers.
              * But it does mean that we have to cast in our own code.
              */
-            let { definition } = (resource as any).from(() => []) as unknown as any;
+            const { definition } = resource.from(() => []) as unknown as any;
 
             cache = invokeHelper(owner, definition);
             caches.set(resource, cache);
@@ -209,14 +209,14 @@ export function serviceOverride(owner: Owner, { original, replacement }: Registe
     );
   }
 
-  let caches = ensureCaches(owner);
+  const caches = ensureCaches(owner);
 
   assert(`Original Resource definition is invalid`, isResourceType(original));
   assert(`Replacement Resource definition is invalid`, isResourceType(replacement));
 
   assert(`Cannot re-register service after it has been accessed.`, !caches.has(original));
 
-  let replacementCache = ensureCaches(owner, REPLACEMENTS);
+  const replacementCache = ensureCaches(owner, REPLACEMENTS);
 
   replacementCache.set(original, replacement);
 }

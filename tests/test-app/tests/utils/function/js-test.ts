@@ -17,7 +17,7 @@ module('Utils | trackedFunction | js', function (hooks) {
       @tracked count = 1;
 
       data = trackedFunction(this, async () => {
-        let count = this.count;
+        const count = this.count;
 
         runCount++;
         // Pretend we're doing async work
@@ -31,7 +31,7 @@ module('Utils | trackedFunction | js', function (hooks) {
       });
     }
 
-    let foo = new Test();
+    const foo = new Test();
 
     assert.strictEqual(foo.data.value, null);
 
@@ -58,7 +58,7 @@ module('Utils | trackedFunction | js', function (hooks) {
       });
     }
 
-    let foo = new Test();
+    const foo = new Test();
 
     assert.strictEqual(foo.data.value, 2);
 
@@ -86,7 +86,7 @@ module('Utils | trackedFunction | js', function (hooks) {
       @tracked count = 1;
 
       data = trackedFunction(this, async () => {
-        let count = this.count;
+        const count = this.count;
 
         // Pretend we're doing async work
         await Promise.resolve();
@@ -95,7 +95,7 @@ module('Utils | trackedFunction | js', function (hooks) {
       });
     }
 
-    let foo = new Test();
+    const foo = new Test();
 
     assert.strictEqual(foo.data.value, null);
 

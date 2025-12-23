@@ -178,7 +178,7 @@ export function map<Elements extends readonly unknown[], MapTo = unknown>(
     map: (element: Elements[0]) => MapTo;
   }
 ): MappedArray<Elements, MapTo> {
-  let { data, map } = options;
+  const { data, map } = options;
 
   return new TrackedArrayMap(destroyable, data, map) as MappedArray<Elements, MapTo>;
 }
@@ -188,9 +188,10 @@ const AT = '__AT__';
 /**
  * @private
  */
-export class TrackedArrayMap<Element = unknown, MappedTo = unknown>
-  implements MappedArray<Element[], MappedTo>
-{
+export class TrackedArrayMap<Element = unknown, MappedTo = unknown> implements MappedArray<
+  Element[],
+  MappedTo
+> {
   // Tells TS that we can array-index-access
   [index: number]: MappedTo;
 
@@ -201,7 +202,7 @@ export class TrackedArrayMap<Element = unknown, MappedTo = unknown>
   private _mapper: (element: Element) => MappedTo;
 
   constructor(owner: object, data: () => readonly Element[], map: (element: Element) => MappedTo) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     setOwner(this, owner as any);
 
     this._dataFn = data;
@@ -221,7 +222,7 @@ export class TrackedArrayMap<Element = unknown, MappedTo = unknown>
     return new Proxy(this, {
       get(_target, property) {
         if (typeof property === 'string') {
-          let parsed = parseInt(property, 10);
+          const parsed = parseInt(property, 10);
 
           if (!isNaN(parsed)) {
             return self[AT](parsed);
@@ -239,7 +240,7 @@ export class TrackedArrayMap<Element = unknown, MappedTo = unknown>
    * because we support 3.28, and @cached was introduced in 4.1-4.5
    */
   #records = createCache(() => {
-    let data = this._dataFn();
+    const data = this._dataFn();
 
     assert(
       `Every entry in the data passed to \`map\` must be an object.`,
@@ -268,7 +269,7 @@ export class TrackedArrayMap<Element = unknown, MappedTo = unknown>
           return { done: true, value: null };
         }
 
-        let value = this[AT](i);
+        const value = this[AT](i);
 
         i++;
 
@@ -287,7 +288,7 @@ export class TrackedArrayMap<Element = unknown, MappedTo = unknown>
    *   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
    */
   [AT] = (i: number) => {
-    let record = this._records[i];
+    const record = this._records[i];
 
     assert(
       `Expected record to exist at index ${i}, but it did not. ` +

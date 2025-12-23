@@ -20,7 +20,7 @@ module('Utils | keepLatest | rendering', function (hooks) {
 
       // @use request = trackedFunction(async () => {
       request = trackedFunction(this, async () => {
-        let value = this.x;
+        const value = this.x;
 
         await timeout(30);
 
@@ -28,9 +28,9 @@ module('Utils | keepLatest | rendering', function (hooks) {
       });
     }
 
-    let instance = new Test();
+    const instance = new Test();
 
-    let passthrough = <T,>(x: T) => x;
+    const passthrough = <T,>(x: T) => x;
 
     render(
       <template>
@@ -65,7 +65,7 @@ module('Utils | keepLatest | rendering', function (hooks) {
 
       // @use request = trackedFunction(async () => {
       request = trackedFunction(this, async () => {
-        let value = this.x;
+        const value = this.x;
 
         await timeout(10);
 
@@ -78,7 +78,7 @@ module('Utils | keepLatest | rendering', function (hooks) {
       });
     }
 
-    let instance = new Test();
+    const instance = new Test();
 
     await render(<template>{{JSON.stringify instance.data}}</template>);
 
@@ -123,7 +123,7 @@ module('Utils | keepLatest | rendering', function (hooks) {
 
       // @use request = trackedFunction(async () => {
       request = trackedFunction(this, async () => {
-        let value = this.x;
+        const value = this.x;
 
         await timeout(10);
 
@@ -140,7 +140,7 @@ module('Utils | keepLatest | rendering', function (hooks) {
       }
     }
 
-    let instance = new Test();
+    const instance = new Test();
 
     render(<template>{{JSON.stringify instance.data}}</template>);
 

@@ -9,7 +9,7 @@ import { HttpResponse } from 'msw';
 import { RemoteData, remoteData } from 'reactiveweb/remote-data';
 import { setupMSW } from 'test-app/tests/msw';
 
-let data = [
+const data = [
   { id: '1', type: 'blogs', attributes: { name: `name:1` } },
   { id: '2', type: 'blogs', attributes: { name: `name:2` } },
   { id: '3', type: 'blogs', attributes: { name: `name:3` } },
@@ -19,10 +19,10 @@ module('Utils | remote-data | js', function (hooks) {
   setupTest(hooks);
   setupMSW(hooks, ({ http }) => [
     http.get('/blogs/:id', ({ params, request }) => {
-      let record = data.find((datum) => datum.id === params['id']);
+      const record = data.find((datum) => datum.id === params['id']);
 
       if (record) {
-        let extra: Record<string, unknown> = {};
+        const extra: Record<string, unknown> = {};
 
         /**
          * The Authorization header here is used in testing to
@@ -56,7 +56,7 @@ module('Utils | remote-data | js', function (hooks) {
         @use request = RemoteData('/blogs/1');
       }
 
-      let test = new Test();
+      const test = new Test();
 
       setOwner(test, this.owner);
 
@@ -82,7 +82,7 @@ module('Utils | remote-data | js', function (hooks) {
         });
       }
 
-      let test = new Test();
+      const test = new Test();
 
       setOwner(test, this.owner);
 
@@ -105,7 +105,7 @@ module('Utils | remote-data | js', function (hooks) {
         @use request = RemoteData(() => this.url);
       }
 
-      let test = new Test();
+      const test = new Test();
 
       setOwner(test, this.owner);
 
@@ -133,7 +133,7 @@ module('Utils | remote-data | js', function (hooks) {
         }));
       }
 
-      let test = new Test();
+      const test = new Test();
 
       setOwner(test, this.owner);
 
@@ -153,7 +153,7 @@ module('Utils | remote-data | js', function (hooks) {
         @use request = RemoteData('/blogs/1000');
       }
 
-      let test = new Test();
+      const test = new Test();
 
       setOwner(test, this.owner);
 
@@ -178,7 +178,7 @@ module('Utils | remote-data | js', function (hooks) {
           @use request = RemoteData('/text-success/100');
         }
 
-        let test = new Test();
+        const test = new Test();
 
         setOwner(test, this.owner);
 
@@ -195,7 +195,7 @@ module('Utils | remote-data | js', function (hooks) {
           @use request = RemoteData('/text-error/100');
         }
 
-        let test = new Test();
+        const test = new Test();
 
         setOwner(test, this.owner);
 
@@ -215,7 +215,7 @@ module('Utils | remote-data | js', function (hooks) {
         @use request = resource((api) => remoteData(api, `/blogs/1`));
       }
 
-      let test = new Test();
+      const test = new Test();
 
       setOwner(test, this.owner);
 
@@ -235,7 +235,7 @@ module('Utils | remote-data | js', function (hooks) {
         request = resource(this, (api) => remoteData(api, `/blogs/1`));
       }
 
-      let test = new Test();
+      const test = new Test();
 
       setOwner(test, this.owner);
 
@@ -261,7 +261,7 @@ module('Utils | remote-data | js', function (hooks) {
         );
       }
 
-      let test = new Test();
+      const test = new Test();
 
       setOwner(test, this.owner);
 
@@ -284,7 +284,7 @@ module('Utils | remote-data | js', function (hooks) {
         @use request = resource((api) => remoteData(api, this.url));
       }
 
-      let test = new Test();
+      const test = new Test();
 
       setOwner(test, this.owner);
 
@@ -313,7 +313,7 @@ module('Utils | remote-data | js', function (hooks) {
         );
       }
 
-      let test = new Test();
+      const test = new Test();
 
       setOwner(test, this.owner);
 
@@ -333,7 +333,7 @@ module('Utils | remote-data | js', function (hooks) {
         @use request = resource((api) => remoteData(api, '/blogs/1000'));
       }
 
-      let test = new Test();
+      const test = new Test();
 
       setOwner(test, this.owner);
 

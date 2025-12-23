@@ -45,7 +45,7 @@ module('Utils | trackedFunction | rendering w/errors', function (hooks) {
       @tracked doError = true;
     }
 
-    let state = new State();
+    const state = new State();
     let i = 0;
 
     class TestComponent extends Component {
@@ -133,7 +133,7 @@ module('Utils | trackedFunction | rendering w/errors', function (hooks) {
       @tracked doError = true;
     }
 
-    let state = new State();
+    const state = new State();
     let i = 0;
 
     class TestComponent extends Component {

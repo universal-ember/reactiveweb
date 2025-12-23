@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 /* eslint-disable ember/no-get */
 import { assert } from '@ember/debug';
 import { associateDestroyableChild, registerDestructor } from '@ember/destroyable';
@@ -55,10 +55,10 @@ export function task<
 
   const state = new State<Args, Return, LocalTask>(task);
 
-  let destroyable = resource(context, () => {
-    let args = thunk || DEFAULT_THUNK;
+  const destroyable = resource(context, () => {
+    const args = thunk || DEFAULT_THUNK;
 
-    let positional = normalizeThunk(args).positional as Args;
+    const positional = normalizeThunk(args).positional as Args;
 
     state[RUN](positional || []);
 
@@ -149,7 +149,7 @@ export class State<Args extends any[], Return, LocalTask extends TaskIsh<Args, R
         }
 
         if (typeof key === 'string') {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+           
           // @ts-ignore
           get(taskRunner.currentTask, key);
         }

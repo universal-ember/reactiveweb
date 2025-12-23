@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { dependencySatisfies, importSync, macroCondition } from '@embroider/macros';
 
 import type Owner from '@ember/owner';
@@ -11,7 +11,7 @@ interface CompatOwner {
 
 export const compatOwner = {
   linkOwner(toHaveOwner, alreadyHasOwner) {
-    let owner = compatOwner.getOwner(alreadyHasOwner);
+    const owner = compatOwner.getOwner(alreadyHasOwner);
 
     if (owner) {
       compatOwner.setOwner(toHaveOwner, owner);
@@ -23,7 +23,7 @@ if (macroCondition(dependencySatisfies('ember-source', '>=4.12.0'))) {
   // In no version of ember where `@ember/owner` tried to be imported did it exist
   // if (macroCondition(false)) {
   // Using 'any' here because importSync can't lookup types correctly
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   compatOwner.getOwner = (importSync('@ember/owner') as any).getOwner;
   compatOwner.setOwner = (importSync('@ember/owner') as any).setOwner;
 } else {

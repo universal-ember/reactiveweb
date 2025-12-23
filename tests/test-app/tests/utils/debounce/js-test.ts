@@ -19,7 +19,7 @@ module('Utils | debounce | js', function (hooks) {
         @use debouncedValue = debounce(100, () => this.value);
       }
 
-      let test = new Test();
+      const test = new Test();
 
       setOwner(test, this.owner);
 
@@ -45,7 +45,7 @@ module('Utils | debounce | js', function (hooks) {
         @use debouncedValue = debounce(100, () => this.value, this.value);
       }
 
-      let test = new Test();
+      const test = new Test();
 
       setOwner(test, this.owner);
 

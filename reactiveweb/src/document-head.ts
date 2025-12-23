@@ -21,11 +21,8 @@ import { resource, resourceFactory } from 'ember-resources';
  * </template>
  * ```
  */
-export function addScript(
-  url: string | (() => string),
-  attributes?: undefined | (HTMLScriptElement & {})
-) {
-  let resolvedURL = typeof url === 'function' ? url() : url;
+export function addScript(url: string | (() => string), attributes?: HTMLScriptElement & {}) {
+  const resolvedURL = typeof url === 'function' ? url() : url;
 
   return resource(({ on }) => {
     const existing = document.querySelector(`script[src="${resolvedURL}"]`);
@@ -42,10 +39,10 @@ export function addScript(
       return;
     }
 
-    let el = document.createElement('script');
+    const el = document.createElement('script');
     let resolve: (x?: unknown) => void;
     let reject: (reason: unknown) => void;
-    let promise = new Promise((r, e) => {
+    const promise = new Promise((r, e) => {
       resolve = r;
       reject = e;
     });
@@ -103,11 +100,8 @@ resourceFactory(addScript);
  * </template>
  * ```
  */
-export function addLink(
-  url: string | (() => string),
-  attributes?: undefined | (HTMLLinkElement & {})
-) {
-  let resolvedURL = typeof url === 'function' ? url() : url;
+export function addLink(url: string | (() => string), attributes?: HTMLLinkElement & {}) {
+  const resolvedURL = typeof url === 'function' ? url() : url;
 
   return resource(({ on }) => {
     const existing = document.querySelector(`link[href="${resolvedURL}"]`);
@@ -124,10 +118,10 @@ export function addLink(
       return;
     }
 
-    let el = document.createElement('link');
+    const el = document.createElement('link');
     let resolve: (x?: unknown) => void;
     let reject: (reason: unknown) => void;
-    let promise = new Promise((r, e) => {
+    const promise = new Promise((r, e) => {
       resolve = r;
       reject = e;
     });
