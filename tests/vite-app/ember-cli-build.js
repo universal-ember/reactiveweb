@@ -12,7 +12,6 @@ module.exports = async function (defaults) {
   if (process.env.EMBER_TRY_CURRENT_SCENARIO === 'ember-concurrency-4.0') {
     babel = {
       plugins: [
-        // eslint-disable-next-line n/no-missing-require
         require.resolve('ember-concurrency/async-arrow-task-transform'),
 
         // NOTE: put any code coverage plugins last, after the transform.

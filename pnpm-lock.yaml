@@ -99,6 +99,9 @@ importers:
       '@babel/runtime':
         specifier: ^7.23.8
         version: 7.28.4
+      '@ember/library-tsconfig':
+        specifier: ^2.0.0
+        version: 2.0.0
       '@ember/test-waiters':
         specifier: ^3.1.0
         version: 3.1.0
@@ -1336,6 +1339,9 @@ packages:
 
   '@ember/edition-utils@1.2.0':
     resolution: {integrity: sha512-VmVq/8saCaPdesQmftPqbFtxJWrzxNGSQ+e8x8LLe3Hjm36pJ04Q8LeORGZkAeOhldoUX9seLGmSaHeXkIqoog==}
+
+  '@ember/library-tsconfig@2.0.0':
+    resolution: {integrity: sha512-DTGt9TYZ3bhObUviQXx4C0v46oWM7HsRrUTbgONw2QBhJVHlmXA89uXenlvuqVrCQkA0g5kz7wwyOlcjIZ8h0w==}
 
   '@ember/optional-features@2.3.0':
     resolution: {integrity: sha512-+M8CkPledQEaDbfIlwlq6Phgpm5jdT3a6WVDJk7b/zadw5xAJkuQKVK7DgR0SFgHGiWlyn6a8AU5p2mCA706RA==}
@@ -10286,6 +10292,8 @@ snapshots:
       walk-sync: 3.0.0
 
   '@ember/edition-utils@1.2.0': {}
+
+  '@ember/library-tsconfig@2.0.0': {}
 
   '@ember/optional-features@2.3.0':
     dependencies:

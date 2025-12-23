@@ -3,6 +3,9 @@
 # will also appear in published NPM packages.
 /README.md
 /LICENSE.md
+src/**/*.d.ts
+src/**/*.d.ts.map
+src/**/*.js
 
 # compiled output
 /dist
