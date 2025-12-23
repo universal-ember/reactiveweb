@@ -34,7 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: wyvox/action-setup-pnpm@v3
-      - run: pnpm build
+      - run: pnpm build && pnpm i -f
       - name: "Verify that no manually needed fixes / violations are present"
         run: pnpm lint
 
