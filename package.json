@@ -17,7 +17,7 @@
     "test:ember": "pnpm --filter '*' test:ember"
   },
   "devDependencies": {
-        "@glint/ember-tsc": "^1.0.8",
+    "@glint/ember-tsc": "^1.0.8",
     "@glint/template": "^1.6.1",
     "@glint/tsserver-plugin": "^2.0.8",
     "concurrently": "^9.0.1",
@@ -42,7 +42,10 @@
       ]
     },
     "overrides": {
-      "@glimmer/validator": "^0.92.0"
+      "@glimmer/validator": "^0.92.0",
+      "@glint/ember-tsc": "^1.0.8",
+      "@glint/template": "^1.6.1",
+      "@glint/tsserver-plugin": "^2.0.8"
     }
   }
 }
