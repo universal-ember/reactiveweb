@@ -6,6 +6,8 @@
 .lint-todo/
 .eslintignore
 .eslintcache
+*.yml
+*.yaml
 
 # ember-try
 /.node_modules.ember-try/

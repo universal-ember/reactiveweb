@@ -6,6 +6,8 @@
 /declarations/
 .eslintignore
 .eslintcache
+*.yml
+*.yaml
 
 # misc
 /coverage/
