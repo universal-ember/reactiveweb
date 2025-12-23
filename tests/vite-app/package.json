@@ -89,7 +89,7 @@
     "@nullvoxpopuli/eslint-configs": "^5.5.0",
     "ember-concurrency": "^5.0.0",
     "ember-modify-based-class-resource": "^1.1.0",
-    "ember-resources": "^7.0.7",
+    "ember-resources": "^6.5.1",
     "msw": "2.4.7"
   },
   "msw": {
