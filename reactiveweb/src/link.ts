@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { assert } from '@ember/debug';
 import { associateDestroyableChild } from '@ember/destroyable';
 
@@ -6,8 +5,8 @@ import { compatOwner } from './-private/ember-compat.ts';
 
 import type { Class, Stage1Decorator, Stage1DecoratorDescriptor } from '#types';
 
-let getOwner = compatOwner.getOwner;
-let setOwner = compatOwner.setOwner;
+const getOwner = compatOwner.getOwner;
+const setOwner = compatOwner.setOwner;
 
 type NonKey<K> = K extends string ? never : K extends symbol ? never : K;
 
@@ -113,7 +112,7 @@ export function link(...args: any[]) {
 function directLink(child: object, parent: object) {
   associateDestroyableChild(parent, child);
 
-  let owner = getOwner(parent);
+  const owner = getOwner(parent);
 
   if (owner) {
     setOwner(child, owner);
@@ -137,7 +136,7 @@ function linkDecorator(
   assert(`@link is a stage 1 decorator, and requires a descriptor`, descriptor);
   assert(`@link can only be used with string-keys`, typeof key === 'string');
 
-  let { initializer } = descriptor;
+  const { initializer } = descriptor;
 
   assert(
     `@link requires an initializer or be used as a decorator factory (\`@link(...))\`). For example, ` +
@@ -145,7 +144,7 @@ function linkDecorator(
     initializer || explicitChild
   );
 
-  let caches = new WeakMap<object, any>();
+  const caches = new WeakMap<object, any>();
 
   return {
     get(this: object) {
@@ -165,7 +164,7 @@ function linkDecorator(
 
         associateDestroyableChild(this, child);
 
-        let owner = getOwner(this);
+        const owner = getOwner(this);
 
         assert(`Owner was not present on parent. Is instance of ${this.constructor.name}`, owner);
 

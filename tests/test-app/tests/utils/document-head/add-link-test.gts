@@ -6,7 +6,7 @@ import { cell } from 'ember-resources';
 import { addLink } from 'reactiveweb/document-head';
 
 function numLinks() {
-  let style = [...document.head.querySelectorAll('link')];
+  const style = [...document.head.querySelectorAll('link')];
 
   return style.length;
 }
@@ -34,8 +34,8 @@ module('addLink', function (hooks) {
   });
 
   test('style is removed from <head> when template block is removed', async function (assert) {
-    let originalNumScripts = numLinks();
-    let show = cell(true);
+    const originalNumScripts = numLinks();
+    const show = cell(true);
 
     await render(
       <template>
@@ -57,9 +57,9 @@ module('addLink', function (hooks) {
   });
 
   test('the same style cannot be added more than once', async function (assert) {
-    let originalNumScripts = numLinks();
+    const originalNumScripts = numLinks();
 
-    let show = cell(true);
+    const show = cell(true);
 
     await render(
       <template>
@@ -88,7 +88,7 @@ module('addLink', function (hooks) {
    * QUnit doesn't have a way to capture this type of error
    */
   skip('style does not exist (captured via onerror)', async function (assert) {
-    let originalNumScripts = numLinks();
+    const originalNumScripts = numLinks();
 
     function handleError(e: unknown) {
       console.error(`Captured:`, e);

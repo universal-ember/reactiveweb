@@ -6,13 +6,12 @@ import { cell } from 'ember-resources';
 import { addScript } from 'reactiveweb/document-head';
 
 function numScripts() {
-  let scripts = [...document.head.querySelectorAll('script')];
+  const scripts = [...document.head.querySelectorAll('script')];
 
   return scripts.length;
 }
 
 function getKnownGlobal(): unknown {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
   return window.__reactiveweb_test__;
 }
@@ -21,7 +20,6 @@ module('addScript', function (hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function () {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     delete window.__reactiveweb_test__;
   });
@@ -35,11 +33,11 @@ module('addScript', function (hooks) {
   });
 
   test('script is removed from <head> when template block is removed', async function (assert) {
-    let originalNumScripts = numScripts();
+    const originalNumScripts = numScripts();
 
     assert.strictEqual(getKnownGlobal(), undefined);
 
-    let show = cell(true);
+    const show = cell(true);
 
     await render(
       <template>
@@ -59,11 +57,11 @@ module('addScript', function (hooks) {
   });
 
   test('the same script cannot be added more than once', async function (assert) {
-    let originalNumScripts = numScripts();
+    const originalNumScripts = numScripts();
 
     assert.strictEqual(getKnownGlobal(), undefined);
 
-    let show = cell(true);
+    const show = cell(true);
 
     await render(
       <template>
@@ -88,7 +86,7 @@ module('addScript', function (hooks) {
   });
 
   test('script throws an error while loading', async function (assert) {
-    let originalNumScripts = numScripts();
+    const originalNumScripts = numScripts();
 
     assert.strictEqual(getKnownGlobal(), undefined);
 
@@ -111,7 +109,7 @@ module('addScript', function (hooks) {
    * QUnit doesn't have a way to capture this type of error
    */
   skip('script does not exist', async function (assert) {
-    let originalNumScripts = numScripts();
+    const originalNumScripts = numScripts();
 
     function handleError(e: unknown) {
       console.error(`Captured:`, e);

@@ -11,9 +11,9 @@ module('Utils | trackedFunction | timing', function (hooks) {
   setupRenderingTest(hooks);
 
   test('With Argument', async function (assert) {
-    let step = (msg: string) => assert.step(msg);
+    const step = (msg: string) => assert.step(msg);
 
-    let state = cell(0);
+    const state = cell(0);
 
     async function fn(value: number) {
       step(`fn:begin:${value}`);
@@ -25,7 +25,7 @@ module('Utils | trackedFunction | timing', function (hooks) {
 
     const WithArgument = resourceFactory((num) =>
       resource(({ use }) => {
-        let reactive = use(trackedFunction(() => fn(num)));
+        const reactive = use(trackedFunction(() => fn(num)));
 
         // TODO: the types should allow us to directly return the use,
         // but they don't currently
@@ -58,13 +58,13 @@ module('Utils | trackedFunction | timing', function (hooks) {
   });
 
   test('From a component class', async function (assert) {
-    let step = (msg: string) => assert.step(msg);
+    const step = (msg: string) => assert.step(msg);
 
-    let state = cell(0);
+    const state = cell(0);
 
     class Example extends Component<{ Args: { value: unknown } }> {
       request = trackedFunction(this, async () => {
-        let value = this.args.value;
+        const value = this.args.value;
 
         step(`fn:begin:${value}`);
         await Promise.resolve();

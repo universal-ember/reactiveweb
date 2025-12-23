@@ -40,7 +40,8 @@
       ]
     },
     "overrides": {
-      "@glimmer/validator": "^0.92.0"
+      "@glimmer/validator": "^0.92.0",
+      "@glint/template": "~1.5.1"
     }
   }
 }

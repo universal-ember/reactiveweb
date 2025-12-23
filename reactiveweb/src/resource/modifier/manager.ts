@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getValue } from '@glimmer/tracking/primitives/cache';
 import { destroy } from '@ember/destroyable';
 import { invokeHelper } from '@ember/helper';
@@ -47,7 +46,7 @@ function installElement<S>(state: CreatedState<S>, element: ElementFor<S>): Inst
 function arrangeArgs(element: Element, args: any) {
   const { positional, named } = args;
 
-  let flattenedArgs = [element, ...positional];
+  const flattenedArgs = [element, ...positional];
 
   if (Object.keys(named).length > 0) {
     flattenedArgs.push(named);
@@ -81,7 +80,7 @@ export default class FunctionBasedModifierManager<S> {
     }
 
     state.helper = invokeHelper(this, state.instance, () => {
-      let foo = arrangeArgs(state.element, args);
+      const foo = arrangeArgs(state.element, args);
 
       return { positional: foo };
     });

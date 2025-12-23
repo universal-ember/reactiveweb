@@ -26,6 +26,8 @@ export function throttle<Value = unknown>(delay: number, callback: () => Value) 
   let last: unknown;
 
   return resource(({ on }) => {
+    // This lint is wrong wtf
+    // eslint-disable-next-line prefer-const
     let timer: number;
 
     on.cleanup(() => clearTimeout(timer));

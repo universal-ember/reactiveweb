@@ -17,7 +17,7 @@ module('Utils | keepLatest | js', function (hooks) {
 
       // @use request = trackedFunction(async () => {
       request = trackedFunction(this, async () => {
-        let value = this.x;
+        const value = this.x;
 
         await timeout(30);
 
@@ -30,7 +30,7 @@ module('Utils | keepLatest | js', function (hooks) {
       });
     }
 
-    let instance = new Test();
+    const instance = new Test();
 
     assert.strictEqual(instance.data, null);
 
@@ -58,7 +58,7 @@ module('Utils | keepLatest | js', function (hooks) {
       });
     }
 
-    let instance = new Test();
+    const instance = new Test();
 
     assert.strictEqual(instance.data, 3);
 
@@ -79,7 +79,7 @@ module('Utils | keepLatest | js', function (hooks) {
       });
     }
 
-    let instance = new Test();
+    const instance = new Test();
 
     assert.deepEqual(instance.data, ['a']);
 
@@ -109,7 +109,7 @@ module('Utils | keepLatest | js', function (hooks) {
       });
     }
 
-    let instance = new Test();
+    const instance = new Test();
 
     assert.deepEqual(instance.data, { x: 3 });
 
@@ -139,7 +139,7 @@ module('Utils | keepLatest | js', function (hooks) {
       });
     }
 
-    let instance = new Test();
+    const instance = new Test();
 
     assert.deepEqual(instance.data, 'one');
 
@@ -169,7 +169,7 @@ module('Utils | keepLatest | js', function (hooks) {
       });
     }
 
-    let instance = new Test();
+    const instance = new Test();
 
     assert.deepEqual(instance.data, 1);
 

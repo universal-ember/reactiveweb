@@ -1,7 +1,6 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 // idk what's going on here.
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { helper } from '@ember/component/helper';
 import { concat } from '@ember/helper';
@@ -37,7 +36,7 @@ module('Utils | map | rendering', function (hooks) {
   }
 
   test('it works', async function (assert) {
-    let step = helper(([text]: [string]) => assert.step(text));
+    const step = helper(([text]: [string]) => assert.step(text));
 
     class Context {
       @tracked records: Array<TestRecord | undefined> = [];
@@ -66,7 +65,7 @@ module('Utils | map | rendering', function (hooks) {
       </template>
     }
 
-    let ctx = new Context();
+    const ctx = new Context();
 
     await render(<template><Test @ctx={{ctx}} /></template>);
 

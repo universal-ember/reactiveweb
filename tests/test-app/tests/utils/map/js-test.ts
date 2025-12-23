@@ -30,7 +30,7 @@ module('Utils | map | js', function (hooks) {
     return new ExampleTrackedThing(id);
   }
 
-  for (let variant of [
+  for (const variant of [
     {
       name: 'public api',
       getItem: (collection: any, index: number) => collection[index],
@@ -64,7 +64,7 @@ module('Utils | map | js', function (hooks) {
       }
 
       let currentStuff: Wrapper[] = [];
-      let instance = new Test();
+      const instance = new Test();
 
       const get = (index: number) => variant.getItem(instance.stuff, index);
 
@@ -73,8 +73,8 @@ module('Utils | map | js', function (hooks) {
       assert.strictEqual(instance.stuff.length, 0);
       assert.verifySteps(['evaluate data thunk'], '❯❯ initially, the data fn is consumed');
 
-      let first = testData(1);
-      let second = testData(2);
+      const first = testData(1);
+      const second = testData(2);
 
       instance.records = [first, second];
       assert.strictEqual(instance.stuff.length, 2, 'length adjusted');

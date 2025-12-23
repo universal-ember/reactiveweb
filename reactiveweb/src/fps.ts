@@ -16,11 +16,11 @@ import { cell, resource, resourceFactory } from 'ember-resources';
  * ```
  */
 export const FrameRate = resource(({ on }) => {
-  let value = cell(0);
-  let startTime = new Date().getTime();
+  const value = cell(0);
+  const startTime = new Date().getTime();
   let frame: number;
 
-  let update = () => {
+  const update = () => {
     // simulate receiving data as fast as possible
     frame = requestAnimationFrame(() => {
       value.current++;
@@ -34,11 +34,11 @@ export const FrameRate = resource(({ on }) => {
   update();
 
   return () => {
-    let elapsed = (new Date().getTime() - startTime) * 0.001;
-    let fps = value.current * Math.pow(elapsed, -1);
-    let rounded = Math.round(fps * 100) * 0.01;
+    const elapsed = (new Date().getTime() - startTime) * 0.001;
+    const fps = value.current * Math.pow(elapsed, -1);
+    const rounded = Math.round(fps * 100) * 0.01;
     // account for https://stackoverflow.com/a/588014/356849
-    let formatted = `${rounded}`.substring(0, 5);
+    const formatted = `${rounded}`.substring(0, 5);
 
     return formatted;
   };
@@ -66,12 +66,12 @@ export const FrameRate = resource(({ on }) => {
 export const UpdateFrequency = resourceFactory((ofWhat: () => unknown, updateInterval = 500) => {
   updateInterval ||= 500;
 
-  let multiplier = 1000 / updateInterval;
+  const multiplier = 1000 / updateInterval;
   let framesSinceUpdate = 0;
 
   return resource(({ on }) => {
-    let value = cell(0);
-    let interval = setInterval(() => {
+    const value = cell(0);
+    const interval = setInterval(() => {
       value.current = framesSinceUpdate * multiplier;
       framesSinceUpdate = 0;
     }, updateInterval);

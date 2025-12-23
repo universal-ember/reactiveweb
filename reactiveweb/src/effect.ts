@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { assert } from '@ember/debug';
 import { waitForPromise } from '@ember/test-waiters';
 

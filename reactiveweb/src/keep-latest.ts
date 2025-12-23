@@ -90,7 +90,7 @@ export function keepLatest<Return = unknown>({ when, value: valueFn }: Options<R
     let initial = true;
 
     return () => {
-      let value = valueFn();
+      const value = valueFn();
 
       if (when()) {
         /**

@@ -50,7 +50,7 @@ module('Utils | trackedFunction | rendering', function (hooks) {
         // Copy the count so asynchrony of trackedFunction evaluation
         // doesn't return a newer value than existed at the time
         // of the function invocation.
-        let localCount = count;
+        const localCount = count;
 
         count++;
         assert.step(`ran trackedFunction ${localCount} & ${isRetrying}`);
@@ -85,7 +85,7 @@ module('Utils | trackedFunction | rendering', function (hooks) {
 
       data = trackedFunction(this, async () => {
         // tracked data consumed here directly does not entangle with the function (deliberately)
-        let { multiplier } = this;
+        const { multiplier } = this;
 
         await timeout(50);
 
@@ -115,7 +115,7 @@ module('Utils | trackedFunction | rendering', function (hooks) {
   test('can be "use"d in a class', async function (assert) {
     const Doubler = resourceFactory((numFn) =>
       trackedFunction(async () => {
-        let num = numFn();
+        const num = numFn();
 
         return num * 2;
       })
@@ -150,7 +150,7 @@ module('Utils | trackedFunction | rendering', function (hooks) {
   test('can be composed directly within a resource', async function (assert) {
     const Doubled = resourceFactory((num: number) => {
       return resource(({ use }) => {
-        let state = use(trackedFunction(() => num * 2));
+        const state = use(trackedFunction(() => num * 2));
 
         return () => state.current.value;
       });
@@ -160,7 +160,7 @@ module('Utils | trackedFunction | rendering', function (hooks) {
       @tracked num = 2;
     }
 
-    let state = new State();
+    const state = new State();
 
     setOwner(state, this.owner);
 
@@ -176,7 +176,7 @@ module('Utils | trackedFunction | rendering', function (hooks) {
   test('can be composed with the resource use', async function (assert) {
     const Sqrt = resourceFactory((numFn: NumberThunk) =>
       trackedFunction(async () => {
-        let num = numFn();
+        const num = numFn();
 
         return Math.sqrt(num);
       })
@@ -184,7 +184,7 @@ module('Utils | trackedFunction | rendering', function (hooks) {
 
     const Squared = resourceFactory((numFn: NumberThunk) =>
       trackedFunction(async () => {
-        let num = numFn();
+        const num = numFn();
 
         return Math.pow(num, 2);
       })
@@ -217,7 +217,7 @@ module('Utils | trackedFunction | rendering', function (hooks) {
       );
     }
 
-    let state = new State();
+    const state = new State();
 
     setOwner(state, this.owner);
 

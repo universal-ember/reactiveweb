@@ -20,7 +20,7 @@ module('modifier | rendering', function (hooks) {
     const capture = modifier((...args: [HTMLDivElement]) => {
       assert.step(`${args.length} args`);
 
-      let [element] = args;
+      const [element] = args;
 
       return resource(() => {
         assert.step(`received element ${element.tagName}`);
@@ -42,7 +42,7 @@ module('modifier | rendering', function (hooks) {
     }>((...args) => {
       assert.step(`${args.length} args`);
 
-      let [element] = args;
+      const [element] = args;
 
       return resource(() => {
         assert.step(`received element ${element.tagName}`);
@@ -66,7 +66,7 @@ module('modifier | rendering', function (hooks) {
       assert.step(`${args.length} args`);
 
       return resource(({ on }) => {
-        let value = args[1];
+        const value = args[1];
 
         assert.step(`received element ${args[0].tagName} for value ${value}`);
 
@@ -106,7 +106,7 @@ module('modifier | rendering', function (hooks) {
       assert.step(`${args.length} args`);
 
       return resource(({ on }) => {
-        let value = args[1];
+        const value = args[1];
 
         assert.step(`received element ${args[0].tagName} for value ${value}`);
 
@@ -141,7 +141,7 @@ module('modifier | rendering', function (hooks) {
       assert.step(`${args.length} args`);
 
       return resource(({ on }) => {
-        let { value } = args[1];
+        const { value } = args[1];
 
         assert.step(`received element ${args[0].tagName} for value ${value}`);
 
@@ -177,8 +177,8 @@ module('modifier | rendering', function (hooks) {
       assert.step(`${args.length} args`);
 
       return resource(({ on }) => {
-        let positionalValue = args[1];
-        let { value } = args[2];
+        const positionalValue = args[1];
+        const { value } = args[2];
 
         assert.step(`received element ${args[0].tagName} for value ${positionalValue},${value}`);
 

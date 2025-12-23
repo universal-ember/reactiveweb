@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { tracked } from '@glimmer/tracking';
 import { settled } from '@ember/test-helpers';
 import { waitForPromise } from '@ember/test-waiters';
@@ -29,7 +29,7 @@ module('useTask', function () {
           search = trackedTask(this, this._search, () => [this.input]);
         }
 
-        let foo = new Test();
+        const foo = new Test();
 
         // task is initiated upon first access
         foo.search;
@@ -65,7 +65,7 @@ module('useTask', function () {
 
           _search = restartableTask(async () => {
             // NOTE: args must be consumed before the first yield
-            let { input } = this;
+            const { input } = this;
 
             // or some bigger timeout for an actual search task to debounce
             await timeout(0);
@@ -77,7 +77,7 @@ module('useTask', function () {
           search = trackedTask(this, this._search);
         }
 
-        let foo = new Test();
+        const foo = new Test();
 
         // task is initiated upon first access
         foo.search;
@@ -122,7 +122,7 @@ module('useTask', function () {
           search = trackedTask(this, this._search, () => [this.input]);
         }
 
-        let foo = new Test();
+        const foo = new Test();
 
         // task is initiated upon first access
         foo.search;
@@ -180,7 +180,7 @@ module('useTask', function () {
           search = trackedTask(this, this._search, () => [this.input]);
         }
 
-        let foo = new Test();
+        const foo = new Test();
 
         // task is initiated upon first access
         foo.search.value;

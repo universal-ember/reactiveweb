@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 export interface Stage1DecoratorDescriptor {
   initializer: () => unknown;
 }

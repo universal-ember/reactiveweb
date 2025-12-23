@@ -2,8 +2,7 @@ import { tracked } from '@glimmer/tracking';
 import { setOwner } from '@ember/application';
 import { render } from '@ember/test-helpers';
 import { module, test } from 'qunit';
-import { setupTest } from 'ember-qunit';
-import { setupRenderingTest } from 'ember-qunit';
+import { setupRenderingTest, setupTest } from 'ember-qunit';
 
 import { use } from 'ember-resources';
 import { throttle } from 'reactiveweb/throttle';
@@ -11,7 +10,7 @@ import { throttle } from 'reactiveweb/throttle';
 module('Utils | throttle | js', function (hooks) {
   setupTest(hooks);
 
-  let someTime = (ms = 25) => new Promise((resolve) => setTimeout(resolve, ms));
+  const someTime = (ms = 25) => new Promise((resolve) => setTimeout(resolve, ms));
 
   module('throttle', function () {
     test('works with @use', async function (assert) {
@@ -21,7 +20,7 @@ module('Utils | throttle | js', function (hooks) {
         @use text = throttle(100, () => this.data);
       }
 
-      let test = new Test();
+      const test = new Test();
 
       setOwner(test, this.owner);
 
@@ -52,7 +51,7 @@ module('Utils | throttle | js', function (hooks) {
 module('Utils | throttle | rendering', function (hooks) {
   setupRenderingTest(hooks);
 
-  let someTime = (ms = 25) => new Promise((resolve) => setTimeout(resolve, ms));
+  const someTime = (ms = 25) => new Promise((resolve) => setTimeout(resolve, ms));
 
   module('debounce', function () {
     test('without debouncing the initial value', async function (assert) {
@@ -61,7 +60,7 @@ module('Utils | throttle | rendering', function (hooks) {
         @use debouncedText = throttle(100, () => this.text);
       }
 
-      let foo = new Test();
+      const foo = new Test();
 
       await render(<template>{{foo.debouncedText}}</template>);
 

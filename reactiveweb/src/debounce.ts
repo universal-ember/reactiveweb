@@ -72,9 +72,11 @@ import { cell, resource } from 'ember-resources';
  */
 export function debounce<Value = unknown>(ms: number, thunk: () => Value, initialize?: Value) {
   let lastValue: Value | undefined = initialize;
-  let state = cell<Value | undefined>(lastValue);
+  const state = cell<Value | undefined>(lastValue);
 
   return resource(({ on }) => {
+    // This lint is wrong wtf
+    // eslint-disable-next-line prefer-const
     let timer: number;
 
     lastValue = thunk();

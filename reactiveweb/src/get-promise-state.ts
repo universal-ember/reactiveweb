@@ -2,7 +2,7 @@ import { tracked } from '@glimmer/tracking';
 import { waitForPromise } from '@ember/test-waiters';
 
 type DePromise<Value> = Value extends Promise<infer Result> ? Result : Value;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 type ResolvedValueOf<Value> = Value extends (...args: any[]) => any
   ? DePromise<ReturnType<Value>>
   : DePromise<Value>;
@@ -277,11 +277,11 @@ export function getPromiseState<Value, Result = ResolvedValueOf<Value>>(
     } as State<Result>;
   }
 
-  let existing = promiseCache.get(fn);
+  const existing = promiseCache.get(fn);
 
   if (existing) return existing as State<Result>;
 
-  let state = new StateImpl(fn, { isLoading: true });
+  const state = new StateImpl(fn, { isLoading: true });
 
   promiseCache.set(fn, state);
 
