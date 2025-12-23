@@ -77,7 +77,7 @@ module('link', function (hooks) {
       @service declare foo: FooService;
     }
 
-    let demo = new Demo();
+    const demo = new Demo();
 
     link(demo, this.owner);
 
