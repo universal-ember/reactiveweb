@@ -10,6 +10,7 @@
       "test-app/tests/*": ["tests/*"],
       "test-app/*": ["app/*"],
       "*": ["types/*"]
-    }
+    },
+    "types": ["../test-app/node_modules/ember-source/types/stable", "@glint/ember-tsc/types"]
   }
 }

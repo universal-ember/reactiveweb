@@ -1,9 +1,6 @@
 {
   "extends": "@tsconfig/ember/tsconfig.json",
   "include": ["src/**/*", "unpublished-development-types/**/*"],
-  "glint": {
-    "environment": ["ember-loose", "ember-template-imports"]
-  },
   "compilerOptions": {
     "skipLibCheck": true,
     "declarationDir": "declarations",
@@ -45,6 +42,7 @@
     "allowImportingTsExtensions": true,
 
     // https://www.typescriptlang.org/tsconfig#stripInternal
-    "stripInternal": true
+    "stripInternal": true,
+    "types": ["ember-source/types", "@glint/ember-tsc/types"]
   }
 }
