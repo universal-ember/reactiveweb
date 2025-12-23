@@ -63,7 +63,7 @@ jobs:
         working-directory: tests/min-supported
 
   try-scenarios:
-    name: ${{ matrix.try-scenario }}
+    name: ${{ matrix.try-scenario.name }}
     needs: ["setup", "test"]
     runs-on: ubuntu-latest
     timeout-minutes: 5
