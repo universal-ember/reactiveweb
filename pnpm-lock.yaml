@@ -7,7 +7,7 @@ settings:
 overrides:
   '@glimmer/validator': ^0.92.0
   '@glint/ember-tsc': ^1.0.8
-  '@glint/template': ^1.6.1
+  '@glint/template': ^1.7.3
   '@glint/tsserver-plugin': ^2.0.8
 
 importers:
@@ -18,7 +18,7 @@ importers:
         specifier: ^1.0.8
         version: 1.0.8(typescript@5.6.3)
       '@glint/template':
-        specifier: ^1.6.1
+        specifier: ^1.7.3
         version: 1.7.3
       '@glint/tsserver-plugin':
         specifier: ^2.0.8
@@ -109,7 +109,7 @@ importers:
         specifier: ^1.0.8
         version: 1.0.8(typescript@5.6.3)
       '@glint/template':
-        specifier: ^1.6.1
+        specifier: ^1.7.3
         version: 1.7.3
       '@glint/tsserver-plugin':
         specifier: ^2.0.8
@@ -212,7 +212,7 @@ importers:
         specifier: ^1.0.8
         version: 1.0.8(typescript@5.6.3)
       '@glint/template':
-        specifier: ^1.6.1
+        specifier: ^1.7.3
         version: 1.7.3
       '@glint/tsserver-plugin':
         specifier: ^2.0.8
@@ -390,7 +390,7 @@ importers:
         specifier: ^1.0.8
         version: 1.0.8(typescript@5.6.3)
       '@glint/template':
-        specifier: ^1.6.1
+        specifier: ^1.7.3
         version: 1.7.3
       '@glint/tsserver-plugin':
         specifier: ^2.0.8
@@ -1418,7 +1418,7 @@ packages:
     resolution: {integrity: sha512-Oz8bUZvZzOV1Gk3qSgIzZJJzs6acclSTcEFyB+KdKbKqjTC3uebn53aU2gAlLU7/YdTRZrg2gNbQuwAp+tGkGg==}
     engines: {node: 12.* || 14.* || >= 16}
     peerDependencies:
-      '@glint/template': ^1.6.1
+      '@glint/template': ^1.7.3
     peerDependenciesMeta:
       '@glint/template':
         optional: true
@@ -1427,7 +1427,7 @@ packages:
     resolution: {integrity: sha512-aSdRetg0vY3c70G/3K85fOSlGtDzSV4ozwF9qD8ToQB+4RLZusxwItnctWEa+MKkhAYB6rbFiQ+bhFwEnaEazg==}
     engines: {node: 12.* || 14.* || >= 16}
     peerDependencies:
-      '@glint/template': ^1.6.1
+      '@glint/template': ^1.7.3
     peerDependenciesMeta:
       '@glint/template':
         optional: true
@@ -4325,7 +4325,7 @@ packages:
       '@ember/test-waiters': ^3.0.0
       '@glimmer/component': ^1.1.2
       '@glimmer/tracking': ^1.1.2
-      '@glint/template': ^1.6.1
+      '@glint/template': ^1.7.3
       ember-concurrency: ^2.0.0 || ^3.0.0
       ember-source: ^3.28.0 || ^4.0.0 || ^5.0.0
     peerDependenciesMeta:
@@ -15012,7 +15012,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.50.1(eslint@9.39.2(jiti@2.4.2))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@4.4.4(eslint-plugin-import@2.32.0)(eslint@9.39.2(jiti@2.4.2)))(eslint@9.39.2(jiti@2.4.2)):
+  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.50.1(eslint@9.39.2(jiti@2.4.2))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@4.4.4)(eslint@9.39.2(jiti@2.4.2)):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
@@ -15073,7 +15073,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 9.39.2(jiti@2.4.2)
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.50.1(eslint@9.39.2(jiti@2.4.2))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@4.4.4(eslint-plugin-import@2.32.0)(eslint@9.39.2(jiti@2.4.2)))(eslint@9.39.2(jiti@2.4.2))
+      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.50.1(eslint@9.39.2(jiti@2.4.2))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@4.4.4)(eslint@9.39.2(jiti@2.4.2))
       hasown: 2.0.2
       is-core-module: 2.16.1
       is-glob: 4.0.3

@@ -18,14 +18,14 @@
   },
   "devDependencies": {
     "@glint/ember-tsc": "^1.0.8",
-    "@glint/template": "^1.6.1",
+    "@glint/template": "^1.7.3",
     "@glint/tsserver-plugin": "^2.0.8",
     "concurrently": "^9.0.1",
     "prettier": "^3.0.3",
     "prettier-plugin-ember-template-tag": "^2.0.0",
     "release-plan": "^0.16.0"
   },
-  "packageManager": "pnpm@9.11.0",
+  "packageManager": "pnpm@9.15.9",
   "engines": {
     "node": ">= 22.11.0"
   },
@@ -44,7 +44,7 @@
     "overrides": {
       "@glimmer/validator": "^0.92.0",
       "@glint/ember-tsc": "^1.0.8",
-      "@glint/template": "^1.6.1",
+      "@glint/template": "^1.7.3",
       "@glint/tsserver-plugin": "^2.0.8"
     }
   }
