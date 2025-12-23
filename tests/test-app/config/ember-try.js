@@ -1,7 +1,5 @@
 'use strict';
 
-const getChannelURL = require('ember-source-channel-url');
-
 module.exports = async function () {
   return {
     usePnpm: true,
@@ -46,30 +44,6 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             'ember-source': '~5.8.0',
-          },
-        },
-      },
-      {
-        name: 'ember-release',
-        npm: {
-          devDependencies: {
-            'ember-source': await getChannelURL('release'),
-          },
-        },
-      },
-      {
-        name: 'ember-beta',
-        npm: {
-          devDependencies: {
-            'ember-source': await getChannelURL('beta'),
-          },
-        },
-      },
-      {
-        name: 'ember-canary',
-        npm: {
-          devDependencies: {
-            'ember-source': await getChannelURL('canary'),
           },
         },
       },

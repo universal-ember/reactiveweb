@@ -1,10 +1,8 @@
 {
-  "extends": "@tsconfig/ember/tsconfig.json",
+  "extends": "@ember/library-tsconfig",
   "include": ["src/**/*", "unpublished-development-types/**/*"],
   "compilerOptions": {
     "skipLibCheck": true,
-    "declarationDir": "declarations",
-    "emitDeclarationOnly": true,
 
     // Required, else declarations don't emit
     // @tsconfig/ember sets noEmit: true

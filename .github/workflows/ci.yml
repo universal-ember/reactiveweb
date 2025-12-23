@@ -8,8 +8,8 @@ on:
   pull_request: {}
 
 concurrency:
-   group: ci-${{ github.head_ref || github.ref }}
-   cancel-in-progress: true
+  group: ci-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   setup:
@@ -23,23 +23,24 @@ jobs:
         with:
           # Future installations will run "prepare"
           # and this job doesn't need to
-          args: '--ignore-scripts'
+          args: "--ignore-scripts"
 
   lint:
     name: "Lints"
-    needs: ['setup']
+    needs: ["setup"]
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
     steps:
       - uses: actions/checkout@v4
       - uses: wyvox/action-setup-pnpm@v3
+      - run: pnpm build && pnpm i -f
       - name: "Verify that no manually needed fixes / violations are present"
         run: pnpm lint
 
   test:
     name: "Tests"
-    needs: ['setup']
+    needs: ["setup"]
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -51,7 +52,7 @@ jobs:
 
   test_min:
     name: "Tests (min-supported, 3.28)"
-    needs: ['setup']
+    needs: ["setup"]
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -62,8 +63,8 @@ jobs:
         working-directory: tests/min-supported
 
   try-scenarios:
-    name: ${{ matrix.try-scenario }}
-    needs: ['setup', 'test']
+    name: ${{ matrix.try-scenario.name }}
+    needs: ["setup", "test"]
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -71,26 +72,20 @@ jobs:
       fail-fast: false
       matrix:
         try-scenario:
-          - ember-lts-4.8
-          - ember-lts-4.12
-          - ember-lts-5.4
-          - ember-lts-5.8
-          - ember-concurrency-4.0
-          - ember-release
-          - ember-beta
-          - ember-canary
+          - { name: "ember-lts-4.8", directory: "tests/test-app" }
+          - { name: "ember-lts-4.12", directory: "tests/test-app" }
+          - { name: "ember-lts-5.4", directory: "tests/test-app" }
+          - { name: "ember-lts-5.8", directory: "tests/test-app" }
+          - { name: "ember-concurrency-4.0", directory: "tests/test-app" }
+          - { name: "ember-release", directory: "tests/vite-app" }
+          - { name: "ember-beta", directory: "tests/vite-app" }
+          - { name: "ember-canary", directory: "tests/vite-app" }
 
     steps:
       - uses: actions/checkout@v4
       - uses: wyvox/action-setup-pnpm@v3
-      - run: ./node_modules/.bin/ember try:one ${{ matrix.try-scenario }} --skip-cleanup
-      # - run: ./node_modules/.bin/ember try:one ${{ matrix.try-scenario }} --skip-cleanup --- echo "setup"
-        working-directory: tests/test-app
-      # - run: pnpm install --ignore-scripts --no-frozen-lockfile
-      # - run: pnpm dedupe
-      # - run: pnpm install --force # ensure pnpm injections are re-created
-      # - run: pnpm ember test
-      #   working-directory: tests/test-app
-
-
-
+      - run: pnpm build
+      # force re-linking
+      - run: pnpm i -f
+      - run: ./node_modules/.bin/ember try:one ${{ matrix.try-scenario.name }} --skip-cleanup
+        working-directory: ${{ matrix.try-scenario.directory }}

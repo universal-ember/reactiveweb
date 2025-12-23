@@ -41,7 +41,7 @@
   "scripts": {
     "build": "concurrently 'npm:build:*'",
     "build:js": "rollup --config",
-    "build:types": "ember-tsc --declaration",
+    "build:types": "ember-tsc --declaration --declarationDir declarations",
     "lint": "concurrently 'npm:lint:*(!fix)' --names 'lint:'",
     "lint:fix": "concurrently 'npm:lint:*:fix' --names 'fix:'",
     "lint:hbs": "ember-template-lint . --no-error-on-unmatched-pattern",
@@ -70,6 +70,7 @@
     "@babel/plugin-transform-class-static-block": "^7.23.4",
     "@babel/plugin-transform-typescript": "^7.23.6",
     "@babel/runtime": "^7.23.8",
+    "@ember/library-tsconfig": "^2.0.0",
     "@ember/test-waiters": "^3.1.0",
     "@embroider/addon-dev": "^5.0.0",
     "@glint/ember-tsc": "^1.0.8",
