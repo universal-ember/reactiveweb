@@ -36,7 +36,7 @@
     "@babel/plugin-transform-typescript": "^7.28.0",
     "@ember/optional-features": "^2.0.0",
     "@ember/string": "^4.0.0",
-    "@ember/test-helpers": "^4.0.2",
+    "@ember/test-helpers": "^5.4.1",
     "@embroider/compat": "^4.0.3",
     "@embroider/config-meta-loader": "^1.0.0",
     "@embroider/core": "^4.0.3",
@@ -64,7 +64,7 @@
     "ember-resolver": "^13.0.0",
     "ember-source": "~6.9.0",
     "ember-source-channel-url": "^3.0.0",
-    "ember-template-lint": "^6.0.0",
+    "ember-template-lint": "^7.9.3",
     "ember-try": "^4.0.0",
     "eslint": "^9.37.2",
     "graphql": "^16.9.0",
@@ -89,7 +89,7 @@
     "@nullvoxpopuli/eslint-configs": "^5.5.0",
     "ember-concurrency": "^5.0.0",
     "ember-modify-based-class-resource": "^1.1.0",
-    "ember-resources": "^6.5.1",
+    "ember-resources": "^7.0.7",
     "msw": "2.4.7"
   },
   "msw": {

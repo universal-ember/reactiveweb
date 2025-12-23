@@ -1,8 +1,7 @@
 import { registerDeprecationHandler } from '@ember/debug';
+import { isDevelopingApp } from '@embroider/macros';
 
-import config from 'vite-app/config/environment';
-
-const SHOULD_THROW = config.environment !== 'production';
+const SHOULD_THROW = isDevelopingApp();
 const SILENCED_DEPRECATIONS: string[] = [
   // Add ids of deprecations you temporarily want to silence here.
 ];
