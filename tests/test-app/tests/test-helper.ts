@@ -2,24 +2,26 @@ import { getSettledState, resetOnerror, setApplication } from '@ember/test-helpe
 import { getPendingWaiterState, getWaiters } from '@ember/test-waiters';
 import * as QUnit from 'qunit';
 import { setup } from 'qunit-dom';
-import { start } from 'ember-qunit';
+import { start as qunitStart } from 'ember-qunit';
 
 import Application from 'test-app/app';
 import config from 'test-app/config/environment';
 
-setApplication(Application.create(config.APP));
+export function start() {
+  setApplication(Application.create(config.APP));
 
-setup(QUnit.assert);
+  setup(QUnit.assert);
 
-Object.assign(window, { getPendingWaiterState, getWaiters, getSettledState });
+  Object.assign(window, { getPendingWaiterState, getWaiters, getSettledState });
 
-QUnit.config.testTimeout = 8000;
+  QUnit.config.testTimeout = 8000;
 
-QUnit.testDone(function () {
-  resetOnerror();
-});
+  QUnit.testDone(function () {
+    resetOnerror();
+  });
 
-// Prevent global Errors from breaking tests
-window.onerror = console.error;
+  // Prevent global Errors from breaking tests
+  window.onerror = console.error;
 
-start();
+  qunitStart();
+}
