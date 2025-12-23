@@ -202,7 +202,6 @@ export class TrackedArrayMap<Element = unknown, MappedTo = unknown> implements M
   private _mapper: (element: Element) => MappedTo;
 
   constructor(owner: object, data: () => readonly Element[], map: (element: Element) => MappedTo) {
-     
     setOwner(this, owner as any);
 
     this._dataFn = data;

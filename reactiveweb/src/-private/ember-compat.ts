@@ -1,4 +1,3 @@
- 
 import { dependencySatisfies, importSync, macroCondition } from '@embroider/macros';
 
 import type Owner from '@ember/owner';

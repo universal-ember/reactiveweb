@@ -1,4 +1,3 @@
- 
 import { assert } from '@ember/debug';
 import { associateDestroyableChild } from '@ember/destroyable';
 

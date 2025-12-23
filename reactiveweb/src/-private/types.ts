@@ -1,5 +1,3 @@
- 
-
 export interface Stage1DecoratorDescriptor {
   initializer: () => unknown;
 }

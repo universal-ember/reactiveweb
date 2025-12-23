@@ -2,7 +2,7 @@ import { tracked } from '@glimmer/tracking';
 import { waitForPromise } from '@ember/test-waiters';
 
 type DePromise<Value> = Value extends Promise<infer Result> ? Result : Value;
- 
+
 type ResolvedValueOf<Value> = Value extends (...args: any[]) => any
   ? DePromise<ReturnType<Value>>
   : DePromise<Value>;

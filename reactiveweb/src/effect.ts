@@ -1,5 +1,3 @@
- 
-
 import { assert } from '@ember/debug';
 import { waitForPromise } from '@ember/test-waiters';
 

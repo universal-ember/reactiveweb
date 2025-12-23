@@ -1,4 +1,3 @@
- 
 /* eslint-disable ember/no-get */
 import { assert } from '@ember/debug';
 import { associateDestroyableChild, registerDestructor } from '@ember/destroyable';
@@ -149,7 +148,6 @@ export class State<Args extends any[], Return, LocalTask extends TaskIsh<Args, R
         }
 
         if (typeof key === 'string') {
-           
           // @ts-ignore
           get(taskRunner.currentTask, key);
         }

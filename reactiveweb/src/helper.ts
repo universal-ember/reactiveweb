@@ -73,7 +73,7 @@ export function helper<T = unknown, S = InferSignature<T>, Return = Get<S, 'Retu
       // SAFETY: we want whatever the Return type is to be forwarded.
       //         getValue could technically be undefined, but we *def*
       //         have an invokedHelper, so we can safely defer to the helper.
-       
+
       return getValue<Return>(resource as any) as Return;
     },
   };
