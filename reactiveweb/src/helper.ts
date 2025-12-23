@@ -3,10 +3,10 @@ import { invokeHelper } from '@ember/helper';
 
 import { DEFAULT_THUNK, normalizeThunk } from './utils.ts';
 
+import type { Thunk } from './resource/types.ts';
 import type ClassBasedHelper from '@ember/component/helper';
 import type { FunctionBasedHelper } from '@ember/component/helper';
 import type { HelperLike } from '@glint/template';
-import type { Thunk } from 'ember-resources';
 
 // Should be from
 // @glimmer/tracking/primitives/cache
