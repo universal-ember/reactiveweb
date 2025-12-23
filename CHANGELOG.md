@@ -1,5 +1,34 @@
 # Changelog
 
+## Release (2025-12-23)
+
+* reactiveweb 1.9.1 (patch)
+
+#### :bug: Bug Fix
+* `reactiveweb`
+  * [#173](https://github.com/universal-ember/reactiveweb/pull/173) Allow link to receive the owner directly ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#177](https://github.com/universal-ember/reactiveweb/pull/177) Pull in types from ember-resources v6 (and earlier) to reduce coupling for those wanting to move to v7 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :memo: Documentation
+* `reactiveweb`
+  * [#168](https://github.com/universal-ember/reactiveweb/pull/168) Update docs ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#167](https://github.com/universal-ember/reactiveweb/pull/167) Add detail from #166 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#162](https://github.com/universal-ember/reactiveweb/pull/162) add import to code example docs of get-promise-state ([@x-m-el](https://github.com/x-m-el))
+* Other
+  * [#165](https://github.com/universal-ember/reactiveweb/pull/165) docs(contributor): contributors readme action update ([@github-actions[bot]](https://github.com/apps/github-actions))
+  * [#164](https://github.com/universal-ember/reactiveweb/pull/164) Thank Contributors <3 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :house: Internal
+* `reactiveweb`
+  * [#174](https://github.com/universal-ember/reactiveweb/pull/174) Convert main test-app to vite ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#176](https://github.com/universal-ember/reactiveweb/pull/176) Glint2 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#175](https://github.com/universal-ember/reactiveweb/pull/175) Update linting ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 3
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+- [@github-actions[bot]](https://github.com/apps/github-actions)
+- [@x-m-el](https://github.com/x-m-el)
+
 ## Release (2025-08-29)
 
 * reactiveweb 1.9.0 (minor)
