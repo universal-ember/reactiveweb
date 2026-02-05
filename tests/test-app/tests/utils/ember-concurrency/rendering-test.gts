@@ -4,7 +4,7 @@ import { render, settled, setupOnerror } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
-import { restartableTask, timeout } from 'ember-concurrency';
+import { task, timeout } from 'ember-concurrency';
 import { trackedTask } from 'reactiveweb/ember-concurrency';
 import { trackedFunction } from 'reactiveweb/function';
 
@@ -19,7 +19,7 @@ module('useTask', function () {
         class TestComponent extends Component<{ Blocks: { default: [TestComponent] } }> {
           @tracked input = 'Hello there';
 
-          _search = restartableTask(async (input: string) => {
+          _search = task({ restartable: true }, async (input: string) => {
             await timeout(500);
 
             return input;
@@ -75,7 +75,7 @@ module('useTask', function () {
       class Test {
         @tracked input = 'Hello there';
 
-        _search = restartableTask(async (input: string) => {
+        _search = task({ restartable: true }, async (input: string) => {
           await timeout(100);
           assert.step('resolved rt');
 
@@ -127,7 +127,7 @@ module('useTask', function () {
       });
 
       class Test {
-        _search = restartableTask(async () => {
+        _search = task({ restartable: true }, async () => {
           await timeout(100);
 
           throw new Error('boop');
@@ -158,7 +158,7 @@ module('useTask', function () {
       class Test {
         @tracked input = 'Hello there';
 
-        _search = restartableTask(async (input: string) => {
+        _search = task({ restartable: true }, async (input: string) => {
           await timeout(100);
 
           return input;
@@ -182,7 +182,7 @@ module('useTask', function () {
 
     test('isCanceled', async function (assert) {
       class Test {
-        _search = restartableTask(async () => {
+        _search = task({ restartable: true }, async () => {
           await timeout(100);
 
           throw new Error('boop');
@@ -208,7 +208,7 @@ module('useTask', function () {
 
     test('isError', async function (assert) {
       class Test {
-        _search = restartableTask(async () => {
+        _search = task({ restartable: true }, async () => {
           await timeout(100);
 
           throw new Error('boop');
@@ -234,7 +234,7 @@ module('useTask', function () {
       class Test {
         @tracked input = 'Hello there';
 
-        _search = restartableTask(async (input: string) => {
+        _search = task({ restartable: true }, async (input: string) => {
           await timeout(100);
 
           return input;
@@ -260,7 +260,7 @@ module('useTask', function () {
       class Test {
         @tracked input = 'Hello there';
 
-        _search = restartableTask(async (input: string) => {
+        _search = task({ restartable: true }, async (input: string) => {
           await timeout(100);
 
           return input;
@@ -286,7 +286,7 @@ module('useTask', function () {
       class Test {
         @tracked input = 'Hello there';
 
-        _search = restartableTask(async (input: string) => {
+        _search = task({ restartable: true }, async (input: string) => {
           await timeout(100);
 
           return input;

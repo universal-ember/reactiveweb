@@ -6,7 +6,7 @@ import { waitForPromise } from '@ember/test-waiters';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-import { dropTask, restartableTask, timeout } from 'ember-concurrency';
+import { task, timeout } from 'ember-concurrency';
 import { trackedTask } from 'reactiveweb/ember-concurrency';
 
 module('useTask', function () {
@@ -18,7 +18,7 @@ module('useTask', function () {
         class Test {
           @tracked input = '';
 
-          _search = restartableTask(async (input: string) => {
+          _search = task({ restartable: true }, async (input: string) => {
             // or some bigger timeout for an actual search task to debounce
             await timeout(0);
 
@@ -63,7 +63,7 @@ module('useTask', function () {
         class Test {
           @tracked input = '';
 
-          _search = restartableTask(async () => {
+          _search = task({ restartable: true }, async () => {
             // NOTE: args must be consumed before the first yield
             const { input } = this;
 
@@ -111,7 +111,7 @@ module('useTask', function () {
         class Test {
           @tracked input: string | undefined | null = 'initial value';
 
-          _search = restartableTask(async (input: string | undefined | null) => {
+          _search = task({ restartable: true }, async (input: string | undefined | null) => {
             // or some bigger timeout for an actual search task to debounce
             await timeout(0);
 
@@ -171,7 +171,7 @@ module('useTask', function () {
         class Test {
           @tracked input = 'initial value';
 
-          _search = dropTask(async (input: string) => {
+          _search = task({ drop: true }, async (input: string) => {
             await waitForPromise(new Promise((resolve) => setTimeout(() => resolve(''))));
 
             return input;

@@ -68,6 +68,13 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             'ember-source': '~6.8.0',
+            // To remove imports from the 'ember' barrel file:
+            '@ember/test-waiters': '^4.0.0',
+            '@glimmer/component': '^2.0.0',
+          },
+          dependencies: {
+            // To remove imports from the 'ember' barrel file:
+            'ember-concurrency': '^5.0.0',
           },
         },
       },

@@ -3,6 +3,7 @@ import { getPendingWaiterState, getWaiters } from '@ember/test-waiters';
 import * as QUnit from 'qunit';
 import { setup } from 'qunit-dom';
 import { start } from 'ember-qunit';
+import { loadTests } from 'ember-qunit/test-loader';
 
 import Application from 'test-app/app';
 import config from 'test-app/config/environment';
@@ -22,4 +23,5 @@ QUnit.testDone(function () {
 // Prevent global Errors from breaking tests
 window.onerror = console.error;
 
+loadTests();
 start();

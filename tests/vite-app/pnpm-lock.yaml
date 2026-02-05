@@ -118,7 +118,7 @@ importers:
         specifier: ^9.0.3
         version: 9.0.3
       ember-qunit:
-        specifier: ^9.0.0
+        specifier: ^9.0.4
         version: 9.0.4(@ember/test-helpers@5.4.1(@babel/core@7.28.5)(@glint/template@1.7.3))(@glint/template@1.7.3)(qunit@2.24.3)
       ember-resolver:
         specifier: ^13.0.0
