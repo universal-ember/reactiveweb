@@ -1,5 +1,15 @@
 # Changelog
 
+## Release (2026-02-05)
+
+
+
+#### :house: Internal
+* [#183](https://github.com/universal-ember/reactiveweb/pull/183) Expand test matrix to 5.12 through 6.8 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-12-23)
 
 * reactiveweb 1.9.1 (patch)

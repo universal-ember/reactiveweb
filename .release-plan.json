@@ -1,26 +1,8 @@
 {
   "solution": {
     "reactiveweb": {
-      "impact": "patch",
-      "oldVersion": "1.9.0",
-      "newVersion": "1.9.1",
-      "tagName": "latest",
-      "constraints": [
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
-        },
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :memo: Documentation"
-        },
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :house: Internal"
-        }
-      ],
-      "pkgJSONPath": "./reactiveweb/package.json"
+      "oldVersion": "1.9.1"
     }
   },
-  "description": "## Release (2025-12-23)\n\n* reactiveweb 1.9.1 (patch)\n\n#### :bug: Bug Fix\n* `reactiveweb`\n  * [#173](https://github.com/universal-ember/reactiveweb/pull/173) Allow link to receive the owner directly ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#177](https://github.com/universal-ember/reactiveweb/pull/177) Pull in types from ember-resources v6 (and earlier) to reduce coupling for those wanting to move to v7 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :memo: Documentation\n* `reactiveweb`\n  * [#168](https://github.com/universal-ember/reactiveweb/pull/168) Update docs ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#167](https://github.com/universal-ember/reactiveweb/pull/167) Add detail from #166 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#162](https://github.com/universal-ember/reactiveweb/pull/162) add import to code example docs of get-promise-state ([@x-m-el](https://github.com/x-m-el))\n* Other\n  * [#165](https://github.com/universal-ember/reactiveweb/pull/165) docs(contributor): contributors readme action update ([@github-actions[bot]](https://github.com/apps/github-actions))\n  * [#164](https://github.com/universal-ember/reactiveweb/pull/164) Thank Contributors <3 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :house: Internal\n* `reactiveweb`\n  * [#174](https://github.com/universal-ember/reactiveweb/pull/174) Convert main test-app to vite ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#176](https://github.com/universal-ember/reactiveweb/pull/176) Glint2 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#175](https://github.com/universal-ember/reactiveweb/pull/175) Update linting ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 3\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n- [@github-actions[bot]](https://github.com/apps/github-actions)\n- [@x-m-el](https://github.com/x-m-el)\n"
+  "description": "## Release (2026-02-05)\n\n\n\n#### :house: Internal\n* [#183](https://github.com/universal-ember/reactiveweb/pull/183) Expand test matrix to 5.12 through 6.8 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
