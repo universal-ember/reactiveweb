@@ -1,5 +1,5 @@
 import { setOwner } from '@ember/application';
-import Service, { inject as service } from '@ember/service';
+import Service, { service } from '@ember/service';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
