@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: wyvox/action-setup-pnpm@v3
         with:
           # Future installations will run "prepare"
@@ -32,7 +32,7 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: wyvox/action-setup-pnpm@v3
       - run: pnpm build && pnpm i -f
       - name: "Verify that no manually needed fixes / violations are present"
@@ -45,7 +45,7 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: wyvox/action-setup-pnpm@v3
       - run: pnpm test:ember
         working-directory: tests/test-app
@@ -57,7 +57,7 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: wyvox/action-setup-pnpm@v3
       - run: pnpm test:ember
         working-directory: tests/min-supported
@@ -85,7 +85,7 @@ jobs:
           - { name: "ember-canary", directory: "tests/vite-app" }
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: wyvox/action-setup-pnpm@v3
       - run: pnpm build
       # force re-linking
