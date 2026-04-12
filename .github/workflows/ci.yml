@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
-      - uses: wyvox/action-setup-pnpm@v3
+      - uses: wyvox/action-setup-pnpm@v4
         with:
           # Future installations will run "prepare"
           # and this job doesn't need to
@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
-      - uses: wyvox/action-setup-pnpm@v3
+      - uses: wyvox/action-setup-pnpm@v4
       - run: pnpm build && pnpm i -f
       - name: "Verify that no manually needed fixes / violations are present"
         run: pnpm lint
@@ -46,7 +46,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
-      - uses: wyvox/action-setup-pnpm@v3
+      - uses: wyvox/action-setup-pnpm@v4
       - run: pnpm test:ember
         working-directory: tests/test-app
 
@@ -58,7 +58,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
-      - uses: wyvox/action-setup-pnpm@v3
+      - uses: wyvox/action-setup-pnpm@v4
       - run: pnpm test:ember
         working-directory: tests/min-supported
 
@@ -86,7 +86,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
-      - uses: wyvox/action-setup-pnpm@v3
+      - uses: wyvox/action-setup-pnpm@v4
       - run: pnpm build
       # force re-linking
       - run: pnpm i -f
