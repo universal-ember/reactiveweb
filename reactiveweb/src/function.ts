@@ -190,7 +190,7 @@ export class State<Value> {
       return 'PENDING';
     }
 
-    if (this.#state.resolved) {
+    if (this.#state.resolved !== undefined) {
       return 'RESOLVED';
     }
 
@@ -235,7 +235,7 @@ export class State<Value> {
    * When true, the function passed to `trackedFunction` has resolved
    */
   get isResolved() {
-    return Boolean(this.#state.resolved);
+    return this.#state.resolved !== undefined;
   }
 
   /**
