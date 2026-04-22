@@ -107,4 +107,37 @@ module('Utils | trackedFunction | State | js', function (hooks) {
     m = 'isPending';
     assert.false(state.isPending, m);
   });
+
+  test('resolving to false', async function (assert) {
+    let m = '<invalid state>';
+    let resolve: (value?: unknown) => void;
+
+    const promise = new Promise((r) => {
+      resolve = r;
+    });
+
+    const value = false;
+
+    const state = new State(() => promise);
+    const promise2 = state.retry();
+
+    // @ts-ignore This is normal promise usage
+    resolve(value);
+    await promise2;
+
+    m = 'isResolved';
+    assert.true(state.isResolved, m);
+
+    m = 'isRejected';
+    assert.false(state.isRejected, m);
+
+    m = 'error';
+    assert.strictEqual(state.error, null, m);
+
+    m = 'value';
+    assert.strictEqual(state.value, value, m);
+
+    m = 'isPending';
+    assert.false(state.isPending, m);
+  });
 });
