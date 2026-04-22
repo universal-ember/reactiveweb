@@ -79,6 +79,13 @@ See the [Contributing](CONTRIBUTING.md) guide for details.
 		</tr>
 		<tr>
             <td align="center">
+                <a href="https://github.com/piemonkey">
+                    <img src="https://avatars.githubusercontent.com/u/1323250?v=4" width="100;" alt="piemonkey"/>
+                    <br />
+                    <sub><b>piemonkey</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/x-m-el">
                     <img src="https://avatars.githubusercontent.com/u/126079676?v=4" width="100;" alt="x-m-el"/>
                     <br />
