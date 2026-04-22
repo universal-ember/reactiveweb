@@ -1,5 +1,24 @@
 # Changelog
 
+## Release (2026-04-22)
+
+* reactiveweb 1.9.2 (patch)
+
+#### :bug: Bug Fix
+* `reactiveweb`
+  * [#189](https://github.com/universal-ember/reactiveweb/pull/189) Check for `!== undefined` to avoid treating `false` as not resolved ([@piemonkey](https://github.com/piemonkey))
+
+#### :house: Internal
+* [#192](https://github.com/universal-ember/reactiveweb/pull/192) docs(contributor): contributors readme action update ([@github-actions[bot]](https://github.com/apps/github-actions))
+* [#190](https://github.com/universal-ember/reactiveweb/pull/190) docs(contributor): contributors readme action update ([@github-actions[bot]](https://github.com/apps/github-actions))
+* [#191](https://github.com/universal-ember/reactiveweb/pull/191) Update release plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#183](https://github.com/universal-ember/reactiveweb/pull/183) Expand test matrix to 5.12 through 6.8 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 3
+- GitHub Actions [Bot] ([@github-actions](https://github.com/apps/github-actions))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+- [@piemonkey](https://github.com/piemonkey)
+
 ## Release (2025-12-23)
 
 * reactiveweb 1.9.1 (patch)
