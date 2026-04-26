@@ -77,19 +77,19 @@
     "@glint/template": "^1.6.1",
     "@glint/tsserver-plugin": "^2.0.8",
     "@nullvoxpopuli/eslint-configs": "^5.5.0",
-    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-babel": "^7.0.0",
     "@tsconfig/ember": "^3.0.1",
     "babel-plugin-ember-template-compilation": "^4.0.0",
     "concurrently": "^9.0.1",
     "ember-source": "~6.10.0",
     "ember-template-lint": "^7.0.0",
-    "eslint": "^9.39.2",
+    "eslint": "^10.0.0",
     "expect-type": "^1.2.2",
     "prettier": "^3.7.4",
     "prettier-plugin-ember-template-tag": "^2.1.2",
     "rollup": "^4.21.3",
     "rollup-plugin-copy": "^3.5.0",
-    "typescript": "^5.6.3"
+    "typescript": "^6.0.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
