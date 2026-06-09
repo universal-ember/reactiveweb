@@ -11,9 +11,6 @@ importers:
       '@embroider/addon-shim':
         specifier: ^1.8.6
         version: 1.10.2
-      '@embroider/macros':
-        specifier: ^1.16.6
-        version: 1.19.5(@glint/template@1.7.3)
       decorator-transforms:
         specifier: ^2.2.2
         version: 2.3.0(@babel/core@7.28.5)
@@ -48,6 +45,9 @@ importers:
       '@embroider/addon-dev':
         specifier: ^8.0.0
         version: 8.3.0(@glint/template@1.7.3)(rollup@4.54.0)
+      '@embroider/macros':
+        specifier: ^1.16.6
+        version: 1.19.5(@glint/template@1.7.3)
       '@glint/ember-tsc':
         specifier: ^1.0.8
         version: 1.0.8(typescript@5.9.3)

@@ -59,7 +59,6 @@
   },
   "dependencies": {
     "@embroider/addon-shim": "^1.8.6",
-    "@embroider/macros": "^1.16.6",
     "decorator-transforms": "^2.2.2",
     "ember-resources": ">= 6.4.2"
   },
@@ -73,6 +72,7 @@
     "@ember/library-tsconfig": "^2.0.0",
     "@ember/test-waiters": "^4.0.0",
     "@embroider/addon-dev": "^8.0.0",
+    "@embroider/macros": "^1.16.6",
     "@glint/ember-tsc": "^1.0.8",
     "@glint/template": "^1.6.1",
     "@glint/tsserver-plugin": "^2.0.8",
