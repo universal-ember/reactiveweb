@@ -2,8 +2,8 @@
   "solution": {
     "reactiveweb": {
       "impact": "patch",
-      "oldVersion": "1.9.1",
-      "newVersion": "1.9.2",
+      "oldVersion": "1.9.2",
+      "newVersion": "1.9.3",
       "tagName": "latest",
       "constraints": [
         {
@@ -14,5 +14,5 @@
       "pkgJSONPath": "./reactiveweb/package.json"
     }
   },
-  "description": "## Release (2026-04-22)\n\n* reactiveweb 1.9.2 (patch)\n\n#### :bug: Bug Fix\n* `reactiveweb`\n  * [#189](https://github.com/universal-ember/reactiveweb/pull/189) Check for `!== undefined` to avoid treating `false` as not resolved ([@piemonkey](https://github.com/piemonkey))\n\n#### :house: Internal\n* [#192](https://github.com/universal-ember/reactiveweb/pull/192) docs(contributor): contributors readme action update ([@github-actions[bot]](https://github.com/apps/github-actions))\n* [#190](https://github.com/universal-ember/reactiveweb/pull/190) docs(contributor): contributors readme action update ([@github-actions[bot]](https://github.com/apps/github-actions))\n* [#191](https://github.com/universal-ember/reactiveweb/pull/191) Update release plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n* [#183](https://github.com/universal-ember/reactiveweb/pull/183) Expand test matrix to 5.12 through 6.8 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 3\n- GitHub Actions [Bot] ([@github-actions](https://github.com/apps/github-actions))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n- [@piemonkey](https://github.com/piemonkey)\n"
+  "description": "## Release (2026-06-09)\n\n* reactiveweb 1.9.3 (patch)\n\n#### :bug: Bug Fix\n* `reactiveweb`\n  * [#195](https://github.com/universal-ember/reactiveweb/pull/195) Remove macros ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
