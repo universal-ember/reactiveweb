@@ -45,6 +45,12 @@ import { DEFAULT_THUNK, normalizeThunk } from './utils.ts';
  *
  *
  */
+export function task<LocalTask extends TaskIsh<unknown[], unknown> = TaskIsh<unknown[], unknown>>(
+  context: object,
+  task: LocalTask,
+  thunk?: () => unknown[]
+): TaskInstance<TaskReturnType<LocalTask>>;
+
 export function task<
   Return = unknown,
   Args extends unknown[] = unknown[],
