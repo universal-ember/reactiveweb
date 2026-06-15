@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-06-09)
+
+* reactiveweb 1.9.3 (patch)
+
+#### :bug: Bug Fix
+* `reactiveweb`
+  * [#195](https://github.com/universal-ember/reactiveweb/pull/195) Remove macros ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2026-04-22)
 
 * reactiveweb 1.9.2 (patch)
