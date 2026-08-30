@@ -81,7 +81,7 @@
     "@tsconfig/ember": "^3.0.1",
     "babel-plugin-ember-template-compilation": "^4.0.0",
     "concurrently": "^9.0.1",
-    "ember-source": "~6.10.0",
+    "ember-source": "~6.12.0",
     "ember-template-lint": "^7.0.0",
     "eslint": "^9.39.2",
     "expect-type": "^1.2.2",
