@@ -76,6 +76,10 @@ module('getPromiseState', function (hooks) {
     test('handles async function', async function (assert) {
       const state = getPromiseState(async () => Promise.resolve('hello'));
 
+      // The function settles within a few microtasks.
+      // How many microtasks pass before render depends on the @ember/test-helpers version.
+      await new Promise((resolve) => setTimeout(resolve));
+
       await stateStepper(state, assert);
 
       assert.verifySteps(['resolved']);
