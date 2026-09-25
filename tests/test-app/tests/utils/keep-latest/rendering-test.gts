@@ -59,6 +59,29 @@ module('Utils | keepLatest | rendering', function (hooks) {
     assert.dom().hasText('2');
   });
 
+  test('it keeps the initial value when it starts out loading', async function (assert) {
+    class Test {
+      @tracked isLoading = true;
+      @tracked value?: number = 3;
+
+      @use data = keepLatest({
+        when: () => this.isLoading,
+        value: () => this.value,
+      });
+    }
+
+    const instance = new Test();
+
+    await render(<template>{{instance.data}}</template>);
+
+    assert.dom().hasText('3');
+
+    instance.value = undefined;
+    await settled();
+
+    assert.dom().hasText('3', 'renders the initial value while the value is empty');
+  });
+
   test('if the previous value is not empty, and the current value is empty', async function (assert) {
     class Test {
       @tracked x: number[] | number = [];
