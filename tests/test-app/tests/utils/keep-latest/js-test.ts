@@ -68,6 +68,26 @@ module('Utils | keepLatest | js', function (hooks) {
     assert.strictEqual(instance.data, 3);
   });
 
+  test('it keeps the initial value when it starts out loading', async function (assert) {
+    class Test {
+      @tracked isLoading = true;
+      @tracked value?: number = 3;
+
+      @use data = keepLatest({
+        when: () => this.isLoading,
+        value: () => this.value,
+      });
+    }
+
+    const instance = new Test();
+
+    assert.strictEqual(instance.data, 3);
+
+    instance.value = undefined;
+
+    assert.strictEqual(instance.data, 3, 'returns the initial value while the value is empty');
+  });
+
   test('it works with array values correctly', async function (assert) {
     class Test {
       @tracked isLoading = false;
