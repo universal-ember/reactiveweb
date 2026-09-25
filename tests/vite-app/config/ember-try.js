@@ -5,6 +5,8 @@ const getChannelURL = require('ember-source-channel-url');
 module.exports = async function () {
   return {
     usePnpm: true,
+    // Build and test the same way as the `test:ember` script.
+    command: 'pnpm test:ember',
     buildManagerOptions() {
       return ['--ignore-scripts', '--no-frozen-lockfile'];
     },
@@ -70,6 +72,14 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             'ember-source': '~6.8.0',
+          },
+        },
+      },
+      {
+        name: 'ember-lts-6.12',
+        npm: {
+          devDependencies: {
+            'ember-source': '~6.12.0',
           },
         },
       },

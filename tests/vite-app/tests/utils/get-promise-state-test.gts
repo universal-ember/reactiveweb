@@ -76,6 +76,18 @@ module('getPromiseState', function (hooks) {
     test('handles async function', async function (assert) {
       const state = getPromiseState(async () => Promise.resolve('hello'));
 
+      // This function settles after about 3 microtasks,
+      // because returning a promise from an async function adds ticks.
+      //
+      // When `renderComponent` exists (ember 6.8+),
+      // @ember/test-helpers 5.5+ renders inside `run()`, so the first paint is synchronous
+      // and would see `loading`.
+      // The legacy outlet path (older ember) paints later, after the function settled.
+      //
+      // Waiting a macrotask gives both paths the same starting state.
+      // This wait may be unnecessary once ember ships the "Render Aware Scheduler".
+      await new Promise((resolve) => setTimeout(resolve));
+
       await stateStepper(state, assert);
 
       assert.verifySteps(['resolved']);
