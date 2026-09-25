@@ -107,7 +107,7 @@ export function keepLatest<Return = unknown>({ when, value: valueFn }: Options<R
         if (previous === undefined && initial) {
           initial = false;
 
-          return value;
+          return (previous = value);
         }
 
         return (previous = isEmpty(value) ? previous : value);
