@@ -1,5 +1,24 @@
 # Changelog
 
+## Release (2026-09-27)
+
+* reactiveweb 1.9.4 (patch)
+
+#### :bug: Bug Fix
+* `reactiveweb`
+  * [#202](https://github.com/universal-ember/reactiveweb/pull/202) keepLatest: keep the initial value when it starts out loading ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### :house: Internal
+* Other
+  * [#203](https://github.com/universal-ember/reactiveweb/pull/203) Test against ember 6.12 LTS, and fix the release/beta/canary scenarios ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+* `reactiveweb`
+  * [#198](https://github.com/universal-ember/reactiveweb/pull/198) Revert "Revert "Prepare Release v1.9.3"" ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#197](https://github.com/universal-ember/reactiveweb/pull/197) Revert "Prepare Release v1.9.3" ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 2
+- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2026-06-09)
 
 * reactiveweb 1.9.3 (patch)
