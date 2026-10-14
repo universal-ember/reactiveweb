@@ -292,4 +292,160 @@ module('getPromiseState', function (hooks) {
       });
     });
   });
+
+  /**
+   * These tests read the state from JS, without rendering or `settled()`,
+   * so they pin down exactly which microtask each property changes on.
+   */
+  module('timing (without rendering)', function () {
+    const MAX_MICROTASKS = 10;
+
+    function describe(state: State<unknown>) {
+      const { isLoading, error, resolved } = state;
+
+      return `isLoading=${isLoading} error=${error?.reason ?? null} resolved=${String(resolved)}`;
+    }
+
+    /**
+     * Steps the state each time it changes, labeled with the microtask it changed on.
+     * "sync" is the state right after `getPromiseState` returns.
+     * "macrotask" is the state after a setTimeout, and is only listed if it differs.
+     */
+    async function stepTimeline(state: State<unknown>, assert: QUnit['assert']) {
+      let previous: string | undefined;
+
+      const record = (label: string) => {
+        const current = describe(state);
+
+        if (current !== previous) assert.step(`${label}: ${current}`);
+
+        previous = current;
+      };
+
+      record('sync');
+
+      for (let i = 1; i <= MAX_MICROTASKS; i++) {
+        await Promise.resolve();
+        record(`microtask ${i}`);
+      }
+
+      await new Promise((resolve) => setTimeout(resolve));
+      record('macrotask');
+    }
+
+    test('value', async function (assert) {
+      const state = getPromiseState('hello');
+
+      await stepTimeline(state, assert);
+
+      assert.verifySteps(['sync: isLoading=false error=null resolved=hello']);
+    });
+
+    test('sync function', async function (assert) {
+      const state = getPromiseState(() => 'hello');
+
+      await stepTimeline(state, assert);
+
+      assert.verifySteps(['sync: isLoading=false error=null resolved=hello']);
+    });
+
+    test('sync function that throws', async function (assert) {
+      const state = getPromiseState(() => {
+        throw new Error('hello');
+      });
+
+      await stepTimeline(state, assert);
+
+      assert.verifySteps([
+        'sync: isLoading=false error=Passed function threw an exception resolved=undefined',
+      ]);
+    });
+
+    test('Promise.resolve', async function (assert) {
+      const state = getPromiseState(Promise.resolve('hello'));
+
+      await stepTimeline(state, assert);
+
+      assert.verifySteps([
+        'sync: isLoading=true error=null resolved=undefined',
+        'microtask 1: isLoading=true error=null resolved=hello',
+        'microtask 3: isLoading=false error=null resolved=hello',
+      ]);
+    });
+
+    test('Promise.reject', async function (assert) {
+      // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
+      const state = getPromiseState(Promise.reject('hello'));
+
+      await stepTimeline(state, assert);
+
+      assert.verifySteps([
+        'sync: isLoading=true error=null resolved=undefined',
+        'microtask 2: isLoading=true error=Promise rejected while waiting to resolve resolved=undefined',
+        'microtask 3: isLoading=false error=Promise rejected while waiting to resolve resolved=undefined',
+      ]);
+    });
+
+    test('async function', async function (assert) {
+      const state = getPromiseState(async () => 'hello');
+
+      await stepTimeline(state, assert);
+
+      assert.verifySteps([
+        'sync: isLoading=true error=null resolved=undefined',
+        'microtask 1: isLoading=true error=null resolved=hello',
+        'microtask 3: isLoading=false error=null resolved=hello',
+      ]);
+    });
+
+    test('async function with an await', async function (assert) {
+      const state = getPromiseState(async () => {
+        await Promise.resolve();
+
+        return 'hello';
+      });
+
+      await stepTimeline(state, assert);
+
+      assert.verifySteps([
+        'sync: isLoading=true error=null resolved=undefined',
+        'microtask 2: isLoading=true error=null resolved=hello',
+        'microtask 4: isLoading=false error=null resolved=hello',
+      ]);
+    });
+
+    test('async function that throws', async function (assert) {
+      const state = getPromiseState(async () => {
+        await Promise.resolve();
+        throw new Error('hello');
+      });
+
+      await stepTimeline(state, assert);
+
+      assert.verifySteps([
+        'sync: isLoading=true error=null resolved=undefined',
+        'microtask 3: isLoading=true error=Promise rejected while waiting to resolve resolved=undefined',
+        'microtask 4: isLoading=false error=Promise rejected while waiting to resolve resolved=undefined',
+      ]);
+    });
+
+    test('same promise, after it settled', async function (assert) {
+      const promise = Promise.resolve('hello');
+
+      getPromiseState(promise);
+      await new Promise((resolve) => setTimeout(resolve));
+
+      const state = getPromiseState(promise);
+
+      await stepTimeline(state, assert);
+
+      assert.verifySteps(['sync: isLoading=false error=null resolved=hello']);
+    });
+
+    test('same promise, while pending', function (assert) {
+      const promise = Promise.resolve('hello');
+
+      assert.strictEqual(getPromiseState(promise), getPromiseState(promise));
+    });
+  });
 });
