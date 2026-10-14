@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-10-14)
+
+
+
+#### :house: Internal
+* [#207](https://github.com/universal-ember/reactiveweb/pull/207) Add getPromiseState microtask timing tests ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#205](https://github.com/universal-ember/reactiveweb/pull/205) Add getPromiseState tests for non-promise values ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2026-09-27)
 
 * reactiveweb 1.9.4 (patch)
