@@ -307,18 +307,17 @@ module('getPromiseState', function (hooks) {
     }
 
     /**
-     * Returns the state each time it changes, labeled with the microtask it changed on.
+     * Steps the state each time it changes, labeled with the microtask it changed on.
      * "sync" is the state right after `getPromiseState` returns.
      * "macrotask" is the state after a setTimeout, and is only listed if it differs.
      */
-    async function timeline(state: State<unknown>) {
-      const changes: string[] = [];
+    async function stepTimeline(state: State<unknown>, assert: QUnit['assert']) {
       let previous: string | undefined;
 
       const record = (label: string) => {
         const current = describe(state);
 
-        if (current !== previous) changes.push(`${label}: ${current}`);
+        if (current !== previous) assert.step(`${label}: ${current}`);
 
         previous = current;
       };
@@ -332,20 +331,22 @@ module('getPromiseState', function (hooks) {
 
       await new Promise((resolve) => setTimeout(resolve));
       record('macrotask');
-
-      return changes;
     }
 
     test('value', async function (assert) {
       const state = getPromiseState('hello');
 
-      assert.deepEqual(await timeline(state), ['sync: isLoading=false error=null resolved=hello']);
+      await stepTimeline(state, assert);
+
+      assert.verifySteps(['sync: isLoading=false error=null resolved=hello']);
     });
 
     test('sync function', async function (assert) {
       const state = getPromiseState(() => 'hello');
 
-      assert.deepEqual(await timeline(state), ['sync: isLoading=false error=null resolved=hello']);
+      await stepTimeline(state, assert);
+
+      assert.verifySteps(['sync: isLoading=false error=null resolved=hello']);
     });
 
     test('sync function that throws', async function (assert) {
@@ -353,7 +354,9 @@ module('getPromiseState', function (hooks) {
         throw new Error('hello');
       });
 
-      assert.deepEqual(await timeline(state), [
+      await stepTimeline(state, assert);
+
+      assert.verifySteps([
         'sync: isLoading=false error=Passed function threw an exception resolved=undefined',
       ]);
     });
@@ -361,7 +364,9 @@ module('getPromiseState', function (hooks) {
     test('Promise.resolve', async function (assert) {
       const state = getPromiseState(Promise.resolve('hello'));
 
-      assert.deepEqual(await timeline(state), [
+      await stepTimeline(state, assert);
+
+      assert.verifySteps([
         'sync: isLoading=true error=null resolved=undefined',
         'microtask 1: isLoading=true error=null resolved=hello',
         'microtask 3: isLoading=false error=null resolved=hello',
@@ -372,7 +377,9 @@ module('getPromiseState', function (hooks) {
       // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
       const state = getPromiseState(Promise.reject('hello'));
 
-      assert.deepEqual(await timeline(state), [
+      await stepTimeline(state, assert);
+
+      assert.verifySteps([
         'sync: isLoading=true error=null resolved=undefined',
         'microtask 2: isLoading=true error=Promise rejected while waiting to resolve resolved=undefined',
         'microtask 3: isLoading=false error=Promise rejected while waiting to resolve resolved=undefined',
@@ -382,7 +389,9 @@ module('getPromiseState', function (hooks) {
     test('async function', async function (assert) {
       const state = getPromiseState(async () => 'hello');
 
-      assert.deepEqual(await timeline(state), [
+      await stepTimeline(state, assert);
+
+      assert.verifySteps([
         'sync: isLoading=true error=null resolved=undefined',
         'microtask 1: isLoading=true error=null resolved=hello',
         'microtask 3: isLoading=false error=null resolved=hello',
@@ -396,7 +405,9 @@ module('getPromiseState', function (hooks) {
         return 'hello';
       });
 
-      assert.deepEqual(await timeline(state), [
+      await stepTimeline(state, assert);
+
+      assert.verifySteps([
         'sync: isLoading=true error=null resolved=undefined',
         'microtask 2: isLoading=true error=null resolved=hello',
         'microtask 4: isLoading=false error=null resolved=hello',
@@ -409,7 +420,9 @@ module('getPromiseState', function (hooks) {
         throw new Error('hello');
       });
 
-      assert.deepEqual(await timeline(state), [
+      await stepTimeline(state, assert);
+
+      assert.verifySteps([
         'sync: isLoading=true error=null resolved=undefined',
         'microtask 3: isLoading=true error=Promise rejected while waiting to resolve resolved=undefined',
         'microtask 4: isLoading=false error=Promise rejected while waiting to resolve resolved=undefined',
@@ -419,11 +432,14 @@ module('getPromiseState', function (hooks) {
     test('same promise, after it settled', async function (assert) {
       const promise = Promise.resolve('hello');
 
-      await timeline(getPromiseState(promise));
+      getPromiseState(promise);
+      await new Promise((resolve) => setTimeout(resolve));
 
       const state = getPromiseState(promise);
 
-      assert.deepEqual(await timeline(state), ['sync: isLoading=false error=null resolved=hello']);
+      await stepTimeline(state, assert);
+
+      assert.verifySteps(['sync: isLoading=false error=null resolved=hello']);
     });
 
     test('same promise, while pending', function (assert) {
