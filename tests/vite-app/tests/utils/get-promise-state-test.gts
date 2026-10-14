@@ -37,6 +37,73 @@ module('getPromiseState', function (hooks) {
       assert.deepEqual(state.toJSON(), { isLoading: false, error: null, resolved: 'hello' });
     });
 
+    test('handles undefined', async function (assert) {
+      const state = getPromiseState(undefined);
+
+      await stateStepper(state, assert);
+
+      assert.verifySteps([]);
+      assert.deepEqual(state.toJSON(), { isLoading: false, error: null, resolved: undefined });
+    });
+
+    test('handles undefined (state created inside template)', async function (assert) {
+      const value = undefined;
+      const step = (msg: string) => assert.step(msg);
+
+      await render(
+        <template>
+          {{#let (getPromiseState value) as |state|}}
+            {{#if state.isLoading}}{{step "loading"}}{{/if}}
+            {{#if state.error}}{{step "error"}}{{/if}}
+            {{#if state.resolved}}{{step "resolved"}}{{/if}}
+          {{/let}}
+        </template>
+      );
+
+      assert.verifySteps([]);
+    });
+
+    module('non-promise values', function () {
+      // Glimmer's {{#if}} treats empty arrays as falsy, so `[]` does not render "resolved"
+      const values: [label: string, value: unknown, steps: string[]][] = [
+        ['null', null, []],
+        ['false', false, []],
+        ['true', true, ['resolved']],
+        ['0', 0, []],
+        ['NaN', NaN, []],
+        ['1', 1, ['resolved']],
+        ['empty string', '', []],
+        ['empty array', [], []],
+        ['array', [1, 2], ['resolved']],
+        ['empty object', {}, ['resolved']],
+        ['object', { a: 1 }, ['resolved']],
+        ['symbol', Symbol('hello'), ['resolved']],
+        ['bigint', 1n, ['resolved']],
+      ];
+
+      for (const [label, value, steps] of values) {
+        test(label, async function (assert) {
+          const state = getPromiseState(value);
+
+          await stateStepper(state, assert);
+
+          assert.verifySteps(steps);
+          assert.deepEqual(state.toJSON(), { isLoading: false, error: null, resolved: value });
+          assert.true(Object.is(state.resolved, value), 'resolved is the same value');
+        });
+      }
+
+      test('objects are not cached', function (assert) {
+        const value = { a: 1 };
+
+        assert.notStrictEqual(getPromiseState(value), getPromiseState(value));
+      });
+
+      test('object with a non-function `then` throws', function (assert) {
+        assert.throws(() => getPromiseState({ then: 1 }), TypeError);
+      });
+    });
+
     test('handles Promise (state created outside template)', async function (assert) {
       const state = getPromiseState(Promise.resolve('hello'));
 
